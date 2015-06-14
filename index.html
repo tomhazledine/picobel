@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+        
+        <title>Style-Free Audio Player</title>
+        <meta name="description" content="A lightweight wrapper for HTML audio. Bring your own markup and CSS.">
+
+        <link rel="stylesheet" href="main.min.css">
+        <!-- <link rel="shortcut icon" href="/favicon.ico"/> -->
+
+        <!-- Typekit JS -->
+        <!--<script src="//use.typekit.net/ejw1ruu.js"></script>
+        <script>try{Typekit.load();}catch(e){}</script>-->
+
+    </head>
+
+    <body>
+
+        <h1>Style-Free Audio Player</h1>
+        
+        <div id="playerExamples" class="player">
+
+            <div class="playlistSongWrapper song0" data-song-index="0">
+                <button class="playlistSongTrigger songPaused notPlayedYet" data-song-index="0">Play/Pause</button>
+                <p class="playlistInfo playlistSongName">Song Name</p>
+                <p class="playlistInfo playlistInfoBandAlbum">Song Artist – <em>Album Name</em></p>
+                <p class="songPlayTimer">0:00</p>
+                <p class="songDuration">0:00</p>
+                <input type="range" class="songProgressSlider" min="0" max="100" value="0" oninput="myAudioPlayer.sliderScrub(this.value, 0)">
+            </div>
+
+            <div class="playlistSongWrapper song1" data-song-index="1">
+                <button class="playlistSongTrigger songPaused notPlayedYet" data-song-index="1">Play/Pause</button>
+                <p class="playlistInfo playlistSongName">Song Name</p>
+                <p class="playlistInfo playlistInfoBandAlbum">Song Artist – <em>Album Name</em></p>
+                <p class="songPlayTimer">0:00</p>
+                <p class="songDuration">0:00</p>
+                <input type="range" class="songProgressSlider" min="0" max="100" value="0" oninput="myAudioPlayer.sliderScrub(this.value, 1)">
+            </div>
+
+        </div>
+
+        <div class="songData">
+            <script>
+                var audioExamples = [
+                    {
+                        "url": "http://eatenbymonsters.com/EbMBlog_mp3s/CWK_LostThatEasy.mp3"
+                    },
+                    {
+                        "url": "http://eatenbymonsters.com/EbMBlog_mp3s/Chvrches_Gun.mp3"
+                    }
+                ];
+            </script>
+        </div>
+
+        <div class="scripts">
+            <script src="styleFreeAudio.min.js"></script>
+            <script src="init.js"></script>
+        </div>
+    </body>
+</html>
