@@ -2,6 +2,8 @@
 
 A lightweight wrapper for HTML audio. Bring your own markup and CSS.
 
+See the demo at [tomhazledine.com/style-free-audio-player](http://tomhazledine.com/style-free-audio-player).
+
 ---
 
 ## Concept
@@ -26,11 +28,10 @@ To install SFAP, just include the `styleFreeAudio.min.js` file at the bottom of 
     <script src="/path/to/styleFreeAudio.min.js"></script>
     <script src="/path/to/yourCustom.js"></script>
 
-Add the [initialization code](#init) to your custom JS file.
+Add the initialization code to your custom JS file.
 
-Add the [required markup](#markup) to your page.
+Add the required markup to your page.
 
-{:#init}
 ## Initialization
 
 To initialize SFAP you need two things:
@@ -70,8 +71,7 @@ The simplest way to save this JSON data for **SFAP** to read is as a JS variable
             }
         ];
     </script>
- 
-{:#markup}
+
 ## Required Markup
 
 To give your audio player controls ("Play", "Pause") and song-data displays ("Song Length", "Time Played"), you need to add some classes to your markup.
