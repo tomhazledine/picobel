@@ -2,8 +2,6 @@
 
 A lightweight wrapper for HTML audio. Bring your own markup and CSS.
 
-See the demo at [tomhazledine.com/style-free-audio-player](http://tomhazledine.com/style-free-audio-player).
-
 ---
 
 ## Concept
