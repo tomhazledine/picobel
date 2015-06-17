@@ -2,31 +2,40 @@
 
 A lightweight wrapper for HTML audio. Bring your own markup and CSS.
 
+* MIT license
+* No dependencies
+* v1.0.1
+* Most recent release date: 20150617
+
+---
+
+Find demos and prettier docs at [tomhazledine.com/audioDemo/](http://tomhazledine.com/audioDemo/).
+
+Explanation and background at [tomhazledine.com/style-free-audio-player/](http://tomhazledine.com/style-free-audio-player/)
+
 ---
 
 ## Concept
 
-A smooth user experience hinges on consistency. Every time you break from your brand's styleguide to include an external widget, you're adding an element of inconsistency.
+Styling default HTML `<audio>` elements is a pain. We *should* be able to do it with CSS, but sadly at the moment we have to battle the "shadow DOM" to get anywhere. Thankfully we can use the Web Audio API to recreate our own audio player. One we can style with CSS. One where *we* have control of the markup.
 
-The **Style-Free Audio Player (SFAP)** aims to solve this problem for audio players. You bring the markup, you bring the CSS, SFAP brings the functionality.
+This **Style-Free Audio Player (SFAP)** is a handy tool to help us do just that. Store details of the audio you want to include in JSON (currently all you need is the path to the file). Then pass it through the `StyleFreeAudio()` function in your javascript along with a reference to your markup. SFAP then links your markup to the audio functionality.
 
-SFAP is all about keeping it simple. Every audio file you want to include in a page gets:
+### SFAP gives you:
 
-* A play/pause button.
+* A play/pause `<button>`.
 * A `songPlayTimer` element that displays the current playhead position of the audio file in minutes and seconds (MM:SS).
 * A `songDuration` element that displays the total length of the audio file in minutes and seconds (MM:SS).
-* A HTML `range` input field that shows a visual representation of the audio file's play progress, and can manually change the play position of the audio file.
-
-Anything else is up to you. As long as those elements are present for each audio file, the player will work.
+* A HTML `<range>` input field that shows a visual representation of the audio file's play progress, and can manually change the play position of the audio file.
 
 ## Installation
 
-To install SFAP, just include the `styleFreeAudio.min.js` file at the bottom of your HTML before your custom javascript.
+To install SFAP, just include the `styleFreeAudio.min.js` file at the bottom of your HTML, before your custom javascript.
 
     <script src="/path/to/styleFreeAudio.min.js"></script>
     <script src="/path/to/yourCustom.js"></script>
 
-Add the initialization code to your custom JS file.
+Add the initialization code (see below) to your custom JS file.
 
 Add the required markup to your page.
 
