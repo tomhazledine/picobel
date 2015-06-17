@@ -1,4 +1,6 @@
-# Style-Free Audio Player
+# SFAP.js
+
+## Style-Free Audio Player
 
 A lightweight wrapper for HTML audio. Bring your own markup and CSS.
 
