@@ -101,24 +101,23 @@ function StyleFreeAudio(songData,playerWrapper){
      */
     function _playPauseAudio(){
         var targetSong = this.getAttribute('data-song-index');
-        
-        // if (_hasClass(this,'songPlaying')) {
-        //     pauseAll();
-        //     _removeClass(this,'songPlaying');
-        //     _addClass(this,'songPaused');
-        // } else {
-        //     for (i = 0; i < playPauseButtons.length; i++) {
-        //         _removeClass(playPauseButtons[i], 'songPlaying');
-        //         _addClass(playPauseButtons[i], 'songPaused');
-        //     }
-        //     playSong(targetSong);
-        //     _addClass(this,'songPlaying');
-        //     _removeClass(this,'songPaused');
-        //     if (_hasClass(this,'notPlayedYet')) {
-        //         _setLengthDisplay(targetSong);
-        //         _removeClass(this, 'notPlayedYet');
-        //     }
-        // }
+        if (_hasClass(this,'songPlaying')) {
+            pauseAll();
+            _removeClass(this,'songPlaying');
+            _addClass(this,'songPaused');
+        } else {
+            for (i = 0; i < playPauseButtons.length; i++) {
+                _removeClass(playPauseButtons[i], 'songPlaying');
+                _addClass(playPauseButtons[i], 'songPaused');
+            }
+            playSong(targetSong);
+            _addClass(this,'songPlaying');
+            _removeClass(this,'songPaused');
+            if (_hasClass(this,'notPlayedYet')) {
+                _setLengthDisplay(targetSong);
+                _removeClass(this, 'notPlayedYet');
+            }
+        }
     }
 
     /**
