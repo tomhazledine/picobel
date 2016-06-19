@@ -11,7 +11,7 @@ A lightweight wrapper for HTML audio. Bring your own markup and CSS.
 
 ---
 
-Find demos and prettier docs at [tomhazledine.com/audioDemo/](http://tomhazledine.com/audioDemo/).
+Find demos and prettier docs at [tomhazledine.com/audio/](http://tomhazledine.com/audio/).
 
 Explanation and background at [tomhazledine.com/style-free-audio-player/](http://tomhazledine.com/style-free-audio-player/)
 
