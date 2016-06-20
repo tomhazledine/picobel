@@ -15,6 +15,8 @@
 
 // Loading indicator
 
+// Sensible, user-friendly error messages
+
 // Display file details
 
 // Get file metadata
