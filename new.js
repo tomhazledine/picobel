@@ -30,9 +30,17 @@ function customAudioPlayer(context){
     // Replace those elements with our own custom markup.
     buildMarkup(audioElements);
 
+    var playPauseButtons = document.getElementsByClassName('playlistSongTrigger');
+    var playTimer = document.getElementsByClassName('songPlayTimer');
+    var progressBar = document.getElementsByClassName('songProgressSlider');
+    var songLengthBox = document.getElementsByClassName('songDuration');
 
     // Initialize the audio.
     var myAudio = initAudio(data);
+
+    console.log(myAudio);
+
+    var currentSongIndex = 0;
 
     // console.log(data);
 
@@ -82,7 +90,12 @@ function customAudioPlayer(context){
     }
 
     /**
+     * ----------------
      * INITIALIZE AUDIO
+     *
+     * Setup the audio
+     * for each file.
+     * ----------------
      */
     function initAudio(data){
 
@@ -90,19 +103,106 @@ function customAudioPlayer(context){
 
         for (var i = 0; i < data.length; i++) {
             myAudio[i] = new Audio(data[i].url);
+            myAudio[i].currentTime = 0;
             // Setup event listeners
+            // var playPauseButtons = document.getElementsByClassName('playlistSongTrigger');
+            // var playTimer = document.getElementsByClassName('songPlayTimer');
+            // var progressBar = document.getElementsByClassName('songProgressSlider');
+            // var songLengthBox = document.getElementsByClassName('songDuration');
+            // 
+            // console.log(playPauseButtons);
             playPauseButtons[i].addEventListener('click',_playPauseAudio,false);
+            progressBar[i].addEventListener('input', sliderScrub, false);
             myAudio[i].addEventListener('timeupdate', _updateProgress, false);
         }
+
+        return myAudio;
     }
 
     /**
-     * 
+     * --------------------
+     * BUILD MARKUP
+     *
+     * Create our own new
+     * elements in place of
+     * the native <audio>
+     * element.
+     * --------------------
      */
     function buildMarkup(data){
         for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
-            newPlayer = "test\n";
+            // console.log(data[i]);
+            // var newPlayer = document.createElement('div');
+            // newPlayer.className = 'customPlayerWrapper player_' + i;
+            // newPlayer.innerHTML = "test\n";
+            // data[i].parentNode.replaceChild(newPlayer,data[i]);
+
+            // Create a container for our new player
+            var newPlayer = document.createElement('div');
+            newPlayer.className = 'customAudioPlayer player_' + i;
+            // Create a play/pause button
+            var button = document.createElement('button');
+            button.setAttribute('data-song-index',i);
+            button.value = data[i].url;
+            button.className = 'playlistSongTrigger';
+            button.innerHTML = 'File #' + (i + 1);
+
+            // Add the button to the player
+            newPlayer.appendChild(button);
+
+            // Create a wrapper for our player's metadata
+            var meta = document.createElement('div');
+            meta.className = 'metaWrapper';
+
+            // Create elements to display file metadata
+            var meta_title = document.createElement('span');
+            meta_title.className = 'titleDisplay';
+            meta_title.innerHTML = 'Title Number ' + (i + 1);
+            meta.appendChild(meta_title);
+
+            var meta_artist = document.createElement('span');
+            meta_artist.className = 'artistDisplay';
+            meta_artist.innerHTML = 'Artist Number ' + (i + 1);
+            meta.appendChild(meta_artist);
+
+            var timings = document.createElement('div');
+            timings.className = 'timingsWrapper';
+
+            var meta_timer = document.createElement('span');
+            meta_timer.className = 'songPlayTimer';
+            meta_timer.innerHTML = '00:00';
+            timings.appendChild(meta_timer);
+
+            var meta_progress = document.createElement('input');
+            meta_progress.type = 'range';
+            meta_progress.setAttribute('data-song-index',i);
+            meta_progress.min = 0;
+            meta_progress.max = 100;
+            meta_progress.value = 0;
+            meta_progress.className = 'songProgressSlider';
+            meta_progress.innerHTML = '00:00';
+            timings.appendChild(meta_progress);
+
+            var meta_duration = document.createElement('span');
+            meta_duration.className = 'songDuration';
+            meta_duration.innerHTML = '00:00';
+            timings.appendChild(meta_duration);
+
+            // <input type="range" class="songProgressSlider" min="0" max="100" value="0" oninput="myAudioPlayer.sliderScrub(this.value, 0)">
+
+            // var playTimer = document.getElementsByClassName('songPlayTimer');
+            // var progressBar = document.getElementsByClassName('songProgressSlider');
+            // var songLengthBox = document.getElementsByClassName('songDuration');
+
+            // Add the metadata to the player
+            newPlayer.appendChild(meta);
+
+            // Add the timings to the player
+            newPlayer.appendChild(timings);
+
+            // newPlayer.innerHTML = source;
+            
+            // Replace the original audio element with our new creation.
             data[i].parentNode.replaceChild(newPlayer,data[i]);
         }
     }
@@ -125,7 +225,7 @@ function customAudioPlayer(context){
      * Set all audio elements to 'paused'
      */
     function pauseAll(){
-        for (var i = 0; i < songs.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             myAudio[i].pause();
         }
     }
@@ -137,7 +237,7 @@ function customAudioPlayer(context){
      */
     function playSong(index){
         currentSongIndex = index;
-        for (var i = 0; i < songs.length; i++) {
+        for (var i = 0; i < data.length; i++) {
             if (i != index) {
                 myAudio[i].pause();
             }
@@ -152,10 +252,19 @@ function customAudioPlayer(context){
      * @param  {integer} newPosition The desired new song position in seconds.
      * @param  {integer} index       The index number of the song to be targeted.
      */
-    function sliderScrub(newPosition,index){
+    function sliderScrub(){
+        var value = this.value;
+        var index = this.getAttribute('data-song-index');
+        // console.log(value);
+        // console.log(index);
+        currentSongIndex = index;
         var duration = myAudio[index].duration;
-        var targetTime = duration * (newPosition / 100);
+        var targetTime = duration * (value / 100);
+        targetTime = targetTime.toFixed(2);
+        // console.log(duration);
+        // console.log(targetTime);
         myAudio[index].currentTime = targetTime;
+        _updateProgress();
     }
 
     /**
@@ -202,6 +311,7 @@ function customAudioPlayer(context){
      * Set the value of the current-position display for a playing song.
      */
     function _updateProgress(){
+        // console.log(this.getAttribute('data-song-index'));
         var progress = myAudio[currentSongIndex].currentTime;
         var duration = myAudio[currentSongIndex].duration;
         progressParsed = _secondsToMMSS(progress);
