@@ -145,7 +145,7 @@ function customAudioPlayer(context){
             button.setAttribute('data-song-index',i);
             button.value = data[i].url;
             button.className = 'playlistSongTrigger';
-            button.innerHTML = 'File #' + (i + 1);
+            button.innerHTML = 'play';//File #' + (i + 1);
 
             // Add the button to the player
             newPlayer.appendChild(button);
@@ -291,18 +291,22 @@ function customAudioPlayer(context){
             pauseAll();
             _removeClass(this,'songPlaying');
             _addClass(this,'songPaused');
+            this.innerHTML = 'play';
         } else {
             for (i = 0; i < playPauseButtons.length; i++) {
                 _removeClass(playPauseButtons[i], 'songPlaying');
                 _addClass(playPauseButtons[i], 'songPaused');
+                playPauseButtons[i].innerHTML = 'play';
+
             }
             playSong(targetSong);
             _addClass(this,'songPlaying');
             _removeClass(this,'songPaused');
-            if (_hasClass(this,'notPlayedYet')) {
+            this.innerHTML = 'pause';
+            // if (_hasClass(this,'notPlayedYet')) {
                 _setLengthDisplay(targetSong);
                 _removeClass(this, 'notPlayedYet');
-            }
+            // }
         }
     }
 
