@@ -160,7 +160,7 @@ function customAudioPlayer(context){
             // Create a play/pause button
             var button = document.createElement('button');
             button.setAttribute('data-song-index',i);
-            button.value = data[i].url;
+            // button.value = data[i].url;
             button.className = 'playlistSongTrigger';
             button.innerHTML = 'play';//File #' + (i + 1);
 
