@@ -30,6 +30,7 @@ function customAudioPlayer(context){
     // Replace those elements with our own custom markup.
     buildMarkup(audioElements);
 
+    var wrappers = document.getElementsByClassName('customAudioPlayer');
     var playPauseButtons = document.getElementsByClassName('playlistSongTrigger');
     var playTimer = document.getElementsByClassName('songPlayTimer');
     var progressBar = document.getElementsByClassName('songProgressSlider');
@@ -114,9 +115,25 @@ function customAudioPlayer(context){
             playPauseButtons[i].addEventListener('click',_playPauseAudio,false);
             progressBar[i].addEventListener('input', sliderScrub, false);
             myAudio[i].addEventListener('timeupdate', _updateProgress, false);
+            myAudio[i].addEventListener('loadstart', _loadStart, false);
+            myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
+            myAudio[i].setAttribute('data-song-index',i);
         }
 
         return myAudio;
+    }
+
+    /**
+     * LOADING
+     */
+    function _loadStart(){
+        console.log('Load start');
+    }
+    function _canplaythrough(){
+        var index = this.getAttribute('data-song-index');
+        console.log('Can play through ' + index);
+        _setLengthDisplay(index);
+        _removeClass(wrappers[index], 'loading');
     }
 
     /**
@@ -139,7 +156,7 @@ function customAudioPlayer(context){
 
             // Create a container for our new player
             var newPlayer = document.createElement('div');
-            newPlayer.className = 'customAudioPlayer player_' + i;
+            newPlayer.className = 'customAudioPlayer loading player_' + i;
             // Create a play/pause button
             var button = document.createElement('button');
             button.setAttribute('data-song-index',i);
@@ -180,12 +197,12 @@ function customAudioPlayer(context){
             meta_progress.max = 100;
             meta_progress.value = 0;
             meta_progress.className = 'songProgressSlider';
-            meta_progress.innerHTML = '00:00';
+            meta_progress.innerHTML = '0:00';
             timings.appendChild(meta_progress);
 
             var meta_duration = document.createElement('span');
             meta_duration.className = 'songDuration';
-            meta_duration.innerHTML = '00:00';
+            meta_duration.innerHTML = '-:--';
             timings.appendChild(meta_duration);
 
             // <input type="range" class="songProgressSlider" min="0" max="100" value="0" oninput="myAudioPlayer.sliderScrub(this.value, 0)">

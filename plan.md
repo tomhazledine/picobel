@@ -16,6 +16,8 @@
 * [ ] Load files into buffer
 
 * [ ] Loading indicator
+    - [x] Loading is Happening
+    - [ ] Incremental progress
 
 * [ ] Sensible, user-friendly error messages
 
