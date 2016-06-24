@@ -134,6 +134,17 @@ function customAudioPlayer(context){
         console.log('Can play through ' + index);
         _setLengthDisplay(index);
         _removeClass(wrappers[index], 'loading');
+
+        _getMeta(index);
+    }
+    function _getMeta(i){
+        var url = myAudio[i].src;
+        var fileType = _getFileType(url);
+        var fileName = _getFileName(url);
+        console.log(fileType);
+        console.log(fileName);
+        // var data = myAudio[i];
+        // console.log(data);
     }
 
     /**
@@ -438,70 +449,25 @@ function customAudioPlayer(context){
         }
     }
 
+    /**
+     * Get File Type
+     */
+    function _getFileType(string){
+        return string.substr((~-string.lastIndexOf(".") >>> 0) + 2);
+    }
+    function _getFileName(string){
+        var fullFileName = string.replace(/^.*[\\\/]/, '');
+        var withNoExtension = fullFileName.split('.')[0];
+        return withNoExtension;
+    }
+
+
     return {
         sliderScrub: sliderScrub,
         playSong: playSong,
         pauseAll: pauseAll
     }
 }
-
-
-/**
- * 
- */
-
-// for (var i = 0; i < items.length; i++) {
-
-//         var currentAudioElement = items[i];
-//         // console.log(audioElements[i]);
-//         var source = currentAudioElement.src;
-//         // console.log(source);
-//         sources.push(source);
-
-//         myAudio[i] = new Audio(source);
-
-
-//         // Create a container for our new player
-//         var newPlayer = document.createElement('div');
-//         newPlayer.className = 'customAudioPlayer player_' + i; 
-//         // Create a play/pause button
-//         var button = document.createElement('button');
-//         button.value = source;
-//         button.innerHTML = 'File #' + (i + 1);
-
-//         // Add the button to the player
-//         newPlayer.appendChild(button);
-
-//         // Create a wrapper for our player's metadata
-//         var meta = document.createElement('div');
-//         meta.className = 'metaWrapper';
-
-//         // Create spans to display file data
-//         var meta_title = document.createElement('span');
-//         meta_title.className = 'titleDisplay';
-//         meta_title.innerHTML = 'Title Number ' + (i + 1);
-//         meta.appendChild(meta_title);
-
-//         var meta_artist = document.createElement('span');
-//         meta_artist.className = 'artistDisplay';
-//         meta_artist.innerHTML = 'Artist Number ' + (i + 1);
-//         meta.appendChild(meta_title);
-
-//         // Add the metadata to the player
-//         newPlayer.appendChild(meta);
-
-//         // newPlayer.innerHTML = source;
-        
-//         // Replace the original audio element with our new creation.
-//         currentAudioElement.parentNode.replaceChild(newPlayer,currentAudioElement);
-//     }
-
-//     return sources;
-
-
-// var myAduioUrls = parseDom();
-
-// console.log(myAduioUrls);
 
 
 
