@@ -35,6 +35,8 @@ function customAudioPlayer(context){
     var playTimer = document.getElementsByClassName('songPlayTimer');
     var progressBar = document.getElementsByClassName('songProgressSlider');
     var songLengthBox = document.getElementsByClassName('songDuration');
+    var titleDisplay = document.getElementsByClassName('titleDisplay');
+
 
     // Initialize the audio.
     var myAudio = initAudio(data);
@@ -141,10 +143,7 @@ function customAudioPlayer(context){
         var url = myAudio[i].src;
         var fileType = _getFileType(url);
         var fileName = _getFileName(url);
-        console.log(fileType);
-        console.log(fileName);
-        // var data = myAudio[i];
-        // console.log(data);
+        titleDisplay[i].innerHTML = fileName;// + '.' + fileType;
     }
 
     /**
@@ -185,20 +184,20 @@ function customAudioPlayer(context){
             // Create elements to display file metadata
             var meta_title = document.createElement('span');
             meta_title.className = 'titleDisplay';
-            meta_title.innerHTML = 'Title Number ' + (i + 1);
+            meta_title.innerHTML = 'File ' + (i + 1);
             meta.appendChild(meta_title);
 
-            var meta_artist = document.createElement('span');
-            meta_artist.className = 'artistDisplay';
-            meta_artist.innerHTML = 'Artist Number ' + (i + 1);
-            meta.appendChild(meta_artist);
+            // var meta_artist = document.createElement('span');
+            // meta_artist.className = 'artistDisplay';
+            // meta_artist.innerHTML = 'Artist Number ' + (i + 1);
+            // meta.appendChild(meta_artist);
 
             var timings = document.createElement('div');
             timings.className = 'timingsWrapper';
 
             var meta_timer = document.createElement('span');
             meta_timer.className = 'songPlayTimer';
-            meta_timer.innerHTML = '00:00';
+            meta_timer.innerHTML = '0:00';
             timings.appendChild(meta_timer);
 
             var meta_progress = document.createElement('input');
