@@ -116,7 +116,7 @@ function customAudioPlayer(context){
             // console.log(playPauseButtons);
             playPauseButtons[i].addEventListener('click',_playPauseAudio,false);
             progressBar[i].addEventListener('input', sliderScrub, false);
-            myAudio[i].addEventListener('timeupdate', _updateProgress, false);
+            myAudio[i].addEventListener('timeupdate', _triggerUpdateProgress, false);
             myAudio[i].addEventListener('loadstart', _loadStart, false);
             myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
             myAudio[i].setAttribute('data-song-index',i);
@@ -284,14 +284,14 @@ function customAudioPlayer(context){
         var index = this.getAttribute('data-song-index');
         // console.log(value);
         // console.log(index);
-        currentSongIndex = index;
+        // currentSongIndex = index;
         var duration = myAudio[index].duration;
         var targetTime = duration * (value / 100);
         targetTime = targetTime.toFixed(2);
         // console.log(duration);
         // console.log(targetTime);
         myAudio[index].currentTime = targetTime;
-        _updateProgress();
+        _updateProgress(index);
     }
 
     /**
@@ -338,23 +338,34 @@ function customAudioPlayer(context){
     }
 
     /**
+     * Trigger "Update Progress":
+     * Link to event handler. Gets the index
+     * of the song to be updated, then passes
+     * it to the _updateProgress() function.
+     */
+    function _triggerUpdateProgress(){
+        var index = this.getAttribute('data-song-index');
+        _updateProgress(index);
+    }
+    
+    /**
      * Update Progress:
      * Set the value of the current-position display for a playing song.
      */
-    function _updateProgress(){
+    function _updateProgress(index){
         // console.log(this.getAttribute('data-song-index'));
-        var progress = myAudio[currentSongIndex].currentTime;
-        var duration = myAudio[currentSongIndex].duration;
+        var progress = myAudio[index].currentTime;
+        var duration = myAudio[index].duration;
         progressParsed = _secondsToMMSS(progress);
-        playTimer[currentSongIndex].innerHTML = progressParsed;
+        playTimer[index].innerHTML = progressParsed;
 
         if (progress >= duration) {
-            _removeClass(playPauseButtons[currentSongIndex], 'songPlaying');
+            _removeClass(playPauseButtons[index], 'songPlaying');
         }
 
         var progressPercent = (progress / duration * 100).toFixed(2);
 
-        progressBar[currentSongIndex].value = progressPercent;
+        progressBar[index].value = progressPercent;
     }
 
     /**
