@@ -1,0 +1,41 @@
+.selectWrapper,.datepickerWrapper{
+	font-size:1em;
+	width:100%;
+	// margin-bottom:2em;
+	border:.15rem solid $primary;
+	border-radius:.5em;
+	padding:.5em;
+	font-family:$display;
+    display:block;
+    background:$white;
+    height:2em;
+    line-height:1;
+    position:relative;
+    overflow:hidden;
+    &.focussed{
+        border-color:$green;
+    }
+
+}
+
+.selectWrapper select{
+	font-family:$display;
+	color:$black;
+    display:block;
+    font-size:1em;
+    padding:0;//.5em;
+    // height:2em;
+    // font-size:1em;
+    cursor:pointer;
+    line-height:1;
+    background:transparent;
+    border-radius:0;
+    border:0;
+    position:absolute;
+    top:.2em;
+    width:120%;
+    right:-20%;
+    &:focus{
+        outline:none;
+    }
+}

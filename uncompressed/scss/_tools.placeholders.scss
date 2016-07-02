@@ -1,0 +1,27 @@
+
+// Clearfix
+// ['@extend'-able version for dealing with pre-generated markup]
+%cf:before,
+%cf:after{
+  content:' ';
+  display:table;
+}
+%cf:after{clear:both;}
+// For IE 6/7 only – Include this rule to trigger hasLayout and contain floats.
+%cf{zoom:1;}
+
+%imgBg{
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+}
+
+%buttonReset{
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background:none;
+    display:inline-block;
+    border:none;
+    border-radius:0;
+}

@@ -1,0 +1,24 @@
+// Typography etc.
+
+// Icon Font
+@font-face {
+  font-family: 'iconFont';
+  src:url('../fonts/icons/icons.eot');
+  src:url('../fonts/icons/icons.eot?#iefix') format('embedded-opentype'),
+      url('../fonts/icons/icons.woff') format('woff'),
+      url('../fonts/icons/icons.ttf') format('truetype'),
+      url('../fonts/icons/icons.svg#icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Fonts
+$display:sans-serif;
+$text:georgia,serif;
+$utility:Helvetica,Arial,sans-serif;
+$icons:'iconFont';
+$code:monospace;
+
+// Weights
+$book:400;
+$bold:700;

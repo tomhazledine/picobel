@@ -1,27 +1,34 @@
 {
-  "name": "style-free-audio-player",
-  "version": "0.0.1",
-  "description": "A lightweight style-free audio player.",
+  "name": "lakelovers",
+  "version": "1.0.0",
+  "description": "Clean-slate WordPress theme for lakelovers.co.uk created by Gendall",
   "main": "gulpfile.js",
   "scripts": {
     "test": "ls -l"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomhazledine/stylefreeaudio"
+    "url": "https://github.com/tomhazledine/gulpstarter"
   },
   "author": "@thomashazledine",
-  "license": "GPLv2",
+  "license": "GPL-3.0",
   "devDependencies": {
-    "gulp": "^3.8.6",
-    "gulp-cache": "^0.2.0",
-    "gulp-concat": "^2.3.4",
-    "gulp-jshint": "^1.8.3",
-    "gulp-plumber": "^0.6.4",
-    "gulp-rename": "^1.2.0",
-    "gulp-size": "^1.0.0",
-    "gulp-uglify": "^0.3.1",
-    "gulp-util": "^3.0.0",
-    "vinyl": "^0.4.6"
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "3.0.1",
+    "gulp-cache": "^0.3.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-livereload": "^2.1.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.4",
+    "gulp-scss-lint": "^0.3.0",
+    "gulp-size": "^2.0.0",
+    "gulp-svg-sprite": "^1.2.10",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6",
+    "tiny-lr": "0.1.6"
   }
 }

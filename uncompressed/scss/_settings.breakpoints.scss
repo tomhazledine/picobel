@@ -1,0 +1,11 @@
+// Media Query Mixins
+@mixin bp($point) {
+  // "min-width" breakpoints (screens getting bigger)
+  @if $point      == u1   { @media (min-width:960px)  { @content; } }
+  @else if $point == u2   { @media (min-width:1200px) { @content; } }
+  @else if $point == u3   { @media (min-width:1400px) { @content; } }
+  // "max-width" breakpoints (screens getting smaller)
+  @else if $point == d1   { @media (max-width:960px)  { @content; } }
+  @else if $point == d2   { @media (max-width:750px)  { @content; } }
+  @else if $point == d3   { @media (max-width:400px)  { @content; } }
+}

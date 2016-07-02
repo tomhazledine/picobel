@@ -1,4 +1,4 @@
-_site
+assets/*
 .sass-cache
-node_modules
+node_modules/*
 DS_Store

@@ -1,0 +1,36 @@
+//------------------------------------//
+
+// * Master SASS file
+// * Architecture uses ITCSS methodology
+
+//------------------------------------//
+
+// 01. SETTINGS
+@import "settings.colours";
+@import "settings.fonts";
+@import "settings.breakpoints";
+
+// 02. TOOLS
+@import "tools.placeholders";
+@import "tools.mixins";
+
+// 03. GENERIC
+//@import 'generic.normalize';
+@import "generic.reset";
+
+// 04. BASE
+@import "base.general";
+@import "base.theme";
+@import "base.forms";
+@import "base.selects";
+@import "base.checkbox";
+@import "base.datepicker";
+
+// 05. OBJECTS
+@import "objects.pagination";
+
+// 06. COMPONENTS
+
+// 07. TRUMPS
+@import "trumps.utilities";
+@import "trumps.printpre";

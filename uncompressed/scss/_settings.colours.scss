@@ -1,0 +1,38 @@
+// COLOURS
+
+// "The New Defaults"
+$aqua:#7fdbff;
+$blue:#0074d9;
+$navy:#001f3f;
+$teal:#39cccc;
+$green:#2ecc40;
+$olive:#3d9970;
+$lime:#01ff70;
+$yellow:#ffdc00;
+$orange:#ff851b;
+$red:#ff4136;
+$fuchsia:#f012be;
+$purple:#b10dc9;
+$maroon:#85144b;
+$white:#fff;
+$silver:#ddd;
+$grey:#aaa;
+$black:#111;
+
+// Project Colours
+$black:#4d4d4d;
+$mid:#9d9d9d;
+$white:#ffffff;
+$cream:#efeeeb;
+$grey:#dad8d2;
+$primary:#00b7c6;
+
+// Selection Colours
+::selection{
+  color:$white;
+  background:$black;
+}
+a::selection{
+  color:$black;
+  background:$white;
+}
