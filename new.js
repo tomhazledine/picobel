@@ -200,6 +200,9 @@ function customAudioPlayer(context){
             meta_timer.innerHTML = '0:00';
             timings.appendChild(meta_timer);
 
+            var meta_progress_wrapper = document.createElement('div');
+            meta_progress_wrapper.setAttribute('data-song-index',i);
+            meta_progress_wrapper.className = 'songProgressSliderWrapper';
             var meta_progress = document.createElement('input');
             meta_progress.type = 'range';
             meta_progress.setAttribute('data-song-index',i);
@@ -208,7 +211,15 @@ function customAudioPlayer(context){
             meta_progress.value = 0;
             meta_progress.className = 'songProgressSlider';
             meta_progress.innerHTML = '0:00';
-            timings.appendChild(meta_progress);
+            meta_progress_wrapper.appendChild(meta_progress);
+            var meta_pseudo_progress_indicator = document.createElement('div');
+            meta_pseudo_progress_indicator.className = 'pseudoProgressIndicator';
+            meta_progress_wrapper.appendChild(meta_pseudo_progress_indicator);
+            var meta_pseudo_progress_playhead = document.createElement('div');
+            meta_pseudo_progress_playhead.className = 'pseudoProgressPlayhead';
+            meta_progress_wrapper.appendChild(meta_pseudo_progress_playhead);
+            
+            timings.appendChild(meta_progress_wrapper);
 
             var meta_duration = document.createElement('span');
             meta_duration.className = 'songDuration';
