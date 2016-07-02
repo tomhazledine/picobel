@@ -1,3 +1,10 @@
-.fillerContent{
-    color:$red;
+body{
+    font-size:1.6rem;
+    font-family:$display;
+}
+
+.container{
+    width:90%;
+    margin:0 auto;
+    max-width:40em;
 }
