@@ -31,7 +31,8 @@ function customAudioPlayer(context){
     buildMarkup(audioElements);
 
     var wrappers = document.getElementsByClassName('customAudioPlayer');
-    var playPauseButtons = document.getElementsByClassName('playlistSongTrigger');
+    var playPauseButtons = document.getElementsByClassName('playerTrigger');
+    var playPauseButtonsText = document.getElementsByClassName('buttonText');
     var playTimer = document.getElementsByClassName('songPlayTimer');
     var progressBar = document.getElementsByClassName('songProgressSlider');
     var songLengthBox = document.getElementsByClassName('songDuration');
@@ -108,7 +109,7 @@ function customAudioPlayer(context){
             myAudio[i] = new Audio(data[i].url);
             myAudio[i].currentTime = 0;
             // Setup event listeners
-            // var playPauseButtons = document.getElementsByClassName('playlistSongTrigger');
+            // var playPauseButtons = document.getElementsByClassName('playerTrigger');
             // var playTimer = document.getElementsByClassName('songPlayTimer');
             // var progressBar = document.getElementsByClassName('songProgressSlider');
             // var songLengthBox = document.getElementsByClassName('songDuration');
@@ -167,12 +168,16 @@ function customAudioPlayer(context){
             // Create a container for our new player
             var newPlayer = document.createElement('div');
             newPlayer.className = 'customAudioPlayer loading player_' + i;
+            
             // Create a play/pause button
             var button = document.createElement('button');
             button.setAttribute('data-song-index',i);
             // button.value = data[i].url;
-            button.className = 'playlistSongTrigger';
-            button.innerHTML = 'play';//File #' + (i + 1);
+            button.className = 'playerTrigger';
+            var buttonText = document.createElement('span');
+            buttonText.className = 'buttonText';
+            buttonText.innerHTML = 'play';//File #' + (i + 1);
+            button.appendChild(buttonText);
 
             // Add the button to the player
             newPlayer.appendChild(button);
@@ -226,19 +231,11 @@ function customAudioPlayer(context){
             meta_duration.innerHTML = '-:--';
             timings.appendChild(meta_duration);
 
-            // <input type="range" class="songProgressSlider" min="0" max="100" value="0" oninput="myAudioPlayer.sliderScrub(this.value, 0)">
-
-            // var playTimer = document.getElementsByClassName('songPlayTimer');
-            // var progressBar = document.getElementsByClassName('songProgressSlider');
-            // var songLengthBox = document.getElementsByClassName('songDuration');
-
             // Add the metadata to the player
             newPlayer.appendChild(meta);
 
             // Add the timings to the player
             newPlayer.appendChild(timings);
-
-            // newPlayer.innerHTML = source;
             
             // Replace the original audio element with our new creation.
             data[i].parentNode.replaceChild(newPlayer,data[i]);
@@ -325,22 +322,23 @@ function customAudioPlayer(context){
      */
     function _playPauseAudio(){
         var targetSong = this.getAttribute('data-song-index');
+        var buttonText = playPauseButtonsText[targetSong];
         if (_hasClass(this,'songPlaying')) {
             pauseAll();
             _removeClass(this,'songPlaying');
             _addClass(this,'songPaused');
-            this.innerHTML = 'play';
+            buttonText.innerHTML = 'play';
         } else {
             for (i = 0; i < playPauseButtons.length; i++) {
                 _removeClass(playPauseButtons[i], 'songPlaying');
                 _addClass(playPauseButtons[i], 'songPaused');
-                playPauseButtons[i].innerHTML = 'play';
+                playPauseButtonsText[i].innerHTML = 'play';
 
             }
             playSong(targetSong);
             _addClass(this,'songPlaying');
             _removeClass(this,'songPaused');
-            this.innerHTML = 'pause';
+            buttonText.innerHTML = 'pause';
             // if (_hasClass(this,'notPlayedYet')) {
                 _setLengthDisplay(targetSong);
                 _removeClass(this, 'notPlayedYet');
