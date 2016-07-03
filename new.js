@@ -37,6 +37,7 @@ function customAudioPlayer(context){
     var progressBar = document.getElementsByClassName('songProgressSlider');
     var songLengthBox = document.getElementsByClassName('songDuration');
     var titleDisplay = document.getElementsByClassName('titleDisplay');
+    // var playhead = document.getElementsByClassName('pseudoProgressPlayhead');
 
 
     // Initialize the audio.
@@ -117,6 +118,7 @@ function customAudioPlayer(context){
             // console.log(playPauseButtons);
             playPauseButtons[i].addEventListener('click',_playPauseAudio,false);
             progressBar[i].addEventListener('input', sliderScrub, false);
+            playhead[i].addEventListener('click',_playheadClick,false);
             myAudio[i].addEventListener('timeupdate', _triggerUpdateProgress, false);
             myAudio[i].addEventListener('loadstart', _loadStart, false);
             myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
@@ -215,14 +217,13 @@ function customAudioPlayer(context){
             meta_progress.max = 100;
             meta_progress.value = 0;
             meta_progress.className = 'songProgressSlider';
-            meta_progress.innerHTML = '0:00';
             meta_progress_wrapper.appendChild(meta_progress);
-            var meta_pseudo_progress_indicator = document.createElement('div');
-            meta_pseudo_progress_indicator.className = 'pseudoProgressIndicator';
-            meta_progress_wrapper.appendChild(meta_pseudo_progress_indicator);
-            var meta_pseudo_progress_playhead = document.createElement('div');
-            meta_pseudo_progress_playhead.className = 'pseudoProgressPlayhead';
-            meta_progress_wrapper.appendChild(meta_pseudo_progress_playhead);
+            // var meta_pseudo_progress_indicator = document.createElement('div');
+            // meta_pseudo_progress_indicator.className = 'pseudoProgressIndicator';
+            // meta_progress_wrapper.appendChild(meta_pseudo_progress_indicator);
+            // var meta_pseudo_progress_playhead = document.createElement('div');
+            // meta_pseudo_progress_playhead.className = 'pseudoProgressPlayhead';
+            // meta_progress_wrapper.appendChild(meta_pseudo_progress_playhead);
             
             timings.appendChild(meta_progress_wrapper);
 
@@ -479,6 +480,16 @@ function customAudioPlayer(context){
         var withNoExtension = fullFileName.split('.')[0];
         return withNoExtension;
     }
+
+    // // HANDLE PLAYHEAD EVENTS
+    // function _playheadClick(){
+    //     // Get song index
+    //     var index = this.parentNode.getAttribute('data-song-index');
+    //     console.log(index);
+    //     // Get position and width/height of playhead
+    //     var rect = this.getBoundingClientRect();
+    //     console.log(rect);
+    // }
 
 
     return {

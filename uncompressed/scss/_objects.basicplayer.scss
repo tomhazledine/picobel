@@ -19,9 +19,28 @@
 .timingsWrapper{
     .songPlayTimer{}
     .songProgressSliderWrapper{
-        .songProgressSlider{}
-        .pseudoProgressIndicator{}
-        .pseudoProgressPlayhead{}
+        height:2em;
+        background:$green;
+        position:relative;
+        // .songProgressSlider{
+        //     display:none;
+        // }
+        // .pseudoProgressIndicator{
+        //     height:2em;
+        //     position:absolute;
+        //     top:0;
+        //     left:0;
+        //     background:$blue;
+        //     width:20%;
+        // }
+        // .pseudoProgressPlayhead{
+        //     width:.2em;
+        //     height:100%;
+        //     position:absolute;
+        //     top:0;
+        //     left:20%;
+        //     background:$red;
+        // }
     }
     .songDuration{
 
