@@ -106,94 +106,44 @@
         // background:$green;
         position:relative;
         background:$grey;
+        overflow:hidden;
         .songProgressSlider{
             width:100%;
             padding:0;
             margin:0;
+            position:absolute;
+            top:0;
+            left:0;
+            // z-index:2;
             opacity:0;
         }
-        // .pseudoProgressIndicator{
-        //     height:2em;
-        //     position:absolute;
-        //     top:0;
-        //     left:0;
-        //     background:$blue;
-        //     width:20%;
-        // }
-        // .pseudoProgressPlayhead{
-        //     width:.2em;
-        //     height:100%;
-        //     position:absolute;
-        //     top:0;
-        //     left:20%;
-        //     background:$red;
-        // }
+        .pseudoProgressIndicator{
+            height:2em;
+            position:absolute;
+            top:0;
+            left:0;
+            background:#888;//grey;
+            width:0%;
+            // z-index:1;
+        }
+        .pseudoProgressPlayhead{
+            width:2em;
+            border-radius:50%;
+            height:2em;
+            position:absolute;
+            top:50%;
+            left:0%;
+            margin-top:-1em;
+            margin-left:-1em;
+            background:white;
+            border:.2em solid black;
+            // z-index:1;
+        }
     }
 }
 
 
-//
-// Range Style Reset
-//
 
-input[type=range].songProgressSlider{
-  -webkit-appearance:none; // Hides the slider so that custom slider can be made
-  width:100%; // Specific width is required for Firefox.
-  margin:0;
-}
-input[type=range].songProgressSlider::-webkit-slider-thumb {
-  -webkit-appearance:none;
-}
-input[type=range].songProgressSlider:focus {
-  outline:none; // Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though.
-}
-input[type=range].songProgressSlider::-ms-track {
-  width:100%;
-  cursor:pointer;
-  background:transparent; // Hides the slider so custom styles can be added
-  border-color:transparent;
-  color:transparent;
-}
-
-//
-// The Thumb
-//
-
-// Special styling for WebKit/Blink
-input[type=range].songProgressSlider::-webkit-slider-thumb{
-  font-size:1em;
-  height:2em;
-  -webkit-appearance:none;
-  width:1.5em;
-  border-radius:0;
-  background:$black;
-  background:rgba($black,.4);
-  cursor:pointer;
-  // margin-top:-14px;
-  box-shadow:0;
-}
-// All the same stuff for Firefox
-input[type=range].songProgressSlider::-moz-range-thumb {
-  box-shadow:0;
-  border:0;
-  height:2em;
-  width:1.5em;
-  border-radius:0;
-  background:$black;
-  background:rgba($black,.4);
-  cursor:pointer;
-}
-// All the same stuff for IE
-input[type=range].songProgressSlider::-ms-thumb {
-  box-shadow:0;
-  border:0;
-  height:2em;
-  width:1.5em;
-  border-radius:0;
-  background:$black;
-  background:rgba($black,.4);
-  cursor:pointer;
-}
 
 //
 // The Track
@@ -201,16 +151,13 @@ input[type=range].songProgressSlider::-ms-thumb {
 
 input[type=range].songProgressSlider::-webkit-slider-runnable-track {
   width:100%;
-  height:2em;
+  font-size:1em;
+  height:2.2em;
   cursor:pointer;
   box-shadow:0;
-  background:$primary;
+  background:black;
   border-radius:0;
   border:0;
-}
-
-input[type=range].songProgressSlider:focus::-webkit-slider-runnable-track {
-  background:$primary;
 }
 
 input[type=range].songProgressSlider::-moz-range-track {
@@ -218,7 +165,7 @@ input[type=range].songProgressSlider::-moz-range-track {
   height:2em;
   cursor:pointer;
   box-shadow:0;
-  background:$primary;
+  background:black;
   border-radius:0;
   border:0;
 }
@@ -233,20 +180,20 @@ input[type=range].songProgressSlider::-ms-track {
   color:transparent;
 }
 input[type=range].songProgressSlider::-ms-fill-lower {
-  background:$primary;
+  background:black;
   border:0;
   border-radius:0;
   box-shadow:0;
 }
 input[type=range].songProgressSlider:focus::-ms-fill-lower {
-  background:$primary;
+  background:black;
 }
 input[type=range].songProgressSlider::-ms-fill-upper {
-  background:$primary;
+  background:black;
   border:0;
   border-radius:0;
   box-shadow:0;
 }
 input[type=range].songProgressSlider:focus::-ms-fill-upper {
-  background:$primary;
+  background:black;
 }
