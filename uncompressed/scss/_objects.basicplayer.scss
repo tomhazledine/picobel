@@ -1,8 +1,10 @@
 .customAudioPlayer{
-    background:$grey;
+    // background:$grey;
+    border:.2em solid $grey;
     margin:2em 0;
-    padding:0 0 0 3em;
+    padding:.5em .5em .5em 3em;
     position:relative;
+    border-radius:.5em;
 }
 
 .playerTrigger{
@@ -24,7 +26,7 @@
     }
     &:focus{
         outline:none;
-        box-shadow:$blue 0 0 0 .2em;
+        box-shadow:$grey 0 0 0 .2em;
     }
     &:before{
         content:'';
@@ -69,20 +71,47 @@
 }
 
 .metaWrapper{
+    margin-bottom:.5em;
     .titleDisplay{
-
+        font-weight:bold;
     }
 }
 
 .timingsWrapper{
-    .songPlayTimer{}
+    padding:0 4em;
+    position:relative;
+    font-size:.8em;
+    .songPlayTimer,
+    .songDuration{
+        position:absolute;
+        top:0;
+        width:4em;
+        text-align:center;
+        background:$grey;
+        line-height:2;
+        height:2em;
+    }
+    .songPlayTimer{
+        left:0;
+        border-radius:.5em 0 0 .5em;
+    }
+    .songDuration{
+        right:0;
+        border-radius:0 .5em .5em 0;
+    }
     .songProgressSliderWrapper{
         height:2em;
-        background:$green;
+        font-size:1em;
+        line-height:1;
+        // background:$green;
         position:relative;
-        // .songProgressSlider{
-        //     display:none;
-        // }
+        background:$grey;
+        .songProgressSlider{
+            width:100%;
+            padding:0;
+            margin:0;
+            opacity:0;
+        }
         // .pseudoProgressIndicator{
         //     height:2em;
         //     position:absolute;
@@ -100,7 +129,124 @@
         //     background:$red;
         // }
     }
-    .songDuration{
+}
 
-    }
+
+//
+// Range Style Reset
+//
+
+input[type=range].songProgressSlider{
+  -webkit-appearance:none; // Hides the slider so that custom slider can be made
+  width:100%; // Specific width is required for Firefox.
+  margin:0;
+}
+input[type=range].songProgressSlider::-webkit-slider-thumb {
+  -webkit-appearance:none;
+}
+input[type=range].songProgressSlider:focus {
+  outline:none; // Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though.
+}
+input[type=range].songProgressSlider::-ms-track {
+  width:100%;
+  cursor:pointer;
+  background:transparent; // Hides the slider so custom styles can be added
+  border-color:transparent;
+  color:transparent;
+}
+
+//
+// The Thumb
+//
+
+// Special styling for WebKit/Blink
+input[type=range].songProgressSlider::-webkit-slider-thumb{
+  font-size:1em;
+  height:2em;
+  -webkit-appearance:none;
+  width:1.5em;
+  border-radius:0;
+  background:$black;
+  background:rgba($black,.4);
+  cursor:pointer;
+  // margin-top:-14px;
+  box-shadow:0;
+}
+// All the same stuff for Firefox
+input[type=range].songProgressSlider::-moz-range-thumb {
+  box-shadow:0;
+  border:0;
+  height:2em;
+  width:1.5em;
+  border-radius:0;
+  background:$black;
+  background:rgba($black,.4);
+  cursor:pointer;
+}
+// All the same stuff for IE
+input[type=range].songProgressSlider::-ms-thumb {
+  box-shadow:0;
+  border:0;
+  height:2em;
+  width:1.5em;
+  border-radius:0;
+  background:$black;
+  background:rgba($black,.4);
+  cursor:pointer;
+}
+
+//
+// The Track
+//
+
+input[type=range].songProgressSlider::-webkit-slider-runnable-track {
+  width:100%;
+  height:2em;
+  cursor:pointer;
+  box-shadow:0;
+  background:$primary;
+  border-radius:0;
+  border:0;
+}
+
+input[type=range].songProgressSlider:focus::-webkit-slider-runnable-track {
+  background:$primary;
+}
+
+input[type=range].songProgressSlider::-moz-range-track {
+  width:100%;
+  height:2em;
+  cursor:pointer;
+  box-shadow:0;
+  background:$primary;
+  border-radius:0;
+  border:0;
+}
+
+input[type=range].songProgressSlider::-ms-track {
+  width:100%;
+  height:2em;
+  cursor:pointer;
+  background:transparent;
+  border-color:transparent;
+  border-width:.5em 0;
+  color:transparent;
+}
+input[type=range].songProgressSlider::-ms-fill-lower {
+  background:$primary;
+  border:0;
+  border-radius:0;
+  box-shadow:0;
+}
+input[type=range].songProgressSlider:focus::-ms-fill-lower {
+  background:$primary;
+}
+input[type=range].songProgressSlider::-ms-fill-upper {
+  background:$primary;
+  border:0;
+  border-radius:0;
+  box-shadow:0;
+}
+input[type=range].songProgressSlider:focus::-ms-fill-upper {
+  background:$primary;
 }
