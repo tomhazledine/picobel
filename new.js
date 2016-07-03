@@ -118,7 +118,7 @@ function customAudioPlayer(context){
             // console.log(playPauseButtons);
             playPauseButtons[i].addEventListener('click',_playPauseAudio,false);
             progressBar[i].addEventListener('input', sliderScrub, false);
-            playhead[i].addEventListener('click',_playheadClick,false);
+            // playhead[i].addEventListener('click',_playheadClick,false);
             myAudio[i].addEventListener('timeupdate', _triggerUpdateProgress, false);
             myAudio[i].addEventListener('loadstart', _loadStart, false);
             myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
