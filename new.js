@@ -37,6 +37,7 @@ function customAudioPlayer(context){
     var progressBar = document.getElementsByClassName('songProgressSlider');
     var songLengthBox = document.getElementsByClassName('songDuration');
     var titleDisplay = document.getElementsByClassName('titleDisplay');
+    var artistDisplay = document.getElementsByClassName('artistDisplay');
     var playhead = document.getElementsByClassName('pseudoProgressPlayhead');
     var indicator = document.getElementsByClassName('pseudoProgressIndicator');
 
@@ -149,11 +150,16 @@ function customAudioPlayer(context){
         var fileName = _getFileName(url);
 
         var title = audioElements[i].title;
+        var artist = audioElements[i].getAttribute('data-artist');;
         
         if (title != '') {
             titleDisplay[i].innerHTML = title;
         } else {
             titleDisplay[i].innerHTML = fileName;// + '.' + fileType;
+        }
+
+        if (artist != '') {
+            artistDisplay[i].innerHTML = artist;
         }
     }
 
@@ -202,10 +208,10 @@ function customAudioPlayer(context){
             meta_title.innerHTML = 'File ' + (i + 1);
             meta.appendChild(meta_title);
 
-            // var meta_artist = document.createElement('span');
-            // meta_artist.className = 'artistDisplay';
+            var meta_artist = document.createElement('span');
+            meta_artist.className = 'artistDisplay';
             // meta_artist.innerHTML = 'Artist Number ' + (i + 1);
-            // meta.appendChild(meta_artist);
+            meta.appendChild(meta_artist);
 
             var timings = document.createElement('div');
             timings.className = 'timingsWrapper';
