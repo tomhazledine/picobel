@@ -1,13 +1,71 @@
 .customAudioPlayer{
     background:$grey;
     margin:2em 0;
+    padding:0 0 0 3em;
+    position:relative;
 }
 
-.playlistSongTrigger{
+.playerTrigger{
+    border:none;
+    appearance:none;
     width:2em;
     height:2em;
+    font-size:1em;
     color:$white;
     background:$black;
+    position:absolute;
+    top:50%;
+    left:.5em;
+    border-radius:50%;
+    margin-top:-1em;
+    cursor:pointer;
+    .buttonText{
+        display:none;
+    }
+    &:focus{
+        outline:none;
+        box-shadow:$blue 0 0 0 .2em;
+    }
+    &:before{
+        content:'';
+        display:block;
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin-top:-.5em;
+        margin-left:-.2em;
+        border-top:.5em solid transparent;
+        border-left:.6em solid $white;
+        border-bottom:.5em solid transparent;
+        transition:border height margin top;
+        transition-duration:.2s;
+    }
+    &:after{
+        content:'';
+        display:block;
+        position:absolute;
+        top:50%;
+        right:50%;
+        height:.8em;
+        margin-top:-.4em;
+        margin-right:-.3em;
+        border-top:0;
+        border-left:.3em solid $white;
+        border-bottom:0;
+        opacity:0;
+        transition:opacity .2s;
+    }
+    &.songPlaying:before{
+        height:.8em;
+        margin-top:-.4em;
+        margin-left:-.3em;
+        border-top:0;
+        border-left:.3em solid $white;
+        border-bottom:0;
+    }
+    &.songPlaying:after{
+        opacity:1;
+    }
 }
 
 .metaWrapper{
