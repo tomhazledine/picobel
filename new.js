@@ -13,12 +13,7 @@
  * by using HTML5 Audio.
  * ----------------------
  */
-function customAudioPlayer(context){
-
-    // NOTE: `context` is the audio context for
-    // the webAudioAPI. This must be set before
-    // we initialize our function. (View bottom
-    // of this file for an example).
+function customAudioPlayer(){
 
     // Find all the elements and store them
     // in an array (for easy access).
@@ -516,14 +511,5 @@ function customAudioPlayer(context){
 }
 
 
-
-// determine if Web Audio API is available
-// (`contextClass` will return `false` if
-// the API is not supported).
-var contextClass = (window.AudioContext || window.webkitAudioContext);
-
-
-if (contextClass) {
-    // Initialise the audio functions
-    customAudioPlayer(contextClass);
-}
+// Initialise the audio functions
+customAudioPlayer();
