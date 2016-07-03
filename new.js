@@ -147,7 +147,14 @@ function customAudioPlayer(context){
         var url = myAudio[i].src;
         var fileType = _getFileType(url);
         var fileName = _getFileName(url);
-        titleDisplay[i].innerHTML = fileName;// + '.' + fileType;
+
+        var title = audioElements[i].title;
+        
+        if (title != '') {
+            titleDisplay[i].innerHTML = title;
+        } else {
+            titleDisplay[i].innerHTML = fileName;// + '.' + fileType;
+        }
     }
 
     /**
