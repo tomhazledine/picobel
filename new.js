@@ -241,8 +241,14 @@ function customAudioPlayer(){
             timings.appendChild(meta_duration);
 
             // Volume Indicator
+            var meta_volume = document.createElement('div');
+            meta_volume.setAttribute('data-song-index',i);
+            meta_volume.className = 'songVolume';
+            var meta_volume_label = document.createElement('span');
+            meta_volume_label.className = 'songVolumeLabel';
+            meta_volume_label.innerHTML = 'Volume';
+            meta_volume.appendChild(meta_volume_label);
             var meta_volume_wrapper = document.createElement('div');
-            meta_volume_wrapper.setAttribute('data-song-index',i);
             meta_volume_wrapper.className = 'songVolumeSliderWrapper';
             var meta_pseudo_volume_indicator = document.createElement('div');
             meta_pseudo_volume_indicator.className = 'pseudoVolumeIndicator';
@@ -250,14 +256,15 @@ function customAudioPlayer(){
             var meta_pseudo_volume_playhead = document.createElement('div');
             meta_pseudo_volume_playhead.className = 'pseudoVolumePlayhead';
             meta_volume_wrapper.appendChild(meta_pseudo_volume_playhead);
-            var meta_volume = document.createElement('input');
-            meta_volume.type = 'range';
-            meta_volume.setAttribute('data-song-index',i);
-            meta_volume.min = 0;
-            meta_volume.max = 100;
-            meta_volume.value = 0;
-            meta_volume.className = 'songVolumeSlider';
-            meta_volume_wrapper.appendChild(meta_volume);
+            var meta_volume_control = document.createElement('input');
+            meta_volume_control.type = 'range';
+            // meta_volume_control.setAttribute('data-song-index',i);
+            meta_volume_control.min = 0;
+            meta_volume_control.max = 100;
+            meta_volume_control.value = 0;
+            meta_volume_control.className = 'songVolumeSlider';
+            meta_volume_wrapper.appendChild(meta_volume_control);
+            meta_volume.appendChild(meta_volume_wrapper);
 
             // Add the button to the player
             newPlayer.appendChild(button);
@@ -269,7 +276,7 @@ function customAudioPlayer(){
             newPlayer.appendChild(timings);
 
             // Add the volume display to the player
-            newPlayer.appendChild(meta_volume_wrapper);
+            newPlayer.appendChild(meta_volume);
             
             // Replace the original audio element with our new creation.
             data[i].parentNode.replaceChild(newPlayer,data[i]);
