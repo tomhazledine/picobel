@@ -150,7 +150,7 @@ function customAudioPlayer(){
         if (title != '') {
             titleDisplay[i].innerHTML = title;
         } else {
-            titleDisplay[i].innerHTML = fileName;// + '.' + fileType;
+            titleDisplay[i].innerHTML = fileName + '.' + fileType;
         }
 
         if (artist != '') {
@@ -190,9 +190,6 @@ function customAudioPlayer(){
             buttonText.innerHTML = 'play';//File #' + (i + 1);
             button.appendChild(buttonText);
 
-            // Add the button to the player
-            newPlayer.appendChild(button);
-
             // Create a wrapper for our player's metadata
             var meta = document.createElement('div');
             meta.className = 'metaWrapper';
@@ -216,6 +213,7 @@ function customAudioPlayer(){
             meta_timer.innerHTML = '0:00';
             timings.appendChild(meta_timer);
 
+            // Progress Indicator
             var meta_progress_wrapper = document.createElement('div');
             meta_progress_wrapper.setAttribute('data-song-index',i);
             meta_progress_wrapper.className = 'songProgressSliderWrapper';
@@ -233,7 +231,8 @@ function customAudioPlayer(){
             meta_progress.value = 0;
             meta_progress.className = 'songProgressSlider';
             meta_progress_wrapper.appendChild(meta_progress);
-            
+
+            // Add the volume display to the player
             timings.appendChild(meta_progress_wrapper);
 
             var meta_duration = document.createElement('span');
@@ -241,11 +240,36 @@ function customAudioPlayer(){
             meta_duration.innerHTML = '-:--';
             timings.appendChild(meta_duration);
 
+            // Volume Indicator
+            var meta_volume_wrapper = document.createElement('div');
+            meta_volume_wrapper.setAttribute('data-song-index',i);
+            meta_volume_wrapper.className = 'songVolumeSliderWrapper';
+            var meta_pseudo_volume_indicator = document.createElement('div');
+            meta_pseudo_volume_indicator.className = 'pseudoVolumeIndicator';
+            meta_volume_wrapper.appendChild(meta_pseudo_volume_indicator);
+            var meta_pseudo_volume_playhead = document.createElement('div');
+            meta_pseudo_volume_playhead.className = 'pseudoVolumePlayhead';
+            meta_volume_wrapper.appendChild(meta_pseudo_volume_playhead);
+            var meta_volume = document.createElement('input');
+            meta_volume.type = 'range';
+            meta_volume.setAttribute('data-song-index',i);
+            meta_volume.min = 0;
+            meta_volume.max = 100;
+            meta_volume.value = 0;
+            meta_volume.className = 'songVolumeSlider';
+            meta_volume_wrapper.appendChild(meta_volume);
+
+            // Add the button to the player
+            newPlayer.appendChild(button);
+
             // Add the metadata to the player
             newPlayer.appendChild(meta);
 
             // Add the timings to the player
             newPlayer.appendChild(timings);
+
+            // Add the volume display to the player
+            newPlayer.appendChild(meta_volume_wrapper);
             
             // Replace the original audio element with our new creation.
             data[i].parentNode.replaceChild(newPlayer,data[i]);
