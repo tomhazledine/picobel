@@ -231,8 +231,7 @@ function customAudioPlayer(){
             meta_progress.value = 0;
             meta_progress.className = 'songProgressSlider';
             meta_progress_wrapper.appendChild(meta_progress);
-
-            // Add the volume display to the player
+            
             timings.appendChild(meta_progress_wrapper);
 
             var meta_duration = document.createElement('span');
@@ -248,6 +247,10 @@ function customAudioPlayer(){
             meta_volume_label.className = 'songVolumeLabel';
             meta_volume_label.innerHTML = 'Volume';
             meta_volume.appendChild(meta_volume_label);
+            var meta_volume_value = document.createElement('span');
+            meta_volume_value.className = 'songVolumeValue';
+            meta_volume_value.innerHTML = '10';
+            meta_volume.appendChild(meta_volume_value);
             var meta_volume_wrapper = document.createElement('div');
             meta_volume_wrapper.className = 'songVolumeSliderWrapper';
             var meta_pseudo_volume_indicator = document.createElement('div');
@@ -258,10 +261,9 @@ function customAudioPlayer(){
             meta_volume_wrapper.appendChild(meta_pseudo_volume_playhead);
             var meta_volume_control = document.createElement('input');
             meta_volume_control.type = 'range';
-            // meta_volume_control.setAttribute('data-song-index',i);
             meta_volume_control.min = 0;
             meta_volume_control.max = 100;
-            meta_volume_control.value = 0;
+            meta_volume_control.value = 100;
             meta_volume_control.className = 'songVolumeSlider';
             meta_volume_wrapper.appendChild(meta_volume_control);
             meta_volume.appendChild(meta_volume_wrapper);
