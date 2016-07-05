@@ -99,46 +99,47 @@
         right:0;
         border-radius:0 .5em .5em 0;
     }
-    .songProgressSliderWrapper{
+}
+
+.songProgressSliderWrapper{
+    height:2em;
+    font-size:1em;
+    line-height:1;
+    // background:$green;
+    position:relative;
+    background:$grey;
+    overflow:hidden;
+    .songProgressSlider{
+        width:100%;
+        padding:0;
+        margin:0;
+        position:absolute;
+        top:0;
+        left:0;
+        // z-index:2;
+        opacity:0;
+    }
+    .pseudoProgressIndicator{
         height:2em;
-        font-size:1em;
-        line-height:1;
-        // background:$green;
-        position:relative;
-        background:$grey;
-        overflow:hidden;
-        .songProgressSlider{
-            width:100%;
-            padding:0;
-            margin:0;
-            position:absolute;
-            top:0;
-            left:0;
-            // z-index:2;
-            opacity:0;
-        }
-        .pseudoProgressIndicator{
-            height:2em;
-            position:absolute;
-            top:0;
-            left:0;
-            background:#888;//grey;
-            width:0%;
-            // z-index:1;
-        }
-        .pseudoProgressPlayhead{
-            width:1em;
-            // border-radius:50%;
-            height:2em;
-            position:absolute;
-            top:50%;
-            left:0%;
-            margin-top:-1em;
-            margin-left:-.5em;
-            background:white;
-            border:.2em solid black;
-            // z-index:1;
-        }
+        position:absolute;
+        top:0;
+        left:0;
+        background:#888;//grey;
+        width:0%;
+        // z-index:1;
+    }
+    .pseudoProgressPlayhead{
+        width:1em;
+        // border-radius:50%;
+        height:2em;
+        position:absolute;
+        top:50%;
+        left:0%;
+        margin-top:-1em;
+        margin-left:-.5em;
+        background:white;
+        border:.2em solid black;
+        // z-index:1;
     }
 }
 
@@ -155,6 +156,67 @@ input[type=range].songProgressSlider::-moz-range-track {
   cursor:pointer;
 }
 input[type=range].songProgressSlider::-ms-track {
+  width:100%;
+  height:2em;
+  cursor:pointer;
+}
+
+.songVolumeSliderWrapper{
+    // font-size:.8em;
+    height:2em;
+    font-size:.8em;//1em;
+    line-height:1;
+    // background:$green;
+    position:relative;
+    background:$grey;
+    overflow:hidden;
+    .songVolumeSlider{
+        width:100%;
+        padding:0;
+        margin:0;
+        position:absolute;
+        top:0;
+        left:0;
+        // z-index:2;
+        opacity:0;
+    }
+    .pseudoVolumeIndicator{
+        height:2em;
+        position:absolute;
+        top:0;
+        left:0;
+        background:#888;//grey;
+        width:100%;
+        // z-index:1;
+    }
+    .pseudoVolumePlayhead{
+        width:1em;
+        // border-radius:50%;
+        height:2em;
+        position:absolute;
+        top:50%;
+        left:100%;
+        margin-top:-1em;
+        margin-left:-.5em;
+        background:white;
+        border:.2em solid black;
+        // z-index:1;
+    }
+}
+
+// Make sure the range Track is the right size and shape
+input[type=range].songVolumeSlider::-webkit-slider-runnable-track {
+  width:100%;
+  font-size:1em;
+  height:2.2em;
+  cursor:pointer;
+}
+input[type=range].songVolumeSlider::-moz-range-track {
+  width:100%;
+  height:2em;
+  cursor:pointer;
+}
+input[type=range].songVolumeSlider::-ms-track {
   width:100%;
   height:2em;
   cursor:pointer;

@@ -26,17 +26,24 @@ function customAudioPlayer(){
     buildMarkup(audioElements);
 
     var wrappers = document.getElementsByClassName('customAudioPlayer');
+    
     var playPauseButtons = document.getElementsByClassName('playerTrigger');
     var playPauseButtonsText = document.getElementsByClassName('buttonText');
+    
     var playTimer = document.getElementsByClassName('songPlayTimer');
-    var progressBar = document.getElementsByClassName('songProgressSlider');
     var songLengthBox = document.getElementsByClassName('songDuration');
+    
     var titleDisplay = document.getElementsByClassName('titleDisplay');
     var artistDisplay = document.getElementsByClassName('artistDisplay');
+
+    var progressBar = document.getElementsByClassName('songProgressSlider');
     var playhead = document.getElementsByClassName('pseudoProgressPlayhead');
     var indicator = document.getElementsByClassName('pseudoProgressIndicator');
+    
     var volumeControl = document.getElementsByClassName('songVolumeSlider');
     var volumeDisplay = document.getElementsByClassName('songVolumeValue');
+    var volumeIndicator = document.getElementsByClassName('pseudoVolumeIndicator');
+    var volumePlayhead = document.getElementsByClassName('pseudoVolumePlayhead');
 
 
     // Initialize the audio.
@@ -265,9 +272,9 @@ function customAudioPlayer(){
             var meta_volume_control = document.createElement('input');
             meta_volume_control.type = 'range';
             meta_volume_control.min = 0;
-            meta_volume_control.max = 1;
-            meta_volume_control.value = 1;
-            meta_volume_control.step = 0.1;
+            meta_volume_control.max = 100;
+            meta_volume_control.value = 100;
+            // meta_volume_control.step = 0.1;
             meta_volume_control.className = 'songVolumeSlider';
             meta_volume_wrapper.appendChild(meta_volume_control);
             meta_volume.appendChild(meta_volume_wrapper);
@@ -354,11 +361,17 @@ function customAudioPlayer(){
      */
     function volume(){
         var value = this.value;
-        var valueMapped = value * 10;
+        var valueMapped = value / 10;
+        valueMapped = valueMapped.toFixed(0);
+        var valueParsed = value / 100;
+        var volumePercent = value;
         var index = this.parentNode.parentNode.getAttribute('data-song-index');
-        myAudio[index].volume = value;
+        myAudio[index].volume = valueParsed;
         volumeDisplay[index].innerHTML = valueMapped;
         // console.log(value + ' + ' + valueMapped);
+        volumeControl[index].value = value;
+        volumeIndicator[index].style.width = volumePercent + '%';
+        volumePlayhead[index].style.left = volumePercent + '%';
     }
 
     /**
