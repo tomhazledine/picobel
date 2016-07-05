@@ -356,8 +356,9 @@ function customAudioPlayer(){
         var value = this.value;
         var valueMapped = value * 10;
         var index = this.parentNode.parentNode.getAttribute('data-song-index');
+        myAudio[index].volume = value;
         volumeDisplay[index].innerHTML = valueMapped;
-        console.log(value + ' + ' + valueMapped);
+        // console.log(value + ' + ' + valueMapped);
     }
 
     /**
