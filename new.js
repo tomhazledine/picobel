@@ -272,9 +272,9 @@ function customAudioPlayer(){
             var meta_volume_control = document.createElement('input');
             meta_volume_control.type = 'range';
             meta_volume_control.min = 0;
-            meta_volume_control.max = 100;
-            meta_volume_control.value = 100;
-            // meta_volume_control.step = 0.1;
+            meta_volume_control.max = 1;
+            meta_volume_control.value = 1;
+            meta_volume_control.step = 0.1;
             meta_volume_control.className = 'songVolumeSlider';
             meta_volume_wrapper.appendChild(meta_volume_control);
             meta_volume.appendChild(meta_volume_wrapper);
@@ -361,12 +361,10 @@ function customAudioPlayer(){
      */
     function volume(){
         var value = this.value;
-        var valueMapped = value / 10;
-        valueMapped = valueMapped.toFixed(0);
-        var valueParsed = value / 100;
-        var volumePercent = value;
+        var valueMapped = value * 10;
+        var volumePercent = value * 100;
         var index = this.parentNode.parentNode.getAttribute('data-song-index');
-        myAudio[index].volume = valueParsed;
+        myAudio[index].volume = value;
         volumeDisplay[index].innerHTML = valueMapped;
         // console.log(value + ' + ' + valueMapped);
         volumeControl[index].value = value;
