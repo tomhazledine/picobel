@@ -35,6 +35,8 @@ function customAudioPlayer(){
     var artistDisplay = document.getElementsByClassName('artistDisplay');
     var playhead = document.getElementsByClassName('pseudoProgressPlayhead');
     var indicator = document.getElementsByClassName('pseudoProgressIndicator');
+    var volumeControl = document.getElementsByClassName('songVolumeSlider');
+    var volumeDisplay = document.getElementsByClassName('songVolumeValue');
 
 
     // Initialize the audio.
@@ -115,6 +117,7 @@ function customAudioPlayer(){
             // console.log(playPauseButtons);
             playPauseButtons[i].addEventListener('click',_playPauseAudio,false);
             progressBar[i].addEventListener('input', sliderScrub, false);
+            volumeControl[i].addEventListener('input', volume, false);
             // playhead[i].addEventListener('click',_playheadClick,false);
             myAudio[i].addEventListener('timeupdate', _triggerUpdateProgress, false);
             myAudio[i].addEventListener('loadstart', _loadStart, false);
@@ -343,6 +346,15 @@ function customAudioPlayer(){
         // console.log(targetTime);
         myAudio[index].currentTime = targetTime;
         _updateProgress(index);
+    }
+
+    /**
+     * VOLUME
+     */
+    function volume(){
+        var value = this.value;
+        var index = this.parentNode.parentNode.getAttribute('data-song-index');
+        console.log(value + ' + ' + index);
     }
 
     /**
