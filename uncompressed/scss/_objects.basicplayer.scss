@@ -5,6 +5,7 @@
     padding:.5em .5em .5em 3em;
     position:relative;
     border-radius:.5em;
+    overflow:auto;
 }
 
 .playerTrigger{
@@ -72,8 +73,10 @@
 
 .metaWrapper{
     margin-bottom:.5em;
+    overflow:auto;
     .titleDisplay{
         font-weight:bold;
+        margin-right:.5em;
     }
 }
 
@@ -81,6 +84,8 @@
     padding:0 4em;
     position:relative;
     font-size:.8em;
+    width:70%;
+    float:left;
     .songPlayTimer,
     .songDuration{
         position:absolute;
@@ -162,12 +167,19 @@ input[type=range].songProgressSlider::-ms-track {
 }
 
 .songVolume{
-    padding-top:1em;
-    width:20em;
+    padding-top:.4em;
+    width:28%;
+    float:right;
+    overflow:auto;
 }
 
 .songVolumeValue{
     margin-left:.2em;
+}
+
+.songVolumeLabelWrapper{
+    width:50%;
+    float:left;
 }
 
 .songVolumeSliderWrapper{
