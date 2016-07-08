@@ -15,6 +15,17 @@
  */
 function customAudioPlayer(){
 
+    /**
+     * ---------------------------------------------
+     * MAKE STUFF HAPPEN
+     *
+     * The following lines initialize functions we
+     * declare further down the file. We need to
+     * call them in a specific order (so things like
+     * elemnt-selection work properly).
+     * ---------------------------------------------
+     */
+
     // Find all the elements and store them
     // in an array (for easy access).
     var audioElements = findAudio();
@@ -25,166 +36,67 @@ function customAudioPlayer(){
     // Replace those elements with our own custom markup.
     buildMarkup(audioElements);
 
+    // Now we've placed our elements in the DOM, we can select them.
     var wrappers = document.getElementsByClassName('customAudioPlayer');
-    
     var playPauseButtons = document.getElementsByClassName('playerTrigger');
     var playPauseButtonsText = document.getElementsByClassName('buttonText');
-    
     var playTimer = document.getElementsByClassName('songPlayTimer');
     var songLengthBox = document.getElementsByClassName('songDuration');
-    
     var titleDisplay = document.getElementsByClassName('titleDisplay');
     var artistDisplay = document.getElementsByClassName('artistDisplay');
-
     var progressBar = document.getElementsByClassName('songProgressSlider');
     var playhead = document.getElementsByClassName('pseudoProgressPlayhead');
     var indicator = document.getElementsByClassName('pseudoProgressIndicator');
-    
     var volumeControl = document.getElementsByClassName('songVolumeSlider');
     var volumeDisplay = document.getElementsByClassName('songVolumeValue');
     var volumeIndicator = document.getElementsByClassName('pseudoVolumeIndicator');
     var volumePlayhead = document.getElementsByClassName('pseudoVolumePlayhead');
 
-
     // Initialize the audio.
     var myAudio = initAudio(data);
 
-    console.log(myAudio);
-
+    // Create a var to store the index of the file currently
+    // being played (defaulting to the first track in the DOM)
     var currentSongIndex = 0;
 
-    // console.log(data);
-
     /**
-     * ----------------------
-     * FIND <AUDIO> INSTANCES
+     * ---------------------------------
+     * SETUP
      *
-     * Return an array of all
-     * the <audio> elements
-     * found on the page.
-     * ----------------------
+     * These functions find our targets,
+     * generate our elements, and set up
+     * our environment.
+     * ---------------------------------
      */
-    function findAudio(){
 
+    // Return an array of all the <audio> elements found on the page.
+    function findAudio(){
         // Get all the <audio> occurrences in the page.
         var audioElements = document.getElementsByTagName('audio');
-        
         // Save our audioElements as an array (so
         // we can manipulate the DOM but still
         // access our items).
         var items = [].slice.call(audioElements);
-
         return items;
     }
 
-    /**
-     * -------------------------
-     * CREATE OBJECTS FROM INPUT
-     *
-     * Scan DOM for instances of
-     * <audio>, and create a new
-     * object for each instance.
-     * -------------------------
-     */
+    // Get the url for each audio file
+    // we want to load [using elements
+    // found by findAudio()]
     function getRawData(data){
         output = [];
-
         for (var i = 0; i < data.length; i++) {
             item = {};
             // Get the file's URL
             item['url'] = data[i].src;
-
             output.push(item);
         }
-
         return output;
     }
 
-    /**
-     * ----------------
-     * INITIALIZE AUDIO
-     *
-     * Setup the audio
-     * for each file.
-     * ----------------
-     */
-    function initAudio(data){
-
-        var myAudio = [];
-
-        for (var i = 0; i < data.length; i++) {
-            myAudio[i] = new Audio(data[i].url);
-            myAudio[i].currentTime = 0;
-            // Setup event listeners
-            // var playPauseButtons = document.getElementsByClassName('playerTrigger');
-            // var playTimer = document.getElementsByClassName('songPlayTimer');
-            // var progressBar = document.getElementsByClassName('songProgressSlider');
-            // var songLengthBox = document.getElementsByClassName('songDuration');
-            // 
-            // console.log(playPauseButtons);
-            playPauseButtons[i].addEventListener('click',_playPauseAudio,false);
-            progressBar[i].addEventListener('input', sliderScrub, false);
-            volumeControl[i].addEventListener('input', volume, false);
-            // playhead[i].addEventListener('click',_playheadClick,false);
-            myAudio[i].addEventListener('timeupdate', _triggerUpdateProgress, false);
-            myAudio[i].addEventListener('loadstart', _loadStart, false);
-            myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
-            myAudio[i].setAttribute('data-song-index',i);
-        }
-
-        return myAudio;
-    }
-
-    /**
-     * LOADING
-     */
-    function _loadStart(){
-        console.log('Load start');
-    }
-    function _canplaythrough(){
-        var index = this.getAttribute('data-song-index');
-        console.log('Can play through ' + index);
-        _setLengthDisplay(index);
-        _removeClass(wrappers[index], 'loading');
-
-        _getMeta(index);
-    }
-    function _getMeta(i){
-        var url = myAudio[i].src;
-        var fileType = _getFileType(url);
-        var fileName = _getFileName(url);
-
-        var title = audioElements[i].title;
-        var artist = audioElements[i].getAttribute('data-artist');;
-        
-        if (title != '') {
-            titleDisplay[i].innerHTML = title;
-        } else {
-            titleDisplay[i].innerHTML = fileName + '.' + fileType;
-        }
-
-        if (artist != '') {
-            artistDisplay[i].innerHTML = artist;
-        }
-    }
-
-    /**
-     * --------------------
-     * BUILD MARKUP
-     *
-     * Create our own new
-     * elements in place of
-     * the native <audio>
-     * element.
-     * --------------------
-     */
+    // Create our own markup in place of the native <audio> elements.
     function buildMarkup(data){
         for (var i = 0; i < data.length; i++) {
-            // console.log(data[i]);
-            // var newPlayer = document.createElement('div');
-            // newPlayer.className = 'customPlayerWrapper player_' + i;
-            // newPlayer.innerHTML = "test\n";
-            // data[i].parentNode.replaceChild(newPlayer,data[i]);
 
             // Create a container for our new player
             var newPlayer = document.createElement('div');
@@ -212,7 +124,6 @@ function customAudioPlayer(){
 
             var meta_artist = document.createElement('span');
             meta_artist.className = 'artistDisplay';
-            // meta_artist.innerHTML = 'Artist Number ' + (i + 1);
             meta.appendChild(meta_artist);
 
             var timings = document.createElement('div');
@@ -299,6 +210,85 @@ function customAudioPlayer(){
         }
     }
 
+
+    // Initialize the audio for each file, and setup the event listeners.
+    function initAudio(data){
+
+        var myAudio = [];
+
+        for (var i = 0; i < data.length; i++) {
+            // Init. the audio
+            myAudio[i] = new Audio(data[i].url);
+            myAudio[i].currentTime = 0;
+
+            // Setup event listeners
+            playPauseButtons[i].addEventListener('click',_playPauseAudio,false);
+            progressBar[i].addEventListener('input', sliderScrub, false);
+            volumeControl[i].addEventListener('input', volume, false);
+            myAudio[i].addEventListener('timeupdate', _triggerUpdateProgress, false);
+            myAudio[i].addEventListener('loadstart', _loadStart, false);
+            myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
+
+            // Assign an index to each audio node:
+            // this links the audio elements to the
+            // relevant markup
+            myAudio[i].setAttribute('data-song-index',i);
+        }
+
+        return myAudio;
+    }
+
+    /**
+     * -----------------------------
+     * LOADING STATES
+     *
+     * Handle the buffering of audio
+     * data and update displays to
+     * show this.
+     * -----------------------------
+     */
+    
+    // Fire this event when loading starts [TEST]
+    function _loadStart(){
+        console.log('Load start');
+    }
+
+    // Fire this event when we can play the audio
+    // all the way through (ie. it is fully loaded)
+    function _canplaythrough(){
+        var index = this.getAttribute('data-song-index');
+        console.log('Can play through ' + index);
+        _setLengthDisplay(index);
+        _removeClass(wrappers[index], 'loading');
+
+        _getMeta(index);
+    }
+
+    // Get info about the audio track, and update the display with this info
+    function _getMeta(i){
+
+        // Get the filename and type
+        var url = myAudio[i].src;
+        var fileType = _getFileType(url);
+        var fileName = _getFileName(url);
+
+        // Get the title and artist from the DOM element
+        var title = audioElements[i].title;
+        var artist = audioElements[i].getAttribute('data-artist');;
+        
+        // If there is a valid title, display that title...
+        if (title != '') {
+            titleDisplay[i].innerHTML = title;
+        } else {
+            // ...otherwise show the file name.
+            titleDisplay[i].innerHTML = fileName + '.' + fileType;
+        }
+
+        // If there is a valid 'artist', display the artist name.
+        if (artist != '') {
+            artistDisplay[i].innerHTML = artist;
+        }
+    }
 
     /**
      * --------------------
