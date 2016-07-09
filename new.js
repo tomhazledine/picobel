@@ -22,7 +22,7 @@ function customAudioPlayer(){
      * The following lines initialize functions we
      * declare further down the file. We need to
      * call them in a specific order (so things like
-     * elemnt-selection work properly).
+     * element-selection work properly).
      * ---------------------------------------------
      */
 
@@ -291,32 +291,23 @@ function customAudioPlayer(){
     }
 
     /**
-     * --------------------
-     * PUBLIC
-     * These methods can be
-     * accessed directly
+     * -----------------------
+     * PLAYBACK SETTING
      *
-     * Pause All
-     * Play Song
-     * Scrubber
-     * --------------------
+     * These functions control
+     * the functionality of
+     * the audio players.
+     * -----------------------
      */
 
-    /**
-     * Pause All:
-     * Set all audio elements to 'paused'
-     */
+    // Set all audio elements to 'paused'
     function pauseAll(){
         for (var i = 0; i < data.length; i++) {
             myAudio[i].pause();
         }
     }
 
-    /**
-     * Play Song:
-     * Play the selected song
-     * @param  {integer} index The index number of the song to be played
-     */
+    // Play the selected song
     function playSong(index){
         currentSongIndex = index;
         for (var i = 0; i < data.length; i++) {
@@ -327,31 +318,18 @@ function customAudioPlayer(){
         myAudio[index].play();
     }
 
-    /**
-     * Scrubber:
-     * Set the current position of selected song to specific value.
-     * Public because it needs to be triggered by a 'range' input's onChange.
-     * @param  {integer} newPosition The desired new song position in seconds.
-     * @param  {integer} index       The index number of the song to be targeted.
-     */
+    // Set the current position of selected song to specific value.
     function sliderScrub(){
         var value = this.value;
         var index = this.getAttribute('data-song-index');
-        // console.log(value);
-        // console.log(index);
-        // currentSongIndex = index;
         var duration = myAudio[index].duration;
         var targetTime = duration * (value / 100);
         targetTime = targetTime.toFixed(2);
-        // console.log(duration);
-        // console.log(targetTime);
         myAudio[index].currentTime = targetTime;
         _updateProgress(index);
     }
 
-    /**
-     * VOLUME
-     */
+    // Volume
     function volume(){
         var value = this.value;
         var valueMapped = value * 10;
@@ -365,24 +343,7 @@ function customAudioPlayer(){
         volumePlayhead[index].style.left = volumePercent + '%';
     }
 
-    /**
-     * ----------------------
-     * PRIVATE
-     * These methods can only
-     * be used by internal
-     * functions
-     *
-     * Play/Pause Toggle
-     * Update Progress
-     * Seconds to MMSS
-     * Set Length Display
-     * ----------------------
-     */
-
-    /**
-     * Play/Pause Toggle:
-     * Toggle 'play' and 'pause' for a song
-     */
+    // Toggle 'play' and 'pause' for a track
     function _playPauseAudio(){
         var targetSong = this.getAttribute('data-song-index');
         var buttonText = playPauseButtonsText[targetSong];
@@ -402,52 +363,49 @@ function customAudioPlayer(){
             _addClass(this,'songPlaying');
             _removeClass(this,'songPaused');
             buttonText.innerHTML = 'pause';
-            // if (_hasClass(this,'notPlayedYet')) {
-                _setLengthDisplay(targetSong);
-                _removeClass(this, 'notPlayedYet');
-            // }
         }
     }
 
-    /**
-     * Trigger "Update Progress":
-     * Link to event handler. Gets the index
-     * of the song to be updated, then passes
-     * it to the _updateProgress() function.
-     */
+    // Get index of track to be updated, then pass it to _updateProgress()
     function _triggerUpdateProgress(){
         var index = this.getAttribute('data-song-index');
         _updateProgress(index);
     }
     
-    /**
-     * Update Progress:
-     * Set the value of the current-position display for a playing song.
-     */
+    // Set the value of the current-position display for a playing song
     function _updateProgress(index){
-        // console.log(this.getAttribute('data-song-index'));
         var progress = myAudio[index].currentTime;
         var duration = myAudio[index].duration;
         progressParsed = _secondsToMMSS(progress);
         playTimer[index].innerHTML = progressParsed;
-
         if (progress >= duration) {
             _removeClass(playPauseButtons[index], 'songPlaying');
         }
-
         var progressPercent = (progress / duration * 100).toFixed(2);
-
         progressBar[index].value = progressPercent;
         indicator[index].style.width = progressPercent + '%';
         playhead[index].style.left = progressPercent + '%';
     }
 
+    // Set the value of the song-length display
+    function _setLengthDisplay(index){
+        var songLength = myAudio[index].duration;
+        var duration = _secondsToMMSS(songLength);
+        var songClass = '.song' + index;
+        songLengthBox[index].innerHTML = duration;
+    }
+
     /**
-     * Seconds to MMSS:
-     * Convert seconds into minutes-and-seconds (MMSS) format
-     * @param  {integer} seconds The seconds value to be parsed
-     * @return {integer}         The MMSS value
+     * -----------------------------
+     * HELPERS
+     * 
+     * These are basic utilities to
+     * parse data, add/remove/toggle
+     * classes etc.
+     * -----------------------------
      */
+    
+    // Convert seconds into minutes-and-seconds (MMSS) format
     function _secondsToMMSS(seconds){
         var mins = Math.floor(seconds % 3600 / 60);
         mins = mins.toFixed(0);
@@ -461,39 +419,8 @@ function customAudioPlayer(){
         var mmss = mins + ':' + secs;
         return mmss;
     }
-
-    /**
-     * Set Length Display:
-     * Set the value of the song-length display.
-     * @param {integer} index The index number of the song we want to find the length of.
-     */
-    function _setLengthDisplay(index){
-        var songLength = myAudio[index].duration;
-        var duration = _secondsToMMSS(songLength);
-        var songClass = '.song' + index;
-        songLengthBox[index].innerHTML = duration;
-    }
-
-    /**
-     * ------------------------------------
-     * HELPERS
-     * These are basic utilities that allow
-     * for cross-browser support, replacing
-     * the need to use jQuery.
-     *
-     * Has Class
-     * Add Class
-     * Remove Class
-     * ------------------------------------
-     */
     
-    /**
-     * Has Class:
-     * Does the target element have the target class?
-     * @param  {object}  el        The target element.
-     * @param  {string}  className The target class.
-     * @return {Boolean}           If the el has the class, output 'true'. Otherwise 'false'.
-     */
+    // Does the target element have the target class?
     function _hasClass(el, className){
         if (el.classList) {
             var result = el.classList.contains(className);
@@ -503,12 +430,7 @@ function customAudioPlayer(){
         return result;
     }
 
-    /**
-     * Add Class:
-     * Add a class to the target element.
-     * @param {object} el        The target element.
-     * @param {string} className The target class.
-     */
+    // Add a class to the target element.
     function _addClass(el, className){
         if (el.classList) {
             el.classList.add(className);
@@ -518,12 +440,7 @@ function customAudioPlayer(){
         }
     }
 
-    /**
-     * Remove Class:
-     * Remove a class from the target element.
-     * @param  {object} el        The target element.
-     * @param  {string} className The target class.
-     */
+    // Remove a class from the target element.
     function _removeClass(el, className){
         if (el.classList) {
             el.classList.remove(className);
@@ -533,28 +450,27 @@ function customAudioPlayer(){
         }
     }
 
-    /**
-     * Get File Type
-     */
+    // Get File Type
     function _getFileType(string){
         return string.substr((~-string.lastIndexOf(".") >>> 0) + 2);
     }
+
+    // Get File Name
     function _getFileName(string){
         var fullFileName = string.replace(/^.*[\\\/]/, '');
         var withNoExtension = fullFileName.split('.')[0];
         return withNoExtension;
     }
 
-    // // HANDLE PLAYHEAD EVENTS
-    // function _playheadClick(){
-    //     // Get song index
-    //     var index = this.parentNode.getAttribute('data-song-index');
-    //     console.log(index);
-    //     // Get position and width/height of playhead
-    //     var rect = this.getBoundingClientRect();
-    //     console.log(rect);
-    // }
-
+    /**
+     * ----------------------
+     * PUBLIC METHODS
+     *
+     * Declare the methods we
+     * want to be accessible
+     * from outside scope.
+     * ----------------------
+     */
 
     return {
         sliderScrub: sliderScrub,
