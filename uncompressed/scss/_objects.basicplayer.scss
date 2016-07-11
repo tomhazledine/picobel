@@ -1,3 +1,7 @@
+$grey:#dad8d2;
+$white:#ffffff;
+$black:#4d4d4d;
+
 .customAudioPlayer{
     // background:$grey;
     border:.2em solid $grey;
@@ -6,6 +10,10 @@
     position:relative;
     border-radius:.5em;
     overflow:auto;
+    box-sizing:border-box;
+    *,
+    *:before,
+    *:after{box-sizing:inherit;}
 }
 
 .playerTrigger{
