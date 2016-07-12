@@ -101,10 +101,11 @@ function customAudioPlayer(){
             // Create a container for our new player
             var newPlayer = document.createElement('div');
             newPlayer.className = 'customAudioPlayer loading player_' + i;
+            newPlayer.setAttribute('data-song-index',i);
             
             // Create a play/pause button
             var button = document.createElement('button');
-            button.setAttribute('data-song-index',i);
+            // button.setAttribute('data-song-index',i);
             // button.value = data[i].url;
             button.className = 'playerTrigger';
             var buttonText = document.createElement('span');
@@ -136,7 +137,7 @@ function customAudioPlayer(){
 
             // Progress Indicator
             var meta_progress_wrapper = document.createElement('div');
-            meta_progress_wrapper.setAttribute('data-song-index',i);
+            // meta_progress_wrapper.setAttribute('data-song-index',i);
             meta_progress_wrapper.className = 'songProgressSliderWrapper';
             var meta_pseudo_progress_indicator = document.createElement('div');
             meta_pseudo_progress_indicator.className = 'pseudoProgressIndicator';
@@ -146,7 +147,7 @@ function customAudioPlayer(){
             meta_progress_wrapper.appendChild(meta_pseudo_progress_playhead);
             var meta_progress = document.createElement('input');
             meta_progress.type = 'range';
-            meta_progress.setAttribute('data-song-index',i);
+            // meta_progress.setAttribute('data-song-index',i);
             meta_progress.min = 0;
             meta_progress.max = 100;
             meta_progress.value = 0;
@@ -162,7 +163,7 @@ function customAudioPlayer(){
 
             // Volume Indicator
             var meta_volume = document.createElement('div');
-            meta_volume.setAttribute('data-song-index',i);
+            // meta_volume.setAttribute('data-song-index',i);
             meta_volume.className = 'songVolume';
             var meta_volume_label_wrapper = document.createElement('div');
             meta_volume_label_wrapper.className = 'songVolumeLabelWrapper';
@@ -321,7 +322,7 @@ function customAudioPlayer(){
     // Set the current position of selected song to specific value.
     function sliderScrub(){
         var value = this.value;
-        var index = this.getAttribute('data-song-index');
+        var index = this.parentNode.parentNode.parentNode.getAttribute('data-song-index');
         var duration = myAudio[index].duration;
         var targetTime = duration * (value / 100);
         targetTime = targetTime.toFixed(2);
@@ -334,7 +335,7 @@ function customAudioPlayer(){
         var value = this.value;
         var valueMapped = value * 10;
         var volumePercent = value * 100;
-        var index = this.parentNode.parentNode.getAttribute('data-song-index');
+        var index = this.parentNode.parentNode.parentNode.getAttribute('data-song-index');
         myAudio[index].volume = value;
         volumeDisplay[index].innerHTML = valueMapped;
         // console.log(value + ' + ' + valueMapped);
@@ -345,7 +346,7 @@ function customAudioPlayer(){
 
     // Toggle 'play' and 'pause' for a track
     function _playPauseAudio(){
-        var targetSong = this.getAttribute('data-song-index');
+        var targetSong = this.parentNode.getAttribute('data-song-index');
         var buttonText = playPauseButtonsText[targetSong];
         if (_hasClass(this,'songPlaying')) {
             pauseAll();
