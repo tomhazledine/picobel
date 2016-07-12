@@ -272,12 +272,9 @@ function customAudioPlayer(){
         var url = myAudio[i].src;
         var fileType = _getFileType(url);
         var fileName = _getFileName(url);
-
-        // Get the title and artist from the DOM element
-        var title = audioElements[i].title;
-        var artist = audioElements[i].getAttribute('data-artist');;
         
         // If there is a valid title, display that title...
+        var title = audioElements[i].title;
         if (title != '') {
             titleDisplay[i].innerHTML = title;
         } else {
@@ -286,8 +283,15 @@ function customAudioPlayer(){
         }
 
         // If there is a valid 'artist', display the artist name.
+        var artist = audioElements[i].getAttribute('data-artist');
         if (artist != '') {
             artistDisplay[i].innerHTML = artist;
+        }
+
+        // If the element has a valid class, add that to the player's wrapper
+        var className = audioElements[i].className;
+        if (className != '') {
+            _addClass(wrappers[i], className)
         }
     }
 
