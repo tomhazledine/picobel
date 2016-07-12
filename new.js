@@ -139,6 +139,9 @@ function customAudioPlayer(){
             var meta_progress_wrapper = document.createElement('div');
             // meta_progress_wrapper.setAttribute('data-song-index',i);
             meta_progress_wrapper.className = 'songProgressSliderWrapper';
+            var meta_pseudo_progress_background = document.createElement('div');
+            meta_pseudo_progress_background.className = 'pseudoProgressBackground';
+            meta_progress_wrapper.appendChild(meta_pseudo_progress_background);
             var meta_pseudo_progress_indicator = document.createElement('div');
             meta_pseudo_progress_indicator.className = 'pseudoProgressIndicator';
             meta_progress_wrapper.appendChild(meta_pseudo_progress_indicator);

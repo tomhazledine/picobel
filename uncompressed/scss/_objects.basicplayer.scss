@@ -1,9 +1,9 @@
 $grey:#dad8d2;
+$grey_dark:#888;
 $white:#ffffff;
 $black:#4d4d4d;
 
-.customAudioPlayer{
-    // background:$grey;
+.basicStyles.customAudioPlayer{
     border:.2em solid $grey;
     margin:2em 0;
     padding:.5em .5em .5em 3em;
@@ -16,253 +16,220 @@ $black:#4d4d4d;
     *:after{box-sizing:inherit;}
 }
 
-.playerTrigger{
-    border:none;
-    appearance:none;
-    width:2em;
-    height:2em;
-    font-size:1em;
-    color:$white;
-    background:$black;
-    position:absolute;
-    top:50%;
-    left:.5em;
-    border-radius:50%;
-    margin-top:-1em;
-    cursor:pointer;
-    .buttonText{
-        display:none;
-    }
-    &:focus{
-        outline:none;
-        box-shadow:$grey 0 0 0 .2em;
-    }
-    &:before{
-        content:'';
-        display:block;
+.basicStyles{
+    .playerTrigger{
+        border:none;
+        appearance:none;
+        width:2em;
+        height:2em;
+        font-size:1em;
+        color:$white;
+        background:$black;
         position:absolute;
         top:50%;
-        left:50%;
-        margin-top:-.5em;
-        margin-left:-.2em;
-        border-top:.5em solid transparent;
-        border-left:.6em solid $white;
-        border-bottom:.5em solid transparent;
-        transition:border height margin top;
-        transition-duration:.2s;
-    }
-    &:after{
-        content:'';
-        display:block;
-        position:absolute;
-        top:50%;
-        right:50%;
-        height:.8em;
-        margin-top:-.4em;
-        margin-right:-.3em;
-        border-top:0;
-        border-left:.3em solid $white;
-        border-bottom:0;
-        opacity:0;
-        transition:opacity .2s;
-    }
-    &.songPlaying:before{
-        height:.8em;
-        margin-top:-.4em;
-        margin-left:-.3em;
-        border-top:0;
-        border-left:.3em solid $white;
-        border-bottom:0;
-    }
-    &.songPlaying:after{
-        opacity:1;
-    }
-}
-
-.metaWrapper{
-    margin-bottom:.5em;
-    overflow:auto;
-    .titleDisplay{
-        font-weight:bold;
-        margin-right:.5em;
-    }
-}
-
-.timingsWrapper{
-    padding:0 4em;
-    position:relative;
-    font-size:.8em;
-    width:70%;
-    float:left;
-    .songPlayTimer,
-    .songDuration{
-        position:absolute;
-        top:0;
-        width:4em;
-        text-align:center;
-        background:$grey;
-        line-height:2;
-        height:2em;
-    }
-    .songPlayTimer{
-        left:0;
-        border-radius:.5em 0 0 .5em;
-    }
-    .songDuration{
-        right:0;
-        border-radius:0 .5em .5em 0;
-    }
-}
-
-.songProgressSliderWrapper{
-    height:2em;
-    font-size:1em;
-    line-height:1;
-    // background:$green;
-    position:relative;
-    background:$grey;
-    overflow:hidden;
-    .songProgressSlider{
-        width:100%;
-        padding:0;
-        margin:0;
-        position:absolute;
-        top:0;
-        left:0;
-        // z-index:2;
-        opacity:0;
-    }
-    .pseudoProgressIndicator{
-        height:2em;
-        position:absolute;
-        top:0;
-        left:0;
-        background:#888;//grey;
-        width:0%;
-        // z-index:1;
-    }
-    .pseudoProgressPlayhead{
-        width:1em;
-        // border-radius:50%;
-        height:2em;
-        position:absolute;
-        top:50%;
-        left:0%;
+        left:.5em;
+        border-radius:50%;
         margin-top:-1em;
-        margin-left:-.5em;
-        background:white;
-        border:.2em solid black;
-        // z-index:1;
+        cursor:pointer;
+        .buttonText{
+            display:none;
+        }
+        &:focus{
+            outline:none;
+            box-shadow:$grey 0 0 0 .2em;
+        }
+        &:before{
+            content:'';
+            display:block;
+            position:absolute;
+            top:50%;
+            left:50%;
+            margin-top:-.5em;
+            margin-left:-.2em;
+            border-top:.5em solid transparent;
+            border-left:.6em solid $white;
+            border-bottom:.5em solid transparent;
+            transition:border height margin top;
+            transition-duration:.2s;
+        }
+        &:after{
+            content:'';
+            display:block;
+            position:absolute;
+            top:50%;
+            right:50%;
+            height:.8em;
+            margin-top:-.4em;
+            margin-right:-.3em;
+            border-top:0;
+            border-left:.3em solid $white;
+            border-bottom:0;
+            opacity:0;
+            transition:opacity .2s;
+        }
+        &.songPlaying:before{
+            height:.8em;
+            margin-top:-.4em;
+            margin-left:-.3em;
+            border-top:0;
+            border-left:.3em solid $white;
+            border-bottom:0;
+        }
+        &.songPlaying:after{
+            opacity:1;
+        }
     }
-}
 
-// Make sure the range Track is the right size and shape
-input[type=range].songProgressSlider::-webkit-slider-runnable-track {
-  width:100%;
-  font-size:1em;
-  height:2.2em;
-  cursor:pointer;
-}
-input[type=range].songProgressSlider::-moz-range-track {
-  width:100%;
-  height:2em;
-  cursor:pointer;
-}
-input[type=range].songProgressSlider::-ms-track {
-  width:100%;
-  height:2em;
-  cursor:pointer;
-}
-
-.songVolume{
-    padding-top:.4em;
-    width:28%;
-    float:right;
-    overflow:auto;
-}
-
-.songVolumeValue{
-    margin-left:.2em;
-}
-
-.songVolumeLabelWrapper{
-    width:50%;
-    float:left;
-}
-
-.songVolumeSliderWrapper{
-    // font-size:.8em;
-    height:1em;
-    font-size:.8em;//1em;
-    // line-height:1.3;
-    // background:$green;
-    position:relative;
-    background:$grey;
-    width:50%;
-    float:left;
-    // display:inline-block;
-    // overflow:hidden;
-    .songVolumeSlider{
-        width:100%;
-        padding:0;
-        margin:0;
-        position:absolute;
-        top:0;
-        left:0;
-        // z-index:2;
-        opacity:0;
+    .metaWrapper{
+        margin-bottom:.5em;
+        overflow:auto;
+        .titleDisplay{
+            font-weight:bold;
+            margin-right:.5em;
+        }
     }
-    .pseudoVolumeIndicator{
+
+    .timingsWrapper{
+        padding:0 4em;
+        position:relative;
+        font-size:.8em;
+        width:70%;
+        float:left;
+        .songPlayTimer,
+        .songDuration{
+            position:absolute;
+            top:0;
+            width:4em;
+            text-align:center;
+            background:$grey;
+            line-height:2;
+            height:2em;
+        }
+        .songPlayTimer{
+            left:0;
+            border-radius:.5em 0 0 .5em;
+        }
+        .songDuration{
+            right:0;
+            border-radius:0 .5em .5em 0;
+        }
+    }
+
+    .songProgressSliderWrapper{
+        height:2em;
+        font-size:1em;
+        line-height:1;
+        position:relative;
+        background:$grey;
+        overflow:hidden;
+        .songProgressSlider{
+            width:100%;
+            padding:0;
+            margin:0;
+            position:absolute;
+            top:0;
+            left:0;
+            opacity:0;
+        }
+        .pseudoProgressIndicator{
+            height:2em;
+            position:absolute;
+            top:0;
+            left:0;
+            background:$grey_dark;
+            width:0%;
+        }
+        .pseudoProgressPlayhead{
+            width:1em;
+            height:2em;
+            position:absolute;
+            top:50%;
+            left:0%;
+            margin-top:-1em;
+            margin-left:-.5em;
+            background:white;
+            border:.2em solid black;
+        }
+    }
+
+    // Make sure the range Track is the right size and shape
+    input[type=range].songProgressSlider::-webkit-slider-runnable-track {
+      width:100%;
+      font-size:1em;
+      height:2.2em;
+      cursor:pointer;
+    }
+    input[type=range].songProgressSlider::-moz-range-track {
+      width:100%;
+      height:2em;
+      cursor:pointer;
+    }
+    input[type=range].songProgressSlider::-ms-track {
+      width:100%;
+      height:2em;
+      cursor:pointer;
+    }
+
+    .songVolume{
+        padding-top:.4em;
+        width:28%;
+        float:right;
+        overflow:auto;
+    }
+
+    .songVolumeValue{
+        margin-left:.2em;
+    }
+
+    .songVolumeLabelWrapper{
+        width:50%;
+        float:left;
+    }
+
+    .songVolumeSliderWrapper{
         height:1em;
-        position:absolute;
-        top:0;
-        left:0;
-        background:#888;//grey;
-        width:100%;
-        // z-index:1;
+        font-size:.8em;
+        position:relative;
+        background:$grey;
+        width:50%;
+        float:left;
+        .songVolumeSlider{
+            width:100%;
+            padding:0;
+            margin:0;
+            position:absolute;
+            top:0;
+            left:0;
+            opacity:0;
+        }
+        .pseudoVolumeIndicator{
+            height:1em;
+            position:absolute;
+            top:0;
+            left:0;
+            background:$grey_dark;
+            width:100%;
+        }
+        .pseudoVolumePlayhead{
+            display:none;
+        }
     }
-    .pseudoVolumePlayhead{
-        display:none;
-        // width:1em;
-        // // border-radius:50%;
-        // height:2em;
-        // position:absolute;
-        // top:50%;
-        // left:100%;
-        // margin-top:-1em;
-        // margin-left:-.5em;
-        // background:white;
-        // border:.2em solid black;
-        // // z-index:1;
-    }
-    // &:after{
-    //     display:block;
-    //     content:'';
-    //     position:absolute;
-    //     width:100%;
-    //     height:100%;
-    //     background:$green;
-    //     transform:rotate(-5deg);
-    //     transform-origin:bottom left;
-    //     // background:linear-gradient(to left top,rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, $white 50%);
-    //     pointer-events:none;
-    // }
-}
 
-// Make sure the range Track is the right size and shape
-input[type=range].songVolumeSlider::-webkit-slider-runnable-track {
-  width:100%;
-  font-size:1em;
-  height:1em;
-  cursor:pointer;
-}
-input[type=range].songVolumeSlider::-moz-range-track {
-  width:100%;
-  height:1em;
-  cursor:pointer;
-}
-input[type=range].songVolumeSlider::-ms-track {
-  width:100%;
-  height:1em;
-  cursor:pointer;
+    // Make sure the range Track is the right size and shape
+    input[type=range].songVolumeSlider::-webkit-slider-runnable-track {
+      width:100%;
+      font-size:1em;
+      height:1em;
+      cursor:pointer;
+    }
+    input[type=range].songVolumeSlider::-moz-range-track {
+      width:100%;
+      height:1em;
+      cursor:pointer;
+    }
+    input[type=range].songVolumeSlider::-ms-track {
+      width:100%;
+      height:1em;
+      cursor:pointer;
+    }
 }
