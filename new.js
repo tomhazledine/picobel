@@ -101,6 +101,11 @@ function customAudioPlayer(){
             // Create a container for our new player
             var newPlayer = document.createElement('div');
             newPlayer.className = 'customAudioPlayer loading player_' + i;
+            // If the element has a valid class, add that to the player's wrapper
+            var className = audioElements[i].className;
+            if (className != '') {
+                _addClass(newPlayer, className);
+            }
             newPlayer.setAttribute('data-song-index',i);
             
             // Create a play/pause button
@@ -294,11 +299,11 @@ function customAudioPlayer(){
             artistDisplay[i].innerHTML = artist;
         }
 
-        // If the element has a valid class, add that to the player's wrapper
-        var className = audioElements[i].className;
-        if (className != '') {
-            _addClass(wrappers[i], className)
-        }
+        // // If the element has a valid class, add that to the player's wrapper
+        // var className = audioElements[i].className;
+        // if (className != '') {
+        //     _addClass(wrappers[i], className)
+        // }
     }
 
     /**
