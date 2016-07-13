@@ -181,6 +181,9 @@ function customAudioPlayer(){
             meta_volume.appendChild(meta_volume_label_wrapper);
             var meta_volume_wrapper = document.createElement('div');
             meta_volume_wrapper.className = 'songVolumeSliderWrapper';
+            var meta_pseudo_volume_background = document.createElement('div');
+            meta_pseudo_volume_background.className = 'pseudoVolumeBackground';
+            meta_volume_wrapper.appendChild(meta_pseudo_volume_background);
             var meta_pseudo_volume_indicator = document.createElement('div');
             meta_pseudo_volume_indicator.className = 'pseudoVolumeIndicator';
             meta_volume_wrapper.appendChild(meta_pseudo_volume_indicator);

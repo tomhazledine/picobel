@@ -4,6 +4,7 @@ $white:#ffffff;
 $black:#333333;
 
 $orange:#fa5300;
+$volume_bg:#f2f2f2;
 
 $border:#cecece;
 $unplayed:#c8c8c8;
@@ -105,7 +106,7 @@ $text_light:#969696;
         // text-align:center;
         margin-bottom:1em;
         float:right;
-        width:20%;
+        width:25%;
         margin-top:.7em;
     }
 
@@ -239,7 +240,7 @@ $text_light:#969696;
         // }
     }
 
-    &:hover .songProgressSliderWrapper .pseudoProgressPlayhead{
+    .songProgressSliderWrapper:hover .pseudoProgressPlayhead{
             opacity:1;
         }
 
@@ -262,11 +263,11 @@ $text_light:#969696;
     }
 
     .songVolume{
-        width:1.5em;
-        height:1em;
+        width:5%;
+        height:3em;
         float:left;
         // background:red;
-        margin-top:1em;
+        // margin-top:1em;
         position:relative;
         cursor:pointer;
         // display:none;
@@ -281,7 +282,8 @@ $text_light:#969696;
             position:absolute;
             content:'';
             top:50%;
-            right:.5em;
+            right:50%;
+            margin-right:.1em;
             transform:translateY(-50%);
             background:$black;
         }
@@ -291,8 +293,9 @@ $text_light:#969696;
             height:.5em;
             position:absolute;
             content:'';
-            top:0;
-            right:.5em;
+            top:50%;
+            margin-top:-.5em;
+            right:50%;
             // background:$black;
             border-top:.5em solid transparent;
             border-right:.5em solid $black;
@@ -315,55 +318,114 @@ $text_light:#969696;
         transform:rotate(-90deg);
         transform-origin:0 0;
         position:absolute;
-        top:0;
-        left:0;
+        top:.5em;
+        left:50%;
+        margin-left:-1.5em;
         background:blue;
-        // height:1em;
-        // font-size:.8em;
-        // position:relative;
-        // background:$grey;
-        // width:50%;
-        // float:left;
-        // .songVolumeSlider{
-        //     width:100%;
-        //     padding:0;
-        //     margin:0;
-        //     position:absolute;
-        //     top:0;
-        //     left:0;
-        //     opacity:0;
-        // }
-        // .pseudoVolumeIndicator{
-        //     height:1em;
-        //     position:absolute;
-        //     top:0;
-        //     left:0;
-        //     background:$grey_dark;
-        //     width:100%;
-        // }
-        // .pseudoVolumePlayhead{
-        //     display:none;
-        // }
+        height:1em;
+        font-size:.8em;
+        position:relative;
+        background:$volume_bg;
+        border:1px solid $border;
+        width:10em;
+        float:left;
+        padding:1em;
+        box-shadow:rgba(black,.3) -.2em 0em 1em -.2em;
+
+        &:before{
+            content:'';
+            display:block;
+            position:absolute;
+            top:50%;
+            margin-top:-8px;
+            left:-8px;
+            
+            border-top:8px solid transparent;
+            border-right:8px solid $border;
+            border-bottom:8px solid transparent;
+            // width:1em;
+            // height:1em;
+            // background:green;
+        }
+        &:after{
+            content:'';
+            display:block;
+            position:absolute;
+            top:50%;
+            margin-top:-8px;
+            left:-7px;
+            
+            border-top:8px solid transparent;
+            border-right:8px solid $volume_bg;
+            border-bottom:8px solid transparent;
+            // width:1em;
+            // height:1em;
+            // background:green;
+        }
+
+        .songVolumeSlider{
+            width:100%;
+            padding:0;
+            margin:0;
+            position:absolute;
+            top:.5em;
+            height:2em;
+            left:0;
+            opacity:0;
+        }
+
+
+        .pseudoVolumeBackground{
+            height:1px;
+            position:absolute;
+            bottom:50%;
+            left:0;
+            background:$unplayed;
+            width:100%;
+        }
+        .pseudoVolumeIndicator{
+            height:1px;
+            position:absolute;
+            bottom:50%;
+            left:0;
+            background:$orange;
+            width:0%;
+        }
+        .pseudoVolumePlayhead{
+            // display:none;
+            background:$orange;
+            width:.4rem;
+            height:.4rem;
+            position:absolute;
+            bottom:50%;
+            margin-bottom:-.2rem;//0 - ($progressHeight / 2);
+            left:0%;
+            border-radius:50%;
+            // margin-top:-1em;
+            margin-left:0 - ($progressHeight / 2);
+            opacity:0;
+            transition:opacity .2s;
+        }
     }
     .songVolume:hover .songVolumeSliderWrapper{
         display:block;
     }
 
-    // // Make sure the range Track is the right size and shape
-    // input[type=range].songVolumeSlider::-webkit-slider-runnable-track {
-    //   width:100%;
-    //   font-size:1em;
-    //   height:1em;
-    //   cursor:pointer;
-    // }
-    // input[type=range].songVolumeSlider::-moz-range-track {
-    //   width:100%;
-    //   height:1em;
-    //   cursor:pointer;
-    // }
-    // input[type=range].songVolumeSlider::-ms-track {
-    //   width:100%;
-    //   height:1em;
-    //   cursor:pointer;
-    // }
+    // Make sure the range Track is the right size and shape
+    input[type=range].songVolumeSlider::-webkit-slider-runnable-track {
+      width:100%;
+      font-size:1em;
+      height:2em;
+      cursor:pointer;
+    }
+    input[type=range].songVolumeSlider::-moz-range-track {
+      width:100%;
+      height:2em;
+      cursor:pointer;
+    }
+    input[type=range].songVolumeSlider::-ms-track {
+      width:100%;
+      height:2em;
+      cursor:pointer;
+    }
 }
