@@ -305,105 +305,94 @@ $played:$highlight;
             border-right:.5em solid $white;
             border-bottom:.5em solid transparent;
         }
-        &:hover{
-            background:$highlight;
-        }
+        // &:hover{
+        //     background:$highlight;
+        // }
         .songVolumeLabel{display:none;}
         .songVolumeValue{display:none;}
     }
+    .songVolume:hover .songVolumeLabelWrapper{
+        background:$highlight;
+    }
 
     .songVolumeSliderWrapper{
-        display:none;
-        transform:rotate(-90deg);
+        // display:none;
+        // transform:rotate(-90deg);
         transform-origin:0 0;
         position:absolute;
-        top:.5em;
-        left:50%;
-        margin-left:-1.5em;
-        background:blue;
-        height:1em;
-        font-size:.8em;
+        top:0;
+        left:3em;
+        height:3em;
+        // font-size:.em;
         position:relative;
-        background:$volume_bg;
-        border:1px solid $border;
-        width:10em;
-        float:left;
-        padding:1em;
-        box-shadow:rgba(black,.3) -.2em 0em 1em -.2em;
-
-        &:before{
-            content:'';
-            display:block;
-            position:absolute;
-            top:50%;
-            margin-top:-8px;
-            left:-8px;
-            
-            border-top:8px solid transparent;
-            border-right:8px solid $border;
-            border-bottom:8px solid transparent;
-            // width:1em;
-            // height:1em;
-            // background:green;
-        }
-        &:after{
-            content:'';
-            display:block;
-            position:absolute;
-            top:50%;
-            margin-top:-8px;
-            left:-7px;
-            
-            border-top:8px solid transparent;
-            border-right:8px solid $volume_bg;
-            border-bottom:8px solid transparent;
-            // width:1em;
-            // height:1em;
-            // background:green;
-        }
+        background:$black;
+        border-left:1px solid $border;
+        width:6em;
+        // margin:.5em;
 
         .songVolumeSlider{
             width:100%;
             padding:0;
             margin:0;
-            position:absolute;
-            top:.5em;
-            height:2em;
+            // position:absolute;
+            // top:.5em;
+            height:3em;
             left:0;
             opacity:0;
         }
 
 
         .pseudoVolumeBackground{
-            height:1px;
+            height:1.5em;
             position:absolute;
-            bottom:50%;
+            bottom:.5em;
             left:0;
-            background:$unplayed;
+            background:$grey;
             width:100%;
+            background-image:linear-gradient(
+                to right,
+                $grey .0em,$grey .5em,$black .5em,$black 1.0em,
+                $grey 1.0em,$grey 1.5em,$black 1.5em,$black 2.0em,
+                $grey 2.0em,$grey 2.5em,$black 2.5em,$black 3.0em,
+                $grey 3.0em,$grey 3.5em,$black 3.5em,$black 4.0em,
+                $grey 4.0em,$grey 4.5em,$black 4.5em,$black 5.0em,
+                $grey 5.0em,$grey 5.5em,$black 5.5em,$black 6.0em,
+                $grey 6.0em,$grey 6.5em,$black 6.5em,$black 7.0em,
+                $grey 7.0em,$grey 7.5em,$black 7.5em,$black 8.0em,
+                $grey 8.0em,$grey 8.5em,$black 8.5em,$black 9.0em,
+                $grey 9.0em,$grey 9.5em,$black 9.5em,$black 10.0em
+                );
         }
         .pseudoVolumeIndicator{
-            height:1px;
+            height:1.5em;
             position:absolute;
-            bottom:50%;
+            bottom:.5em;
             left:0;
-            background:$orange;
+            background:$highlight;
             width:0%;
+            background-image:linear-gradient(
+                to right,
+                $highlight .0em,$highlight .5em,$black .5em,$black 1.0em,
+                $highlight 1.0em,$highlight 1.5em,$black 1.5em,$black 2.0em,
+                $highlight 2.0em,$highlight 2.5em,$black 2.5em,$black 3.0em,
+                $highlight 3.0em,$highlight 3.5em,$black 3.5em,$black 4.0em,
+                $highlight 4.0em,$highlight 4.5em,$black 4.5em,$black 5.0em,
+                $highlight 5.0em,$highlight 5.5em,$black 5.5em,$black 6.0em,
+                $highlight 6.0em,$highlight 6.5em,$black 6.5em,$black 7.0em,
+                $highlight 7.0em,$highlight 7.5em,$black 7.5em,$black 8.0em,
+                $highlight 8.0em,$highlight 8.5em,$black 8.5em,$black 9.0em,
+                $highlight 9.0em,$highlight 9.5em,$black 9.5em,$black 10.0em
+                );
         }
         .pseudoVolumePlayhead{
             // display:none;
-            background:$orange;
-            width:.4rem;
-            height:.4rem;
+            background:$white;
+            width:.2em;
+            height:2em;
             position:absolute;
-            bottom:50%;
-            margin-bottom:-.2rem;//0 - ($progressHeight / 2);
+            bottom:.5em;
             left:0%;
-            border-radius:50%;
-            // margin-top:-1em;
-            margin-left:0 - ($progressHeight / 2);
-            opacity:0;
-            transition:opacity .2s;
+            margin-left:-.1em;
         }
     }
     .songVolume:hover .songVolumeSliderWrapper{
@@ -414,17 +403,17 @@ $played:$highlight;
     input[type=range].songVolumeSlider::-webkit-slider-runnable-track {
       width:100%;
       font-size:1em;
-      height:2em;
+      height:3em;
       cursor:pointer;
     }
     input[type=range].songVolumeSlider::-moz-range-track {
       width:100%;
-      height:2em;
+      height:3em;
       cursor:pointer;
     }
     input[type=range].songVolumeSlider::-ms-track {
       width:100%;
-      height:2em;
+      height:3em;
       cursor:pointer;
     }
 }
