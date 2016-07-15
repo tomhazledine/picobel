@@ -9,12 +9,15 @@ $unplayed:$black;
 $played:$highlight;
 
 @function boxShadow ($n, $colour1, $colour2) {
-    $value: 'inset #{$colour1} 0 0 0';
+    $value: 'inset #{$colour1} 0 0 0 0,';
     @for $i from 1 through $n {
         @if ($i % 2 != 0) {
-            $value: '#{$value} , inset #{$colour2} #{$i}em 0 0 0';
+            $value: '#{$value} inset #{$colour2} #{$i}em 0 0 0';
         } @else {
-            $value: '#{$value} , inset #{$colour1} #{$i}em 0 0 0';
+            $value: '#{$value} inset #{$colour1} #{$i}em 0 0 0';
+        }
+        @if ($i < $n) {
+            $value: '#{$value}, ';
         }
     }
     @return unquote($value);
@@ -48,26 +51,26 @@ $played:$highlight;
         background:$black;//rgba(red,.3);
         z-index:2;
         pointer-events:none;
-        // opacity:0;
+        opacity:0;
         transition:opacity .2s;
         text-align:center;
         line-height:1;
         padding:1em;
-        &:before{
+        overflow:hidden;
+        &:after{
             content:'Loading';
             color:$white;
         }
-        &:after{
+        &:before{
             display:block;
             content:'';
-            width:100%;
+            width:130%;
             height:100%;
             position:absolute;
             top:0;
             left:0;
-            transform:rotateZ(0);
             box-shadow:boxShadow(100,$black,$highlight);
-            animation:loading linear infinite .4s;
+            animation:slide linear infinite .2s;
         }
 
     }
@@ -488,11 +491,23 @@ $played:$highlight;
     }
 }
 
-@keyframes loading{
+@keyframes slide{
     0%{
-        box-shadow:boxShadow(100,$black,$highlight);
+        transform:translateX(-2em);
     }
     100%{
-        box-shadow:boxShadow(101,$highlight,$black);
+        transform:translateX(0);
     }
 }
+
+// @keyframes loading{
+//     0%{
+//         box-shadow:boxShadow(100,$black,$highlight,0);
+//     }
+//     50%{
+//         box-shadow:boxShadow(100,$black,$highlight,1);
+//     }
+//     100%{
+//         box-shadow:boxShadow(100,$black,$highlight,0);
+//     }
+// }
