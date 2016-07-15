@@ -107,6 +107,11 @@ function customAudioPlayer(){
                 _addClass(newPlayer, className);
             }
             newPlayer.setAttribute('data-song-index',i);
+
+            // Create a loading indicator
+            var loading = document.createElement('div');
+            loading.className = 'loader';
+            newPlayer.appendChild(loading);
             
             // Create a play/pause button
             var button = document.createElement('button');

@@ -8,6 +8,18 @@ $grey:#808080;
 $unplayed:$black;
 $played:$highlight;
 
+@function boxShadow ($n, $colour1, $colour2) {
+    $value: 'inset #{$colour1} 0 0 0';
+    @for $i from 1 through $n {
+        @if ($i % 2 != 0) {
+            $value: '#{$value} , inset #{$colour2} #{$i}em 0 0 0';
+        } @else {
+            $value: '#{$value} , inset #{$colour1} #{$i}em 0 0 0';
+        }
+    }
+    @return unquote($value);
+}
+
 .bbc.customAudioPlayer{
     margin:2em 0;
     padding:0em;
@@ -25,6 +37,44 @@ $played:$highlight;
     *,
     *:before,
     *:after{box-sizing:inherit;}
+
+    
+    .loader{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:3em;
+        background:$black;//rgba(red,.3);
+        z-index:2;
+        pointer-events:none;
+        // opacity:0;
+        transition:opacity .2s;
+        text-align:center;
+        line-height:1;
+        padding:1em;
+        &:before{
+            content:'Loading';
+            color:$white;
+        }
+        &:after{
+            display:block;
+            content:'';
+            width:100%;
+            height:100%;
+            position:absolute;
+            top:0;
+            left:0;
+            transform:rotateZ(0);
+            box-shadow:boxShadow(100,$black,$highlight);
+            animation:loading linear infinite .4s;
+        }
+
+    }
+    &.loading .loader{
+        opacity:1;
+    }
+
     .playerTrigger{
         border:none;
         appearance:none;
@@ -435,5 +485,14 @@ $played:$highlight;
       width:100%;
       height:3em;
       cursor:pointer;
+    }
+}
+
+@keyframes loading{
+    0%{
+        box-shadow:boxShadow(100,$black,$highlight);
+    }
+    100%{
+        box-shadow:boxShadow(101,$highlight,$black);
     }
 }
