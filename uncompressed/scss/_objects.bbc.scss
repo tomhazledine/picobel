@@ -351,16 +351,26 @@ $played:$highlight;
             width:100%;
             background-image:linear-gradient(
                 to right,
-                $grey .0em,$grey .5em,$black .5em,$black 1.0em,
-                $grey 1.0em,$grey 1.5em,$black 1.5em,$black 2.0em,
-                $grey 2.0em,$grey 2.5em,$black 2.5em,$black 3.0em,
-                $grey 3.0em,$grey 3.5em,$black 3.5em,$black 4.0em,
-                $grey 4.0em,$grey 4.5em,$black 4.5em,$black 5.0em,
-                $grey 5.0em,$grey 5.5em,$black 5.5em,$black 6.0em,
-                $grey 6.0em,$grey 6.5em,$black 6.5em,$black 7.0em,
-                $grey 7.0em,$grey 7.5em,$black 7.5em,$black 8.0em,
-                $grey 8.0em,$grey 8.5em,$black 8.5em,$black 9.0em,
-                $grey 9.0em,$grey 9.5em,$black 9.5em,$black 10.0em
+                $grey .0em,$grey .25em,$black .25em,$black .5em,
+                $grey .5em,$grey .75em,$black .75em,$black 1em,
+                $grey 1.0em,$grey 1.25em,$black 1.25em,$black 1.5em,
+                $grey 1.5em,$grey 1.75em,$black 1.75em,$black 2em,
+                $grey 2.0em,$grey 2.25em,$black 2.25em,$black 2.5em,
+                $grey 2.5em,$grey 2.75em,$black 2.75em,$black 3em,
+                $grey 3.0em,$grey 3.25em,$black 3.25em,$black 3.5em,
+                $grey 3.5em,$grey 3.75em,$black 3.75em,$black 4em,
+                $grey 4.0em,$grey 4.25em,$black 4.25em,$black 4.5em,
+                $grey 4.5em,$grey 4.75em,$black 4.75em,$black 5.0em,
+                $grey 5.0em,$grey 5.25em,$black 5.25em,$black 5.5em,
+                $grey 5.5em,$grey 5.75em,$black 5.75em,$black 6.0em,
+                $grey 6.0em,$grey 6.25em,$black 6.25em,$black 6.5em,
+                $grey 6.5em,$grey 6.75em,$black 6.75em,$black 7.0em,
+                $grey 7.0em,$grey 7.25em,$black 7.25em,$black 7.5em,
+                $grey 7.5em,$grey 7.75em,$black 7.75em,$black 8.0em,
+                $grey 8.0em,$grey 8.25em,$black 8.25em,$black 8.5em,
+                $grey 8.5em,$grey 8.75em,$black 8.75em,$black 9em,
+                $grey 9.0em,$grey 9.25em,$black 9.25em,$black 9.5em,
+                $grey 9.5em,$grey 9.75em,$black 9.75em,$black 10.0em
                 );
         }
         .pseudoVolumeIndicator{
@@ -369,19 +379,29 @@ $played:$highlight;
             bottom:.5em;
             left:0;
             background:$highlight;
-            width:0%;
+            width:100%;
             background-image:linear-gradient(
                 to right,
-                $highlight .0em,$highlight .5em,$black .5em,$black 1.0em,
-                $highlight 1.0em,$highlight 1.5em,$black 1.5em,$black 2.0em,
-                $highlight 2.0em,$highlight 2.5em,$black 2.5em,$black 3.0em,
-                $highlight 3.0em,$highlight 3.5em,$black 3.5em,$black 4.0em,
-                $highlight 4.0em,$highlight 4.5em,$black 4.5em,$black 5.0em,
-                $highlight 5.0em,$highlight 5.5em,$black 5.5em,$black 6.0em,
-                $highlight 6.0em,$highlight 6.5em,$black 6.5em,$black 7.0em,
-                $highlight 7.0em,$highlight 7.5em,$black 7.5em,$black 8.0em,
-                $highlight 8.0em,$highlight 8.5em,$black 8.5em,$black 9.0em,
-                $highlight 9.0em,$highlight 9.5em,$black 9.5em,$black 10.0em
+                $highlight .0em,$highlight .25em,$black .25em,$black .5em,
+                $highlight .5em,$highlight .75em,$black .75em,$black 1em,
+                $highlight 1.0em,$highlight 1.25em,$black 1.25em,$black 1.5em,
+                $highlight 1.5em,$highlight 1.75em,$black 1.75em,$black 2em,
+                $highlight 2.0em,$highlight 2.25em,$black 2.25em,$black 2.5em,
+                $highlight 2.5em,$highlight 2.75em,$black 2.75em,$black 3em,
+                $highlight 3.0em,$highlight 3.25em,$black 3.25em,$black 3.5em,
+                $highlight 3.5em,$highlight 3.75em,$black 3.75em,$black 4em,
+                $highlight 4.0em,$highlight 4.25em,$black 4.25em,$black 4.5em,
+                $highlight 4.5em,$highlight 4.75em,$black 4.75em,$black 5.0em,
+                $highlight 5.0em,$highlight 5.25em,$black 5.25em,$black 5.5em,
+                $highlight 5.5em,$highlight 5.75em,$black 5.75em,$black 6.0em,
+                $highlight 6.0em,$highlight 6.25em,$black 6.25em,$black 6.5em,
+                $highlight 6.5em,$highlight 6.75em,$black 6.75em,$black 7.0em,
+                $highlight 7.0em,$highlight 7.25em,$black 7.25em,$black 7.5em,
+                $highlight 7.5em,$highlight 7.75em,$black 7.75em,$black 8.0em,
+                $highlight 8.0em,$highlight 8.25em,$black 8.25em,$black 8.5em,
+                $highlight 8.5em,$highlight 8.75em,$black 8.75em,$black 9em,
+                $highlight 9.0em,$highlight 9.25em,$black 9.25em,$black 9.5em,
+                $highlight 9.5em,$highlight 9.75em,$black 9.75em,$black 10.0em
                 );
         }
         .pseudoVolumePlayhead{
@@ -391,7 +411,7 @@ $played:$highlight;
             height:2em;
             position:absolute;
             bottom:.5em;
-            left:0%;
+            left:100%;
             margin-left:-.1em;
         }
     }
