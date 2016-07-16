@@ -71,7 +71,7 @@ $text_light:#969696;
             top:-200%;
             left:0;
             // transform:rotate(45deg);
-            box-shadow:pitchfork_boxShadow(100,lighten($played,20%),darken($played,20%));
+            box-shadow:pitchfork_boxShadow(100,$unplayed,$grey);
             animation:pitchfork_slide linear infinite .3s;
             transform-origin:center;
         }
