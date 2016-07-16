@@ -329,19 +329,20 @@ $text_light:#969696;
         &:before{
             display:block;
             width:.5em;
-            height:.5em;
+            height:.4em;
             position:absolute;
             content:'';
             top:50%;
             right:50%;
             margin-right:.1em;
-            transform:translateY(-50%);
+            margin-top:-.2em;
+            // transform:translateY(-50%);
             background:$black;
         }
         &:after{
             display:block;
             width:.5em;
-            height:.5em;
+            // height:.5em;
             position:absolute;
             content:'';
             top:50%;
