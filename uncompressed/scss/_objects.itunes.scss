@@ -37,6 +37,34 @@ $text_light:#7a7a7a;
     *,
     *:before,
     *:after{box-sizing:inherit;}
+
+    .loader{
+        position:absolute;
+        top:50%;
+        left:50%;
+        width:2em;
+        height:2em;
+        margin-top:-1.25em;
+        margin-left:1em;
+        border:.2em solid $border;
+        border-top-color:$black;
+        // background:$black;//rgba(red,.3);
+        z-index:2;
+        pointer-events:none;
+        opacity:0;
+        transition:opacity .2s;
+        text-align:center;
+        line-height:1;
+        // padding:1em;
+        overflow:hidden;
+        border-radius:50%;
+        animation:itunes_spin linear infinite 1s;
+
+    }
+    &.loading .loader{
+        opacity:1;
+    }
+
     .playerTrigger{
         border:none;
         appearance:none;
@@ -102,6 +130,10 @@ $text_light:#7a7a7a;
 
     .metaWrapper{
         padding:.5em;
+    }
+
+    &.loading .metaWrapper{
+        display:none;
     }
 
     .titleDisplay{
@@ -300,4 +332,13 @@ $text_light:#7a7a7a;
     //   height:1em;
     //   cursor:pointer;
     // }
+}
+
+@keyframes itunes_spin{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
 }
