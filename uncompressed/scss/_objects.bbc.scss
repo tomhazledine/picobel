@@ -59,7 +59,18 @@ $played:$highlight;
         overflow:hidden;
         &:after{
             content:'Loading';
+            display:block;
+            width:6em;
+            text-align:left;
             color:$white;
+            animation:ellipsis linear infinite .8s;
+            position:absolute;
+            top:1em;
+            // background:rgba(red,.5);
+            padding-left:1em;
+            left:50%;
+            margin-left:-3em;
+            z-index:2;
         }
         &:before{
             display:block;
@@ -67,6 +78,7 @@ $played:$highlight;
             width:130%;
             height:100%;
             position:absolute;
+            z-index:1;
             top:0;
             left:0;
             box-shadow:boxShadow(100,$black,$highlight);
@@ -497,6 +509,24 @@ $played:$highlight;
     }
     100%{
         transform:translateX(0);
+    }
+}
+
+@keyframes ellipsis{
+    0%{
+        content:'Loading';
+    }
+    25%{
+        content:'Loading.';
+    }
+    50%{
+        content:'Loading..';
+    }
+    75%{
+        content:'Loading...';
+    }
+    100%{
+        content:'Loading';
     }
 }
 
