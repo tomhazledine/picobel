@@ -1,6 +1,15 @@
 /**
  * ----------------------
- * STYLEABLE AUDIO PLAYER
+ * STYLE-FREE AUDIO PLAYER
+ *
+ *    ____ _______    ______  _
+ *  / ____|  ____/\   |  __ \(_)    
+ * | (___ | |__ /  \  | |__) |_ ___ 
+ *  \___ \|  __/ /\ \ |  ___/| / __|
+ *  ____) | | / ____ \| |   _| \__ \
+ * |_____/|_|/_/    \_\_|  (_) |___/
+ * SFAP.js                  _/ |    
+ * tomhazledine.com/audio  |__/    
  *
  * Replace native <audio>
  * elements with standard
