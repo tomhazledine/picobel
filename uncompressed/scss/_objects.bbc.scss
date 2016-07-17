@@ -334,8 +334,40 @@ $played:$highlight;
         border-right:1px solid $border;
     }
 
+    .songVolumeLabel{
+        // background:red;
+        display:block;
+        position:absolute;
+        top:50%;
+        height:1rem;
+        margin-top:-.5rem;
+        width:1rem;
+        font-size:0;
+        left:50%;
+        border-top:2px solid $white;
+        border-right:2px solid $white;
+        // border-bottom:.1rem solid $white;
+        border-radius:0 .8rem 0 0;
+        // margin-left:.1rem;
+        transform:rotate(45deg);
+        // display:none;
+    }
     .songVolumeValue{
-        display:none;
+        // background:red;
+        display:block;
+        position:absolute;
+        top:50%;
+        height:.6rem;
+        margin-top:-.3rem;
+        width:.6rem;
+        font-size:0;
+        left:50%;
+        border-top:2px solid $white;
+        border-right:2px solid $white;
+        // border-bottom:.1rem solid $white;
+        border-radius:0 .5rem 0 0;
+        // margin-left:.1rem;
+        transform:rotate(45deg);
     }
 
     .songVolumeLabelWrapper{
@@ -375,8 +407,8 @@ $played:$highlight;
         // &:hover{
         //     background:$highlight;
         // }
-        .songVolumeLabel{display:none;}
-        .songVolumeValue{display:none;}
+        // .songVolumeLabel{display:none;}
+        // .songVolumeValue{display:none;}
     }
     .songVolume:hover .songVolumeLabelWrapper{
         background:$highlight;
