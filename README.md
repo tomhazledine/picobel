@@ -12,15 +12,15 @@ The only downside is we're limited to the native brower styles. Usefull, but not
 
 ### Chrome audio player
 
-![Chrome audio player](assets/images/native_chrome.jpg)
+![Chrome audio player](images/native_chrome.jpg)
 
 ### Firefox audio player
 
-![Chrome audio player](assets/images/native_firefox.jpg)
+![Chrome audio player](images/native_firefox.jpg)
 
 ### Safari audio player
 
-![Chrome audio player](assets/images/native_safari.jpg)
+![Chrome audio player](images/native_safari.jpg)
 
 ---
 
