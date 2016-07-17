@@ -9,8 +9,8 @@
     - [x] current time
     - [x] total time
     - [x] current time indicator (scrobbleable)
-    - [ ] artist
-    - [ ] track title
+    - [x] artist
+    - [x] track title
     - [ ] album title (?)
 
 * [ ] Load files into buffer
@@ -21,7 +21,7 @@
 
 * [ ] Sensible, user-friendly error messages
 
-* [ ] Display file details
+* [x] Display file details
 
 * [ ] Get file metadata
 

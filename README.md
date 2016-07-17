@@ -18,7 +18,7 @@ With this tool, you can make the `<audio>` element look however you like.
 
 See **SFAP.js** in action at [tomhazledine.com/audio/](http://tomhazledine.com/audio/).
 
-## Useage
+## Usage
 
 To use **SFAP.js** you'll need to include the `styleFreeAudio.min.js` file in your project. This needs to be called before your custom scripts, and ideally in the `<foot>` of your page.
 

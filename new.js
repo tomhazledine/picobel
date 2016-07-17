@@ -13,7 +13,7 @@
  * by using HTML5 Audio.
  * ----------------------
  */
-function customAudioPlayer(){
+function StyleFreeAudio(){
 
     /**
      * ---------------------------------------------
@@ -502,4 +502,4 @@ function customAudioPlayer(){
 
 
 // Initialise the audio functions
-customAudioPlayer();
+StyleFreeAudio();
