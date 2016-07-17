@@ -1,13 +1,33 @@
 # SFAP.js
 
-## Style-Free Audio Player
+## Style-Free Audio Player (Better name coming soon, hopefully)
 
-A lightweight wrapper for HTML audio. Bring your own markup and CSS.
+SFAP is a lightweight dependency-free JS tool that converts html audio tags into styleable markup.
+
+## Why do we need this?
+
+The native html `<audio>` tag is fantastic: it gives us play/pause functionality for audio files, along with interactive progress & volume sliders, and displays for track-length and current-position.
+
+The only downside is we're limited to the native brower styles. Usefull, but not ideal. And certainly not easy to customise.
+
+### Chrome audio player
+
+![Chrome audio player](assets/images/native_chrome.jpg)
+
+### Firefox audio player
+
+![Chrome audio player](assets/images/native_firefox.jpg)
+
+### Safari audio player
+
+![Chrome audio player](assets/images/native_safari.jpg)
+
+---
 
 * MIT license
 * No dependencies
-* v1.0.1
-* Most recent release date: 20150617
+* v0.2.0
+* Most recent release date: 20160717
 
 ---
 
