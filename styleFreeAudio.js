@@ -508,7 +508,3 @@ function StyleFreeAudio(){
         pauseAll: pauseAll
     }
 }
-
-
-// Initialise the audio functions
-StyleFreeAudio();
