@@ -22,7 +22,24 @@
  * by using HTML5 Audio.
  * ----------------------
  */
-function StyleFreeAudio(){
+function StyleFreeAudio(options = {}){
+
+    console.log(options);
+
+    /**
+     * -----------------------
+     * PARSE OPTIONS
+     *
+     * Make sure we have valid
+     * options. If we don't we
+     * should provide sensible
+     * fallbacks.
+     * -----------------------
+     */
+    options.prefix = options.prefix || 'sfap_';
+    options.wrapper = options.wrapper || 'basicPlayer';
+
+    console.log(options);
 
     /**
      * ---------------------------------------------
@@ -109,7 +126,7 @@ function StyleFreeAudio(){
 
             // Create a container for our new player
             var newPlayer = document.createElement('div');
-            newPlayer.className = 'customAudioPlayer loading player_' + i;
+            newPlayer.className = 'customAudioPlayer loading player_' + i + ' ' + options.wrapper;
             // If the element has a valid class, add that to the player's wrapper
             var className = audioElements[i].className;
             if (className != '') {
