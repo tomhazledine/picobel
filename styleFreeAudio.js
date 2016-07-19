@@ -61,6 +61,7 @@ function StyleFreeAudio(options = {}){
     // Now we've placed our elements in the DOM, we can select them.
     var wrappers = document.getElementsByClassName('customAudioPlayer');
     var playPauseButtons = document.getElementsByClassName('playerTrigger');
+    var muteButtons = document.getElementsByClassName('songMuteButton');
     var playPauseButtonsText = document.getElementsByClassName('buttonText');
     var playTimer = document.getElementsByClassName('songPlayTimer');
     var songLengthBox = document.getElementsByClassName('songDuration');
@@ -273,6 +274,7 @@ function StyleFreeAudio(options = {}){
             myAudio[i].addEventListener('timeupdate', _triggerUpdateProgress, false);
             myAudio[i].addEventListener('loadstart', _loadStart, false);
             myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
+            muteButtons[i].addEventListener('click',_muteUnmuteAudio,false);
 
             // Assign an index to each audio node:
             // this links the audio elements to the
@@ -381,15 +383,37 @@ function StyleFreeAudio(options = {}){
     // Volume
     function volume(){
         var value = this.value;
+        var index = this.parentNode.parentNode.parentNode.getAttribute('data-song-index');
+        setVolume(index,value);
+    }
+
+    function setVolume(index,value){
         var valueMapped = value * 10;
         var volumePercent = value * 100;
-        var index = this.parentNode.parentNode.parentNode.getAttribute('data-song-index');
         myAudio[index].volume = value;
         volumeDisplay[index].innerHTML = valueMapped;
-        // console.log(value + ' + ' + valueMapped);
         volumeControl[index].value = value;
         volumeIndicator[index].style.width = volumePercent + '%';
         volumePlayhead[index].style.left = volumePercent + '%';
+    }
+
+    // Mute
+    function mute(index,state){
+        if (state) {
+            var oldVolume = myAudio[index].volume;
+            muteButtons[index].setAttribute('data-saved-volume',oldVolume);
+            setVolume(index,0);
+        } else {
+            // myAudio[index].volume = 0;
+            var oldVolume = muteButtons[index].getAttribute('data-saved-volume');
+            if (typeof oldVolume != 'undefined' && oldVolume > 0) {
+                // myAudio[index].volume = oldVolume;
+                setVolume(index,oldVolume);
+            } else {
+                setVolume(index,1);
+            }
+            // console.log(oldVolume);
+        }
     }
 
     // Toggle 'play' and 'pause' for a track
@@ -412,6 +436,23 @@ function StyleFreeAudio(options = {}){
             _addClass(this,'songPlaying');
             _removeClass(this,'songPaused');
             buttonText.innerHTML = 'pause';
+        }
+    }
+
+    // Toggle 'mute' for a track
+    function _muteUnmuteAudio(){
+        var targetSong = this.parentNode.parentNode.getAttribute('data-song-index');
+        var buttonText = playPauseButtonsText[targetSong];
+        if (_hasClass(this,'songMuted')) {
+            mute(targetSong,false);
+            _removeClass(this,'songMuted');
+            _addClass(this,'songUnmuted');
+            buttonText.innerHTML = 'mute';
+        } else {
+            mute(targetSong,true);
+            _addClass(this,'songMuted');
+            _removeClass(this,'songUnmuted');
+            buttonText.innerHTML = 'unmute';
         }
     }
 
