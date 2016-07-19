@@ -24,8 +24,6 @@
  */
 function StyleFreeAudio(options = {}){
 
-    console.log(options);
-
     /**
      * -----------------------
      * PARSE OPTIONS
@@ -36,10 +34,8 @@ function StyleFreeAudio(options = {}){
      * fallbacks.
      * -----------------------
      */
-    options.prefix = options.prefix || 'sfap_';
+    // options.prefix = options.prefix || '';
     options.wrapper = options.wrapper || 'basicPlayer';
-
-    console.log(options);
 
     /**
      * ---------------------------------------------
@@ -126,11 +122,13 @@ function StyleFreeAudio(options = {}){
 
             // Create a container for our new player
             var newPlayer = document.createElement('div');
-            newPlayer.className = 'customAudioPlayer loading player_' + i + ' ' + options.wrapper;
+            newPlayer.className = 'customAudioPlayer loading player_' + i;
             // If the element has a valid class, add that to the player's wrapper
             var className = audioElements[i].className;
             if (className != '') {
                 _addClass(newPlayer, className);
+            } else {
+                _addClass(newPlayer, options.wrapper);
             }
             newPlayer.setAttribute('data-song-index',i);
 
@@ -204,6 +202,10 @@ function StyleFreeAudio(options = {}){
             var meta_volume = document.createElement('div');
             // meta_volume.setAttribute('data-song-index',i);
             meta_volume.className = 'songVolume';
+            var meta_mute = document.createElement('button');
+            meta_mute.className = 'songMuteButton';
+            meta_mute.innerHTML = 'Mute';
+            meta_volume.appendChild(meta_mute);
             var meta_volume_label_wrapper = document.createElement('div');
             meta_volume_label_wrapper.className = 'songVolumeLabelWrapper';
             var meta_volume_label = document.createElement('span');
