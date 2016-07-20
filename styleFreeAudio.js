@@ -276,6 +276,10 @@ function StyleFreeAudio(options = {}){
             myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
             muteButtons[i].addEventListener('click',_muteUnmuteAudio,false);
 
+            myAudio[i].addEventListener('error',_errors,false);
+            myAudio[i].addEventListener('stalled',_stalled,false);
+            myAudio[i].addEventListener('waiting',_errors,false);
+
             // Assign an index to each audio node:
             // this links the audio elements to the
             // relevant markup
@@ -490,6 +494,43 @@ function StyleFreeAudio(options = {}){
         var duration = _secondsToMMSS(songLength);
         var songClass = '.song' + index;
         songLengthBox[index].innerHTML = duration;
+    }
+
+    /**
+     * --------------
+     * ERROR HANDLING
+     *
+     * Functions that
+     * will display a
+     * warning notice
+     * when any error
+     * is triggered.
+     * -------------- 
+     */
+    
+    function _errors(e){
+        console.log('error: ');
+        console.log(e.type);
+        console.log(e);
+    }
+    
+    function _error(e){
+        console.log('error: ');
+        console.log(e);
+        console.log(e.target.error);
+    }
+    function _stalled(e){
+        console.log('stalled: ');
+        var index = this.getAttribute('data-song-index');
+        console.log(myAudio[index]);
+
+        // console.log('stalled: ');
+        // console.log(e);
+        // console.log(this);
+    }
+    function _waiting(e){
+        console.log('waiting: ');
+        console.log(e);
     }
 
     /**
