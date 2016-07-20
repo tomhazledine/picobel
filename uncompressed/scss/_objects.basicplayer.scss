@@ -105,13 +105,13 @@ $secondary:$orange;
             position:absolute;
             top:50%;
             left:50%;
-            margin-top:-.5em;
-            margin-left:-.2em;
-            border-top:.5em solid transparent;
-            border-left:.6em solid $white;
-            border-bottom:.5em solid transparent;
-            transition:border height margin top;
-            transition-duration:.2s;
+            margin-top:-.6em;
+            margin-left:-.25em;
+            border-top:.6em solid transparent;
+            border-left:.8em solid $white;
+            border-bottom:.6em solid transparent;
+            // transition:border height margin top;
+            // transition-duration:.2s;
         }
         &:after{
             content:'';
@@ -119,21 +119,21 @@ $secondary:$orange;
             position:absolute;
             top:50%;
             right:50%;
-            height:.8em;
-            margin-top:-.4em;
-            margin-right:-.3em;
+            height:1em;
+            margin-top:-.5em;
+            margin-right:-.5em;
             border-top:0;
-            border-left:.3em solid $white;
+            border-left:.4em solid $white;
             border-bottom:0;
             opacity:0;
-            transition:opacity .2s;
+            // transition:opacity .2s;
         }
         &.songPlaying:before{
-            height:.8em;
-            margin-top:-.4em;
-            margin-left:-.3em;
+            height:1em;
+            margin-top:-.5em;
+            margin-left:-.5em;
             border-top:0;
-            border-left:.3em solid $white;
+            border-left:.4em solid $white;
             border-bottom:0;
         }
         &.songPlaying:after{
@@ -162,6 +162,10 @@ $secondary:$orange;
             display:block;
             line-height:1;
         }
+    }
+
+    .songPlaying + .metaWrapper{
+        background:$orange;
     }
 
     .timingsWrapper{
