@@ -384,6 +384,7 @@ function StyleFreeAudio(options = {}){
     function volume(){
         var value = this.value;
         var index = this.parentNode.parentNode.parentNode.getAttribute('data-song-index');
+        mute(index,false);
         setVolume(index,value);
     }
 
@@ -403,6 +404,9 @@ function StyleFreeAudio(options = {}){
             var oldVolume = myAudio[index].volume;
             muteButtons[index].setAttribute('data-saved-volume',oldVolume);
             setVolume(index,0);
+            _addClass(muteButtons[index],'songMuted');
+            _removeClass(muteButtons[index],'songUnmuted');
+            muteButtons[index].innerHTML = 'unmute';
         } else {
             // myAudio[index].volume = 0;
             var oldVolume = muteButtons[index].getAttribute('data-saved-volume');
@@ -412,6 +416,9 @@ function StyleFreeAudio(options = {}){
             } else {
                 setVolume(index,1);
             }
+            _removeClass(muteButtons[index],'songMuted');
+            _addClass(muteButtons[index],'songUnmuted');
+            muteButtons[index].innerHTML = 'mute';
             // console.log(oldVolume);
         }
     }
@@ -445,14 +452,14 @@ function StyleFreeAudio(options = {}){
         var buttonText = playPauseButtonsText[targetSong];
         if (_hasClass(this,'songMuted')) {
             mute(targetSong,false);
-            _removeClass(this,'songMuted');
-            _addClass(this,'songUnmuted');
-            buttonText.innerHTML = 'mute';
+            // _removeClass(this,'songMuted');
+            // _addClass(this,'songUnmuted');
+            // buttonText.innerHTML = 'mute';
         } else {
             mute(targetSong,true);
-            _addClass(this,'songMuted');
-            _removeClass(this,'songUnmuted');
-            buttonText.innerHTML = 'unmute';
+            // _addClass(this,'songMuted');
+            // _removeClass(this,'songUnmuted');
+            // buttonText.innerHTML = 'unmute';
         }
     }
 
