@@ -1,26 +1,22 @@
 /**
- * ----------------------
+ * -----------------------------------
  * STYLE-FREE AUDIO PLAYER
+ *    ____ _______    _______  _
+ *  / ____|  ____/\   |  __  \(_)    
+ * | (___ | |__ /  \  | |__) | _  ___ 
+ *  \___ \|  __/ /\ \ |  ___ /| |/ __|
+ *  ____) | | / ____ \| |  _  | |\__ \
+ * |_____/|_|/_/    \_\_| (_) | ||___/
+ * SFAP.js                   _/ |    
+ * tomhazledine.com/audio   |__/    
  *
- *    ____ _______    ______  _
- *  / ____|  ____/\   |  __ \(_)    
- * | (___ | |__ /  \  | |__) |_ ___ 
- *  \___ \|  __/ /\ \ |  ___/| / __|
- *  ____) | | / ____ \| |   _| \__ \
- * |_____/|_|/_/    \_\_|  (_) |___/
- * SFAP.js                  _/ |    
- * tomhazledine.com/audio  |__/    
+ * ===================================
+ * 
+ * Replace native <audio> instances with standard elements (spans, buttons & divs) that we can style however we like.
  *
- * Replace native <audio>
- * elements with standard
- * DOM elements (buttons,
- * divs, & spans) that we
- * can then style however
- * we like.
- *
- * Functionality provided
- * by using HTML5 Audio.
- * ----------------------
+ * Functionality powered by HTML5
+ * Audio.
+ * -----------------------------------
  */
 function StyleFreeAudio(options = {}){
 
@@ -280,6 +276,8 @@ function StyleFreeAudio(options = {}){
             myAudio[i].addEventListener('stalled',_stalled,false);
             myAudio[i].addEventListener('waiting',_errors,false);
 
+            myAudio[i].addEventListener('progress',_progress,false);
+
             // Assign an index to each audio node:
             // this links the audio elements to the
             // relevant markup
@@ -427,26 +425,38 @@ function StyleFreeAudio(options = {}){
         }
     }
 
-    // Toggle 'play' and 'pause' for a track
-    function _playPauseAudio(){
-        var targetSong = this.parentNode.getAttribute('data-song-index');
-        var buttonText = playPauseButtonsText[targetSong];
-        if (_hasClass(this,'songPlaying')) {
-            pauseAll();
-            _removeClass(this,'songPlaying');
-            _addClass(this,'songPaused');
-            buttonText.innerHTML = 'play';
-        } else {
+    // Play or pause a track
+    function playPause(index,state){
+        var buttonText = playPauseButtonsText[index];
+        var target = playPauseButtons[index]
+        if (state) {
             for (i = 0; i < playPauseButtons.length; i++) {
                 _removeClass(playPauseButtons[i], 'songPlaying');
                 _addClass(playPauseButtons[i], 'songPaused');
                 playPauseButtonsText[i].innerHTML = 'play';
-
             }
-            playSong(targetSong);
-            _addClass(this,'songPlaying');
-            _removeClass(this,'songPaused');
+            playSong(index);
+            _addClass(target,'songPlaying');
+            _removeClass(target,'songPaused');
             buttonText.innerHTML = 'pause';
+        } else {
+            pauseAll();
+            _removeClass(target,'songPlaying');
+            _addClass(target,'songPaused');
+            buttonText.innerHTML = 'play';
+        }
+    }
+
+    // Toggle 'play' and 'pause' for a track
+    function _playPauseAudio(){
+        var targetSong = this.parentNode.getAttribute('data-song-index');
+        if (typeof targetSong != 'undefined') {
+            var playSong = (_hasClass(this,'songPlaying') ? false : true);
+            // console.log('Target: ' + targetSong);
+            // console.log('Play?: ' + playSong);
+            playPause(targetSong,playSong);
+        } else {
+            console.log('too soon to play!');
         }
     }
 
@@ -511,26 +521,33 @@ function StyleFreeAudio(options = {}){
     function _errors(e){
         console.log('error: ');
         console.log(e.type);
-        console.log(e);
+        var index = this.getAttribute('data-song-index');
+        console.log(myAudio[index].error);
+        // console.log(e);
     }
     
     function _error(e){
+        var index = this.getAttribute('data-song-index');
+        var error = myAudio[index].error;
         console.log('error: ');
-        console.log(e);
-        console.log(e.target.error);
+        // console.log(e);
+        console.log(error);
     }
     function _stalled(e){
-        console.log('stalled: ');
+        console.log('stalled!');
         var index = this.getAttribute('data-song-index');
-        console.log(myAudio[index]);
-
-        // console.log('stalled: ');
-        // console.log(e);
-        // console.log(this);
+        console.log('Target: ' + index);
+        console.log('Play?: ' + false);
+        playPause(index,false);
     }
     function _waiting(e){
         console.log('waiting: ');
         console.log(e);
+    }
+
+    function _progress(e){
+        var index = this.getAttribute('data-song-index');
+        var readyState = myAudio[index].readyState;
     }
 
     /**
