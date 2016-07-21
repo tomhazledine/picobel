@@ -540,9 +540,8 @@ function StyleFreeAudio(options = {}){
         console.log('Play?: ' + false);
         playPause(index,false);
     }
-    function _waiting(e){
-        console.log('waiting: ');
-        console.log(e);
+    function _waiting(){
+        console.log('waiting!');
     }
 
     function _progress(e){
