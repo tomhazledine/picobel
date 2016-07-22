@@ -12,7 +12,7 @@ The native html `<audio>` tag provides fantastic functionality, but gives you no
 
 ![Native audio player](images/native_players.jpg)
 
-With this tool, you can make the `<audio>` element look however you like.
+**SFAP** allows you to create custom styles for your audio players: providing cross-browser consistency and a seamless integration with your existing brand styles.
 
 ## Demo
 
