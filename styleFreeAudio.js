@@ -133,6 +133,8 @@ function StyleFreeAudio(options = {}){
             var loading = document.createElement('div');
             loading.className = 'loader';
             newPlayer.appendChild(loading);
+
+            // Add "waiting" indicator here.
             
             // Create a play/pause button
             var button = document.createElement('button');
