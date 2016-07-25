@@ -317,6 +317,10 @@ $text_light:#969696;
       cursor:pointer;
     }
 
+    .songMuteButton{
+        display:none;
+    }
+
     .songVolume{
         width:5%;
         height:3em;
