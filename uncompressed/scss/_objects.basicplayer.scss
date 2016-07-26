@@ -1,17 +1,9 @@
-$grey:#dad8d2;
-$grey_dark:#888;
-$white:#ffffff;
-$black:#4d4d4d;
-
-
 $black:#555;
 $white:#ffffff;
 $cream:#efeeeb;
 $grey:#dad8d2;
 $greyDark:darken($grey,20%);
 $primary:#00b7c6;
-$orange:#ff851b;
-$secondary:$orange;
 
 @function soundcloud_boxShadow ($n, $colour1, $colour2) {
     $value: 'inset #{$colour1} 0 0 0 0,';
@@ -30,11 +22,9 @@ $secondary:$orange;
 
 @keyframes basic_slide{
     0%{
-        // transform:rotate(15deg) translateX(-2em);
         transform:translateX(-2em);
     }
     100%{
-        // transform:rotate(15deg) translateX(0);
         transform:translateX(0);
     }
 }
@@ -61,19 +51,15 @@ $secondary:$orange;
         &:before{
             display:block;
             content:'';
-            width:200%;//400%;
-            // padding-bottom:100%;
-            height:100%;//600%;
+            width:200%;
+            height:100%;
             position:absolute;
             z-index:1;
             top:0%;
-            left:0%;//-25%;
-            // transform:rotate(15deg);
-            // transform:rotate(.02turn);
+            left:0%;
             transform-origin:center center;
             box-shadow:soundcloud_boxShadow(100,$primary,darken($primary,10%));
             animation:basic_slide linear infinite .4s;
-            // transform-origin:center;
         }
     }
 
@@ -110,8 +96,6 @@ $secondary:$orange;
             border-top:.6em solid transparent;
             border-left:.8em solid $white;
             border-bottom:.6em solid transparent;
-            // transition:border height margin top;
-            // transition-duration:.2s;
         }
         &:after{
             content:'';
@@ -126,7 +110,6 @@ $secondary:$orange;
             border-left:.4em solid $white;
             border-bottom:0;
             opacity:0;
-            // transition:opacity .2s;
         }
         &.songPlaying:before{
             height:1em;
@@ -143,20 +126,14 @@ $secondary:$orange;
 
     .metaWrapper{
         padding:.5em 1.5em .5em 3.5em;
-        // padding:.5em;
         height:4em;
-        // margin-bottom:1em;
         overflow:auto;
         background:$primary;
         background:rgba($primary,.3);
-        // &:hover{
-        //     background:rgba($primary,.6);
-        // }
         .titleDisplay{
             display:block;
             line-height:1;
             font-weight:bold;
-            // margin-right:.5em;
         }
         .artistDisplay{
             display:block;
@@ -164,13 +141,8 @@ $secondary:$orange;
         }
     }
 
-    .songPlaying + .metaWrapper{
-        background:$orange;
-    }
-
     .timingsWrapper{
         position:absolute;
-        // font-size:.8em;
         width:100%;
         bottom:0;
         left:0;
@@ -203,16 +175,14 @@ $secondary:$orange;
 
     .songProgressSliderWrapper{
         height:2em;
-        // padding-left:6em;
         font-size:1em;
         line-height:1;
         position:absolute;
         top:0;
         left:0;
         width:100%;
-        background:$black;//$primary;
+        background:$black;
         overflow:hidden;
-        // border:1px solid $black;
         .songProgressSlider{
             width:100%;
             padding:0;
@@ -238,7 +208,7 @@ $secondary:$orange;
             left:0%;
             margin-top:-1em;
             margin-left:-.5em;
-            background:$primary;//darken($primary,20%);
+            background:$primary;
         }
     }
     &.loading .pseudoProgressIndicator,
@@ -268,14 +238,10 @@ $secondary:$orange;
         position:absolute;
         top:0;
         right:0;
-        // padding-top:.4em;
         width:1.5em;
         height:4em;
         overflow:hidden;
-        background:blue;
         z-index:2;
-        // transform:rotate(-90deg);
-        // transform-origin:top right;
         .songMuteButton{
             display:block;
             width:1.5rem;
@@ -310,12 +276,10 @@ $secondary:$orange;
                 margin-top:-.4rem;
                 right:50%;
                 margin-right:-.2rem;
-                // background:$black;
                 border-top:.4rem solid transparent;
                 border-right:.4rem solid $white;
                 border-bottom:.4rem solid transparent;
             }
-            // display:none;
             &.songMuted{
                 &:before{
                     background:$grey;
@@ -342,9 +306,8 @@ $secondary:$orange;
         top:0;
         left:0;
         z-index:3;
-        background:$grey_dark;
+        background:$greyDark;
         width:2.5em;
-        // border-right:1px solid rgba($black,.2);
         transform:rotate(90deg);
         transform-origin:bottom left;
         // display:none;
@@ -358,7 +321,6 @@ $secondary:$orange;
             left:0;
             opacity:0;
             transform:rotate(180deg);
-            // display:none;
         }
         .pseudoVolumeIndicator{
             height:1.5em;
@@ -372,16 +334,6 @@ $secondary:$orange;
         }
         .pseudoVolumePlayhead{
             display:none;
-            // width:.2em;
-            // height:1em;
-            // position:absolute;
-            // top:0;
-            // left:0;
-            // margin-top:0;
-            // margin-left:-.1em;
-            // background:$primary;
-            // transform:rotate(180deg);
-            // display:none;
         }
     }
 
