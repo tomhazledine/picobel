@@ -37,7 +37,7 @@ var onError = function (err) {
 // Compile Our Sass
 gulp.task('sass', function() {
     return gulp.src('uncompressed/scss/*.scss')
-    .pipe(sass().on('error', sass.logError))
+    .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
     .pipe(autoprefixer('last 2 versions', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(size({title: 'css'}))
     .pipe(gulp.dest('assets/css'))
