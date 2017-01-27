@@ -1,8 +1,6 @@
-# SFAP.js
+# Picobel.js
 
-## Style-Free Audio Player (Better name coming soon, hopefully)
-
-SFAP is a lightweight dependency-free JS tool that converts html audio tags into styleable markup.
+Picobel.js (pronounced *peek-o-bell*, as in *decibel*) is a lightweight dependency-free Javascript tool that converts html audio tags into styleable markup.
 
 ## Why would I need this?
 
