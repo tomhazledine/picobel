@@ -10,15 +10,15 @@ The native html `<audio>` tag provides fantastic functionality, but gives you no
 
 ![Native audio player](images/native_players.jpg)
 
-**SFAP** allows you to create custom styles for your audio players: providing cross-browser consistency and a seamless integration with your existing brand styles.
+**Picobel** allows you to create custom styles for your audio players: providing cross-browser consistency and a seamless integration with your existing brand styles.
 
 ## Demo
 
-See **SFAP.js** in action at [tomhazledine.com/audio/](http://tomhazledine.com/audio/).
+See **Picobel.js** in action at [tomhazledine.com/audio/](http://tomhazledine.com/audio/).
 
 ## Usage
 
-To use **SFAP.js** you'll need to include the `styleFreeAudio.min.js` file in your project. This needs to be called before your custom scripts, and ideally in the `<foot>` of your page.
+To use **Picobel.js** you'll need to include the `styleFreeAudio.min.js` file in your project. This needs to be called before your custom scripts, and ideally in the `<foot>` of your page.
 
     <script src="/path/to/styleFreeAudio.min.js"></script>
     <script src="/path/to/yourCustom.js"></script>
@@ -27,7 +27,7 @@ Then, in your custom JS script file, initialize the function:
 
     customAudioPlayer();
 
-When your page loads, SFAP will replace any default `<audio>` elements with a block of custom-markup, complete with classes that you can use to target your custom CSS.
+When your page loads, Picobel will replace any default `<audio>` elements with a block of custom-markup, complete with classes that you can use to apply your custom CSS.
 
 ### This:
 
