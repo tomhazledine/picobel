@@ -1,24 +1,23 @@
 /**
- * -----------------------------------
- * STYLE-FREE AUDIO PLAYER
- *    ____ _______    _______  _
- *  / ____|  ____/\   |  __  \(_)    
- * | (___ | |__ /  \  | |__) | _  ___ 
- *  \___ \|  __/ /\ \ |  ___ /| |/ __|
- *  ____) | | / ____ \| |  _  | |\__ \
- * |_____/|_|/_/    \_\_| (_) | ||___/
- * SFAP.js                   _/ |    
- * tomhazledine.com/audio   |__/    
+ * -----------------------------------------
+ *  ____  _           _          _    _
+ * |  _ \(_) ___ ___ | |__   ___| |  (_)___ 
+ * | |_) | |/ __/ _ \| '_ \ / _ \ |  | / __|
+ * |  __/| | (_| (_) | |_) |  __/ |_ | \__ \
+ * |_|   |_|\___\___/|_.__/ \___|_(_)| |___/
+ * Picobel.js                       _/ |    
+ * tomhazledine.com/audio          |__/    
  *
- * ===================================
+ * =========================================
  * 
- * Replace native <audio> instances with standard elements (spans, buttons & divs) that we can style however we like.
+ * Replace any native <audio> instances with
+ * standard elements (spans, buttons & divs)
+ * that we can style however we like.
  *
- * Functionality powered by HTML5
- * Audio.
- * -----------------------------------
+ * Functionality powered by Web Audio API.
+ * -----------------------------------------
  */
-function StyleFreeAudio(options = {}){
+function Picobel(options = {}){
 
     /**
      * -----------------------

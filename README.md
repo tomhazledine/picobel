@@ -4,17 +4,25 @@ Picobel.js (pronounced *peek-o-bell*, as in *decibel*) is a lightweight dependen
 
 ## Why would I need this?
 
-Because you're frontender and CSS magician who loves to have control over every aspect the sites you create.
+There are two reasons you might want to use Picobel...
 
-The native html `<audio>` tag provides fantastic functionality, but gives you no styling options at all. This tool rebuilds the audio player with regular html elements: you get all the functionality of the native audio element, *and* complete control of it's appearance.
+1. You want a uniform cross-browser experience for the audio players on your site. Pick a pre-made Picobel theme, and you're all set.
+
+2. You're frontender and CSS magician who loves to have control over every aspect the sites you create. You can use the markup-only version of Picobel, and write your own CSS.
+
+The native html `<audio>` tag provides fantastic functionality, but gives you no styling options at all. Picobel rebuilds the audio player with regular html elements: you get all the functionality of the native audio element, *and* complete control of it's appearance.
+
+Using Picobel you can turn this:
 
 ![Native audio player](images/native_players.jpg)
+*Default browser audio players*
+
+Into this:
+
+![Picobel-styled audio player](images/native_players.jpg)
+*default browser audio players*
 
 **Picobel** allows you to create custom styles for your audio players: providing cross-browser consistency and a seamless integration with your existing brand styles.
-
-## Demo
-
-See **Picobel.js** in action at [tomhazledine.com/audio/](http://tomhazledine.com/audio/).
 
 ## Usage
 
