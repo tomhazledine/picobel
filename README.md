@@ -19,8 +19,8 @@ Using Picobel you can turn this:
 
 Into this:
 
-![Picobel-styled audio player](images/native_players.jpg)
-*default browser audio players*
+![Picobel-styled audio player](images/image_coming.jpg)
+*Picobel-styled audio players*
 
 **Picobel** allows you to create custom styles for your audio players: providing cross-browser consistency and a seamless integration with your existing brand styles.
 
