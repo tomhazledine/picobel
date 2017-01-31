@@ -138,12 +138,10 @@ function Picobel( options ) {
             
             // Create a play/pause button
             var button = document.createElement( 'button' );
-            // button.setAttribute('data-song-index',i);
-            // button.value = data[i].url;
             button.className = 'playerTrigger';
             var buttonText = document.createElement( 'span' );
             buttonText.className = 'buttonText';
-            buttonText.innerHTML = 'play';//File #' + (i + 1);
+            buttonText.innerHTML = 'play';
             button.appendChild( buttonText );
 
             // Create a wrapper for our player's metadata
@@ -170,7 +168,6 @@ function Picobel( options ) {
 
             // Progress Indicator
             var meta_progress_wrapper = document.createElement( 'div' );
-            // meta_progress_wrapper.setAttribute('data-song-index',i);
             meta_progress_wrapper.className = 'songProgressSliderWrapper';
             var meta_pseudo_progress_background = document.createElement( 'div' );
             meta_pseudo_progress_background.className = 'pseudoProgressBackground';
@@ -183,7 +180,6 @@ function Picobel( options ) {
             meta_progress_wrapper.appendChild( meta_pseudo_progress_playhead );
             var meta_progress = document.createElement( 'input' );
             meta_progress.type = 'range';
-            // meta_progress.setAttribute('data-song-index',i);
             meta_progress.min = 0;
             meta_progress.max = 100;
             meta_progress.value = 0;
@@ -199,7 +195,6 @@ function Picobel( options ) {
 
             // Volume Indicator
             var meta_volume = document.createElement( 'div' );
-            // meta_volume.setAttribute('data-song-index',i);
             meta_volume.className = 'songVolume';
             var meta_mute = document.createElement( 'button' );
             meta_mute.className = 'songMuteButton';
@@ -301,14 +296,13 @@ function Picobel( options ) {
     
     // Fire this event when loading starts [TEST]
     function _loadStart() {
-        console.log( 'Load start' );
+        // console.log( 'Load start' );
     }
 
     // Fire this event when we can play the audio
     // all the way through (ie. it is fully loaded)
     function _canplaythrough() {
         var index = this.getAttribute( 'data-song-index' );
-        console.log( 'Can play through ' + index );
         _setLengthDisplay( index );
         _removeClass( wrappers[index], 'loading' );
 
@@ -416,7 +410,6 @@ function Picobel( options ) {
             // myAudio[index].volume = 0;
             oldVolume = muteButtons[index].getAttribute( 'data-saved-volume' );
             if ( typeof oldVolume != 'undefined' && oldVolume > 0 ) {
-                // myAudio[index].volume = oldVolume;
                 setVolume( index, oldVolume );
             } else {
                 setVolume( index, 1 );
@@ -424,7 +417,6 @@ function Picobel( options ) {
             _removeClass( muteButtons[index], 'songMuted' );
             _addClass( muteButtons[index], 'songUnmuted' );
             muteButtons[index].innerHTML = 'mute';
-            // console.log(oldVolume);
         }
     }
 
@@ -455,8 +447,6 @@ function Picobel( options ) {
         var targetSong = this.parentNode.getAttribute( 'data-song-index' );
         if ( typeof targetSong != 'undefined' ) {
             var playSong = ( _hasClass( this, 'songPlaying' ) ? false : true );
-            // console.log('Target: ' + targetSong);
-            // console.log('Play?: ' + playSong);
             playPause( targetSong, playSong );
         } else {
             console.log( 'too soon to play!' );
@@ -522,29 +512,29 @@ function Picobel( options ) {
      */
     
     function _errors( e ) {
-        console.log( 'error: ' );
-        console.log( e.type );
+        // console.log( 'error: ' );
+        // console.log( e.type );
         var index = this.getAttribute( 'data-song-index' );
-        console.log( myAudio[index].error );
+        // console.log( myAudio[index].error );
         // console.log(e);
     }
     
     function _error( e ) {
         var index = this.getAttribute( 'data-song-index' );
         var error = myAudio[index].error;
-        console.log( 'error: ' );
+        // console.log( 'error: ' );
         // console.log(e);
-        console.log( error );
+        // console.log( error );
     }
     function _stalled( e ) {
-        console.log( 'stalled!' );
+        // console.log( 'stalled!' );
         var index = this.getAttribute( 'data-song-index' );
-        console.log( 'Target: ' + index );
-        console.log( 'Play?: ' + false );
+        // console.log( 'Target: ' + index );
+        // console.log( 'Play?: ' + false );
         playPause( index, false );
     }
     function _waiting() {
-        console.log( 'waiting!' );
+        // console.log( 'waiting!' );
     }
 
     function _progress( e ){
