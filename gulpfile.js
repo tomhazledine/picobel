@@ -69,7 +69,7 @@ gulp.task('svg',function() {
 
 // Lets lint our JS
 gulp.task('jslint', function() {
-    return gulp.src('uncompressed/js/custom/*.js')
+    return gulp.src('uncompressed/js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
