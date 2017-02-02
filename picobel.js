@@ -29,9 +29,14 @@ function Picobel( options ) {
      * fallbacks.
      * -----------------------
      */
+    
+    console.log(options);
+
     options = typeof options !== 'undefined' ? options : {};
     // options.prefix = options.prefix || '';
     options.theme = options.theme || 'basic_player';
+
+    console.log(options);
 
     /**
      * ---------------------------------------------
@@ -124,9 +129,8 @@ function Picobel( options ) {
             var className = audioElements[i].className;
             if ( className !== '' ) {
                 _addClass( newPlayer, className );
-            } else {
-                _addClass( newPlayer, options.theme );
             }
+            _addClass( newPlayer, options.theme );
             newPlayer.setAttribute( 'data-song-index', i );
 
             // Create a loading indicator

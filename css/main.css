@@ -460,7 +460,7 @@ form button.submitButton:hover {
   }
 }
 
-.customAudioPlayer {
+.basicPlayer.customAudioPlayer {
   margin: 2em 0;
   position: relative;
   overflow: hidden;
@@ -468,13 +468,13 @@ form button.submitButton:hover {
   height: 6em;
 }
 
-.customAudioPlayer *,
-.customAudioPlayer *:before,
-.customAudioPlayer *:after {
+.basicPlayer.customAudioPlayer *,
+.basicPlayer.customAudioPlayer *:before,
+.basicPlayer.customAudioPlayer *:after {
   box-sizing: inherit;
 }
 
-.customAudioPlayer .loader {
+.basicPlayer.customAudioPlayer .loader {
   width: 100%;
   position: absolute;
   bottom: 0;
@@ -485,7 +485,7 @@ form button.submitButton:hover {
   transition: opacity .2s;
 }
 
-.customAudioPlayer .loader:before {
+.basicPlayer.customAudioPlayer .loader:before {
   display: block;
   content: '';
   width: 200%;
@@ -499,11 +499,11 @@ form button.submitButton:hover {
   animation: basic_slide linear infinite .4s;
 }
 
-.customAudioPlayer.loading .loader {
+.basicPlayer.customAudioPlayer.loading .loader {
   opacity: 1;
 }
 
-.customAudioPlayer .playerTrigger {
+.basicPlayer.customAudioPlayer .playerTrigger {
   border: none;
   -webkit-appearance: none;
      -moz-appearance: none;
@@ -519,15 +519,15 @@ form button.submitButton:hover {
   cursor: pointer;
 }
 
-.customAudioPlayer .playerTrigger .buttonText {
+.basicPlayer.customAudioPlayer .playerTrigger .buttonText {
   display: none;
 }
 
-.customAudioPlayer .playerTrigger:focus {
+.basicPlayer.customAudioPlayer .playerTrigger:focus {
   outline: none;
 }
 
-.customAudioPlayer .playerTrigger:before {
+.basicPlayer.customAudioPlayer .playerTrigger:before {
   content: '';
   display: block;
   position: absolute;
@@ -540,7 +540,7 @@ form button.submitButton:hover {
   border-bottom: .6em solid transparent;
 }
 
-.customAudioPlayer .playerTrigger:after {
+.basicPlayer.customAudioPlayer .playerTrigger:after {
   content: '';
   display: block;
   position: absolute;
@@ -555,7 +555,7 @@ form button.submitButton:hover {
   opacity: 0;
 }
 
-.customAudioPlayer .playerTrigger.songPlaying:before {
+.basicPlayer.customAudioPlayer .playerTrigger.songPlaying:before {
   height: 1em;
   margin-top: -.5em;
   margin-left: -.5em;
@@ -564,11 +564,11 @@ form button.submitButton:hover {
   border-bottom: 0;
 }
 
-.customAudioPlayer .playerTrigger.songPlaying:after {
+.basicPlayer.customAudioPlayer .playerTrigger.songPlaying:after {
   opacity: 1;
 }
 
-.customAudioPlayer .metaWrapper {
+.basicPlayer.customAudioPlayer .metaWrapper {
   padding: .5em 1.5em .5em 3.5em;
   height: 4em;
   overflow: auto;
@@ -576,18 +576,18 @@ form button.submitButton:hover {
   background: rgba(0, 183, 198, 0.3);
 }
 
-.customAudioPlayer .metaWrapper .titleDisplay {
+.basicPlayer.customAudioPlayer .metaWrapper .titleDisplay {
   display: block;
   line-height: 1;
   font-weight: bold;
 }
 
-.customAudioPlayer .metaWrapper .artistDisplay {
+.basicPlayer.customAudioPlayer .metaWrapper .artistDisplay {
   display: block;
   line-height: 1;
 }
 
-.customAudioPlayer .timingsWrapper {
+.basicPlayer.customAudioPlayer .timingsWrapper {
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -596,8 +596,8 @@ form button.submitButton:hover {
   background: red;
 }
 
-.customAudioPlayer .timingsWrapper .songPlayTimer,
-.customAudioPlayer .timingsWrapper .songDuration {
+.basicPlayer.customAudioPlayer .timingsWrapper .songPlayTimer,
+.basicPlayer.customAudioPlayer .timingsWrapper .songDuration {
   position: absolute;
   top: 0;
   z-index: 3;
@@ -610,20 +610,20 @@ form button.submitButton:hover {
   pointer-events: none;
 }
 
-.customAudioPlayer .timingsWrapper .songPlayTimer {
+.basicPlayer.customAudioPlayer .timingsWrapper .songPlayTimer {
   left: 0;
 }
 
-.customAudioPlayer .timingsWrapper .songDuration {
+.basicPlayer.customAudioPlayer .timingsWrapper .songDuration {
   right: 0;
 }
 
-.customAudioPlayer.loading .songPlayTimer,
-.customAudioPlayer.loading .songDuration {
+.basicPlayer.customAudioPlayer.loading .songPlayTimer,
+.basicPlayer.customAudioPlayer.loading .songDuration {
   display: none;
 }
 
-.customAudioPlayer .songProgressSliderWrapper {
+.basicPlayer.customAudioPlayer .songProgressSliderWrapper {
   height: 2em;
   font-size: 1em;
   line-height: 1;
@@ -635,7 +635,7 @@ form button.submitButton:hover {
   overflow: hidden;
 }
 
-.customAudioPlayer .songProgressSliderWrapper .songProgressSlider {
+.basicPlayer.customAudioPlayer .songProgressSliderWrapper .songProgressSlider {
   width: 100%;
   padding: 0;
   margin: 0;
@@ -645,7 +645,7 @@ form button.submitButton:hover {
   opacity: 0;
 }
 
-.customAudioPlayer .songProgressSliderWrapper .pseudoProgressIndicator {
+.basicPlayer.customAudioPlayer .songProgressSliderWrapper .pseudoProgressIndicator {
   height: 2em;
   position: absolute;
   top: 0;
@@ -654,7 +654,7 @@ form button.submitButton:hover {
   width: 0%;
 }
 
-.customAudioPlayer .songProgressSliderWrapper .pseudoProgressPlayhead {
+.basicPlayer.customAudioPlayer .songProgressSliderWrapper .pseudoProgressPlayhead {
   width: 1em;
   height: 2em;
   position: absolute;
@@ -665,31 +665,31 @@ form button.submitButton:hover {
   background: #00b7c6;
 }
 
-.customAudioPlayer.loading .pseudoProgressIndicator,
-.customAudioPlayer.loading .pseudoProgressPlayhead {
+.basicPlayer.customAudioPlayer.loading .pseudoProgressIndicator,
+.basicPlayer.customAudioPlayer.loading .pseudoProgressPlayhead {
   display: none;
 }
 
-.customAudioPlayer input[type=range].songProgressSlider::-webkit-slider-runnable-track {
+.basicPlayer.customAudioPlayer input[type=range].songProgressSlider::-webkit-slider-runnable-track {
   width: 100%;
   font-size: 1em;
   height: 2.2em;
   cursor: pointer;
 }
 
-.customAudioPlayer input[type=range].songProgressSlider::-moz-range-track {
+.basicPlayer.customAudioPlayer input[type=range].songProgressSlider::-moz-range-track {
   width: 100%;
   height: 2em;
   cursor: pointer;
 }
 
-.customAudioPlayer input[type=range].songProgressSlider::-ms-track {
+.basicPlayer.customAudioPlayer input[type=range].songProgressSlider::-ms-track {
   width: 100%;
   height: 2em;
   cursor: pointer;
 }
 
-.customAudioPlayer .songVolume {
+.basicPlayer.customAudioPlayer .songVolume {
   position: absolute;
   top: 0;
   right: 0;
@@ -699,7 +699,7 @@ form button.submitButton:hover {
   z-index: 2;
 }
 
-.customAudioPlayer .songVolume .songMuteButton {
+.basicPlayer.customAudioPlayer .songVolume .songMuteButton {
   display: block;
   width: 1.5rem;
   height: 1.5rem;
@@ -715,7 +715,7 @@ form button.submitButton:hover {
   cursor: pointer;
 }
 
-.customAudioPlayer .songVolume .songMuteButton:before {
+.basicPlayer.customAudioPlayer .songVolume .songMuteButton:before {
   display: block;
   width: .4rem;
   height: .3rem;
@@ -728,7 +728,7 @@ form button.submitButton:hover {
   background: #ffffff;
 }
 
-.customAudioPlayer .songVolume .songMuteButton:after {
+.basicPlayer.customAudioPlayer .songVolume .songMuteButton:after {
   display: block;
   width: .4rem;
   height: .4rem;
@@ -743,23 +743,23 @@ form button.submitButton:hover {
   border-bottom: .4rem solid transparent;
 }
 
-.customAudioPlayer .songVolume .songMuteButton.songMuted:before {
+.basicPlayer.customAudioPlayer .songVolume .songMuteButton.songMuted:before {
   background: #dad8d2;
 }
 
-.customAudioPlayer .songVolume .songMuteButton.songMuted:after {
+.basicPlayer.customAudioPlayer .songVolume .songMuteButton.songMuted:after {
   border-right-color: #dad8d2;
 }
 
-.customAudioPlayer .songVolumeValue {
+.basicPlayer.customAudioPlayer .songVolumeValue {
   margin-left: .2em;
 }
 
-.customAudioPlayer .songVolumeLabelWrapper {
+.basicPlayer.customAudioPlayer .songVolumeLabelWrapper {
   display: none;
 }
 
-.customAudioPlayer .songVolumeSliderWrapper {
+.basicPlayer.customAudioPlayer .songVolumeSliderWrapper {
   display: block;
   height: 1.5em;
   position: absolute;
@@ -772,7 +772,7 @@ form button.submitButton:hover {
   transform-origin: bottom left;
 }
 
-.customAudioPlayer .songVolumeSliderWrapper .songVolumeSlider {
+.basicPlayer.customAudioPlayer .songVolumeSliderWrapper .songVolumeSlider {
   width: 100%;
   padding: 0;
   margin: 0;
@@ -784,7 +784,7 @@ form button.submitButton:hover {
   transform: rotate(180deg);
 }
 
-.customAudioPlayer .songVolumeSliderWrapper .pseudoVolumeIndicator {
+.basicPlayer.customAudioPlayer .songVolumeSliderWrapper .pseudoVolumeIndicator {
   height: 1.5em;
   position: absolute;
   top: 0;
@@ -794,24 +794,24 @@ form button.submitButton:hover {
   transform: rotate(180deg);
 }
 
-.customAudioPlayer .songVolumeSliderWrapper .pseudoVolumePlayhead {
+.basicPlayer.customAudioPlayer .songVolumeSliderWrapper .pseudoVolumePlayhead {
   display: none;
 }
 
-.customAudioPlayer input[type=range].songVolumeSlider::-webkit-slider-runnable-track {
+.basicPlayer.customAudioPlayer input[type=range].songVolumeSlider::-webkit-slider-runnable-track {
   width: 100%;
   font-size: 1em;
   height: 1.5em;
   cursor: pointer;
 }
 
-.customAudioPlayer input[type=range].songVolumeSlider::-moz-range-track {
+.basicPlayer.customAudioPlayer input[type=range].songVolumeSlider::-moz-range-track {
   width: 100%;
   height: 1.5em;
   cursor: pointer;
 }
 
-.customAudioPlayer input[type=range].songVolumeSlider::-ms-track {
+.basicPlayer.customAudioPlayer input[type=range].songVolumeSlider::-ms-track {
   width: 100%;
   height: 1.5em;
   cursor: pointer;

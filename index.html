@@ -5,10 +5,14 @@
     <title>Picobel.js Test Page</title>
 
     <!-- Load the Picobel CSS -->
-    <link rel='stylesheet' href='css/standard.min.css' type='text/css'/>
+    <link rel='stylesheet' href='css/basic.min.css' type='text/css'/>
 
 </head>
 <body>
+    
+    <h1><a href="https://github.com/tomhazledine/picobel">Picobel.js</a> Test Page</h1>
+
+    <!-- Include an <audio> element. This will be replaced by Picobel. -->
     <audio class="customPlayer" src="http://audio.eatenbymonsters.com/reviews/daughter/human.mp3" title="Human" data-artist="Daughter" controls>
         Your browser does not support the <code>audio</code> element.
     </audio>
@@ -18,7 +22,7 @@
 
     <!-- Initialise Picobel -->
     <script>
-        Picobel();
+        Picobel({theme: 'bbc' });
     </script>
 
 </body>
