@@ -29,14 +29,9 @@ function Picobel( options ) {
      * fallbacks.
      * -----------------------
      */
-    
-    console.log(options);
-
     options = typeof options !== 'undefined' ? options : {};
     // options.prefix = options.prefix || '';
     options.theme = options.theme || 'basic_player';
-
-    console.log(options);
 
     /**
      * ---------------------------------------------
