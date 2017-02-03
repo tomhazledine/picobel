@@ -125,6 +125,7 @@ function Picobel( options ) {
             if ( className !== '' ) {
                 _addClass( newPlayer, className );
             }
+            // Add the class set in our options.
             _addClass( newPlayer, options.theme );
             newPlayer.setAttribute( 'data-song-index', i );
 
