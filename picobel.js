@@ -31,7 +31,7 @@ function Picobel( options ) {
      */
     options = typeof options !== 'undefined' ? options : {};
     // options.prefix = options.prefix || '';
-    options.theme = options.theme || 'basic_player';
+    options.theme = options.theme || 'basicPlayer';
 
     /**
      * ---------------------------------------------
@@ -125,6 +125,7 @@ function Picobel( options ) {
             if ( className !== '' ) {
                 _addClass( newPlayer, className );
             }
+            // Add the class set in our options.
             _addClass( newPlayer, options.theme );
             newPlayer.setAttribute( 'data-song-index', i );
 
