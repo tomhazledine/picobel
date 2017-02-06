@@ -40,7 +40,8 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  height: 6em;
+  height: 4em;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0.2em 0.2em 0;
 }
 
 .basicPlayer.customAudioPlayer *,
@@ -50,10 +51,10 @@
 }
 
 .basicPlayer.customAudioPlayer .loader {
-  width: 100%;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 4em;
+  right: 0;
   height: 2em;
   overflow: hidden;
   opacity: 0;
@@ -70,7 +71,7 @@
   top: 0%;
   left: 0%;
   transform-origin: center center;
-  box-shadow: inset #00b7c6 0 0 0 0, inset #008893 1em 0 0 0,  inset #00b7c6 2em 0 0 0,  inset #008893 3em 0 0 0,  inset #00b7c6 4em 0 0 0,  inset #008893 5em 0 0 0,  inset #00b7c6 6em 0 0 0,  inset #008893 7em 0 0 0,  inset #00b7c6 8em 0 0 0,  inset #008893 9em 0 0 0,  inset #00b7c6 10em 0 0 0,  inset #008893 11em 0 0 0,  inset #00b7c6 12em 0 0 0,  inset #008893 13em 0 0 0,  inset #00b7c6 14em 0 0 0,  inset #008893 15em 0 0 0,  inset #00b7c6 16em 0 0 0,  inset #008893 17em 0 0 0,  inset #00b7c6 18em 0 0 0,  inset #008893 19em 0 0 0,  inset #00b7c6 20em 0 0 0,  inset #008893 21em 0 0 0,  inset #00b7c6 22em 0 0 0,  inset #008893 23em 0 0 0,  inset #00b7c6 24em 0 0 0,  inset #008893 25em 0 0 0,  inset #00b7c6 26em 0 0 0,  inset #008893 27em 0 0 0,  inset #00b7c6 28em 0 0 0,  inset #008893 29em 0 0 0,  inset #00b7c6 30em 0 0 0,  inset #008893 31em 0 0 0,  inset #00b7c6 32em 0 0 0,  inset #008893 33em 0 0 0,  inset #00b7c6 34em 0 0 0,  inset #008893 35em 0 0 0,  inset #00b7c6 36em 0 0 0,  inset #008893 37em 0 0 0,  inset #00b7c6 38em 0 0 0,  inset #008893 39em 0 0 0,  inset #00b7c6 40em 0 0 0,  inset #008893 41em 0 0 0,  inset #00b7c6 42em 0 0 0,  inset #008893 43em 0 0 0,  inset #00b7c6 44em 0 0 0,  inset #008893 45em 0 0 0,  inset #00b7c6 46em 0 0 0,  inset #008893 47em 0 0 0,  inset #00b7c6 48em 0 0 0,  inset #008893 49em 0 0 0,  inset #00b7c6 50em 0 0 0,  inset #008893 51em 0 0 0,  inset #00b7c6 52em 0 0 0,  inset #008893 53em 0 0 0,  inset #00b7c6 54em 0 0 0,  inset #008893 55em 0 0 0,  inset #00b7c6 56em 0 0 0,  inset #008893 57em 0 0 0,  inset #00b7c6 58em 0 0 0,  inset #008893 59em 0 0 0,  inset #00b7c6 60em 0 0 0,  inset #008893 61em 0 0 0,  inset #00b7c6 62em 0 0 0,  inset #008893 63em 0 0 0,  inset #00b7c6 64em 0 0 0,  inset #008893 65em 0 0 0,  inset #00b7c6 66em 0 0 0,  inset #008893 67em 0 0 0,  inset #00b7c6 68em 0 0 0,  inset #008893 69em 0 0 0,  inset #00b7c6 70em 0 0 0,  inset #008893 71em 0 0 0,  inset #00b7c6 72em 0 0 0,  inset #008893 73em 0 0 0,  inset #00b7c6 74em 0 0 0,  inset #008893 75em 0 0 0,  inset #00b7c6 76em 0 0 0,  inset #008893 77em 0 0 0,  inset #00b7c6 78em 0 0 0,  inset #008893 79em 0 0 0,  inset #00b7c6 80em 0 0 0,  inset #008893 81em 0 0 0,  inset #00b7c6 82em 0 0 0,  inset #008893 83em 0 0 0,  inset #00b7c6 84em 0 0 0,  inset #008893 85em 0 0 0,  inset #00b7c6 86em 0 0 0,  inset #008893 87em 0 0 0,  inset #00b7c6 88em 0 0 0,  inset #008893 89em 0 0 0,  inset #00b7c6 90em 0 0 0,  inset #008893 91em 0 0 0,  inset #00b7c6 92em 0 0 0,  inset #008893 93em 0 0 0,  inset #00b7c6 94em 0 0 0,  inset #008893 95em 0 0 0,  inset #00b7c6 96em 0 0 0,  inset #008893 97em 0 0 0,  inset #00b7c6 98em 0 0 0,  inset #008893 99em 0 0 0,  inset #00b7c6 100em 0 0 0;
+  box-shadow: inset #ddd 0 0 0 0, inset #c4c4c4 1em 0 0 0,  inset #ddd 2em 0 0 0,  inset #c4c4c4 3em 0 0 0,  inset #ddd 4em 0 0 0,  inset #c4c4c4 5em 0 0 0,  inset #ddd 6em 0 0 0,  inset #c4c4c4 7em 0 0 0,  inset #ddd 8em 0 0 0,  inset #c4c4c4 9em 0 0 0,  inset #ddd 10em 0 0 0,  inset #c4c4c4 11em 0 0 0,  inset #ddd 12em 0 0 0,  inset #c4c4c4 13em 0 0 0,  inset #ddd 14em 0 0 0,  inset #c4c4c4 15em 0 0 0,  inset #ddd 16em 0 0 0,  inset #c4c4c4 17em 0 0 0,  inset #ddd 18em 0 0 0,  inset #c4c4c4 19em 0 0 0,  inset #ddd 20em 0 0 0,  inset #c4c4c4 21em 0 0 0,  inset #ddd 22em 0 0 0,  inset #c4c4c4 23em 0 0 0,  inset #ddd 24em 0 0 0,  inset #c4c4c4 25em 0 0 0,  inset #ddd 26em 0 0 0,  inset #c4c4c4 27em 0 0 0,  inset #ddd 28em 0 0 0,  inset #c4c4c4 29em 0 0 0,  inset #ddd 30em 0 0 0,  inset #c4c4c4 31em 0 0 0,  inset #ddd 32em 0 0 0,  inset #c4c4c4 33em 0 0 0,  inset #ddd 34em 0 0 0,  inset #c4c4c4 35em 0 0 0,  inset #ddd 36em 0 0 0,  inset #c4c4c4 37em 0 0 0,  inset #ddd 38em 0 0 0,  inset #c4c4c4 39em 0 0 0,  inset #ddd 40em 0 0 0,  inset #c4c4c4 41em 0 0 0,  inset #ddd 42em 0 0 0,  inset #c4c4c4 43em 0 0 0,  inset #ddd 44em 0 0 0,  inset #c4c4c4 45em 0 0 0,  inset #ddd 46em 0 0 0,  inset #c4c4c4 47em 0 0 0,  inset #ddd 48em 0 0 0,  inset #c4c4c4 49em 0 0 0,  inset #ddd 50em 0 0 0,  inset #c4c4c4 51em 0 0 0,  inset #ddd 52em 0 0 0,  inset #c4c4c4 53em 0 0 0,  inset #ddd 54em 0 0 0,  inset #c4c4c4 55em 0 0 0,  inset #ddd 56em 0 0 0,  inset #c4c4c4 57em 0 0 0,  inset #ddd 58em 0 0 0,  inset #c4c4c4 59em 0 0 0,  inset #ddd 60em 0 0 0,  inset #c4c4c4 61em 0 0 0,  inset #ddd 62em 0 0 0,  inset #c4c4c4 63em 0 0 0,  inset #ddd 64em 0 0 0,  inset #c4c4c4 65em 0 0 0,  inset #ddd 66em 0 0 0,  inset #c4c4c4 67em 0 0 0,  inset #ddd 68em 0 0 0,  inset #c4c4c4 69em 0 0 0,  inset #ddd 70em 0 0 0,  inset #c4c4c4 71em 0 0 0,  inset #ddd 72em 0 0 0,  inset #c4c4c4 73em 0 0 0,  inset #ddd 74em 0 0 0,  inset #c4c4c4 75em 0 0 0,  inset #ddd 76em 0 0 0,  inset #c4c4c4 77em 0 0 0,  inset #ddd 78em 0 0 0,  inset #c4c4c4 79em 0 0 0,  inset #ddd 80em 0 0 0,  inset #c4c4c4 81em 0 0 0,  inset #ddd 82em 0 0 0,  inset #c4c4c4 83em 0 0 0,  inset #ddd 84em 0 0 0,  inset #c4c4c4 85em 0 0 0,  inset #ddd 86em 0 0 0,  inset #c4c4c4 87em 0 0 0,  inset #ddd 88em 0 0 0,  inset #c4c4c4 89em 0 0 0,  inset #ddd 90em 0 0 0,  inset #c4c4c4 91em 0 0 0,  inset #ddd 92em 0 0 0,  inset #c4c4c4 93em 0 0 0,  inset #ddd 94em 0 0 0,  inset #c4c4c4 95em 0 0 0,  inset #ddd 96em 0 0 0,  inset #c4c4c4 97em 0 0 0,  inset #ddd 98em 0 0 0,  inset #c4c4c4 99em 0 0 0,  inset #ddd 100em 0 0 0;
   animation: basic_slide linear infinite .4s;
 }
 
@@ -144,31 +145,37 @@
 }
 
 .basicPlayer.customAudioPlayer .metaWrapper {
-  padding: .5em 1.5em .5em 3.5em;
-  height: 4em;
-  overflow: auto;
-  background: #00b7c6;
-  background: rgba(0, 183, 198, 0.3);
+  padding: .5em 1.5em .5em 4.5em;
+  height: 2em;
+  overflow: hidden;
+  background: #ddd;
+  background: rgba(221, 221, 221, 0.3);
 }
 
 .basicPlayer.customAudioPlayer .metaWrapper .titleDisplay {
-  display: block;
+  display: inline-block;
   line-height: 1;
   font-weight: bold;
+  margin-right: .2em;
+}
+
+.basicPlayer.customAudioPlayer .metaWrapper .titleDisplay:after {
+  content: ' – ';
 }
 
 .basicPlayer.customAudioPlayer .metaWrapper .artistDisplay {
-  display: block;
+  display: inline-block;
   line-height: 1;
 }
 
 .basicPlayer.customAudioPlayer .timingsWrapper {
   position: absolute;
-  width: 100%;
   bottom: 0;
-  left: 0;
+  left: 4em;
+  right: 0;
   height: 2em;
   background: red;
+  border-left: 0.1rem solid #555;
 }
 
 .basicPlayer.customAudioPlayer .timingsWrapper .songPlayTimer,
@@ -225,7 +232,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: rgba(0, 183, 198, 0.4);
+  background: rgba(221, 221, 221, 0.4);
   width: 0%;
 }
 
@@ -267,8 +274,8 @@
 .basicPlayer.customAudioPlayer .songVolume {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 1.5em;
+  left: 3em;
+  width: 1em;
   height: 4em;
   overflow: hidden;
   z-index: 2;
@@ -276,8 +283,8 @@
 
 .basicPlayer.customAudioPlayer .songVolume .songMuteButton {
   display: block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1rem;
+  height: 1rem;
   font-size: 0;
   border: 0;
   -webkit-appearance: none;
@@ -336,15 +343,28 @@
 
 .basicPlayer.customAudioPlayer .songVolumeSliderWrapper {
   display: block;
-  height: 1.5em;
+  height: 1em;
   position: absolute;
-  top: 0;
+  top: 1em;
   left: 0;
   z-index: 3;
   background: #aca79a;
-  width: 2.5em;
-  transform: rotate(90deg);
-  transform-origin: bottom left;
+  width: 3em;
+  transform: rotate(90deg) translateY(-100%);
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+.basicPlayer.customAudioPlayer .songVolumeSliderWrapper:after {
+  content: '';
+  display: block;
+  width: 100%;
+  border-right: 3em solid #555;
+  border-bottom: 1em solid transparent;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
 }
 
 .basicPlayer.customAudioPlayer .songVolumeSliderWrapper .songVolumeSlider {

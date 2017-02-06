@@ -12,7 +12,8 @@ $black:#555;
 $white:#ffffff;
 $grey:#dad8d2;
 $greyDark:darken($grey,20%);
-$primary:#00b7c6;
+$primary:#ddd;//#00b7c6;
+$highlight:#00b7c6;
 
 /**
  * -------------------
@@ -69,14 +70,17 @@ $primary:#00b7c6;
     position:relative;
     overflow:hidden;
     box-sizing:border-box;
-    height:6em;
+    height:4em;
+    // border:.1rem solid $black;
+    box-shadow:rgba(black,.3) 0 .2em .2em 0;
 
     // The loading-state indicator
     .loader{
-        width:100%;
+        // width:100%;
         position:absolute;
         bottom:0;
-        left:0;
+        left:4em;
+        right:0;
         height:2em;
         overflow:hidden;
         opacity:0;
@@ -165,18 +169,22 @@ $primary:#00b7c6;
     
     // Display song info
     .metaWrapper{
-        padding:.5em 1.5em .5em 3.5em;
-        height:4em;
-        overflow:auto;
+        padding:.5em 1.5em .5em 4.5em;
+        height:2em;
+        overflow:hidden;
         background:$primary;
         background:rgba($primary,.3);
         .titleDisplay{
-            display:block;
+            display:inline-block;
             line-height:1;
             font-weight:bold;
+            margin-right:.2em;
+            &:after{
+                content:' – ';
+            }
         }
         .artistDisplay{
-            display:block;
+            display:inline-block;
             line-height:1;
         }
     }
@@ -184,11 +192,13 @@ $primary:#00b7c6;
     // Display info about time-played and song-duration
     .timingsWrapper{
         position:absolute;
-        width:100%;
+        // width:100%;
         bottom:0;
-        left:0;
+        left:4em;
+        right:0;
         height:2em;
         background:red;
+        border-left:.1rem solid $black;
         .songPlayTimer,
         .songDuration{
             position:absolute;
@@ -256,7 +266,7 @@ $primary:#00b7c6;
             left:0%;
             margin-top:-1em;
             margin-left:-.5em;
-            background:$primary;
+            background:$highlight;
         }
     }
     // Hide dynamic elements until loading has finished
@@ -290,15 +300,15 @@ $primary:#00b7c6;
     .songVolume{
         position:absolute;
         top:0;
-        right:0;
-        width:1.5em;
+        left:3em;
+        width:1em;
         height:4em;
         overflow:hidden;
         z-index:2;
         .songMuteButton{
             display:block;
-            width:1.5rem;
-            height:1.5rem;
+            width:1rem;
+            height:1rem;
             font-size:0;
             border:0;
             appearance:none;
@@ -360,15 +370,28 @@ $primary:#00b7c6;
     // volume slider functionality
     .songVolumeSliderWrapper{
         display:block;
-        height:1.5em;
+        height:1em;
         position:absolute;
-        top:0;
+        top:1em;
         left:0;
         z-index:3;
         background:$greyDark;
-        width:2.5em;
-        transform:rotate(90deg);
-        transform-origin:bottom left;
+        width:3em;
+        transform:rotate(90deg) translateY(-100%);
+        transform-origin:top left;
+        overflow:hidden;
+        &:after{
+            content:'';
+            display:block;
+            width:100%;
+            border-right:3em solid $black;
+            border-bottom:1em solid transparent;
+            position:absolute;
+            bottom:0;
+            left:0;
+            pointer-events:none;
+        }
+
         // Make sure the real range element
         // is the same size as the fake one.
         // Position it on-top of the fake and
@@ -390,7 +413,7 @@ $primary:#00b7c6;
             position:absolute;
             top:0;
             right:0;
-            background:$primary;
+            background:$highlight;
             width:100%;
             transform:rotate(180deg);
         }
