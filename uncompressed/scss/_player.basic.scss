@@ -15,6 +15,9 @@ $greyDark:darken($grey,20%);
 $primary:#ddd;//#00b7c6;
 $highlight:#00b7c6;
 
+$background_grey_dark:#e6e6e6;
+$background_grey_light:#f1f1f1;
+
 /**
  * -------------------
  * BOX SHADOW BARS
@@ -72,7 +75,7 @@ $highlight:#00b7c6;
     box-sizing:border-box;
     height:4em;
     // border:.1rem solid $black;
-    box-shadow:rgba(black,.3) 0 .2em .2em 0;
+    box-shadow:rgba(black,.3) 0 .1em .2em 0;
 
     // The loading-state indicator
     .loader{
@@ -173,7 +176,8 @@ $highlight:#00b7c6;
         height:2em;
         overflow:hidden;
         background:$primary;
-        background:rgba($primary,.3);
+        // background:rgba($primary,.3);
+        background-image:linear-gradient($background_grey_light,$background_grey_dark);
         .titleDisplay{
             display:inline-block;
             line-height:1;

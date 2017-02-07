@@ -41,7 +41,7 @@
   overflow: hidden;
   box-sizing: border-box;
   height: 4em;
-  box-shadow: rgba(0, 0, 0, 0.3) 0 0.2em 0.2em 0;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0.1em 0.2em 0;
 }
 
 .basicPlayer.customAudioPlayer *,
@@ -149,7 +149,7 @@
   height: 2em;
   overflow: hidden;
   background: #ddd;
-  background: rgba(221, 221, 221, 0.3);
+  background-image: linear-gradient(#f1f1f1, #e6e6e6);
 }
 
 .basicPlayer.customAudioPlayer .metaWrapper .titleDisplay {
