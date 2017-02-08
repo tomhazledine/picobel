@@ -41,6 +41,7 @@
   overflow: hidden;
   box-sizing: border-box;
   height: 4em;
+  border-radius: .2em;
   box-shadow: rgba(0, 0, 0, 0.3) 0 0.1em 0.2em 0;
 }
 
@@ -89,6 +90,8 @@
   font-size: 1em;
   color: #ffffff;
   background: #555;
+  background-image: linear-gradient(#6f6f6f, #555);
+  box-shadow: inset #6f6f6f -1px 0 0 0;
   position: absolute;
   top: 0;
   left: 0;
@@ -146,9 +149,11 @@
 
 .basicPlayer.customAudioPlayer .metaWrapper {
   padding: .5em 1.5em .5em 4.5em;
-  height: 2em;
+  height: 3em;
   overflow: hidden;
   background: #ddd;
+  color: #555;
+  text-shadow: #ffffff 0 1px 0;
   background-image: linear-gradient(#f1f1f1, #e6e6e6);
 }
 
@@ -173,8 +178,7 @@
   bottom: 0;
   left: 4em;
   right: 0;
-  height: 2em;
-  background: red;
+  height: 1em;
   border-left: 0.1rem solid #555;
 }
 
@@ -187,9 +191,11 @@
   text-align: center;
   background: transparent;
   color: #ffffff;
-  line-height: 2;
-  height: 2em;
+  line-height: 1;
+  height: 1em;
   pointer-events: none;
+  font-size: .8em;
+  padding-top: .15em;
 }
 
 .basicPlayer.customAudioPlayer .timingsWrapper .songPlayTimer {
@@ -206,7 +212,7 @@
 }
 
 .basicPlayer.customAudioPlayer .songProgressSliderWrapper {
-  height: 2em;
+  height: 1em;
   font-size: 1em;
   line-height: 1;
   position: absolute;
@@ -215,6 +221,7 @@
   width: 100%;
   background: #555;
   overflow: hidden;
+  border-bottom-right-radius: 0.2em;
 }
 
 .basicPlayer.customAudioPlayer .songProgressSliderWrapper .songProgressSlider {
@@ -228,7 +235,7 @@
 }
 
 .basicPlayer.customAudioPlayer .songProgressSliderWrapper .pseudoProgressIndicator {
-  height: 2em;
+  height: 1em;
   position: absolute;
   top: 0;
   left: 0;
@@ -237,13 +244,12 @@
 }
 
 .basicPlayer.customAudioPlayer .songProgressSliderWrapper .pseudoProgressPlayhead {
-  width: 1em;
-  height: 2em;
+  width: .5em;
+  height: 1em;
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0%;
-  margin-top: -1em;
-  margin-left: -.5em;
+  margin-left: -.2em;
   background: #00b7c6;
 }
 
@@ -255,19 +261,19 @@
 .basicPlayer.customAudioPlayer input[type=range].songProgressSlider::-webkit-slider-runnable-track {
   width: 100%;
   font-size: 1em;
-  height: 2.2em;
+  height: 1em;
   cursor: pointer;
 }
 
 .basicPlayer.customAudioPlayer input[type=range].songProgressSlider::-moz-range-track {
   width: 100%;
-  height: 2em;
+  height: 1em;
   cursor: pointer;
 }
 
 .basicPlayer.customAudioPlayer input[type=range].songProgressSlider::-ms-track {
   width: 100%;
-  height: 2em;
+  height: 1em;
   cursor: pointer;
 }
 
