@@ -162,6 +162,7 @@
   line-height: 1;
   font-weight: bold;
   margin-right: .2em;
+  font-family: monospace;
 }
 
 .basicPlayer.customAudioPlayer .metaWrapper .titleDisplay:after {
@@ -169,6 +170,7 @@
 }
 
 .basicPlayer.customAudioPlayer .metaWrapper .artistDisplay {
+  font-family: monospace;
   display: inline-block;
   line-height: 1;
 }
@@ -195,7 +197,8 @@
   height: 1em;
   pointer-events: none;
   font-size: .8em;
-  padding-top: .15em;
+  padding-top: .3em;
+  font-family: monospace;
 }
 
 .basicPlayer.customAudioPlayer .timingsWrapper .songPlayTimer {
