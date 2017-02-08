@@ -14,12 +14,12 @@ The native html `<audio>` tag provides fantastic functionality, but gives you no
 
 Using Picobel you can turn this:
 
-![Native audio player](images/native_players.jpg)
+![Native audio player](images/native_players.png)
 *Default browser audio players*
 
 Into this:
 
-![Picobel-styled audio player](images/image_coming.jpg)
+![Picobel-styled audio player](images/picbel_players.png)
 *Picobel-styled audio players*
 
 **Picobel** allows you to create custom styles for your audio players: providing cross-browser consistency and a seamless integration with your existing brand styles.
