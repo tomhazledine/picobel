@@ -19,7 +19,7 @@ Using Picobel you can turn this:
 
 Into this:
 
-![Picobel-styled audio player](images/picbel_players.png)
+![Picobel-styled audio player](images/picobel_players.png)
 *Picobel-styled audio players*
 
 **Picobel** allows you to create custom styles for your audio players: providing cross-browser consistency and a seamless integration with your existing brand styles.
