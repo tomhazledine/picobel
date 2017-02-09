@@ -26,20 +26,34 @@ Into this:
 
 ## Usage
 
-To use **Picobel.js** you'll need to include the `styleFreeAudio.min.js` file in your project. This needs to be called before your custom scripts, and ideally in the `<foot>` of your page.
+To use **Picobel.js** you'll need to include the `picobel.min.js` file in your project. This needs to be called before your custom scripts, and ideally in the `<foot>` of your page.
 
-    <script src="/path/to/styleFreeAudio.min.js"></script>
-    <script src="/path/to/yourCustom.js"></script>
+    <!-- Load Picobel -->
+    <script type='text/javascript' src='picobel.min.js'></script>
 
-Then, in your custom JS script file, initialize the function: 
+You will also need the CSS styles. Choose which "theme" you'd like to use, and load that stylesheet.
 
-    customAudioPlayer();
+    <!-- Load the Picobel CSS -->
+    <link rel='stylesheet' href='basic.min.css' type='text/css'/>
+
+Then initialize the function. For simplicity, the example below does this in an in-line `<script>` tag, but you can add this to your master JS file. Just make sure you initialise Picobel *after* the picobel.min.js file has been called.
+
+    <!-- Initialise Picobel -->
+    <script>
+        Picobel();
+    </script>
 
 When your page loads, Picobel will replace any default `<audio>` elements with a block of custom-markup, complete with classes that you can use to apply your custom CSS.
 
+If you're using a theme other than "basic", you'll need to specify the theme name in the options object when you intialise Picobel.
+
+    Picobel( { theme: 'themename' } );
+
+This adds a class to the container of each audio element, so if you've made your own styles you can use this to make sure your CSS is nicely namespaced.
+
 ### This:
 
-    <audio src="http://audio.eatenbymonsters.com/reviews/chvrches/gun.mp3"></audio>
+    <audio src="http://path/to/audio/file.mp3"></audio>
 
 ### Gets turned into this:
 
@@ -49,7 +63,7 @@ When your page loads, Picobel will replace any default `<audio>` elements with a
             <span class="buttonText">play</span>
         </button>
         <div class="metaWrapper">
-            <span class="titleDisplay">gun.mp3</span>
+            <span class="titleDisplay">file.mp3</span>
             <span class="artistDisplay"></span>
         </div>
         <div class="timingsWrapper">
@@ -82,7 +96,7 @@ When your page loads, Picobel will replace any default `<audio>` elements with a
 * MIT license
 * No dependencies
 * v0.2.0
-* Most recent release date: 20160717
+* Most recent release date: 20170208
 
 ---
 
