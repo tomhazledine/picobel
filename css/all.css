@@ -40,7 +40,7 @@
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  height: 3em;
+  height: 4em;
   border-radius: .2em;
   box-shadow: rgba(0, 0, 0, 0.3) 0 0.1em 0.2em 0;
 }
@@ -86,7 +86,7 @@
      -moz-appearance: none;
           appearance: none;
   width: 3em;
-  height: 3em;
+  height: 4em;
   font-size: 1em;
   color: #ffffff;
   background: #555;
@@ -149,7 +149,7 @@
 
 .basicPlayer.customAudioPlayer .metaWrapper {
   padding: .5em 1.5em .5em 4.5em;
-  height: 2em;
+  height: 3em;
   overflow: hidden;
   background: #ddd;
   color: #555;
@@ -285,7 +285,7 @@
   top: 0;
   left: 3em;
   width: 1em;
-  height: 3em;
+  height: 4em;
   overflow: hidden;
   z-index: 2;
 }
@@ -358,7 +358,7 @@
   left: 0;
   z-index: 3;
   background: #aca79a;
-  width: 2em;
+  width: 3em;
   transform: rotate(90deg) translateY(-100%);
   transform-origin: top left;
   overflow: hidden;
@@ -368,7 +368,7 @@
   content: '';
   display: block;
   width: 100%;
-  border-right: 2em solid #555;
+  border-right: 3em solid #555;
   border-bottom: 1em solid transparent;
   position: absolute;
   bottom: 0;
