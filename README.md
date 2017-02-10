@@ -90,6 +90,19 @@ This adds a class to the container of each audio element, so if you've made your
         </div>
     </div>
 
+## Pre-made themes
+
+![BBC theme](images/theme_bbc.png)
+*BBC-esque theme*
+
+![iTunes theme](images/theme_itunes.png)
+*iTunes-esque theme*
+
+![Soundcloud theme](images/theme_soundcloud.png)
+*Soundcloud-esque theme*
+
+![Pitchfork theme](images/theme_pitchfork.png)
+*Pitchfork-esque theme*
 
 ---
 
