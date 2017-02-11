@@ -107,7 +107,7 @@ This adds a class to the container of each audio element, so if you've made your
 ![Pitchfork theme](images/theme_pitchfork.png)
 *Pitchfork-esque theme*
 
-![Eaten by Monsters theme](images/theme_eatenbymonsters.png)
+![Eaten by Monsters theme](images/theme_ebm.png)
 *Eaten by Monsters theme*
 
 ---
