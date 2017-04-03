@@ -14,7 +14,6 @@ $grey:#dad8d2;
 $greyDark:darken($grey,20%);
 $primary:#ddd;
 $highlight:#00b7c6;
-
 $background_grey_dark:#e6e6e6;
 $background_grey_light:#f1f1f1;
 
@@ -52,41 +51,42 @@ $background_grey_light:#f1f1f1;
  * --------------------
  */
 @keyframes basic_slide{
-    0%{
-        transform:translateX(-2em);
-    }
-    100%{
-        transform:translateX(0);
-    }
+    0%{ transform:translateX(-2em); }
+    100%{ transform:translateX(0); }
 }
 
-// Next all rules inside our custom class:
+/**
+ * -------------
+ * PLAYER STYLES
+ *
+ * All rules are
+ * nested within
+ * a theme class
+ * name - making
+ * switching the
+ * themes easy.
+ * -------------
+ */
 .basicPlayer.customAudioPlayer{
-
-    // 1 = 1.6
-    // 2 = 3.2
-    // 3 = 4.8
-    // 4 = 6.4
-    font-size:10px;
     
     // Global
     *,
     *:before,
     *:after{box-sizing:inherit;}
+    font-size:10px;
+    position:relative;
+    box-sizing:border-box;
+    overflow:hidden;
+    z-index:1;
 
     // Wrapper
     margin:1em 0;
-    position:relative;
-    overflow:hidden;
-    box-sizing:border-box;
     height:6em;
     border-radius:.3em;
-    // border:.1rem solid $black;
     box-shadow:rgba(black,.3) 0 .1em .2em 0;
 
     // The loading-state indicator
     .loader{
-        // width:100%;
         position:absolute;
         bottom:0;
         left:4em;
@@ -105,6 +105,7 @@ $background_grey_light:#f1f1f1;
             top:0%;
             left:0%;
             transform-origin:center center;
+            // Build a repeating striped background.
             box-shadow:basic_boxShadow(100,$primary,darken($primary,10%));
             animation:basic_slide linear infinite .4s;
         }
@@ -136,6 +137,7 @@ $background_grey_light:#f1f1f1;
         &:focus{
             outline:none;
         }
+        
         // The "play" icon
         &:before{
             content:'';
@@ -149,8 +151,8 @@ $background_grey_light:#f1f1f1;
             border-left:1em solid $white;
             border-bottom:.8em solid transparent;
         }
-        // Hidden right side of "pause" icon (shown when paused)
         
+        // Hidden right side of "pause" icon (shown when paused)
         &:after{
             content:'';
             display:block;
@@ -165,6 +167,7 @@ $background_grey_light:#f1f1f1;
             border-bottom:0;
             opacity:0;
         }
+        
         // The left side of the "pause" icon
         &.songPlaying:before{
             height:1.4em;
@@ -174,6 +177,7 @@ $background_grey_light:#f1f1f1;
             border-left:.5em solid $white;
             border-bottom:0;
         }
+        
         // Make the right side visible
         &.songPlaying:after{
             opacity:1;
@@ -188,7 +192,6 @@ $background_grey_light:#f1f1f1;
         background:$primary;
         color:$black;
         text-shadow:$white 0 .1em 0;
-        // background:rgba($primary,.3);
         background-image:linear-gradient($background_grey_light,$background_grey_dark);
         .titleDisplay{
             display:inline-block;
@@ -210,13 +213,10 @@ $background_grey_light:#f1f1f1;
     // Display info about time-played and song-duration
     .timingsWrapper{
         position:absolute;
-        // width:100%;
         bottom:0;
         left:5.6em;
         right:0;
         height:1.6em;
-        // background:red;
-        // border-left:.1em solid $black;
         .songPlayTimer,
         .songDuration{
             position:absolute;
@@ -240,7 +240,7 @@ $background_grey_light:#f1f1f1;
             right:0;
         }
     }
-    // ...and hide them when we're loading
+    // Hide song-timings when we're loading
     &.loading .songPlayTimer,
     &.loading .songDuration{
         display:none;
@@ -286,11 +286,11 @@ $background_grey_light:#f1f1f1;
             position:absolute;
             top:0;
             left:0%;
-            // margin-top:-1em;
             margin-left:-.2em;
             background:$highlight;
         }
     }
+
     // Hide dynamic elements until loading has finished
     &.loading .pseudoProgressIndicator,
     &.loading .pseudoProgressPlayhead{
@@ -340,6 +340,7 @@ $background_grey_light:#f1f1f1;
             top:0;
             right:0;
             cursor:pointer;
+            
             // Rectangle part of "speaker cone" icon
             &:before{
                 display:block;
@@ -353,6 +354,7 @@ $background_grey_light:#f1f1f1;
                 transform:translateY(-50%);
                 background:$white;
             }
+            
             // Triangle part of "speaker cone" icon
             &:after{
                 display:block;
@@ -368,6 +370,7 @@ $background_grey_light:#f1f1f1;
                 border-right:.4em solid $white;
                 border-bottom:.4em solid transparent;
             }
+            
             // Change icon when muted
             &.songMuted{
                 &:before{
