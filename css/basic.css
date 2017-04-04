@@ -35,12 +35,25 @@
   }
 }
 
+/**
+ * -------------
+ * PLAYER STYLES
+ *
+ * All rules are
+ * nested within
+ * a theme class
+ * name - making
+ * switching the
+ * themes easy.
+ * -------------
+ */
 .basicPlayer.customAudioPlayer {
   font-size: 10px;
-  margin: 1em 0;
   position: relative;
-  overflow: hidden;
   box-sizing: border-box;
+  overflow: hidden;
+  z-index: 1;
+  margin: 1em 0;
   height: 6em;
   border-radius: .3em;
   box-shadow: rgba(0, 0, 0, 0.3) 0 0.1em 0.2em 0;
