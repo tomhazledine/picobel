@@ -2395,11 +2395,12 @@
 }
 
 .skeleton.customAudioPlayer .metaWrapper {
-  padding: 1em 2em 1em 6em;
-  height: 4.4em;
+  padding: 0 1em 0 4.5em;
+  height: 4em;
   overflow: hidden;
   background: #ffffff;
   color: #555;
+  line-height: 1.6;
 }
 
 .skeleton.customAudioPlayer .metaWrapper .titleDisplay {
@@ -2423,9 +2424,10 @@
 .skeleton.customAudioPlayer .timingsWrapper {
   position: absolute;
   bottom: 0;
-  left: 5.6em;
+  left: 10em;
   right: 0;
-  height: 1.6em;
+  height: 2em;
+  border-left: 0.1em solid #555;
 }
 
 .skeleton.customAudioPlayer .timingsWrapper .songPlayTimer,
@@ -2531,6 +2533,8 @@
   height: 2em;
   overflow: hidden;
   z-index: 2;
+  border-top: 0.1em solid #555;
+  background: #ffffff;
 }
 
 .skeleton.customAudioPlayer .songVolume .songMuteButton {
@@ -2545,15 +2549,19 @@
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  background: red;
+  background: #ffffff;
+  position: relative;
   cursor: pointer;
-  border-right: 0.1em solid #555;
+}
+
+.skeleton.customAudioPlayer .songVolume .songMuteButton:focus {
+  outline: none;
 }
 
 .skeleton.customAudioPlayer .songVolume .songMuteButton:before {
   display: block;
-  width: .4em;
-  height: .3em;
+  width: .5em;
+  height: .4em;
   position: absolute;
   content: '';
   top: 50%;
@@ -2565,17 +2573,17 @@
 
 .skeleton.customAudioPlayer .songVolume .songMuteButton:after {
   display: block;
-  width: .4em;
-  height: .4em;
+  width: .5em;
+  height: .5em;
   position: absolute;
   content: '';
   top: 50%;
-  margin-top: -.4em;
+  transform: translateY(-50%);
   right: 50%;
   margin-right: -.2em;
-  border-top: .4em solid transparent;
-  border-right: 0.4em solid #555;
-  border-bottom: .4em solid transparent;
+  border-top: .5em solid transparent;
+  border-right: 0.5em solid #555;
+  border-bottom: .5em solid transparent;
 }
 
 .skeleton.customAudioPlayer .songVolume .songMuteButton.songMuted:before {
@@ -2596,25 +2604,26 @@
 
 .skeleton.customAudioPlayer .songVolumeSliderWrapper {
   display: block;
-  height: 2em;
+  height: 1em;
+  position: relative;
+  margin: .5em;
   left: 0;
   z-index: 3;
   background: #ddd;
-  width: 4em;
+  width: 3em;
   float: left;
-  transform-origin: top left;
+  transform: rotate(180deg);
   overflow: hidden;
-  border-top: 0.1em solid #555;
 }
 
 .skeleton.customAudioPlayer .songVolumeSliderWrapper:after {
   content: '';
   display: block;
   width: 100%;
-  border-right: 4.4em solid #ffffff;
-  border-bottom: 1.6em solid transparent;
+  border-right: 3em solid #ffffff;
+  border-top: 1em solid transparent;
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   pointer-events: none;
 }
@@ -2623,7 +2632,7 @@
   width: 100%;
   padding: 0;
   margin: 0;
-  height: 1.6em;
+  height: 1em;
   position: absolute;
   top: 0;
   left: 0;
@@ -2632,13 +2641,12 @@
 }
 
 .skeleton.customAudioPlayer .songVolumeSliderWrapper .pseudoVolumeIndicator {
-  height: 1.6em;
+  height: 1em;
   position: absolute;
   top: 0;
   right: 0;
   background: #555;
   width: 100%;
-  transform: rotate(180deg);
 }
 
 .skeleton.customAudioPlayer .songVolumeSliderWrapper .pseudoVolumePlayhead {

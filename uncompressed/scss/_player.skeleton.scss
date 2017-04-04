@@ -182,12 +182,14 @@ $grey:#ddd;
     
     // Display song info
     .metaWrapper{
-        padding:1em 2em 1em 6em;
-        height:4.4em;
+        padding:0 1em 0 4.5em;
+        height:4em;
         overflow:hidden;
         background:$white;
         color:$black;
+        line-height:1.6;
         .titleDisplay{
+            // font-size:1.4em;
             display:inline-block;
             line-height:1;
             font-weight:bold;
@@ -198,6 +200,7 @@ $grey:#ddd;
             }
         }
         .artistDisplay{
+            // font-size:1.4em;
             font-family:monospace;
             display:inline-block;
             line-height:1;
@@ -208,9 +211,10 @@ $grey:#ddd;
     .timingsWrapper{
         position:absolute;
         bottom:0;
-        left:5.6em;
+        left:10em;
         right:0;
-        height:1.6em;
+        height:2em;
+        border-left:.1em solid $black;
         .songPlayTimer,
         .songDuration{
             position:absolute;
@@ -320,6 +324,8 @@ $grey:#ddd;
         height:2em;
         overflow:hidden;
         z-index:2;
+        border-top:.1em solid $black;
+        background:$white;
         .songMuteButton{
             display:block;
             z-index:2;
@@ -330,18 +336,18 @@ $grey:#ddd;
             color:transparent;
             border:0;
             appearance:none;
-            background:red;//$white;
-            // position:absolute;
-            // top:0;
-            // right:0;
+            background:$white;
+            position:relative;
             cursor:pointer;
-            border-right:.1em solid $black;
+            &:focus{
+                outline:none;
+            }
             
             // Rectangle part of "speaker cone" icon
             &:before{
                 display:block;
-                width:.4em;
-                height:.3em;
+                width:.5em;
+                height:.4em;
                 position:absolute;
                 content:'';
                 top:50%;
@@ -354,17 +360,17 @@ $grey:#ddd;
             // Triangle part of "speaker cone" icon
             &:after{
                 display:block;
-                width:.4em;
-                height:.4em;
+                width:.5em;
+                height:.5em;
                 position:absolute;
                 content:'';
                 top:50%;
-                margin-top:-.4em;
+                transform:translateY(-50%);
                 right:50%;
                 margin-right:-.2em;
-                border-top:.4em solid transparent;
-                border-right:.4em solid $black;
-                border-bottom:.4em solid transparent;
+                border-top:.5em solid transparent;
+                border-right:.5em solid $black;
+                border-bottom:.5em solid transparent;
             }
             
             // Change icon when muted
@@ -392,28 +398,29 @@ $grey:#ddd;
     // volume slider functionality
     .songVolumeSliderWrapper{
         display:block;
-        height:2em;
-        // position:absolute;
-        // top:1.6em;
+        height:1em;
+        position:relative;
+        margin:.5em;
         left:0;
         z-index:3;
         background:$grey;
-        width:4em;
+        width:3em;
         float:left;
         // transform:rotate(90deg) translateY(-100%);
-        transform-origin:top left;
+        transform:rotate(180deg);
+        // transform-origin:top left;
         overflow:hidden;
-        border-top:.1em solid $black;
         &:after{
             content:'';
             display:block;
             width:100%;
-            border-right:4.4em solid $white;
-            border-bottom:1.6em solid transparent;
+            border-right:3em solid $white;
+            border-top:1em solid transparent;
             position:absolute;
-            bottom:0;
+            top:0;
             left:0;
             pointer-events:none;
+            // transform:rotate(180deg);
         }
 
         // Make sure the real range element
@@ -425,7 +432,7 @@ $grey:#ddd;
             width:100%;
             padding:0;
             margin:0;
-            height:1.6em;
+            height:1em;
             position:absolute;
             top:0;
             left:0;
@@ -433,13 +440,13 @@ $grey:#ddd;
             transform:rotate(180deg);
         }
         .pseudoVolumeIndicator{
-            height:1.6em;
+            height:1em;
             position:absolute;
             top:0;
             right:0;
             background:$black;
             width:100%;
-            transform:rotate(180deg);
+            // transform:rotate(180deg);
         }
         .pseudoVolumePlayhead{
             display:none;
