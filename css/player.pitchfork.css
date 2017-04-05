@@ -1,0 +1,254 @@
+@charset "UTF-8";
+.pitchfork.customAudioPlayer {
+  margin: 2em 0;
+  padding: 1em;
+  padding-left: 4em;
+  position: relative;
+  border: 2px solid #a2a2a2;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: #ffffff;
+  font-family: 'Arial',sans-serif;
+  color: #969696;
+}
+
+.pitchfork.customAudioPlayer *,
+.pitchfork.customAudioPlayer *:before,
+.pitchfork.customAudioPlayer *:after {
+  box-sizing: inherit;
+}
+
+.pitchfork.customAudioPlayer .loader {
+  position: absolute;
+  top: 3.1em;
+  left: 7.2em;
+  right: 4.2em;
+  height: .4em;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s;
+  text-align: center;
+  line-height: 1;
+  overflow: hidden;
+  border-radius: .2em;
+}
+
+.pitchfork.customAudioPlayer .loader:before {
+  display: block;
+  content: '';
+  width: 130%;
+  height: 600%;
+  position: absolute;
+  z-index: 1;
+  top: -200%;
+  left: 0;
+  box-shadow: inset #eeeeee 0 0 0 0, inset #dad8d2 0.5em 0 0 0,  inset #eeeeee 1em 0 0 0,  inset #dad8d2 1.5em 0 0 0,  inset #eeeeee 2em 0 0 0,  inset #dad8d2 2.5em 0 0 0,  inset #eeeeee 3em 0 0 0,  inset #dad8d2 3.5em 0 0 0,  inset #eeeeee 4em 0 0 0,  inset #dad8d2 4.5em 0 0 0,  inset #eeeeee 5em 0 0 0,  inset #dad8d2 5.5em 0 0 0,  inset #eeeeee 6em 0 0 0,  inset #dad8d2 6.5em 0 0 0,  inset #eeeeee 7em 0 0 0,  inset #dad8d2 7.5em 0 0 0,  inset #eeeeee 8em 0 0 0,  inset #dad8d2 8.5em 0 0 0,  inset #eeeeee 9em 0 0 0,  inset #dad8d2 9.5em 0 0 0,  inset #eeeeee 10em 0 0 0,  inset #dad8d2 10.5em 0 0 0,  inset #eeeeee 11em 0 0 0,  inset #dad8d2 11.5em 0 0 0,  inset #eeeeee 12em 0 0 0,  inset #dad8d2 12.5em 0 0 0,  inset #eeeeee 13em 0 0 0,  inset #dad8d2 13.5em 0 0 0,  inset #eeeeee 14em 0 0 0,  inset #dad8d2 14.5em 0 0 0,  inset #eeeeee 15em 0 0 0,  inset #dad8d2 15.5em 0 0 0,  inset #eeeeee 16em 0 0 0,  inset #dad8d2 16.5em 0 0 0,  inset #eeeeee 17em 0 0 0,  inset #dad8d2 17.5em 0 0 0,  inset #eeeeee 18em 0 0 0,  inset #dad8d2 18.5em 0 0 0,  inset #eeeeee 19em 0 0 0,  inset #dad8d2 19.5em 0 0 0,  inset #eeeeee 20em 0 0 0,  inset #dad8d2 20.5em 0 0 0,  inset #eeeeee 21em 0 0 0,  inset #dad8d2 21.5em 0 0 0,  inset #eeeeee 22em 0 0 0,  inset #dad8d2 22.5em 0 0 0,  inset #eeeeee 23em 0 0 0,  inset #dad8d2 23.5em 0 0 0,  inset #eeeeee 24em 0 0 0,  inset #dad8d2 24.5em 0 0 0,  inset #eeeeee 25em 0 0 0,  inset #dad8d2 25.5em 0 0 0,  inset #eeeeee 26em 0 0 0,  inset #dad8d2 26.5em 0 0 0,  inset #eeeeee 27em 0 0 0,  inset #dad8d2 27.5em 0 0 0,  inset #eeeeee 28em 0 0 0,  inset #dad8d2 28.5em 0 0 0,  inset #eeeeee 29em 0 0 0,  inset #dad8d2 29.5em 0 0 0,  inset #eeeeee 30em 0 0 0,  inset #dad8d2 30.5em 0 0 0,  inset #eeeeee 31em 0 0 0,  inset #dad8d2 31.5em 0 0 0,  inset #eeeeee 32em 0 0 0,  inset #dad8d2 32.5em 0 0 0,  inset #eeeeee 33em 0 0 0,  inset #dad8d2 33.5em 0 0 0,  inset #eeeeee 34em 0 0 0,  inset #dad8d2 34.5em 0 0 0,  inset #eeeeee 35em 0 0 0,  inset #dad8d2 35.5em 0 0 0,  inset #eeeeee 36em 0 0 0,  inset #dad8d2 36.5em 0 0 0,  inset #eeeeee 37em 0 0 0,  inset #dad8d2 37.5em 0 0 0,  inset #eeeeee 38em 0 0 0,  inset #dad8d2 38.5em 0 0 0,  inset #eeeeee 39em 0 0 0,  inset #dad8d2 39.5em 0 0 0,  inset #eeeeee 40em 0 0 0,  inset #dad8d2 40.5em 0 0 0,  inset #eeeeee 41em 0 0 0,  inset #dad8d2 41.5em 0 0 0,  inset #eeeeee 42em 0 0 0,  inset #dad8d2 42.5em 0 0 0,  inset #eeeeee 43em 0 0 0,  inset #dad8d2 43.5em 0 0 0,  inset #eeeeee 44em 0 0 0,  inset #dad8d2 44.5em 0 0 0,  inset #eeeeee 45em 0 0 0,  inset #dad8d2 45.5em 0 0 0,  inset #eeeeee 46em 0 0 0,  inset #dad8d2 46.5em 0 0 0,  inset #eeeeee 47em 0 0 0,  inset #dad8d2 47.5em 0 0 0,  inset #eeeeee 48em 0 0 0,  inset #dad8d2 48.5em 0 0 0,  inset #eeeeee 49em 0 0 0,  inset #dad8d2 49.5em 0 0 0,  inset #eeeeee 50em 0 0 0;
+  animation: pitchfork_slide linear infinite .3s;
+  transform-origin: center;
+}
+
+.pitchfork.customAudioPlayer.loading .loader {
+  opacity: 1;
+}
+
+.pitchfork.customAudioPlayer .playerTrigger {
+  border: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 2.6em;
+  height: 2.6em;
+  font-size: 1em;
+  color: #7f7f7f;
+  background: #ffffff;
+  position: absolute;
+  top: 50%;
+  margin-top: -1.3em;
+  left: 1em;
+  border: 2px solid #000;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.pitchfork.customAudioPlayer .playerTrigger .buttonText {
+  display: none;
+}
+
+.pitchfork.customAudioPlayer .playerTrigger:focus {
+  outline: none;
+}
+
+.pitchfork.customAudioPlayer .playerTrigger:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -.6em;
+  margin-left: -.25em;
+  border-top: .6em solid transparent;
+  border-left: 0.8em solid #000;
+  border-bottom: .6em solid transparent;
+}
+
+.pitchfork.customAudioPlayer .playerTrigger:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  height: 1em;
+  margin-top: -.5em;
+  margin-right: -.5em;
+  border-top: 0;
+  border-left: 0.4em solid #000;
+  border-bottom: 0;
+  opacity: 0;
+}
+
+.pitchfork.customAudioPlayer .playerTrigger.songPlaying:before {
+  height: 1em;
+  margin-top: -.5em;
+  margin-left: -.5em;
+  border-top: 0;
+  border-left: 0.4em solid #000;
+  border-bottom: 0;
+}
+
+.pitchfork.customAudioPlayer .playerTrigger.songPlaying:after {
+  opacity: 1;
+}
+
+.pitchfork.customAudioPlayer .metaWrapper {
+  color: #000;
+  padding: 0 1em;
+  margin-bottom: 1em;
+}
+
+.pitchfork.customAudioPlayer .titleDisplay {
+  font-weight: bold;
+}
+
+.pitchfork.customAudioPlayer .titleDisplay:before {
+  content: '“';
+}
+
+.pitchfork.customAudioPlayer .titleDisplay:after {
+  content: '”';
+}
+
+.pitchfork.customAudioPlayer .artistDisplay:before {
+  content: ' – ';
+}
+
+.pitchfork.customAudioPlayer .songPlayTimer {
+  position: absolute;
+  bottom: 1em;
+  left: 5em;
+}
+
+.pitchfork.customAudioPlayer .songDuration {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+
+.pitchfork.customAudioPlayer .timingsWrapper {
+  padding: 0 4em;
+  position: relative;
+  font-size: .8em;
+  width: 100%;
+  float: left;
+}
+
+.pitchfork.customAudioPlayer .timingsWrapper .songPlayTimer,
+.pitchfork.customAudioPlayer .timingsWrapper .songDuration {
+  position: absolute;
+  top: -.2em;
+  width: 4em;
+  text-align: center;
+  line-height: 1;
+}
+
+.pitchfork.customAudioPlayer .timingsWrapper .songPlayTimer {
+  left: 0;
+  border-radius: .5em 0 0 .5em;
+}
+
+.pitchfork.customAudioPlayer .timingsWrapper .songDuration {
+  right: 0;
+  border-radius: 0 .5em .5em 0;
+}
+
+.pitchfork.customAudioPlayer .songProgressSliderWrapper {
+  height: 0.4rem;
+  line-height: 1;
+  position: relative;
+  border-radius: .2rem;
+  overflow: hidden;
+}
+
+.pitchfork.customAudioPlayer .songProgressSliderWrapper .songProgressSlider {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.pitchfork.customAudioPlayer .songProgressSliderWrapper .pseudoProgressBackground {
+  height: 0.4rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #eeeeee;
+  width: 100%;
+}
+
+.pitchfork.customAudioPlayer .songProgressSliderWrapper .pseudoProgressIndicator {
+  height: 0.4rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #ff3530;
+  width: 0%;
+}
+
+.pitchfork.customAudioPlayer .songProgressSliderWrapper .pseudoProgressPlayhead {
+  display: none;
+}
+
+.pitchfork.customAudioPlayer input[type=range].songProgressSlider::-webkit-slider-runnable-track {
+  width: 100%;
+  font-size: 0.4rem;
+  height: 2.2em;
+  cursor: pointer;
+}
+
+.pitchfork.customAudioPlayer input[type=range].songProgressSlider::-moz-range-track {
+  width: 100%;
+  height: 0.4rem;
+  cursor: pointer;
+}
+
+.pitchfork.customAudioPlayer input[type=range].songProgressSlider::-ms-track {
+  width: 100%;
+  height: 0.4rem;
+  cursor: pointer;
+}
+
+.pitchfork.customAudioPlayer .songVolume {
+  display: none;
+}
+
+@keyframes pitchfork_slide {
+  0% {
+    transform: translateX(-2em);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
