@@ -31,7 +31,7 @@ function Picobel( options ) {
      */
     options = typeof options !== 'undefined' ? options : {};
     // options.prefix = options.prefix || '';
-    options.theme = options.theme || 'defaultPlayerTheme';
+    options.theme = options.theme || 'defaultPlayerTheme'
 
     /**
      * ---------------------------------------------
