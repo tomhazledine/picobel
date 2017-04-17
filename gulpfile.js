@@ -11,11 +11,19 @@ var rename       = require('gulp-rename');
 var sass         = require('gulp-sass');
 var uglify       = require('gulp-uglify');
 var gutil        = require('gulp-util');
+var mochaPhantomJS = require('gulp-mocha-phantomjs');
 
 // This will handle our errors
 var onError = function (err) {
     gutil.log(gutil.colors.red(err));
 };
+
+// Tests
+gulp.task('test', function () {
+    return gulp
+    .src('test/runner.html')
+    .pipe(mochaPhantomJS());
+});
 
 // Compile Our Sass
 gulp.task('sass', function() {
