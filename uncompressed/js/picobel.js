@@ -29,9 +29,7 @@ function Picobel( options ) {
      * fallbacks.
      * -----------------------
      */
-    options = typeof options !== 'undefined' ? options : {};
-    // options.prefix = options.prefix || '';
-    options.theme = options.theme || 'defaultPlayerTheme'
+    var options = parseOptions( options );
 
     /**
      * ---------------------------------------------
@@ -87,6 +85,14 @@ function Picobel( options ) {
      * our environment.
      * ---------------------------------
      */
+    
+    // Make sure we have valid options.
+    function parseOptions(options){
+        options = typeof options !== 'undefined' ? options : {};
+        // options.prefix = options.prefix || '';
+        options.theme = options.theme || 'defaultPlayerTheme';
+        return options;
+    }
 
     // Return an array of all the <audio> elements found on the page.
     function findAudio() {
@@ -620,9 +626,21 @@ function Picobel( options ) {
      * ----------------------
      */
 
-    return {
-        sliderScrub: sliderScrub,
-        playSong: playSong,
-        pauseAll: pauseAll
-    };
+    // return {
+    //     sliderScrub: sliderScrub,
+    //     playSong: playSong,
+    //     pauseAll: pauseAll,
+    //     parseOptions: parseOptions
+    // };
+    return true;
+}
+
+function testfunction() {
+    return true;
+}
+
+// If we're running under Node, 
+if(typeof exports !== 'undefined') {
+    exports.Picobel = Picobel;
+    exports.testfunction = testfunction;
 }
