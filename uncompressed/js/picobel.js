@@ -626,21 +626,11 @@ function Picobel( options ) {
      * ----------------------
      */
 
-    // return {
-    //     sliderScrub: sliderScrub,
-    //     playSong: playSong,
-    //     pauseAll: pauseAll,
-    //     parseOptions: parseOptions
-    // };
-    return true;
-}
-
-function testfunction() {
-    return true;
-}
-
-// If we're running under Node, 
-if(typeof exports !== 'undefined') {
-    exports.Picobel = Picobel;
-    exports.testfunction = testfunction;
+    return {
+        checksum: true,
+        sliderScrub: sliderScrub,
+        playSong: playSong,
+        pauseAll: pauseAll,
+        parseOptions: parseOptions
+    };
 }

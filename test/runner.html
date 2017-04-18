@@ -10,18 +10,8 @@
         <script src="../node_modules/chai/chai.js"></script>
         <script src="../node_modules/mocha/mocha.js"></script>
         <script src="../uncompressed/js/picobel.js"></script>
-        <script>mocha.setup('bdd')</script>
-        <script>
-            var should = chai.should();
-
-            describe('Test',function() {
-                it('should return true', function(){
-                    Picobel().should.equal(true);
-                })
-            });
-        </script>
-        <script>
-            mocha.run();
-        </script>
+        <script>mocha.setup('bdd');</script>
+        <script src="../test/tests.js"></script>
+        <script>mocha.run();</script>
     </body>
 </html>

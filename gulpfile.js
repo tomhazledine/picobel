@@ -20,8 +20,7 @@ var onError = function (err) {
 
 // Tests
 gulp.task('test', function () {
-    return gulp
-    .src('test/runner.html')
+    return gulp.src('test/runner.html')
     .pipe(mochaPhantomJS());
 });
 
