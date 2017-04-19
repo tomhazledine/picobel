@@ -2,7 +2,7 @@
 
 <h1 align="center">Picobel.js</h1>
 
-<p align="center" markdown="1">[![Build Status](https://travis-ci.org/tomhazledine/picobel.svg?branch=master)](https://travis-ci.org/tomhazledine/picobel)</p>
+<p align="center" markdown="1"><a href="https://travis-ci.org/tomhazledine/picobel"><img src="https://travis-ci.org/tomhazledine/picobel.svg?branch=master" alt="Build Status"></a></p>
 
 Picobel.js (pronounced *peek-o-bell*, as in *decibel*) is a lightweight dependency-free Javascript tool that converts html audio tags into styleable markup.
 
