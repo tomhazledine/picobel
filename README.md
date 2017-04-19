@@ -1,3 +1,5 @@
+<p align="center"><a href="https://audio.tomhazledine.com" target="_blank"><img width="200"src="https://audio.tomhazledine.com/assets/images/heroLogo.png"></a></p>
+
 # Picobel.js
 
 [![Build Status](https://travis-ci.org/tomhazledine/picobel.svg?branch=master)](https://travis-ci.org/tomhazledine/picobel)
