@@ -258,7 +258,11 @@ function Picobel( options ) {
         for ( var i = 0; i < data.length; i++ ) {
             // Init. the audio
             myAudio[i] = new Audio( data[i].url );
-            myAudio[i].currentTime = 0;
+            
+            // Check if file exists before setting time, to prevent IE11 error
+            if (!isNaN(myAudio[i].duration)) {
+                myAudio[i].currentTime = 0;
+            }
 
             // Setup event listeners
             playPauseButtons[i].addEventListener( 'click', _playPauseAudio, false );
