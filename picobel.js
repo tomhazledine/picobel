@@ -108,6 +108,7 @@ function Picobel( options ) {
             item = {};
             // Get the file's URL
             item.url = data[i].src;
+            item.preload = data[i].preload;
             output.push( item );
         }
         return output;
@@ -257,7 +258,9 @@ function Picobel( options ) {
 
         for ( var i = 0; i < data.length; i++ ) {
             // Init. the audio
-            myAudio[i] = new Audio( data[i].url );
+            myAudio[i] = new Audio();
+            if (data[i].preload) myAudio[i].preload = data[i].preload;
+            myAudio[i].src = data[i].url;
             
             // Check if file exists before setting time, to prevent IE11 error
             if (!isNaN(myAudio[i].duration)) {
