@@ -108,7 +108,7 @@ function Picobel( options ) {
             item = {};
             // Get the file's URL
             item.url = data[i].src;
-            item.preload = data[i].preload;
+            item.preload = options.preload ? options.preload : data[i].preload;
             output.push( item );
         }
         return output;
