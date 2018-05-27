@@ -4,7 +4,7 @@
 
 <p align="center" markdown="1"><a href="https://travis-ci.org/tomhazledine/picobel"><img src="https://travis-ci.org/tomhazledine/picobel.svg?branch=master" alt="Build Status"></a></p>
 
-Picobel.js (pronounced *peek-o-bell*, as in *decibel*) is a lightweight dependency-free Javascript tool that converts html audio tags into styleable markup.
+Picobel.js (pronounced _peek-o-bell_, as in _decibel_) is a lightweight dependency-free Javascript tool that converts html audio tags into styleable markup.
 
 ## Why would I need this?
 
@@ -14,17 +14,17 @@ There are two reasons you might want to use Picobel...
 
 2. You're frontender and CSS magician who loves to have control over every aspect the sites you create. You can use the markup-only version of Picobel, and write your own CSS.
 
-The native html `<audio>` tag provides fantastic functionality, but gives you no styling options at all. Picobel rebuilds the audio player with regular html elements: you get all the functionality of the native audio element, *and* complete control of it's appearance.
+The native html `<audio>` tag provides fantastic functionality, but gives you no styling options at all. Picobel rebuilds the audio player with regular html elements: you get all the functionality of the native audio element, _and_ complete control of it's appearance.
 
 Using Picobel you can turn this:
 
 ![Native audio player](images/native_players.png)
-*Default browser audio players*
+_Default browser audio players_
 
 Into this:
 
 ![Picobel-styled audio player](images/picobel_players.png)
-*Picobel-styled audio players*
+_Picobel-styled audio players_
 
 **Picobel** allows you to create custom styles for your audio players: providing cross-browser consistency and a seamless integration with your existing brand styles.
 
@@ -40,7 +40,7 @@ You will also need the CSS styles. Choose which "theme" you'd like to use, and l
     <!-- Load the Picobel CSS -->
     <link rel='stylesheet' href='basic.min.css' type='text/css'/>
 
-Then initialize the function. For simplicity, the example below does this in an in-line `<script>` tag, but you can add this to your master JS file. Just make sure you initialise Picobel *after* the picobel.min.js file has been called.
+Then initialize the function. For simplicity, the example below does this in an in-line `<script>` tag, but you can add this to your master JS file. Just make sure you initialise Picobel _after_ the picobel.min.js file has been called.
 
     <!-- Initialise Picobel -->
     <script>
@@ -118,29 +118,29 @@ So if you wanted to use the "iTunes" theme, your Picobel call would look like th
 You can see them all in action in the [Picobel.js CodePen Collection](http://codepen.io/collection/XpZEor/), and see screenshots of each featured theme on this page:
 
 ![Default theme](images/theme_basic.png)
-*Default theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/VpNqYO)*
+_Default theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/VpNqYO)_
 
 ![Skeleton theme](images/theme_skeleton.png)
-*Skeleton theme (use this as a jumping-off point for your own styles). [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/zZXyGa)*
+_Skeleton theme (use this as a jumping-off point for your own styles). [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/zZXyGa)_
 
 ![BBC iPlayer theme](images/theme_bbc.png)
-*BBC iPlayer-esque theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/kXZaKL)*
+_BBC iPlayer-esque theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/kXZaKL)_
 
 ![iTunes theme](images/theme_itunes.png)
-*iTunes-esque theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/NAyWQW)*
+_iTunes-esque theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/NAyWQW)_
 
 ![Soundcloud theme](images/theme_soundcloud.png)
-*Soundcloud-esque theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/VpNqjJ)*
+_Soundcloud-esque theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/VpNqjJ)_
 
 ![Pitchfork theme](images/theme_pitchfork.png)
-*Pitchfork-esque theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/OpGrXN)*
+_Pitchfork-esque theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/OpGrXN)_
 
 ![Eaten by Monsters theme](images/theme_ebm.png)
-*Eaten by Monsters theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/gmyZLP)*
+_Eaten by Monsters theme. [View the this theme on CodePen](http://codepen.io/tomhazledine/pen/gmyZLP)_
 
 ## Contribute
 
-This started out as a "scratch your own itch" tool for a specific project. I'm open-sourcing it in the hope it might prove useful to others too. There are *a few* audio player tools/plugins out there, but most have too many features for my needs. I like simplicity, and I like any JS I add to my sites to be as lean as possible.
+This started out as a "scratch your own itch" tool for a specific project. I'm open-sourcing it in the hope it might prove useful to others too. There are _a few_ audio player tools/plugins out there, but most have too many features for my needs. I like simplicity, and I like any JS I add to my sites to be as lean as possible.
 
 I'm hoping Picobel can be of use to as many people as possible. If you have an improvement or bug-fix or new feature, get in touch! Make a pull request on the [Picobel.js Github repo](https://github.com/tomhazledine/picobel). I'm just getting started with "open source", so I'd be very glad of any help or suggestions or advice.
 

@@ -2,4 +2,3 @@ assets/*
 .sass-cache
 node_modules/*
 .DS_Store
-cjs/
