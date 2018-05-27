@@ -6,7 +6,8 @@
   "module": "./esm/index.js",
   "scripts": {
     "build": "babel esm --out-dir cjs",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "styles": "node-sass --output-style compressed -o css scss"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,8 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "node-sass": "^4.9.0"
   },
   "babel": {
     "presets": [
