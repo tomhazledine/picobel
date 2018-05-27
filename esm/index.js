@@ -102,7 +102,7 @@ function Picobel(options) {
     // we want to load [using elements
     // found by findAudio()]
     function getRawData(data) {
-        output = [];
+        var output = [];
         for (var i = 0; i < data.length; i++) {
             item = {};
             // Get the file's URL
