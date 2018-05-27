@@ -104,7 +104,7 @@ function Picobel(options) {
     function getRawData(data) {
         var output = [];
         for (var i = 0; i < data.length; i++) {
-            item = {};
+            var item = {};
             // Get the file's URL
             item.url = data[i].src;
             output.push(item);
@@ -424,7 +424,7 @@ function Picobel(options) {
         var buttonText = playPauseButtonsText[index];
         var target = playPauseButtons[index];
         if (state) {
-            for (i = 0; i < playPauseButtons.length; i++) {
+            for (var i = 0; i < playPauseButtons.length; i++) {
                 _removeClass(playPauseButtons[i], 'songPlaying');
                 _addClass(playPauseButtons[i], 'songPaused');
                 playPauseButtonsText[i].innerHTML = 'play';
@@ -479,7 +479,7 @@ function Picobel(options) {
     function _updateProgress(index) {
         var progress = myAudio[index].currentTime;
         var duration = myAudio[index].duration;
-        progressParsed = _secondsToMMSS(progress);
+        var progressParsed = _secondsToMMSS(progress);
         playTimer[index].innerHTML = progressParsed;
         if (progress >= duration) {
             _removeClass(playPauseButtons[index], 'songPlaying');
