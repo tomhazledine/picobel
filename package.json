@@ -5,9 +5,9 @@
   "main": "./cjs/picobel.js",
   "module": "./esm/picobel.js",
   "scripts": {
-    "build": "babel esm --out-dir cjs",
+    "build": "babel esm --out-dir cjs && npm run styles",
     "prepublishOnly": "npm run build",
-    "styles": "npm run sass | npm run autoprefix",
+    "styles": "npm run sass && npm run autoprefix",
     "sass": "node-sass --output-style expanded -o css scss",
     "autoprefix": "postcss css/*.css --use autoprefixer -d css"
   },
