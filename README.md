@@ -30,7 +30,35 @@ _Picobel-styled audio players_
 
 ## Installation
 
-To use **Picobel.js** you'll need to include the `picobel.min.js` file ([found here](https://github.com/tomhazledine/picobel/blob/master/picobel.min.js)) in your project. This needs to be called before your custom scripts, and ideally in the `<footer>` of your page.
+### Install with NPM
+
+`npm install picobel` will install Picobel in your `node_modules` directory. Then you can include Picobel in your javascript like this:
+
+ // Include Picobel in your project:
+import Picobel from 'picobel';
+
+    // Initialise Picobel:
+    Picobel()
+
+    // ...or initialise Picobel with your chosen options:
+    Picobel({ themename: 'default' })
+
+If you are using WebPack to bundle your scripts, you can include the stylesheet for your chosen Picobel theme here too:
+
+    // Include the styles for *all* the themes:
+    import 'picobel/css/all.css';
+
+    // ...or include only the styles for a specific theme:
+    import 'picobel/css/player.default.css';
+
+Or alternatively you could include the stylesheets manually with a `<link>` tag in your `index.html`:
+
+    <!-- Load the Picobel CSS -->
+    <link rel='stylesheet' href='node_modules/picobel/css/player.default.css' type='text/css'/>
+
+### Manually install
+
+To use **Picobel.js** you'll need to include the `picobel.js` file ([found here](https://github.com/tomhazledine/picobel/blob/master/picobel.min.js)) in your project. This needs to be called before your custom scripts, and ideally in the `<footer>` of your page.
 
     <!-- Load Picobel -->
     <script type='text/javascript' src='picobel.min.js'></script>
@@ -38,7 +66,7 @@ To use **Picobel.js** you'll need to include the `picobel.min.js` file ([found h
 You will also need the CSS styles. Choose which "theme" you'd like to use, and load that stylesheet. All current themes can be previewed in the [Picobel.js CodePen Collection](http://codepen.io/collection/XpZEor/), and all the css files can be found in the repo, [here](https://github.com/tomhazledine/picobel/tree/master/css).
 
     <!-- Load the Picobel CSS -->
-    <link rel='stylesheet' href='basic.min.css' type='text/css'/>
+    <link rel='stylesheet' href='player.default.css' type='text/css'/>
 
 Then initialize the function. For simplicity, the example below does this in an in-line `<script>` tag, but you can add this to your master JS file. Just make sure you initialise Picobel _after_ the picobel.min.js file has been called.
 

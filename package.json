@@ -2,12 +2,12 @@
   "name": "picobel",
   "version": "1.0.9",
   "description": "Convert html audio tags into styleable markup.",
-  "main": "./cjs/index.js",
-  "module": "./esm/index.js",
+  "main": "./cjs/picobel.js",
+  "module": "./esm/picobel.js",
   "scripts": {
     "build": "babel esm --out-dir cjs",
     "prepublishOnly": "npm run build",
-    "styles": "node-sass --output-style compressed -o css scss"
+    "styles": "node-sass --output-style expanded -o css scss"
   },
   "repository": {
     "type": "git",
