@@ -7,7 +7,9 @@
   "scripts": {
     "build": "babel esm --out-dir cjs",
     "prepublishOnly": "npm run build",
-    "styles": "node-sass --output-style expanded -o css scss"
+    "styles": "npm run sass | npm run autoprefix",
+    "sass": "node-sass --output-style expanded -o css scss",
+    "autoprefix": "postcss css/*.css --use autoprefixer -d css"
   },
   "repository": {
     "type": "git",
@@ -20,9 +22,11 @@
     "url": "https://github.com/tomhazledine/picobel/issues"
   },
   "devDependencies": {
+    "autoprefixer": "^8.5.1",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "node-sass": "^4.9.0"
+    "node-sass": "^4.9.0",
+    "postcss-cli": "^5.0.0"
   },
   "babel": {
     "presets": [
