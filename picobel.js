@@ -108,6 +108,7 @@ function Picobel( options ) {
             item = {};
             // Get the file's URL
             item.url = data[i].src;
+            // Check for a audio tag's `preload` attribute
             item.preload = options.preload ? options.preload : data[i].preload;
             output.push( item );
         }
@@ -259,7 +260,13 @@ function Picobel( options ) {
         for ( var i = 0; i < data.length; i++ ) {
             // Init. the audio
             myAudio[i] = new Audio();
-            if (data[i].preload) myAudio[i].preload = data[i].preload;
+            
+            // Apply the preload attr. if needed
+            if (data[i].preload) {
+                myAudio[i].preload = data[i].preload;
+            }
+            
+            // Add the audio source (by URL) to the audio node
             myAudio[i].src = data[i].url;
             
             // Check if file exists before setting time, to prevent IE11 error
