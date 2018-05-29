@@ -6,6 +6,13 @@
 
 Picobel.js (pronounced _peek-o-bell_, as in _decibel_) is a lightweight dependency-free Javascript tool that converts html audio tags into styleable markup.
 
+* [Overview](#why-would-i-need-this)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Setting "artist" and "track name" values](#setting-artist-and-track-name-values)
+* [Pre-made themes](#pre-made-themes)
+* [Contribute](#contribute)
+
 ## Why would I need this?
 
 There are two reasons you might want to use Picobel...
