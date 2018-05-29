@@ -102,9 +102,9 @@ function Picobel(options) {
     // we want to load [using elements
     // found by findAudio()]
     function getRawData(data) {
-        var output = [];
+        output = [];
         for (var i = 0; i < data.length; i++) {
-            var item = {};
+            item = {};
             // Get the file's URL
             item.url = data[i].src;
             // Check for a audio tag's `preload` attribute
@@ -434,7 +434,7 @@ function Picobel(options) {
         var buttonText = playPauseButtonsText[index];
         var target = playPauseButtons[index];
         if (state) {
-            for (var i = 0; i < playPauseButtons.length; i++) {
+            for (i = 0; i < playPauseButtons.length; i++) {
                 _removeClass(playPauseButtons[i], 'songPlaying');
                 _addClass(playPauseButtons[i], 'songPaused');
                 playPauseButtonsText[i].innerHTML = 'play';
@@ -489,7 +489,7 @@ function Picobel(options) {
     function _updateProgress(index) {
         var progress = myAudio[index].currentTime;
         var duration = myAudio[index].duration;
-        var progressParsed = _secondsToMMSS(progress);
+        progressParsed = _secondsToMMSS(progress);
         playTimer[index].innerHTML = progressParsed;
         if (progress >= duration) {
             _removeClass(playPauseButtons[index], 'songPlaying');
@@ -636,5 +636,3 @@ function Picobel(options) {
         pauseAll: pauseAll
     };
 }
-
-export default Picobel;
