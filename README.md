@@ -34,8 +34,8 @@ _Picobel-styled audio players_
 
 `npm install picobel` will install Picobel in your `node_modules` directory. Then you can include Picobel in your javascript like this:
 
- // Include Picobel in your project:
-import Picobel from 'picobel';
+    // Include Picobel in your project:
+    import Picobel from 'picobel';
 
     // Initialise Picobel:
     Picobel()
@@ -43,7 +43,7 @@ import Picobel from 'picobel';
     // ...or initialise Picobel with your chosen options:
     Picobel({ themename: 'default' })
 
-If you are using WebPack to bundle your scripts, you can include the stylesheet for your chosen Picobel theme here too:
+If you are using WebPack (or similar) to bundle your scripts, you can include the stylesheet for your chosen Picobel theme here too:
 
     // Include the styles for *all* the themes:
     import 'picobel/css/all.css';
@@ -51,14 +51,16 @@ If you are using WebPack to bundle your scripts, you can include the stylesheet 
     // ...or include only the styles for a specific theme:
     import 'picobel/css/player.default.css';
 
-Or alternatively you could include the stylesheets manually with a `<link>` tag in your `index.html`:
+Alternatively you could include the stylesheets manually with a `<link>` tag in your `index.html`:
 
     <!-- Load the Picobel CSS -->
     <link rel='stylesheet' href='node_modules/picobel/css/player.default.css' type='text/css'/>
 
+When your page loads, Picobel will replace any default `<audio>` elements with a block of custom-markup, complete with classes that you can use to apply your custom CSS.
+
 ### Manually install
 
-To use **Picobel.js** you'll need to include the `picobel.js` file ([found here](https://github.com/tomhazledine/picobel/blob/master/picobel.min.js)) in your project. This needs to be called before your custom scripts, and ideally in the `<footer>` of your page.
+To use **Picobel.js** you'll need to include the `picobel.js` file (found here: [picobel.legacy.min.js](https://github.com/tomhazledine/picobel/blob/master/picobel.legacy.min.js)) in your project. This needs to be called before your custom scripts, and ideally in the `<footer>` of your page.
 
     <!-- Load Picobel -->
     <script type='text/javascript' src='picobel.min.js'></script>
