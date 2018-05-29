@@ -2,5 +2,5 @@ language: node_js
 node_js:
   - "6.9.5"
 before_install: npm install
-script: gulp jslint
+script: npm run build
 script: gulp test
