@@ -219,14 +219,15 @@ $background_grey_light: #f1f1f1;
             position: absolute;
             top: 0;
             z-index: 3;
-            width: 4em;
-            text-align: center;
+            width: 6em;
+            text-align: left;
             background: transparent;
             color: $white;
             line-height: 1;
             height: 1em;
             pointer-events: none;
             font-size: 1em;
+            padding: 0 0.5em 0 1em;
             padding-top: 0.3em;
             font-family: monospace;
         }
@@ -235,6 +236,7 @@ $background_grey_light: #f1f1f1;
         }
         .songDuration {
             right: 0;
+            text-align: right;
         }
     }
     // Hide song-timings when we're loading

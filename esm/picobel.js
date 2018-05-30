@@ -485,7 +485,7 @@ function Picobel(options) {
     function _updateProgress(index) {
         let progress = myAudio[index].currentTime;
         let duration = myAudio[index].duration;
-        let progressParsed = _secondsToMMSS(progress);
+        let progressParsed = _parseTime(progress);
         playTimer[index].innerHTML = progressParsed;
         if (progress >= duration) {
             _removeClass(playPauseButtons[index], 'songPlaying');
@@ -499,7 +499,7 @@ function Picobel(options) {
     // Set the value of the song-length display
     function _setLengthDisplay(index) {
         let songLength = myAudio[index].duration;
-        let duration = _secondsToMMSS(songLength);
+        let duration = _parseTime(songLength);
         let songClass = '.song' + index;
         songLengthBox[index].innerHTML = duration;
     }
@@ -558,18 +558,29 @@ function Picobel(options) {
      */
 
     // Convert seconds into minutes-and-seconds (MMSS) format
-    function _secondsToMMSS(seconds) {
-        let mins = Math.floor((seconds % 3600) / 60);
-        mins = mins.toFixed(0);
-        mins = mins.toString();
-        let secs = Math.floor((seconds % 3600) % 60);
-        secs = secs.toFixed(0);
-        secs = secs.toString();
-        if (secs < 10) {
-            secs = '0' + secs;
+    function _parseTime(seconds) {
+        let hours = Math.floor(seconds / 3600);
+
+        let mins = Math.floor((seconds % 3600) / 60)
+            .toFixed(0)
+            .toString();
+
+        let secs = Math.floor((seconds % 3600) % 60)
+            .toFixed(0)
+            .toString();
+
+        // Left-pad seconds string if needed
+        secs = secs > 10 ? secs : `0${secs}`;
+
+        let parsedTime = `${mins}:${secs}`;
+
+        if (hours > 0) {
+            // Left-pad minutes string if needed
+            mins = mins > 10 ? mins : `0${mins}`;
+            parsedTime = `${hours}:${mins}:${secs}`;
         }
-        let mmss = mins + ':' + secs;
-        return mmss;
+
+        return parsedTime;
     }
 
     // Does the target element have the target class?

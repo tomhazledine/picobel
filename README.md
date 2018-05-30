@@ -48,7 +48,7 @@ _Picobel-styled audio players_
     Picobel()
 
     // ...or initialise Picobel with your chosen options:
-    Picobel({ themename: 'default' })
+    Picobel({ theme: 'default' })
 
 If you are using WebPack (or similar) to bundle your scripts, you can include the stylesheet for your chosen Picobel theme here too:
 
@@ -143,14 +143,14 @@ Applying metadata to your audio file requires adding data-attributes to your `<a
 
 ## Pre-made themes
 
-Picobel comes with many pre-made themes. To use a theme, make sure you've downloaded the correct stylesheet from the [Picobel CSS library](https://github.com/tomhazledine/picobel/tree/master/css) and then reference the chosen themename as an option when you initialize Picobel in your JS.
+Picobel comes with many pre-made themes. To use a theme, make sure you've downloaded the correct stylesheet from the [Picobel CSS library](https://github.com/tomhazledine/picobel/tree/master/css) and then reference the chosen theme name as an option when you initialize Picobel in your JS.
 
     <!-- Initialise Picobel with a theme-->
     <script>
-        Picobel( { themename: "chosenThemeName" } );
+        Picobel( { theme: "chosenThemeName" } );
     </script>
 
-So if you wanted to use the "iTunes" theme, your Picobel call would look like this: `Picobel({themename:"itunes"});`. If you don't explicitly choose a theme, then the Default theme will be used. The current options are: `skeleton`, `itunes`, `bbc`, `soundcloud`, `pitchfork`, & `eatenbymonsters`.
+So if you wanted to use the "iTunes" theme, your Picobel call would look like this: `Picobel({theme:"itunes"});`. If you don't explicitly choose a theme, then the Default theme will be used. The current options are: `skeleton`, `itunes`, `bbc`, `soundcloud`, `pitchfork`, & `eatenbymonsters`.
 
 You can see them all in action in the [Picobel.js CodePen Collection](http://codepen.io/collection/XpZEor/), and see screenshots of each featured theme on this page:
 

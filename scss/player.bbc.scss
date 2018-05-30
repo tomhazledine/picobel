@@ -212,26 +212,32 @@ $played: $highlight;
             display: block;
             top: 3em;
             height: 3em;
-            width: 3em;
+            width: 4.5em;
             color: $white;
             background: $black;
             border: 0;
             padding: 1em 0;
-            text-align: center;
+            text-align: right;
             border-radius: 0;
         }
         .songPlayTimer {
-            right: 3em;
+            right: 4.5em;
+            padding-right: 0.3em;
+            isplay: inline-block;
+            width: auto;
+            padding-left: 1em;
             border-left: 1px solid $border;
         }
         .songDuration {
+            text-align: left;
             right: 0;
             color: $grey;
             &:before {
-                display: block;
-                position: absolute;
-                top: 1em;
-                left: 0;
+                // display: block;
+                // position: absolute;
+                // top: 1em;
+                // left: 0;
+                padding-right: 0.2em;
                 content: '/';
             }
         }
