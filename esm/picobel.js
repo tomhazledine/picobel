@@ -315,7 +315,6 @@ function Picobel(options) {
     function _getMeta(i) {
         // Get the filename and type
         let url = myAudio[i].src;
-        console.log('url', url);
         let fileType = _helpers.getFileType(url);
         let fileName = _helpers.getFileName(url);
 
