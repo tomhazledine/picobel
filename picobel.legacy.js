@@ -29,8 +29,9 @@ function Picobel(options) {
      * -----------------------
      */
     options = typeof options !== 'undefined' ? options : {};
-    // options.prefix = options.prefix || '';
     options.theme = options.theme || 'defaultPlayerTheme';
+    // Setting a value for `preload` here will override the audio element's value.
+    options.preload = options.preload || false;
 
     /**
      * ---------------------------------------------
@@ -73,6 +74,8 @@ function Picobel(options) {
     // Initialize the audio.
     var myAudio = initAudio(data);
 
+    console.log('myAudio', myAudio);
+
     // Create a var to store the index of the file currently
     // being played (defaulting to the first track in the DOM)
     var currentSongIndex = 0;
@@ -101,22 +104,19 @@ function Picobel(options) {
     // Get the url for each audio file
     // we want to load [using elements
     // found by findAudio()]
-    function getRawData(data) {
-        output = [];
-        for (var i = 0; i < data.length; i++) {
-            item = {};
-            // Get the file's URL
-            item.url = data[i].src;
-            // Check for a audio tag's `preload` attribute
-            item.preload = options.preload ? options.preload : data[i].preload;
-            output.push(item);
-        }
+    function getRawData(_data) {
+        var output = _data.map(function(item) {
+            return {
+                preload: options.preload ? options.preload : item.preload,
+                url: item.src
+            };
+        });
         return output;
     }
 
     // Create our own markup in place of the native <audio> elements.
-    function buildMarkup(data) {
-        for (var i = 0; i < data.length; i++) {
+    function buildMarkup(_data) {
+        for (var i = 0; i < _data.length; i++) {
             // Create a container for our new player
             var newPlayer = document.createElement('div');
             newPlayer.className = 'customAudioPlayer loading player_' + i;
@@ -245,53 +245,51 @@ function Picobel(options) {
             newPlayer.appendChild(meta_volume);
 
             // Replace the original audio element with our new creation.
-            data[i].parentNode.replaceChild(newPlayer, data[i]);
+            _data[i].parentNode.replaceChild(newPlayer, _data[i]);
         }
     }
 
     // Initialize the audio for each file, and setup the event listeners.
-    function initAudio(data) {
-        var myAudio = [];
-
-        for (var i = 0; i < data.length; i++) {
-            // Init. the audio
-            myAudio[i] = new Audio();
+    function initAudio(_data) {
+        var _myAudio = _data.map(function(item, key) {
+            var node = new Audio();
 
             // Apply the preload attr. if needed
-            if (data[i].preload) {
-                myAudio[i].preload = data[i].preload;
+            if (item.preload) {
+                node.preload = item.preload;
             }
 
             // Add the audio source (by URL) to the audio node
-            myAudio[i].src = data[i].url;
+            node.src = item.url;
 
             // Check if file exists before setting time, to prevent IE11 error
-            if (!isNaN(myAudio[i].duration)) {
-                myAudio[i].currentTime = 0;
+            if (!isNaN(node.duration)) {
+                node.currentTime = 0;
             }
-
-            // Setup event listeners
-            playPauseButtons[i].addEventListener('click', _playPauseAudio, false);
-            progressBar[i].addEventListener('input', sliderScrub, false);
-            volumeControl[i].addEventListener('input', volume, false);
-            myAudio[i].addEventListener('timeupdate', _triggerUpdateProgress, false);
-            myAudio[i].addEventListener('loadstart', _loadStart, false);
-            myAudio[i].addEventListener('canplaythrough', _canplaythrough, false);
-            muteButtons[i].addEventListener('click', _muteUnmuteAudio, false);
-
-            myAudio[i].addEventListener('error', _errors, false);
-            myAudio[i].addEventListener('stalled', _stalled, false);
-            myAudio[i].addEventListener('waiting', _errors, false);
-
-            myAudio[i].addEventListener('progress', _progress, false);
 
             // Assign an index to each audio node:
             // this links the audio elements to the
             // relevant markup
-            myAudio[i].setAttribute('data-song-index', i);
-        }
+            node.setAttribute('data-song-index', key);
 
-        return myAudio;
+            // Setup event listeners
+            node.addEventListener('timeupdate', _triggerUpdateProgress, false);
+            node.addEventListener('loadstart', _loadStart, false);
+            node.addEventListener('canplaythrough', _canplaythrough, false);
+            node.addEventListener('error', _errors, false);
+            node.addEventListener('stalled', _stalled, false);
+            node.addEventListener('waiting', _errors, false);
+            node.addEventListener('progress', _progress, false);
+
+            playPauseButtons[key].addEventListener('click', _playPauseAudio, false);
+            progressBar[key].addEventListener('input', sliderScrub, false);
+            volumeControl[key].addEventListener('input', volume, false);
+            muteButtons[key].addEventListener('click', _muteUnmuteAudio, false);
+
+            return node;
+        });
+
+        return _myAudio;
     }
 
     /**
@@ -305,9 +303,8 @@ function Picobel(options) {
      */
 
     // Fire this event when loading starts [TEST]
-    function _loadStart() {
-        // console.log( 'Load start' );
-    }
+    function _loadStart() {}
+    // console.log( 'Load start' );
 
     // Fire this event when we can play the audio
     // all the way through (ie. it is fully loaded)
@@ -407,7 +404,7 @@ function Picobel(options) {
 
     // Mute
     function mute(index, state) {
-        var oldVolume;
+        var oldVolume = void 0;
         if (state) {
             oldVolume = myAudio[index].volume;
             muteButtons[index].setAttribute('data-saved-volume', oldVolume);
@@ -434,7 +431,7 @@ function Picobel(options) {
         var buttonText = playPauseButtonsText[index];
         var target = playPauseButtons[index];
         if (state) {
-            for (i = 0; i < playPauseButtons.length; i++) {
+            for (var i = 0; i < playPauseButtons.length; i++) {
                 _removeClass(playPauseButtons[i], 'songPlaying');
                 _addClass(playPauseButtons[i], 'songPaused');
                 playPauseButtonsText[i].innerHTML = 'play';
@@ -455,8 +452,8 @@ function Picobel(options) {
     function _playPauseAudio() {
         var targetSong = this.parentNode.getAttribute('data-song-index');
         if (typeof targetSong != 'undefined') {
-            var playSong = _hasClass(this, 'songPlaying') ? false : true;
-            playPause(targetSong, playSong);
+            var _playSong = _hasClass(this, 'songPlaying') ? false : true;
+            playPause(targetSong, _playSong);
         } else {
             console.log('too soon to play!');
         }
@@ -489,7 +486,7 @@ function Picobel(options) {
     function _updateProgress(index) {
         var progress = myAudio[index].currentTime;
         var duration = myAudio[index].duration;
-        progressParsed = _secondsToMMSS(progress);
+        var progressParsed = _parseTime(progress);
         playTimer[index].innerHTML = progressParsed;
         if (progress >= duration) {
             _removeClass(playPauseButtons[index], 'songPlaying');
@@ -503,7 +500,7 @@ function Picobel(options) {
     // Set the value of the song-length display
     function _setLengthDisplay(index) {
         var songLength = myAudio[index].duration;
-        var duration = _secondsToMMSS(songLength);
+        var duration = _parseTime(songLength);
         var songClass = '.song' + index;
         songLengthBox[index].innerHTML = duration;
     }
@@ -562,23 +559,34 @@ function Picobel(options) {
      */
 
     // Convert seconds into minutes-and-seconds (MMSS) format
-    function _secondsToMMSS(seconds) {
-        var mins = Math.floor((seconds % 3600) / 60);
-        mins = mins.toFixed(0);
-        mins = mins.toString();
-        var secs = Math.floor((seconds % 3600) % 60);
-        secs = secs.toFixed(0);
-        secs = secs.toString();
-        if (secs < 10) {
-            secs = '0' + secs;
+    function _parseTime(seconds) {
+        var hours = Math.floor(seconds / 3600);
+
+        var mins = Math.floor((seconds % 3600) / 60)
+            .toFixed(0)
+            .toString();
+
+        var secs = Math.floor((seconds % 3600) % 60)
+            .toFixed(0)
+            .toString();
+
+        // Left-pad seconds string if needed
+        secs = secs > 10 ? secs : '0' + secs;
+
+        var parsedTime = mins + ':' + secs;
+
+        if (hours > 0) {
+            // Left-pad minutes string if needed
+            mins = mins > 10 ? mins : '0' + mins;
+            parsedTime = hours + ':' + mins + ':' + secs;
         }
-        var mmss = mins + ':' + secs;
-        return mmss;
+
+        return parsedTime;
     }
 
     // Does the target element have the target class?
     function _hasClass(el, className) {
-        var result;
+        var result = void 0;
         if (el.classList) {
             result = el.classList.contains(className);
         } else {
