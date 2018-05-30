@@ -10,3 +10,15 @@ it('converts seconds into HH:MM:SS format', () => {
     // Durations longer than an hour
     expect(helpers.parseTime(3846)).toEqual('1:04:06');
 });
+
+it('gets the filetype from a url', () => {
+    expect(
+        helpers.getFileType('http://audio.eatenbymonsters.com/reviews/daughter/human.mp3')
+    ).toEqual('mp3');
+});
+
+it('gets the file name from a url', () => {
+    expect(
+        helpers.getFileName('http://audio.eatenbymonsters.com/reviews/daughter/human.mp3')
+    ).toEqual('human');
+});

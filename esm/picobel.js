@@ -315,8 +315,9 @@ function Picobel(options) {
     function _getMeta(i) {
         // Get the filename and type
         let url = myAudio[i].src;
-        let fileType = _getFileType(url);
-        let fileName = _getFileName(url);
+        console.log('url', url);
+        let fileType = _helpers.getFileType(url);
+        let fileName = _helpers.getFileName(url);
 
         // If there is a valid title, display that title...
         let title = audioElements[i].title;
@@ -543,6 +544,16 @@ function Picobel(options) {
         let readyState = myAudio[index].readyState;
     }
 
+    /**
+     * -----------------------------
+     * HELPERS
+     *
+     * These are basic utilities to
+     * parse data, add/remove/toggle
+     * classes etc.
+     * -----------------------------
+     */
+
     // Does the target element have the target class?
     function _hasClass(el, className) {
         let result;
@@ -573,18 +584,6 @@ function Picobel(options) {
                 ' '
             );
         }
-    }
-
-    // Get File Type
-    function _getFileType(string) {
-        return string.substr((~-string.lastIndexOf('.') >>> 0) + 2);
-    }
-
-    // Get File Name
-    function _getFileName(string) {
-        let fullFileName = string.replace(/^.*[\\\/]/, '');
-        let withNoExtension = fullFileName.split('.')[0];
-        return withNoExtension;
     }
 
     /**
@@ -638,6 +637,16 @@ const _helpers = {
         }
 
         return parsedTime;
+    },
+
+    // Get File Type
+    getFileType: string => string.substr((~-string.lastIndexOf('.') >>> 0) + 2),
+
+    // Get File Name
+    getFileName: string => {
+        let fullFileName = string.replace(/^.*[\\\/]/, '');
+        let withNoExtension = fullFileName.split('.')[0];
+        return withNoExtension;
     }
 };
 
