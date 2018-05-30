@@ -9,7 +9,8 @@
     "prepublishOnly": "npm run build",
     "styles": "npm run sass && npm run autoprefix",
     "sass": "node-sass --output-style expanded -o css scss",
-    "autoprefix": "postcss css/*.css --use autoprefixer -d css"
+    "autoprefix": "postcss css/*.css --use autoprefixer -d css",
+    "legacy": "uglifyjs picobel.legacy.js -o picobel.legacy.min.js"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,8 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "node-sass": "^4.9.0",
-    "postcss-cli": "^5.0.0"
+    "postcss-cli": "^5.0.0",
+    "uglify-js": "^3.3.28"
   },
   "babel": {
     "presets": [
@@ -34,7 +36,7 @@
         "env",
         {
           "targets": {
-            "node": "current"
+            "browsers": ["last 2 versions", "safari >= 7"]
           }
         }
       ]
