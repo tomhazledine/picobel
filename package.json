@@ -5,6 +5,7 @@
   "main": "./cjs/picobel.js",
   "module": "./esm/picobel.js",
   "scripts": {
+    "test": "jest --verbose",
     "build": "babel esm --out-dir cjs && npm run styles",
     "prepublishOnly": "npm run build",
     "styles": "npm run sass && npm run autoprefix",
@@ -25,7 +26,9 @@
   "devDependencies": {
     "autoprefixer": "^8.5.1",
     "babel-cli": "^6.26.0",
+    "babel-jest": "^23.0.1",
     "babel-preset-env": "^1.7.0",
+    "jest": "^23.0.1",
     "node-sass": "^4.9.0",
     "postcss-cli": "^5.0.0",
     "uglify-js": "^3.3.28"
@@ -36,10 +39,7 @@
         "env",
         {
           "targets": {
-            "browsers": [
-              "last 2 versions",
-              "safari >= 7"
-            ]
+            "browsers": ["last 2 versions", "safari >= 7"]
           }
         }
       ]

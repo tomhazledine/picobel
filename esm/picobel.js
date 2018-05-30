@@ -74,8 +74,6 @@ function Picobel(options) {
     // Initialize the audio.
     let myAudio = initAudio(data);
 
-    console.log('myAudio', myAudio);
-
     // Create a var to store the index of the file currently
     // being played (defaulting to the first track in the DOM)
     let currentSongIndex = 0;
@@ -302,7 +300,6 @@ function Picobel(options) {
 
     // Fire this event when loading starts [TEST]
     function _loadStart() {}
-    // console.log( 'Load start' );
 
     // Fire this event when we can play the audio
     // all the way through (ie. it is fully loaded)
@@ -484,7 +481,7 @@ function Picobel(options) {
     function _updateProgress(index) {
         let progress = myAudio[index].currentTime;
         let duration = myAudio[index].duration;
-        let progressParsed = _parseTime(progress);
+        let progressParsed = _helpers.parseTime(progress);
         playTimer[index].innerHTML = progressParsed;
         if (progress >= duration) {
             _removeClass(playPauseButtons[index], 'songPlaying');
@@ -498,7 +495,7 @@ function Picobel(options) {
     // Set the value of the song-length display
     function _setLengthDisplay(index) {
         let songLength = myAudio[index].duration;
-        let duration = _parseTime(songLength);
+        let duration = _helpers.parseTime(songLength);
         let songClass = '.song' + index;
         songLengthBox[index].innerHTML = duration;
     }
@@ -544,42 +541,6 @@ function Picobel(options) {
     function _progress(e) {
         let index = this.getAttribute('data-song-index');
         let readyState = myAudio[index].readyState;
-    }
-
-    /**
-     * -----------------------------
-     * HELPERS
-     *
-     * These are basic utilities to
-     * parse data, add/remove/toggle
-     * classes etc.
-     * -----------------------------
-     */
-
-    // Convert seconds into minutes-and-seconds (MMSS) format
-    function _parseTime(seconds) {
-        let hours = Math.floor(seconds / 3600);
-
-        let mins = Math.floor((seconds % 3600) / 60)
-            .toFixed(0)
-            .toString();
-
-        let secs = Math.floor((seconds % 3600) % 60)
-            .toFixed(0)
-            .toString();
-
-        // Left-pad seconds string if needed
-        secs = secs > 10 ? secs : `0${secs}`;
-
-        let parsedTime = `${mins}:${secs}`;
-
-        if (hours > 0) {
-            // Left-pad minutes string if needed
-            mins = mins > 10 ? mins : `0${mins}`;
-            parsedTime = `${hours}:${mins}:${secs}`;
-        }
-
-        return parsedTime;
     }
 
     // Does the target element have the target class?
@@ -642,5 +603,44 @@ function Picobel(options) {
         pauseAll: pauseAll
     };
 }
+
+/**
+ * -----------------------------
+ * HELPERS
+ *
+ * These are basic utilities to
+ * parse data, add/remove/toggle
+ * classes etc.
+ * -----------------------------
+ */
+const _helpers = {
+    // Convert seconds into minutes-and-seconds (MMSS) format
+    parseTime: seconds => {
+        let hours = Math.floor(seconds / 3600);
+
+        let mins = Math.floor((seconds % 3600) / 60)
+            .toFixed(0)
+            .toString();
+
+        let secs = Math.floor((seconds % 3600) % 60)
+            .toFixed(0)
+            .toString();
+
+        // Left-pad seconds string if needed
+        secs = secs > 10 ? secs : `0${secs}`;
+
+        let parsedTime = `${mins}:${secs}`;
+
+        if (hours > 0) {
+            // Left-pad minutes string if needed
+            mins = mins > 10 ? mins : `0${mins}`;
+            parsedTime = `${hours}:${mins}:${secs}`;
+        }
+
+        return parsedTime;
+    }
+};
+
+export const helpers = _helpers;
 
 export default Picobel;
