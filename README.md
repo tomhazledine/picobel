@@ -207,5 +207,5 @@ New themes should be named with the following pattern: `/scss/player.NEW_THEME_N
 
 * MIT license
 * No dependencies
-* v1.0.9
+* v1.0.10
 * Most recent release date: 20180529
