@@ -69,3 +69,24 @@ it('generates a div for each audio element', () => {
     expect(markup.length).toEqual(3);
     expect(markup[0].localName).toEqual('div');
 });
+
+it('creates an array of class names', () => {
+    let classList = Picobel().prepareClasses(0, 'some classes', 'themeName');
+
+    expect(Array.isArray(classList)).toEqual(true);
+    expect(classList.length).toEqual(6);
+    expect(classList[0]).toEqual('customAudioPlayer');
+    expect(classList[1]).toEqual('loading');
+    expect(classList[2]).toEqual('player_0');
+    expect(classList[3]).toEqual('some');
+    expect(classList[4]).toEqual('classes');
+    expect(classList[5]).toEqual('themeName');
+
+    classList = Picobel().prepareClasses(2, '', 'something');
+    expect(Array.isArray(classList)).toEqual(true);
+    expect(classList.length).toEqual(4);
+    expect(classList[0]).toEqual('customAudioPlayer');
+    expect(classList[1]).toEqual('loading');
+    expect(classList[2]).toEqual('player_2');
+    expect(classList[3]).toEqual('something');
+});

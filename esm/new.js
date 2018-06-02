@@ -86,20 +86,22 @@ function Picobel(rawOptions = {}) {
         return items;
     };
 
+    const _prepareClasses = (index, classes, theme) => {
+        const classesString = `customAudioPlayer loading player_${index} ${classes}`;
+        const classesArray = classesString.trim().split(' ');
+        classesArray.push(theme);
+        return classesArray;
+    };
+
     const _generateMarkup = (nodes = [], components = defaultOptions.components) => {
         const markupArray = nodes.map((node, key) => {
             // Create a container for our new player
             const newPlayer = document.createElement('div');
-            newPlayer.className = `customAudioPlayer loading player_${key}`;
 
-            // If the element has a valid class, add that to the player's wrapper
-            if (node.className) {
-                let classes = node.className.trim().split(' ');
-                newPlayer.classList.add(...classes);
-            }
+            // Set the relevant classes on the new player element
+            const classes = _prepareClasses(key, node.className, components.theme);
+            newPlayer.classList.add(...classes);
 
-            // Add the class set in our options.
-            newPlayer.classList.add(components.theme);
             // _addClass(newPlayer, options.theme);
             // newPlayer.setAttribute('data-song-index', i);
 
@@ -265,7 +267,8 @@ function Picobel(rawOptions = {}) {
         state,
         setComponentsByTheme: _setComponentsByTheme,
         findAudio: _findAudio,
-        generateMarkup: _generateMarkup
+        generateMarkup: _generateMarkup,
+        prepareClasses: _prepareClasses
     };
 }
 
