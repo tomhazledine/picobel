@@ -1,7 +1,8 @@
 import _helpers from './helpers';
 
-function Picobel(
-    options = {
+function Picobel(rawOptions = {}) {
+    // Define our default options.
+    const defaultOptions = {
         theme: 'default',
         components: {
             playPause: true,
@@ -12,15 +13,18 @@ function Picobel(
             duration: true,
             timer: true
         }
-    }
-) {
+    };
+    // Set options from arguments, usind defaultOptions as fallback.
+    const options = Object.assign(defaultOptions, rawOptions);
+
+    console.log(options);
     let state = {
         theme: options.theme,
         components: options.components,
         audioNodes: []
     };
 
-    // Return an array of all the <audio> elements found on the page.
+    // Method to return an array of all the <audio> elements found on the page.
     const _findAudio = () => {
         // Get all the <audio> occurrences in the page.
         let audioElements = document.getElementsByTagName('audio');
@@ -30,16 +34,11 @@ function Picobel(
         return items;
     };
 
-    const testing = () => {
-        console.log(testing);
-    };
-
     // Set `components` based on theme, but can be overridden by `options.components`
-    const audioNodes = _findAudio();
-
-    // console.log(audioNodes);
 
     // Get audio elements from page, and save their details to `state.audioNodes`
+    const audioNodes = _findAudio();
+    state.audioNodes = audioNodes;
 
     // Build markup for each element, based on `components`
 
@@ -53,8 +52,7 @@ function Picobel(
 
     return {
         state,
-        findAudio: _findAudio,
-        testing
+        findAudio: _findAudio
     };
 }
 
