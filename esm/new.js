@@ -32,6 +32,7 @@ function Picobel(rawOptions = {}) {
     const defaultOptions = {
         theme: 'default',
         components: {
+            theme: 'default',
             playPause: true,
             progress: true,
             volume: true,
@@ -62,6 +63,7 @@ function Picobel(rawOptions = {}) {
     // Return a `components` object that matches the provided themename.
     const _setComponentsByTheme = (themename = 'default', rawComponents = {}) => {
         const defaultComponents = {
+            theme: themename,
             playPause: true,
             progress: true,
             volume: true,
@@ -84,8 +86,145 @@ function Picobel(rawOptions = {}) {
         return items;
     };
 
-    const _generateMarkup = (nodes, components) => {
-        nodes.map((node, key) => {});
+    const _generateMarkup = (nodes = [], components = defaultOptions.components) => {
+        const markupArray = nodes.map((node, key) => {
+            // Create a container for our new player
+            const newPlayer = document.createElement('div');
+            newPlayer.className = `customAudioPlayer loading player_${key}`;
+
+            // If the element has a valid class, add that to the player's wrapper
+            if (node.className) {
+                let classes = node.className.trim().split(' ');
+                newPlayer.classList.add(...classes);
+            }
+
+            // Add the class set in our options.
+            newPlayer.classList.add(components.theme);
+            // _addClass(newPlayer, options.theme);
+            // newPlayer.setAttribute('data-song-index', i);
+
+            // // Create a loading indicator
+            // let loading = document.createElement('div');
+            // loading.className = 'loader';
+            // newPlayer.appendChild(loading);
+
+            // // Add "waiting" indicator here.
+
+            // // Create a play/pause button
+            // let button = document.createElement('button');
+            // button.className = 'playerTrigger';
+            // let buttonText = document.createElement('span');
+            // buttonText.className = 'buttonText';
+            // buttonText.innerHTML = 'play';
+            // button.appendChild(buttonText);
+
+            // // Create a wrapper for our player's metadata
+            // let meta = document.createElement('div');
+            // meta.className = 'metaWrapper';
+
+            // // Create elements to display file metadata
+            // let meta_title = document.createElement('span');
+            // meta_title.className = 'titleDisplay';
+            // meta_title.innerHTML = 'File ' + (i + 1);
+            // meta.appendChild(meta_title);
+
+            // let meta_artist = document.createElement('span');
+            // meta_artist.className = 'artistDisplay';
+            // meta.appendChild(meta_artist);
+
+            // let timings = document.createElement('div');
+            // timings.className = 'timingsWrapper';
+
+            // let meta_timer = document.createElement('span');
+            // meta_timer.className = 'songPlayTimer';
+            // meta_timer.innerHTML = '0:00';
+            // timings.appendChild(meta_timer);
+
+            // // Progress Indicator
+            // let meta_progress_wrapper = document.createElement('div');
+            // meta_progress_wrapper.className = 'songProgressSliderWrapper';
+            // let meta_pseudo_progress_background = document.createElement('div');
+            // meta_pseudo_progress_background.className = 'pseudoProgressBackground';
+            // meta_progress_wrapper.appendChild(meta_pseudo_progress_background);
+            // let meta_pseudo_progress_indicator = document.createElement('div');
+            // meta_pseudo_progress_indicator.className = 'pseudoProgressIndicator';
+            // meta_progress_wrapper.appendChild(meta_pseudo_progress_indicator);
+            // let meta_pseudo_progress_playhead = document.createElement('div');
+            // meta_pseudo_progress_playhead.className = 'pseudoProgressPlayhead';
+            // meta_progress_wrapper.appendChild(meta_pseudo_progress_playhead);
+            // let meta_progress = document.createElement('input');
+            // meta_progress.type = 'range';
+            // meta_progress.min = 0;
+            // meta_progress.max = 100;
+            // meta_progress.value = 0;
+            // meta_progress.className = 'songProgressSlider';
+            // meta_progress_wrapper.appendChild(meta_progress);
+
+            // timings.appendChild(meta_progress_wrapper);
+
+            // let meta_duration = document.createElement('span');
+            // meta_duration.className = 'songDuration';
+            // meta_duration.innerHTML = '-:--';
+            // timings.appendChild(meta_duration);
+
+            // // Volume Indicator
+            // let meta_volume = document.createElement('div');
+            // meta_volume.className = 'songVolume';
+            // let meta_mute = document.createElement('button');
+            // meta_mute.className = 'songMuteButton';
+            // meta_mute.innerHTML = 'Mute';
+            // meta_volume.appendChild(meta_mute);
+            // let meta_volume_label_wrapper = document.createElement('div');
+            // meta_volume_label_wrapper.className = 'songVolumeLabelWrapper';
+            // let meta_volume_label = document.createElement('span');
+            // meta_volume_label.className = 'songVolumeLabel';
+            // meta_volume_label.innerHTML = 'Volume';
+            // meta_volume_label_wrapper.appendChild(meta_volume_label);
+            // let meta_volume_value = document.createElement('span');
+            // meta_volume_value.className = 'songVolumeValue';
+            // meta_volume_value.innerHTML = '10';
+            // meta_volume_label_wrapper.appendChild(meta_volume_value);
+            // meta_volume.appendChild(meta_volume_label_wrapper);
+            // let meta_volume_wrapper = document.createElement('div');
+            // meta_volume_wrapper.className = 'songVolumeSliderWrapper';
+            // let meta_pseudo_volume_background = document.createElement('div');
+            // meta_pseudo_volume_background.className = 'pseudoVolumeBackground';
+            // meta_volume_wrapper.appendChild(meta_pseudo_volume_background);
+            // let meta_pseudo_volume_indicator = document.createElement('div');
+            // meta_pseudo_volume_indicator.className = 'pseudoVolumeIndicator';
+            // meta_volume_wrapper.appendChild(meta_pseudo_volume_indicator);
+            // let meta_pseudo_volume_playhead = document.createElement('div');
+            // meta_pseudo_volume_playhead.className = 'pseudoVolumePlayhead';
+            // meta_volume_wrapper.appendChild(meta_pseudo_volume_playhead);
+            // let meta_volume_control = document.createElement('input');
+            // meta_volume_control.type = 'range';
+            // meta_volume_control.min = 0;
+            // meta_volume_control.max = 1;
+            // meta_volume_control.value = 1;
+            // meta_volume_control.step = 0.1;
+            // meta_volume_control.className = 'songVolumeSlider';
+            // meta_volume_wrapper.appendChild(meta_volume_control);
+            // meta_volume.appendChild(meta_volume_wrapper);
+
+            // // Add the button to the player
+            // newPlayer.appendChild(button);
+
+            // // Add the metadata to the player
+            // newPlayer.appendChild(meta);
+
+            // // Add the timings to the player
+            // newPlayer.appendChild(timings);
+
+            // // Add the volume display to the player
+            // newPlayer.appendChild(meta_volume);
+
+            // // Replace the original audio element with our new creation.
+            // _data[i].parentNode.replaceChild(newPlayer, _data[i]);
+
+            return newPlayer;
+        });
+
+        return markupArray;
     };
 
     /**
@@ -101,8 +240,7 @@ function Picobel(rawOptions = {}) {
     state.components = _setComponentsByTheme(state.theme, rawOptions.components);
 
     // Get audio elements from page, and save their details to state.
-    const audioNodes = _findAudio();
-    state.audioNodes = audioNodes;
+    state.audioNodes = _findAudio();
 
     // Build markup for each element, based on `components`
     const markup = _generateMarkup(state.audioNodes, state.components);
@@ -126,7 +264,8 @@ function Picobel(rawOptions = {}) {
     return {
         state,
         setComponentsByTheme: _setComponentsByTheme,
-        findAudio: _findAudio
+        findAudio: _findAudio,
+        generateMarkup: _generateMarkup
     };
 }
 

@@ -36,6 +36,7 @@ it('finds the audio nodes', () => {
 
 it('correctly sets component state', () => {
     const expectedComponents = {
+        theme: 'default',
         playPause: false,
         progress: true,
         volume: true,
@@ -49,6 +50,22 @@ it('correctly sets component state', () => {
     // Does it work when called as part of the whole app?
     expect(picobel.state.components).toEqual(expectedComponents);
     // Does it work when called directly?
-    let components = picobel.setComponentsByTheme(null, startingOptions.components);
+    let components = picobel.setComponentsByTheme('default', startingOptions.components);
     expect(components).toEqual(expectedComponents);
+});
+
+it('generates a div for each audio element', () => {
+    const expectedComponents = {
+        theme: 'default',
+        playPause: false,
+        progress: true,
+        volume: true,
+        download: false,
+        mute: true,
+        duration: true,
+        timer: true
+    };
+    const markup = Picobel().generateMarkup(['test', 'test', 'test'], expectedComponents);
+    expect(markup.length).toEqual(3);
+    expect(markup[0].localName).toEqual('div');
 });
