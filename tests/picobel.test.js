@@ -24,8 +24,31 @@ it('sets the correct theme option', () => {
 });
 
 it('finds the audio nodes', () => {
-    // Setup test DOM:
+    // With test DOM:
     document.body.innerHTML = testDOM;
     let nodes = Picobel().findAudio();
     expect(nodes.length).toEqual(2);
+    // With empty DOM:
+    document.body.innerHTML = '';
+    nodes = Picobel().findAudio();
+    expect(nodes.length).toEqual(0);
+});
+
+it('correctly sets component state', () => {
+    const expectedComponents = {
+        playPause: false,
+        progress: true,
+        volume: true,
+        download: false,
+        mute: true,
+        duration: true,
+        timer: true
+    };
+    const startingOptions = { components: { playPause: false } };
+    let picobel = Picobel(startingOptions);
+    // Does it work when called as part of the whole app?
+    expect(picobel.state.components).toEqual(expectedComponents);
+    // Does it work when called directly?
+    let components = picobel.setComponentsByTheme(null, startingOptions.components);
+    expect(components).toEqual(expectedComponents);
 });
