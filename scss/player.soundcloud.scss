@@ -349,7 +349,7 @@ $text_light: #969696;
         display: none;
     }
 
-    .songVolumeSliderWrapper {
+    .volume-slider__wrapper {
         display: none;
         transform: rotate(-90deg);
         transform-origin: 0 0;
@@ -393,7 +393,7 @@ $text_light: #969696;
             border-bottom: 8px solid transparent;
         }
 
-        .songVolumeSlider {
+        .volume-slider__range {
             width: 100%;
             padding: 0;
             margin: 0;
@@ -404,7 +404,7 @@ $text_light: #969696;
             opacity: 0;
         }
 
-        .pseudoVolumeBackground {
+        .volume-slider__background {
             height: 1px;
             position: absolute;
             bottom: 50%;
@@ -412,7 +412,7 @@ $text_light: #969696;
             background: $unplayed;
             width: 100%;
         }
-        .pseudoVolumeIndicator {
+        .volume-slider__progress-indicator {
             height: 1px;
             position: absolute;
             bottom: 50%;
@@ -420,7 +420,7 @@ $text_light: #969696;
             background: $orange;
             width: 0%;
         }
-        .pseudoVolumePlayhead {
+        .volume-slider__playhead {
             background: $orange;
             width: 0.4rem;
             height: 0.4rem;
@@ -434,23 +434,23 @@ $text_light: #969696;
             transition: opacity 0.2s;
         }
     }
-    .songVolume:hover .songVolumeSliderWrapper {
+    .songVolume:hover .volume-slider__wrapper {
         display: block;
     }
 
     // Make sure the range Track is the right size and shape
-    input[type='range'].songVolumeSlider::-webkit-slider-runnable-track {
+    input[type='range'].volume-slider__range::-webkit-slider-runnable-track {
         width: 100%;
         font-size: 1em;
         height: 2em;
         cursor: pointer;
     }
-    input[type='range'].songVolumeSlider::-moz-range-track {
+    input[type='range'].volume-slider__range::-moz-range-track {
         width: 100%;
         height: 2em;
         cursor: pointer;
     }
-    input[type='range'].songVolumeSlider::-ms-track {
+    input[type='range'].volume-slider__range::-ms-track {
         width: 100%;
         height: 2em;
         cursor: pointer;

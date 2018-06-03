@@ -393,7 +393,7 @@ $background_grey_light: #f1f1f1;
     // As with the playback indicator, we're
     // using a range element to power the
     // volume slider functionality
-    .songVolumeSliderWrapper {
+    .volume-slider__wrapper {
         display: block;
         height: 1.6em;
         position: absolute;
@@ -422,7 +422,7 @@ $background_grey_light: #f1f1f1;
         // Position it on-top of the fake and
         // make it invisible (so we can still
         // get the functionality)
-        .songVolumeSlider {
+        .volume-slider__range {
             width: 100%;
             padding: 0;
             margin: 0;
@@ -433,7 +433,7 @@ $background_grey_light: #f1f1f1;
             opacity: 0;
             transform: rotate(180deg);
         }
-        .pseudoVolumeIndicator {
+        .volume-slider__progress-indicator {
             height: 1.6em;
             position: absolute;
             top: 0;
@@ -442,7 +442,7 @@ $background_grey_light: #f1f1f1;
             width: 100%;
             transform: rotate(180deg);
         }
-        .pseudoVolumePlayhead {
+        .volume-slider__playhead {
             display: none;
         }
     }
@@ -451,18 +451,18 @@ $background_grey_light: #f1f1f1;
     // right size and shape. Needs prefixed
     // versions to ensure cross-browser
     // consistency.
-    input[type='range'].songVolumeSlider::-webkit-slider-runnable-track {
+    input[type='range'].volume-slider__range::-webkit-slider-runnable-track {
         width: 100%;
         font-size: 1em;
         height: 1.5em;
         cursor: pointer;
     }
-    input[type='range'].songVolumeSlider::-moz-range-track {
+    input[type='range'].volume-slider__range::-moz-range-track {
         width: 100%;
         height: 1.5em;
         cursor: pointer;
     }
-    input[type='range'].songVolumeSlider::-ms-track {
+    input[type='range'].volume-slider__range::-ms-track {
         width: 100%;
         height: 1.5em;
         cursor: pointer;

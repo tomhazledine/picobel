@@ -173,56 +173,43 @@ function Picobel(rawOptions = {}) {
                     timings.appendChild(duration);
                 }
 
+                // Add the timings to the player
                 newPlayer.appendChild(timings);
             }
 
-            // // Volume Indicator
-            // let meta_volume = document.createElement('div');
-            // meta_volume.className = 'songVolume';
-            // let meta_mute = document.createElement('button');
-            // meta_mute.className = 'songMuteButton';
-            // meta_mute.innerHTML = 'Mute';
-            // meta_volume.appendChild(meta_mute);
-            // let meta_volume_label_wrapper = document.createElement('div');
-            // meta_volume_label_wrapper.className = 'songVolumeLabelWrapper';
-            // let meta_volume_label = document.createElement('span');
-            // meta_volume_label.className = 'songVolumeLabel';
-            // meta_volume_label.innerHTML = 'Volume';
-            // meta_volume_label_wrapper.appendChild(meta_volume_label);
-            // let meta_volume_value = document.createElement('span');
-            // meta_volume_value.className = 'songVolumeValue';
-            // meta_volume_value.innerHTML = '10';
-            // meta_volume_label_wrapper.appendChild(meta_volume_value);
-            // meta_volume.appendChild(meta_volume_label_wrapper);
-            // let meta_volume_wrapper = document.createElement('div');
-            // meta_volume_wrapper.className = 'songVolumeSliderWrapper';
-            // let meta_pseudo_volume_background = document.createElement('div');
-            // meta_pseudo_volume_background.className = 'pseudoVolumeBackground';
-            // meta_volume_wrapper.appendChild(meta_pseudo_volume_background);
-            // let meta_pseudo_volume_indicator = document.createElement('div');
-            // meta_pseudo_volume_indicator.className = 'pseudoVolumeIndicator';
-            // meta_volume_wrapper.appendChild(meta_pseudo_volume_indicator);
-            // let meta_pseudo_volume_playhead = document.createElement('div');
-            // meta_pseudo_volume_playhead.className = 'pseudoVolumePlayhead';
-            // meta_volume_wrapper.appendChild(meta_pseudo_volume_playhead);
-            // let meta_volume_control = document.createElement('input');
-            // meta_volume_control.type = 'range';
-            // meta_volume_control.min = 0;
-            // meta_volume_control.max = 1;
-            // meta_volume_control.value = 1;
-            // meta_volume_control.step = 0.1;
-            // meta_volume_control.className = 'songVolumeSlider';
-            // meta_volume_wrapper.appendChild(meta_volume_control);
-            // meta_volume.appendChild(meta_volume_wrapper);
+            // ----------------
+            // VOLUME INDICATOR
+            // ----------------
+            if (components.volume || components.mute) {
+                // Volume Indicator
+                let volume = document.createElement('div');
+                volume.className = 'songVolume';
 
-            // // Add the timings to the player
-            // newPlayer.appendChild(timings);
+                if (components.mute) {
+                    let mute = document.createElement('button');
+                    mute.className = 'songMuteButton';
+                    mute.innerHTML = 'Mute';
+                    volume.appendChild(mute);
+                }
 
-            // // Add the volume display to the player
-            // newPlayer.appendChild(meta_volume);
+                if (components.volume) {
+                    let volume_label_wrapper = document.createElement('div');
+                    volume_label_wrapper.className = 'songVolumeLabelWrapper';
+                    let volume_label = document.createElement('span');
+                    volume_label.className = 'songVolumeLabel';
+                    volume_label.innerHTML = 'Volume';
+                    volume_label_wrapper.appendChild(volume_label);
+                    let volume_value = document.createElement('span');
+                    volume_value.className = 'songVolumeValue';
+                    volume_value.innerHTML = '10';
+                    volume_label_wrapper.appendChild(volume_value);
+                    volume.appendChild(volume_label_wrapper);
 
-            // // Replace the original audio element with our new creation.
-            // _data[i].parentNode.replaceChild(newPlayer, _data[i]);
+                    let volume_slider = _helpers.buildSlider('volume', 0, 1, 1, 0.1);
+                    volume.appendChild(volume_slider);
+                }
+                newPlayer.appendChild(volume);
+            }
 
             return newPlayer;
         });

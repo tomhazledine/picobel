@@ -45,7 +45,7 @@ const _helpers = {
     },
 
     // Create markup for a custom slider
-    buildSlider: (namespace = 'picobel', min = 0, max = 100, value = 0) => {
+    buildSlider: (namespace = 'picobel', min = 0, max = 100, value = 0, step = false) => {
         // Create a container element to hold all the parts
         let wrapper = document.createElement('div');
         wrapper.className = `${namespace}-slider__wrapper`;
@@ -72,6 +72,9 @@ const _helpers = {
         progress.min = min;
         progress.max = max;
         progress.value = value;
+        if (step) {
+            progress.step = step;
+        }
         progress.className = `${namespace}-slider__range`;
         wrapper.appendChild(progress);
 
