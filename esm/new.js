@@ -105,10 +105,10 @@ function Picobel(rawOptions = {}) {
             // Set song index attribute
             newPlayer.setAttribute('data-song-index', key);
 
-            // // Create a loading indicator
-            // let loading = document.createElement('div');
-            // loading.className = 'loader';
-            // newPlayer.appendChild(loading);
+            // Create a loading indicator
+            let loading = document.createElement('div');
+            loading.className = 'loader';
+            newPlayer.appendChild(loading);
 
             // // Add "waiting" indicator here.
 

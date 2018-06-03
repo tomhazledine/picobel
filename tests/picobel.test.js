@@ -113,8 +113,19 @@ describe('markup generation', () => {
 
     it('adds the correct data attribute to each audio element', () => {
         const markup = Picobel().generateMarkup(TEST_NODES, EXPECTED_COMPONENTS);
-        expect(markup.length).toEqual(2);
         expect(markup[0].getAttribute('data-song-index')).toEqual('0');
         expect(markup[1].getAttribute('data-song-index')).toEqual('1');
+    });
+
+    it('adds a loading indicator each audio element', () => {
+        const markup = Picobel().generateMarkup(TEST_NODES, EXPECTED_COMPONENTS);
+
+        let firstIndicator = markup[0].getElementsByTagName('div');
+        expect(firstIndicator.length).toEqual(1);
+        expect(firstIndicator[0].classList).toContain('loader');
+
+        let secondIndicator = markup[1].getElementsByTagName('div');
+        expect(secondIndicator.length).toEqual(1);
+        expect(secondIndicator[0].classList).toContain('loader');
     });
 });
