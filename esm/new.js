@@ -102,8 +102,8 @@ function Picobel(rawOptions = {}) {
             const classes = _prepareClasses(key, node.className, components.theme);
             newPlayer.classList.add(...classes);
 
-            // _addClass(newPlayer, options.theme);
-            // newPlayer.setAttribute('data-song-index', i);
+            // Set song index attribute
+            newPlayer.setAttribute('data-song-index', key);
 
             // // Create a loading indicator
             // let loading = document.createElement('div');

@@ -1,6 +1,6 @@
 import Picobel from '../esm/new';
 
-const testDOM = `
+const TEST_DOM = `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -18,75 +18,103 @@ const testDOM = `
     </html>
 `;
 
-it('sets the correct theme option', () => {
-    expect(Picobel().state.theme).toEqual('default');
-    expect(Picobel({ theme: 'bbc' }).state.theme).toEqual('bbc');
+const EXPECTED_COMPONENTS = {
+    theme: 'default',
+    playPause: false,
+    progress: true,
+    volume: true,
+    download: false,
+    mute: true,
+    duration: true,
+    timer: true
+};
+
+/**
+ * -----------------------------------------------------------------------------
+ * SETUP
+ * -----------------------------------------------------------------------------
+ */
+describe('setup', () => {
+    it('sets the correct theme option', () => {
+        expect(Picobel().state.theme).toEqual('default');
+        expect(Picobel({ theme: 'bbc' }).state.theme).toEqual('bbc');
+    });
+
+    it('finds the audio nodes', () => {
+        // With test DOM:
+        document.body.innerHTML = TEST_DOM;
+        let nodes = Picobel().findAudio();
+        expect(nodes.length).toEqual(2);
+        // With empty DOM:
+        document.body.innerHTML = '';
+        nodes = Picobel().findAudio();
+        expect(nodes.length).toEqual(0);
+    });
+
+    it('correctly sets component state', () => {
+        const startingOptions = { components: { playPause: false } };
+        let picobel = Picobel(startingOptions);
+        // Does it work when called as part of the whole app?
+        expect(picobel.state.components).toEqual(EXPECTED_COMPONENTS);
+        // Does it work when called directly?
+        let components = picobel.setComponentsByTheme('default', startingOptions.components);
+        expect(components).toEqual(EXPECTED_COMPONENTS);
+    });
 });
 
-it('finds the audio nodes', () => {
-    // With test DOM:
-    document.body.innerHTML = testDOM;
-    let nodes = Picobel().findAudio();
-    expect(nodes.length).toEqual(2);
-    // With empty DOM:
-    document.body.innerHTML = '';
-    nodes = Picobel().findAudio();
-    expect(nodes.length).toEqual(0);
-});
+/**
+ * -----------------------------------------------------------------------------
+ * MARKUP GENERATION
+ * -----------------------------------------------------------------------------
+ */
+describe('markup generation', () => {
+    // Create some test nodes to trigger markup generation.
+    document.body.innerHTML = TEST_DOM;
+    let audioElements = document.getElementsByTagName('audio');
+    const TEST_NODES = [].slice.call(audioElements);
 
-it('correctly sets component state', () => {
-    const expectedComponents = {
-        theme: 'default',
-        playPause: false,
-        progress: true,
-        volume: true,
-        download: false,
-        mute: true,
-        duration: true,
-        timer: true
-    };
-    const startingOptions = { components: { playPause: false } };
-    let picobel = Picobel(startingOptions);
-    // Does it work when called as part of the whole app?
-    expect(picobel.state.components).toEqual(expectedComponents);
-    // Does it work when called directly?
-    let components = picobel.setComponentsByTheme('default', startingOptions.components);
-    expect(components).toEqual(expectedComponents);
-});
+    it('generates a div for each audio element', () => {
+        // With three arbitrary array entries.
+        let markup = Picobel().generateMarkup(['test', 'test', 'test'], EXPECTED_COMPONENTS);
+        expect(markup.length).toEqual(3);
+        expect(markup[0].localName).toEqual('div');
 
-it('generates a div for each audio element', () => {
-    const expectedComponents = {
-        theme: 'default',
-        playPause: false,
-        progress: true,
-        volume: true,
-        download: false,
-        mute: true,
-        duration: true,
-        timer: true
-    };
-    const markup = Picobel().generateMarkup(['test', 'test', 'test'], expectedComponents);
-    expect(markup.length).toEqual(3);
-    expect(markup[0].localName).toEqual('div');
-});
+        // With two arbitrary array entries.
+        markup = Picobel().generateMarkup(['test', 'test'], EXPECTED_COMPONENTS);
+        expect(markup.length).toEqual(2);
+        expect(markup[1].localName).toEqual('div');
 
-it('creates an array of class names', () => {
-    let classList = Picobel().prepareClasses(0, 'some classes', 'themeName');
+        // With our test nodes.
+        markup = Picobel().generateMarkup(TEST_NODES, EXPECTED_COMPONENTS);
+        expect(markup.length).toEqual(2);
+        expect(markup[1].localName).toEqual('div');
+    });
 
-    expect(Array.isArray(classList)).toEqual(true);
-    expect(classList.length).toEqual(6);
-    expect(classList[0]).toEqual('customAudioPlayer');
-    expect(classList[1]).toEqual('loading');
-    expect(classList[2]).toEqual('player_0');
-    expect(classList[3]).toEqual('some');
-    expect(classList[4]).toEqual('classes');
-    expect(classList[5]).toEqual('themeName');
+    it('creates an array of class names', () => {
+        let classList = Picobel().prepareClasses(0, 'some classes', 'themeName');
 
-    classList = Picobel().prepareClasses(2, '', 'something');
-    expect(Array.isArray(classList)).toEqual(true);
-    expect(classList.length).toEqual(4);
-    expect(classList[0]).toEqual('customAudioPlayer');
-    expect(classList[1]).toEqual('loading');
-    expect(classList[2]).toEqual('player_2');
-    expect(classList[3]).toEqual('something');
+        expect(Array.isArray(classList)).toEqual(true);
+        expect(classList.length).toEqual(6);
+        expect(classList).toContain('customAudioPlayer');
+        expect(classList).toContain('loading');
+        expect(classList).toContain('player_0');
+        expect(classList).toContain('some');
+        expect(classList).toContain('classes');
+        expect(classList).toContain('themeName');
+
+        classList = Picobel().prepareClasses(2, '', 'something');
+        expect(Array.isArray(classList)).toEqual(true);
+        expect(classList.length).toEqual(4);
+        expect(classList).toContain('customAudioPlayer');
+        expect(classList).toContain('loading');
+        expect(classList).toContain('player_2');
+        expect(classList).toContain('something');
+    });
+
+    it('adds the correct data attribute to each audio element', () => {
+        const markup = Picobel().generateMarkup(TEST_NODES, EXPECTED_COMPONENTS);
+        expect(markup.length).toEqual(2);
+        expect(markup[0].getAttribute('data-song-index')).toEqual('0');
+        expect(markup[1].getAttribute('data-song-index')).toEqual('1');
+    });
 });
