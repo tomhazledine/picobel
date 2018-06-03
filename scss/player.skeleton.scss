@@ -242,7 +242,7 @@ $grey: #ddd;
     }
 
     // The "fake" range slider
-    .songProgressSliderWrapper {
+    .progress-slider__wrapper {
         height: 2em;
         font-size: 1em;
         line-height: 1;
@@ -258,7 +258,7 @@ $grey: #ddd;
         // Position it on-top of the fake and
         // make it invisible (so we can still
         // get the functionality)
-        .songProgressSlider {
+        .progress-slider__range {
             width: 100%;
             padding: 0;
             margin: 0;
@@ -267,7 +267,7 @@ $grey: #ddd;
             left: 0;
             opacity: 0;
         }
-        .pseudoProgressIndicator {
+        .progress-slider__progress-indicator {
             height: 2em;
             position: absolute;
             top: 0;
@@ -275,7 +275,7 @@ $grey: #ddd;
             background: $grey;
             width: 0%;
         }
-        .pseudoProgressPlayhead {
+        .progress-slider__playhead {
             width: 0.5em;
             height: 2em;
             position: absolute;
@@ -287,8 +287,8 @@ $grey: #ddd;
     }
 
     // Hide dynamic elements until loading has finished
-    &.loading .pseudoProgressIndicator,
-    &.loading .pseudoProgressPlayhead {
+    &.loading .progress-slider__progress-indicator,
+    &.loading .progress-slider__playhead {
         display: none;
     }
 
@@ -296,18 +296,18 @@ $grey: #ddd;
     // right size and shape. Needs prefixed
     // versions to ensure cross-browser
     // consistency.
-    input[type='range'].songProgressSlider::-webkit-slider-runnable-track {
+    input[type='range'].progress-slider__range::-webkit-slider-runnable-track {
         width: 100%;
         font-size: 1em;
         height: 2em;
         cursor: pointer;
     }
-    input[type='range'].songProgressSlider::-moz-range-track {
+    input[type='range'].progress-slider__range::-moz-range-track {
         width: 100%;
         height: 2em;
         cursor: pointer;
     }
-    input[type='range'].songProgressSlider::-ms-track {
+    input[type='range'].progress-slider__range::-ms-track {
         width: 100%;
         height: 2em;
         cursor: pointer;

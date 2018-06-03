@@ -42,6 +42,40 @@ const _helpers = {
         let fullFileName = string.replace(/^.*[\\\/]/, '');
         let withNoExtension = fullFileName.split('.')[0];
         return withNoExtension;
+    },
+
+    // Create markup for a custom slider
+    buildSlider: (namespace = 'picobel', min = 0, max = 100, value = 0) => {
+        // Create a container element to hold all the parts
+        let wrapper = document.createElement('div');
+        wrapper.className = `${namespace}-slider__wrapper`;
+
+        // Create a background div
+        let background = document.createElement('div');
+        background.className = `${namespace}-slider__background`;
+        // Add the background to the container
+        wrapper.appendChild(background);
+
+        // Create a progress indicator
+        let progressIndicator = document.createElement('div');
+        progressIndicator.className = `${namespace}-slider__progress-indicator`;
+        wrapper.appendChild(progressIndicator);
+
+        // Create a "playhead"
+        let playhead = document.createElement('div');
+        playhead.className = `${namespace}-slider__playhead`;
+        wrapper.appendChild(playhead);
+
+        // Create an (invisible) input (html range)
+        let progress = document.createElement('input');
+        progress.type = 'range';
+        progress.min = min;
+        progress.max = max;
+        progress.value = value;
+        progress.className = `${namespace}-slider__range`;
+        wrapper.appendChild(progress);
+
+        return wrapper;
     }
 };
 

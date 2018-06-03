@@ -168,7 +168,7 @@ $text_light: #7a7a7a;
 
     $progressHeight: 1rem;
 
-    .songProgressSliderWrapper {
+    .progress-slider__wrapper {
         height: $progressHeight;
         line-height: 1;
         position: absolute;
@@ -176,7 +176,7 @@ $text_light: #7a7a7a;
         left: 4rem;
         right: 0;
         overflow: hidden;
-        .songProgressSlider {
+        .progress-slider__range {
             width: 100%;
             padding: 0;
             margin: 0;
@@ -186,7 +186,7 @@ $text_light: #7a7a7a;
             opacity: 0;
         }
 
-        .pseudoProgressBackground {
+        .progress-slider__background {
             height: 0.5em;
             position: absolute;
             bottom: 0;
@@ -194,7 +194,7 @@ $text_light: #7a7a7a;
             background: $unplayed_grey;
             width: 100%;
         }
-        .pseudoProgressIndicator {
+        .progress-slider__progress-indicator {
             height: 0.5em;
             position: absolute;
             bottom: 0;
@@ -202,7 +202,7 @@ $text_light: #7a7a7a;
             background: $played_grey;
             width: 0%;
         }
-        .pseudoProgressPlayhead {
+        .progress-slider__playhead {
             width: 0.3em;
             height: $progressHeight;
             position: absolute;
@@ -216,18 +216,18 @@ $text_light: #7a7a7a;
     }
 
     // Make sure the range Track is the right size and shape
-    input[type='range'].songProgressSlider::-webkit-slider-runnable-track {
+    input[type='range'].progress-slider__range::-webkit-slider-runnable-track {
         width: 100%;
         font-size: $progressHeight;
         height: 2.2em;
         cursor: pointer;
     }
-    input[type='range'].songProgressSlider::-moz-range-track {
+    input[type='range'].progress-slider__range::-moz-range-track {
         width: 100%;
         height: $progressHeight;
         cursor: pointer;
     }
-    input[type='range'].songProgressSlider::-ms-track {
+    input[type='range'].progress-slider__range::-ms-track {
         width: 100%;
         height: $progressHeight;
         cursor: pointer;

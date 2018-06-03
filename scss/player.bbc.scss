@@ -245,14 +245,14 @@ $played: $highlight;
 
     $progressHeight: 0.6rem;
 
-    .songProgressSliderWrapper {
+    .progress-slider__wrapper {
         height: 1em;
         line-height: 1;
         position: absolute;
         top: 1em;
         left: 1em;
         right: 1em;
-        .songProgressSlider {
+        .progress-slider__range {
             width: 100%;
             padding: 0;
             height: 1em;
@@ -263,7 +263,7 @@ $played: $highlight;
             opacity: 0;
         }
 
-        .pseudoProgressBackground {
+        .progress-slider__background {
             height: 0.5em;
             position: absolute;
             top: 0.25em;
@@ -271,7 +271,7 @@ $played: $highlight;
             background: $unplayed;
             width: 100%;
         }
-        .pseudoProgressIndicator {
+        .progress-slider__progress-indicator {
             height: 0.5em;
             position: absolute;
             top: 0.25em;
@@ -279,7 +279,7 @@ $played: $highlight;
             background: $highlight;
             width: 0%;
         }
-        .pseudoProgressPlayhead {
+        .progress-slider__playhead {
             background: $black;
             box-shadow: inset $white 0 0 0 0.2em;
             width: 0.5em;
@@ -292,18 +292,18 @@ $played: $highlight;
     }
 
     // Make sure the range Track is the right size and shape
-    input[type='range'].songProgressSlider::-webkit-slider-runnable-track {
+    input[type='range'].progress-slider__range::-webkit-slider-runnable-track {
         width: 100%;
         font-size: $progressHeight;
         height: 2em;
         cursor: pointer;
     }
-    input[type='range'].songProgressSlider::-moz-range-track {
+    input[type='range'].progress-slider__range::-moz-range-track {
         width: 100%;
         height: $progressHeight;
         cursor: pointer;
     }
-    input[type='range'].songProgressSlider::-ms-track {
+    input[type='range'].progress-slider__range::-ms-track {
         width: 100%;
         height: $progressHeight;
         cursor: pointer;

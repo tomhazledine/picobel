@@ -237,12 +237,12 @@ $text_light: #969696;
 
     $progressHeight: 0.6rem;
 
-    .songProgressSliderWrapper {
+    .progress-slider__wrapper {
         height: $progressHeight;
         line-height: 1;
         position: relative;
         border-radius: 0.2rem;
-        .songProgressSlider {
+        .progress-slider__range {
             width: 100%;
             padding: 0;
             margin: 0;
@@ -252,7 +252,7 @@ $text_light: #969696;
             opacity: 0;
         }
 
-        .pseudoProgressBackground {
+        .progress-slider__background {
             height: 0.1rem;
             position: absolute;
             bottom: 50%;
@@ -260,7 +260,7 @@ $text_light: #969696;
             background: $unplayed;
             width: 100%;
         }
-        .pseudoProgressIndicator {
+        .progress-slider__progress-indicator {
             height: 0.1rem;
             position: absolute;
             bottom: 50%;
@@ -268,7 +268,7 @@ $text_light: #969696;
             background: $orange;
             width: 0%;
         }
-        .pseudoProgressPlayhead {
+        .progress-slider__playhead {
             background: $orange;
             width: 0.4rem;
             height: 0.4rem;
@@ -283,23 +283,23 @@ $text_light: #969696;
         }
     }
 
-    .songProgressSliderWrapper:hover .pseudoProgressPlayhead {
+    .progress-slider__wrapper:hover .progress-slider__playhead {
         opacity: 1;
     }
 
     // Make sure the range Track is the right size and shape
-    input[type='range'].songProgressSlider::-webkit-slider-runnable-track {
+    input[type='range'].progress-slider__range::-webkit-slider-runnable-track {
         width: 100%;
         font-size: $progressHeight;
         height: 2.2em;
         cursor: pointer;
     }
-    input[type='range'].songProgressSlider::-moz-range-track {
+    input[type='range'].progress-slider__range::-moz-range-track {
         width: 100%;
         height: $progressHeight;
         cursor: pointer;
     }
-    input[type='range'].songProgressSlider::-ms-track {
+    input[type='range'].progress-slider__range::-ms-track {
         width: 100%;
         height: $progressHeight;
         cursor: pointer;

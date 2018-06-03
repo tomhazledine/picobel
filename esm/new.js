@@ -110,64 +110,71 @@ function Picobel(rawOptions = {}) {
             loading.className = 'loader';
             newPlayer.appendChild(loading);
 
-            // // Add "waiting" indicator here.
+            // TODO: Add "waiting" indicator here?
 
-            // // Create a play/pause button
-            // let button = document.createElement('button');
-            // button.className = 'playerTrigger';
-            // let buttonText = document.createElement('span');
-            // buttonText.className = 'buttonText';
-            // buttonText.innerHTML = 'play';
-            // button.appendChild(buttonText);
+            // -----------------
+            // PLAY/PAUSE BUTTON
+            // -----------------
+            if (components.playPause) {
+                // Create a play/pause button
+                let button = document.createElement('button');
+                button.className = 'playerTrigger';
+                let buttonText = document.createElement('span');
+                buttonText.className = 'buttonText';
+                buttonText.innerHTML = 'play';
+                button.appendChild(buttonText);
+                // Add the button to the player
+                newPlayer.appendChild(button);
+            }
 
-            // // Create a wrapper for our player's metadata
-            // let meta = document.createElement('div');
-            // meta.className = 'metaWrapper';
+            // ---------
+            // META DATA
+            // ---------
+            // Create a wrapper for our player's metadata
+            let meta = document.createElement('div');
+            meta.className = 'metaWrapper';
 
-            // // Create elements to display file metadata
-            // let meta_title = document.createElement('span');
-            // meta_title.className = 'titleDisplay';
-            // meta_title.innerHTML = 'File ' + (i + 1);
-            // meta.appendChild(meta_title);
+            // Create elements to display file metadata
+            let meta_title = document.createElement('span');
+            meta_title.className = 'titleDisplay';
+            meta_title.innerHTML = 'File ' + (key + 1);
+            meta.appendChild(meta_title);
 
-            // let meta_artist = document.createElement('span');
-            // meta_artist.className = 'artistDisplay';
-            // meta.appendChild(meta_artist);
+            let meta_artist = document.createElement('span');
+            meta_artist.className = 'artistDisplay';
+            meta.appendChild(meta_artist);
 
-            // let timings = document.createElement('div');
-            // timings.className = 'timingsWrapper';
+            // Add the metadata to the player
+            newPlayer.appendChild(meta);
 
-            // let meta_timer = document.createElement('span');
-            // meta_timer.className = 'songPlayTimer';
-            // meta_timer.innerHTML = '0:00';
-            // timings.appendChild(meta_timer);
+            // -----------------------------------
+            // TIMINGS (PROGRESS, DURATION, TIMER)
+            // -----------------------------------
+            if (components.progress || components.duration || components.timer) {
+                let timings = document.createElement('div');
+                timings.className = 'timingsWrapper';
 
-            // // Progress Indicator
-            // let meta_progress_wrapper = document.createElement('div');
-            // meta_progress_wrapper.className = 'songProgressSliderWrapper';
-            // let meta_pseudo_progress_background = document.createElement('div');
-            // meta_pseudo_progress_background.className = 'pseudoProgressBackground';
-            // meta_progress_wrapper.appendChild(meta_pseudo_progress_background);
-            // let meta_pseudo_progress_indicator = document.createElement('div');
-            // meta_pseudo_progress_indicator.className = 'pseudoProgressIndicator';
-            // meta_progress_wrapper.appendChild(meta_pseudo_progress_indicator);
-            // let meta_pseudo_progress_playhead = document.createElement('div');
-            // meta_pseudo_progress_playhead.className = 'pseudoProgressPlayhead';
-            // meta_progress_wrapper.appendChild(meta_pseudo_progress_playhead);
-            // let meta_progress = document.createElement('input');
-            // meta_progress.type = 'range';
-            // meta_progress.min = 0;
-            // meta_progress.max = 100;
-            // meta_progress.value = 0;
-            // meta_progress.className = 'songProgressSlider';
-            // meta_progress_wrapper.appendChild(meta_progress);
+                if (components.timer) {
+                    let timer = document.createElement('span');
+                    timer.className = 'songPlayTimer';
+                    timer.innerHTML = '0:00';
+                    timings.appendChild(timer);
+                }
 
-            // timings.appendChild(meta_progress_wrapper);
+                if (components.progress) {
+                    let progress = _helpers.buildSlider('progress', 0, 100, 0);
+                    timings.appendChild(progress);
+                }
 
-            // let meta_duration = document.createElement('span');
-            // meta_duration.className = 'songDuration';
-            // meta_duration.innerHTML = '-:--';
-            // timings.appendChild(meta_duration);
+                if (components.duration) {
+                    let duration = document.createElement('span');
+                    duration.className = 'songDuration';
+                    duration.innerHTML = '-:--';
+                    timings.appendChild(duration);
+                }
+
+                newPlayer.appendChild(timings);
+            }
 
             // // Volume Indicator
             // let meta_volume = document.createElement('div');
@@ -208,12 +215,6 @@ function Picobel(rawOptions = {}) {
             // meta_volume_wrapper.appendChild(meta_volume_control);
             // meta_volume.appendChild(meta_volume_wrapper);
 
-            // // Add the button to the player
-            // newPlayer.appendChild(button);
-
-            // // Add the metadata to the player
-            // newPlayer.appendChild(meta);
-
             // // Add the timings to the player
             // newPlayer.appendChild(timings);
 
@@ -227,6 +228,12 @@ function Picobel(rawOptions = {}) {
         });
 
         return markupArray;
+    };
+
+    const _replaceNodes = (audioElements, newMarkup) => {
+        audioElements.map((element, key) => {
+            element.parentNode.replaceChild(newMarkup[key], element);
+        });
     };
 
     /**
@@ -248,6 +255,7 @@ function Picobel(rawOptions = {}) {
     const markup = _generateMarkup(state.audioNodes, state.components);
 
     // Replace audio elements in DOM with new markup
+    _replaceNodes(state.audioNodes, markup);
 
     // Setup event listeners
 
