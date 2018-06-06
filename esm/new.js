@@ -103,27 +103,26 @@ export const PicobelMarkup = {
     // Create markup for a custom slider
     buildSlider: (namespace = 'picobel', min = 0, max = 100, value = 0, step = false) => {
         // Create a container element to hold all the parts
-        let wrapper = document.createElement('div');
-        wrapper.className = `${namespace}-slider__wrapper`;
+        let wrapper = PicobelMarkup.createElement('div', `${namespace}-slider__wrapper`);
 
         // Create a background div
-        let background = document.createElement('div');
-        background.className = `${namespace}-slider__background`;
+        let background = PicobelMarkup.createElement('div', `${namespace}-slider__background`);
         // Add the background to the container
         wrapper.appendChild(background);
 
         // Create a progress indicator
-        let progressIndicator = document.createElement('div');
-        progressIndicator.className = `${namespace}-slider__progress-indicator`;
+        let progressIndicator = PicobelMarkup.createElement(
+            'div',
+            `${namespace}-slider__progress-indicator`
+        );
         wrapper.appendChild(progressIndicator);
 
         // Create a "playhead"
-        let playhead = document.createElement('div');
-        playhead.className = `${namespace}-slider__playhead`;
+        let playhead = PicobelMarkup.createElement('div', `${namespace}-slider__playhead`);
         wrapper.appendChild(playhead);
 
         // Create an (invisible) input (html range)
-        let progress = document.createElement('input');
+        let progress = PicobelMarkup.createElement('input', `${namespace}-slider__range`);
         progress.type = 'range';
         progress.min = min;
         progress.max = max;
@@ -131,16 +130,21 @@ export const PicobelMarkup = {
         if (step) {
             progress.step = step;
         }
-        progress.className = `${namespace}-slider__range`;
         wrapper.appendChild(progress);
 
         return wrapper;
     },
 
+    createElement: (type = 'div', className = '') => {
+        const newElement = document.createElement(type);
+        newElement.className = className;
+        return newElement;
+    },
+
     generateMarkup: (nodes = [], components) => {
         const markupArray = nodes.map(node => {
             // Create a container for our new player
-            const newPlayer = document.createElement('div');
+            const newPlayer = PicobelMarkup.createElement('div');
 
             // Set the relevant classes on the new player element
             const classes = PicobelData.prepareClasses(node.key, node.className, components.theme);
@@ -150,8 +154,7 @@ export const PicobelMarkup = {
             newPlayer.setAttribute('data-song-index', node.key);
 
             // Create a loading indicator
-            let loading = document.createElement('div');
-            loading.className = 'loader';
+            let loading = PicobelMarkup.createElement('div', 'loader');
             newPlayer.appendChild(loading);
 
             // TODO: Add "waiting" indicator here?
@@ -161,10 +164,8 @@ export const PicobelMarkup = {
             // -----------------
             if (components.playPause) {
                 // Create a play/pause button
-                let button = document.createElement('button');
-                button.className = 'playerTrigger';
-                let buttonText = document.createElement('span');
-                buttonText.className = 'buttonText';
+                let button = PicobelMarkup.createElement('button', 'playerTrigger');
+                let buttonText = PicobelMarkup.createElement('span', 'buttonText');
                 buttonText.innerHTML = 'play';
                 button.appendChild(buttonText);
                 // Add the button to the player
@@ -175,17 +176,14 @@ export const PicobelMarkup = {
             // META DATA
             // ---------
             // Create a wrapper for our player's metadata
-            let meta = document.createElement('div');
-            meta.className = 'metaWrapper';
+            let meta = PicobelMarkup.createElement('div', 'metaWrapper');
 
             // Create elements to display file metadata
-            let meta_title = document.createElement('span');
-            meta_title.className = 'titleDisplay';
+            let meta_title = PicobelMarkup.createElement('span', 'titleDisplay');
             meta_title.innerHTML = 'File ' + (node.key + 1);
             meta.appendChild(meta_title);
 
-            let meta_artist = document.createElement('span');
-            meta_artist.className = 'artistDisplay';
+            let meta_artist = PicobelMarkup.createElement('span', 'artistDisplay');
             meta.appendChild(meta_artist);
 
             // Add the metadata to the player
@@ -195,12 +193,10 @@ export const PicobelMarkup = {
             // TIMINGS (PROGRESS, DURATION, TIMER)
             // -----------------------------------
             if (components.progress || components.duration || components.timer) {
-                let timings = document.createElement('div');
-                timings.className = 'timingsWrapper';
+                let timings = PicobelMarkup.createElement('div', 'timingsWrapper');
 
                 if (components.timer) {
-                    let timer = document.createElement('span');
-                    timer.className = 'songPlayTimer';
+                    let timer = PicobelMarkup.createElement('span', 'songPlayTimer');
                     timer.innerHTML = '0:00';
                     timings.appendChild(timer);
                 }
@@ -211,8 +207,7 @@ export const PicobelMarkup = {
                 }
 
                 if (components.duration) {
-                    let duration = document.createElement('span');
-                    duration.className = 'songDuration';
+                    let duration = PicobelMarkup.createElement('span', 'songDuration');
                     duration.innerHTML = '-:--';
                     timings.appendChild(duration);
                 }
@@ -226,25 +221,23 @@ export const PicobelMarkup = {
             // ----------------
             if (components.volume || components.mute) {
                 // Volume Indicator
-                let volume = document.createElement('div');
-                volume.className = 'songVolume';
+                let volume = PicobelMarkup.createElement('div', 'songVolume');
 
                 if (components.mute) {
-                    let mute = document.createElement('button');
-                    mute.className = 'songMuteButton';
+                    let mute = PicobelMarkup.createElement('button', 'songMuteButton');
                     mute.innerHTML = 'Mute';
                     volume.appendChild(mute);
                 }
 
                 if (components.volume) {
-                    let volume_label_wrapper = document.createElement('div');
-                    volume_label_wrapper.className = 'songVolumeLabelWrapper';
-                    let volume_label = document.createElement('span');
-                    volume_label.className = 'songVolumeLabel';
+                    let volume_label_wrapper = PicobelMarkup.createElement(
+                        'div',
+                        'songVolumeLabelWrapper'
+                    );
+                    let volume_label = PicobelMarkup.createElement('span', 'songVolumeLabel');
                     volume_label.innerHTML = 'Volume';
                     volume_label_wrapper.appendChild(volume_label);
-                    let volume_value = document.createElement('span');
-                    volume_value.className = 'songVolumeValue';
+                    let volume_value = PicobelMarkup.createElement('span', 'songVolumeValue');
                     volume_value.innerHTML = '10';
                     volume_label_wrapper.appendChild(volume_value);
                     volume.appendChild(volume_label_wrapper);

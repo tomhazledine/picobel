@@ -12,7 +12,7 @@ const EXPECTED_COMPONENTS = {
 };
 
 describe('Markup helpers', () => {
-    it('builds a slider', () => {
+    it('can create a slider', () => {
         const NAMESPACE = 'progress';
         const MIN = 0;
         const MAX = 100;
@@ -26,6 +26,28 @@ describe('Markup helpers', () => {
         expect(slider.children[3].min).toEqual(MIN.toString());
         expect(slider.children[3].max).toEqual(MAX.toString());
         expect(slider.children[3].value).toEqual(VALUE.toString());
+    });
+
+    it('can create new elements', () => {
+        // Works without second arg
+        let elementNoClass = PicobelMarkup.createElement('div');
+        expect(elementNoClass.localName).toEqual('div');
+        // Creates a span
+        let elementSpan = PicobelMarkup.createElement('span', 'songVolumeValue');
+        expect(elementSpan.localName).toEqual('span');
+        expect(elementSpan.classList).toContain('songVolumeValue');
+        // Creates a div
+        let elementDiv = PicobelMarkup.createElement('div', 'test');
+        expect(elementDiv.localName).toEqual('div');
+        expect(elementDiv.classList).toContain('test');
+        // Creates a button
+        let elementButton = PicobelMarkup.createElement('button', 'testing');
+        expect(elementButton.localName).toEqual('button');
+        expect(elementButton.classList).toContain('testing');
+        // Creates an input
+        let elementInput = PicobelMarkup.createElement('input', 'something');
+        expect(elementInput.localName).toEqual('input');
+        expect(elementInput.classList).toContain('something');
     });
 });
 
