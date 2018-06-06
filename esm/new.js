@@ -91,12 +91,16 @@ export const PicobelData = {
 
     // Get the url for each audio file we want to load [using elements found by findAudio()]
     getRawData: nodes =>
-        nodes.map((node, key) => ({
-            key: key,
-            preload: node.preload,
-            url: node.src,
-            className: node.className
-        }))
+        // nodes.map((node, key) => ({
+        //     key: key,
+        //     preload: node.preload,
+        //     url: node.src,
+        //     className: node.className
+        // }))
+        nodes.map((node, key) => {
+            node.key = key;
+            return node;
+        })
 };
 
 export const PicobelMarkup = {
@@ -255,6 +259,8 @@ export const PicobelMarkup = {
     }
 };
 
+export const PicobelAudio = {};
+
 function Picobel(rawOptions = {}) {
     /**
      * -------------------------------------------------------------------------
@@ -269,7 +275,7 @@ function Picobel(rawOptions = {}) {
     const options = PicobelSetup.parseOptions(rawOptions);
 
     // Declare a `state` variable that will hold the active state
-    let state = PicobelSetup.setState({}, { rawNodes: [], audioNodes: [] });
+    let state = PicobelSetup.setState({}, { audioNodes: [] });
 
     // Add options to state
     state = PicobelSetup.setState(state, {
@@ -287,15 +293,17 @@ function Picobel(rawOptions = {}) {
     state.components = PicobelSetup.setComponentsByTheme(state.theme, rawOptions.components);
 
     // Get audio elements from page, and save their details to state.
-    state.rawNodes = PicobelData.findAudio();
+    state.audioNodes = PicobelData.findAudio();
 
-    state.audioNodes = PicobelData.getRawData(state.rawNodes);
+    state.audioNodes = PicobelData.getRawData(state.audioNodes);
 
     // Build markup for each element, based on `components`
     const markup = PicobelMarkup.generateMarkup(state.audioNodes, state.components);
 
     // Replace audio elements in DOM with new markup
-    _replaceNodes(state.rawNodes, markup);
+    _replaceNodes(state.audioNodes, markup);
+
+    // state.audioNodes = PicobelAudio.init(state.audioNodes);
 
     // Setup event listeners
 
