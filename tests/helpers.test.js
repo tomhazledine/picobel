@@ -24,21 +24,3 @@ describe('Utilities', () => {
         ).toEqual('human');
     });
 });
-
-describe('Markup helpers', () => {
-    it('builds a slider', () => {
-        const NAMESPACE = 'progress';
-        const MIN = 0;
-        const MAX = 100;
-        const VALUE = 50;
-
-        let slider = helpers.buildSlider(NAMESPACE, MIN, MAX, VALUE);
-        expect(slider.localName).toEqual('div');
-        expect(slider.classList).toContain(`${NAMESPACE}-slider__wrapper`);
-        expect(slider.children.length).toEqual(4);
-        expect(slider.children[3].localName).toEqual('input');
-        expect(slider.children[3].min).toEqual(MIN.toString());
-        expect(slider.children[3].max).toEqual(MAX.toString());
-        expect(slider.children[3].value).toEqual(VALUE.toString());
-    });
-});
