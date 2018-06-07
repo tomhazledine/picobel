@@ -42,6 +42,18 @@ const _helpers = {
         let fullFileName = string.replace(/^.*[\\\/]/, '');
         let withNoExtension = fullFileName.split('.')[0];
         return withNoExtension;
+    },
+
+    // Find parent index (recursively climbs through parents until it finds a
+    // valid index or runs out of elements)
+    findParentIndex: startingElement => {
+        if (typeof startingElement.dataset.songIndex !== 'undefined') {
+            return startingElement.dataset.songIndex;
+        }
+        if (typeof startingElement.parentNode !== 'undefined') {
+            return _helpers.findParentIndex(startingElement.parentNode);
+        }
+        return false;
     }
 };
 
