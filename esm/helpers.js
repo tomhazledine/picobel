@@ -50,7 +50,10 @@ const _helpers = {
         if (typeof startingElement.dataset.songIndex !== 'undefined') {
             return startingElement.dataset.songIndex;
         }
-        if (typeof startingElement.parentNode !== 'undefined') {
+        if (
+            typeof startingElement.parentNode !== 'undefined' &&
+            typeof startingElement.parentNode.dataset !== 'undefined'
+        ) {
             return _helpers.findParentIndex(startingElement.parentNode);
         }
         return false;
