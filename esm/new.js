@@ -388,7 +388,12 @@ function Picobel(rawOptions = {}) {
 
     const _playPauseAudio = function() {
         let index = _helpers.findParentIndex(this);
-        console.log(`playpause ${index}`);
+        let activeNode = state.audioNodes.find(node => node.key == index);
+        if (activeNode.paused || activeNode.currentTime === 0) {
+            activeNode.play();
+        } else {
+            activeNode.pause();
+        }
     };
 
     // Set `components` based on theme (but overridden by explicit `options`).
