@@ -91,12 +91,6 @@ export const PicobelData = {
 
     // Get the url for each audio file we want to load [using elements found by findAudio()]
     getRawData: nodes =>
-        // nodes.map((node, key) => ({
-        //     key: key,
-        //     preload: node.preload,
-        //     url: node.src,
-        //     className: node.className
-        // }))
         nodes.map((node, key) => {
             node.key = key;
             return node;
@@ -259,7 +253,83 @@ export const PicobelMarkup = {
     }
 };
 
-export const PicobelAudio = {};
+export const PicobelAudio = {
+    setupListeners: nodes =>
+        nodes.map((node, key) => {
+            node.addEventListener('timeupdate', PicobelAudio.triggerUpdateProgress, false);
+            node.addEventListener('loadstart', PicobelAudio.loadStart, false);
+            node.addEventListener('canplaythrough', PicobelAudio.canplaythrough, false);
+            node.addEventListener('error', PicobelAudio.errors, false);
+            node.addEventListener('stalled', PicobelAudio.stalled, false);
+            node.addEventListener('waiting', PicobelAudio.errors, false);
+            node.addEventListener('progress', PicobelAudio.progress, false);
+
+            node.elements.playPauseButton[0].addEventListener(
+                'click',
+                PicobelAudio.playPauseAudio,
+                false
+            );
+            node.elements.progressBar[0].addEventListener('input', PicobelAudio.sliderScrub, false);
+            node.elements.volumeControl[0].addEventListener('input', PicobelAudio.volume, false);
+            node.elements.muteButton[0].addEventListener(
+                'click',
+                PicobelAudio.muteUnmuteAudio,
+                false
+            );
+
+            return node;
+        }),
+
+    elementHooks: nodes =>
+        nodes.map(node => {
+            let wrapper = document.querySelectorAll(`[data-song-index='${node.key}']`);
+            node.elements = {
+                wrapper: wrapper[0],
+                playPauseButton: wrapper[0].querySelectorAll('.playerTrigger'),
+                muteButton: wrapper[0].querySelectorAll('.songMuteButton'),
+                playPauseButtonText: wrapper[0].querySelectorAll('.buttonText'),
+                playTimer: wrapper[0].querySelectorAll('.songPlayTimer'),
+                durationDisplay: wrapper[0].querySelectorAll('.songDuration'),
+                titleDisplay: wrapper[0].querySelectorAll('.titleDisplay'),
+                artistDisplay: wrapper[0].querySelectorAll('.artistDisplay'),
+                progressBar: wrapper[0].querySelectorAll('.progress-slider__range'),
+                playhead: wrapper[0].querySelectorAll('.progress-slider__playhead'),
+                indicator: wrapper[0].querySelectorAll('.progress-slider__progress-indicator'),
+                volumeControl: wrapper[0].querySelectorAll('.volume-slider__range'),
+                volumeDisplay: wrapper[0].querySelectorAll('.songVolumeValue'),
+                volumeIndicator: wrapper[0].querySelectorAll('.volume-slider__progress-indicator'),
+                volumePlayhead: wrapper[0].querySelectorAll('.volume-slider__playhead')
+            };
+            return node;
+        }),
+
+    triggerUpdateProgress: () => {},
+    loadStart: () => {},
+    canplaythrough: function() {
+        console.log(`canplaythrough ${this.key}`);
+        let index = this.key;
+        console.log(this.elements);
+        PicobelAudio.setLengthDisplay(this);
+        this.elements.wrapper.classList.remove('loading');
+
+        // _getMeta(index);
+    },
+    errors: () => {},
+    stalled: () => {},
+    errors: () => {},
+    progress: () => {},
+
+    // Set the value of the song-length display
+    setLengthDisplay(item) {
+        let duration = _helpers.parseTime(item.duration);
+        item.elements.durationDisplay[0].innerHTML = duration;
+    }
+
+    // playPauseAudio: () => {}, false);
+    //         node.elements.progressBar.addEventListener('input', sliderScrub, false);
+    //         node.elements.volumeControl.addEventListener('input', volume, false);
+    //         node.elements.muteButton.addEventListener('click', _muteUnmuteAudio
+};
 
 function Picobel(rawOptions = {}) {
     /**
@@ -302,6 +372,13 @@ function Picobel(rawOptions = {}) {
 
     // Replace audio elements in DOM with new markup
     _replaceNodes(state.audioNodes, markup);
+
+    // Save new DOM elements to our node list
+    state.audioNodes = PicobelAudio.elementHooks(state.audioNodes);
+    state.audioNodes = PicobelAudio.setupListeners(state.audioNodes);
+
+    // Replace audio elements in DOM with new markup
+    // _replaceNodes(state.audioNodes, markup);
 
     // state.audioNodes = PicobelAudio.init(state.audioNodes);
 
