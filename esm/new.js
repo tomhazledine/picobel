@@ -341,11 +341,7 @@ export const PicobelAudio = {
     errors: () => {},
     stalled: () => {},
     errors: () => {},
-    progress: () => {},
-
-    playPauseAudio: function() {
-        console.log(`play/pause ${this.key}`);
-    }
+    progress: () => {}
 };
 
 function Picobel(rawOptions = {}) {
@@ -391,8 +387,12 @@ function Picobel(rawOptions = {}) {
         let activeNode = state.audioNodes.find(node => node.key == index);
         if (activeNode.paused || activeNode.currentTime === 0) {
             activeNode.play();
+            this.classList.remove('songPaused');
+            this.classList.add('songPlaying');
         } else {
             activeNode.pause();
+            this.classList.remove('songPlaying');
+            this.classList.add('songPaused');
         }
     };
 
