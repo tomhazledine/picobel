@@ -346,7 +346,7 @@ function Picobel(rawOptions = {}) {
             // DOM interaction event listeners
             node.elements.playPauseButton[0].addEventListener(
                 'click',
-                audioFunctions.playPauseAudio,
+                audioFunctions.triggerPlayPauseAudio,
                 false
             );
             node.elements.progressBar[0].addEventListener(
@@ -364,18 +364,36 @@ function Picobel(rawOptions = {}) {
         });
 
     const audioFunctions = {
-        playPauseAudio: function() {
-            let index = _helpers.findParentIndex(this);
-            let activeNode = state.audioNodes.find(node => node.key == index);
-            if (activeNode.paused || activeNode.currentTime === 0) {
-                activeNode.play();
-                this.classList.remove('songPaused');
-                this.classList.add('songPlaying');
+        pauseAll: () => {
+            const paused = state.audioNodes.map(node => {
+                audioFunctions.pause(node);
+            });
+        },
+        triggerPlayPauseAudio: event => {
+            let index = _helpers.findParentIndex(event.srcElement);
+            let node = state.audioNodes.find(node => node.key == index);
+            let button = event.srcElement;
+            audioFunctions.playPauseAudio(node, button);
+        },
+        playPauseAudio: node => {
+            if (node.paused || node.currentTime === 0) {
+                audioFunctions.pauseAll();
+                audioFunctions.play(node);
             } else {
-                activeNode.pause();
-                this.classList.remove('songPlaying');
-                this.classList.add('songPaused');
+                audioFunctions.pause(node);
             }
+        },
+        play: node => {
+            node.play();
+            let button = node.elements.playPauseButton[0];
+            button.classList.remove('songPaused');
+            button.classList.add('songPlaying');
+        },
+        pause: node => {
+            node.pause();
+            let button = node.elements.playPauseButton[0];
+            button.classList.remove('songPlaying');
+            button.classList.add('songPaused');
         },
         triggerUpdateProgress: event => audioFunctions.updateProgress(event.srcElement),
 
@@ -393,17 +411,24 @@ function Picobel(rawOptions = {}) {
             node.elements.indicator[0].style.width = progressPercent + '%';
             node.elements.playhead[0].style.left = progressPercent + '%';
         },
-        loadStart: () => {},
+        loadStart: () => {
+            console.log('loadStart');
+        },
         canplaythrough: function() {
             PicobelMarkup.setLengthDisplay(this);
             this.elements.wrapper.classList.remove('loading');
             let meta = PicobelData.getMeta(this);
             PicobelMarkup.setMeta(meta, this.elements);
         },
-        errors: () => {},
-        stalled: () => {},
-        errors: () => {},
-        progress: () => {},
+        errors: error => {
+            console.log(error);
+        },
+        stalled: () => {
+            console.log('stalled');
+        },
+        progress: () => {
+            console.log('progress');
+        },
         sliderScrub: event => {
             let index = _helpers.findParentIndex(event.srcElement);
             let activeNode = state.audioNodes.find(node => node.key == index);
@@ -414,7 +439,10 @@ function Picobel(rawOptions = {}) {
             audioFunctions.updateProgress(activeNode);
         },
         volume: () => {},
-        muteUnmuteAudio: () => {}
+        muteUnmuteAudio: function() {
+            let index = _helpers.findParentIndex(this);
+            console.log();
+        }
     };
 
     // Set `components` based on theme (but overridden by explicit `options`).

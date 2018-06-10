@@ -21,13 +21,13 @@ const _helpers = {
             .toString();
 
         // Left-pad seconds string if needed
-        secs = secs > 10 ? secs : `0${secs}`;
+        secs = secs >= 10 ? secs : `0${secs}`;
 
         let parsedTime = `${mins}:${secs}`;
 
         if (hours > 0) {
             // Left-pad minutes string if needed
-            mins = mins > 10 ? mins : `0${mins}`;
+            mins = mins >= 10 ? mins : `0${mins}`;
             parsedTime = `${hours}:${mins}:${secs}`;
         }
 
