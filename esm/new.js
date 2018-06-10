@@ -439,34 +439,43 @@ function Picobel(rawOptions = {}) {
             activeNode.currentTime = targetTime;
             audioFunctions.updateProgress(activeNode);
         },
-        volume: () => {},
-        muteUnmuteAudio: event => {
-            console.log('mute button clicked!');
+        volume: event => {
             let index = _helpers.findParentIndex(event.srcElement);
             let node = state.audioNodes.find(node => node.key == index);
+            let volume = event.srcElement.value;
+            audioFunctions.mute(node, false);
+            audioFunctions.setVolume(node, volume);
+        },
+        setVolume: (node, value) => {
+            let valueMapped = value * 10;
+            let volumePercent = value * 100;
+            node.volume = value;
+            node.elements.volumeDisplay[0].innerHTML = valueMapped;
+            node.elements.volumeControl[0].value = value;
+            node.elements.volumeIndicator[0].style.width = volumePercent + '%';
+            node.elements.volumePlayhead[0].style.left = volumePercent + '%';
+        },
+        muteUnmuteAudio: event => {
+            let index = _helpers.findParentIndex(event.srcElement);
+            let node = state.audioNodes.find(node => node.key == index);
+            node.mute = !node.mute;
             audioFunctions.mute(node, node.mute);
         },
         mute: (node, mute) => {
-            node.mute = !mute;
-            console.log(`mute = ${mute} for ${node.key}`);
-            // let oldVolume;
+            // node.mute = !mute;
             let button = node.elements.muteButton[0];
             if (node.mute) {
                 node.tmpVolume = node.volume;
-                // button.setAttribute('data-saved-volume', oldVolume);
-                // setVolume(index, 0);
+                audioFunctions.setVolume(node, 0);
                 button.classList.add('songMuted');
                 button.classList.remove('songUnmuted');
                 button.innerHTML = 'unmute';
             } else {
-                // myAudio[index].volume = 0;
-                // oldVolume = button.getAttribute('data-saved-volume');
                 if (typeof node.tmpVolume != 'undefined' && node.tmpVolume > 0) {
-                    // setVolume(index, oldVolume);
+                    audioFunctions.setVolume(node, node.tmpVolume);
                 } else {
-                    // setVolume(index, 1);
+                    audioFunctions.setVolume(node, 1);
                 }
-
                 button.classList.remove('songMuted');
                 button.classList.add('songUnmuted');
                 button.innerHTML = 'mute';
