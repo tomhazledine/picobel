@@ -93,6 +93,8 @@ export const PicobelData = {
     getRawData: nodes =>
         nodes.map((node, key) => {
             node.key = key;
+            node.mute = false;
+            node.tmpVolume = 1;
             return node;
         }),
 
@@ -372,8 +374,7 @@ function Picobel(rawOptions = {}) {
         triggerPlayPauseAudio: event => {
             let index = _helpers.findParentIndex(event.srcElement);
             let node = state.audioNodes.find(node => node.key == index);
-            let button = event.srcElement;
-            audioFunctions.playPauseAudio(node, button);
+            audioFunctions.playPauseAudio(node);
         },
         playPauseAudio: node => {
             if (node.paused || node.currentTime === 0) {
@@ -439,9 +440,37 @@ function Picobel(rawOptions = {}) {
             audioFunctions.updateProgress(activeNode);
         },
         volume: () => {},
-        muteUnmuteAudio: function() {
-            let index = _helpers.findParentIndex(this);
-            console.log();
+        muteUnmuteAudio: event => {
+            console.log('mute button clicked!');
+            let index = _helpers.findParentIndex(event.srcElement);
+            let node = state.audioNodes.find(node => node.key == index);
+            audioFunctions.mute(node, node.mute);
+        },
+        mute: (node, mute) => {
+            node.mute = !mute;
+            console.log(`mute = ${mute} for ${node.key}`);
+            // let oldVolume;
+            let button = node.elements.muteButton[0];
+            if (node.mute) {
+                node.tmpVolume = node.volume;
+                // button.setAttribute('data-saved-volume', oldVolume);
+                // setVolume(index, 0);
+                button.classList.add('songMuted');
+                button.classList.remove('songUnmuted');
+                button.innerHTML = 'unmute';
+            } else {
+                // myAudio[index].volume = 0;
+                // oldVolume = button.getAttribute('data-saved-volume');
+                if (typeof node.tmpVolume != 'undefined' && node.tmpVolume > 0) {
+                    // setVolume(index, oldVolume);
+                } else {
+                    // setVolume(index, 1);
+                }
+
+                button.classList.remove('songMuted');
+                button.classList.add('songUnmuted');
+                button.innerHTML = 'mute';
+            }
         }
     };
 
