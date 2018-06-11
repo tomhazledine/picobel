@@ -1,6 +1,6 @@
 {
   "name": "picobel",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Convert html audio tags into styleable markup.",
   "main": "./cjs/picobel.js",
   "module": "./esm/picobel.js",
