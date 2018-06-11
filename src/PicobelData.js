@@ -36,9 +36,14 @@ const PicobelData = {
         meta.fileType = _helpers.getFileType(meta.url);
         meta.fileName = _helpers.getFileName(meta.url);
         // If there is a valid title, get that title, otherwise get the file name.
-        meta.title = item.title !== '' ? item.title : `${meta.fileName}.${meta.fileType}`;
+        meta.title =
+            item.title && item.title !== '' ? item.title : `${meta.fileName}.${meta.fileType}`;
         // If there is a valid 'artist', get the artist name.
-        meta.artist = item.dataset.artist ? item.dataset.artist : false;
+        if (item.dataset) {
+            meta.artist = item.dataset.artist ? item.dataset.artist : false;
+        } else {
+            meta.artist = false;
+        }
         return meta;
     }
 };
