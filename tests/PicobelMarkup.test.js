@@ -1,4 +1,4 @@
-import { PicobelMarkup } from '../esm/new.js';
+import PicobelMarkup from '../src/PicobelMarkup';
 
 const EXPECTED_COMPONENTS = {
     theme: 'default',

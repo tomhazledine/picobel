@@ -1,4 +1,4 @@
-import Picobel from '../esm/new';
+import Picobel from '../esm/Picobel';
 // import helpers from '../esm/helpers';
 // import 'picobel/css/player.default.css';
 

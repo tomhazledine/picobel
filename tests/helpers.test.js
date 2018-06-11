@@ -1,4 +1,4 @@
-import helpers from '../esm/helpers.js';
+import helpers from '../src/helpers.js';
 
 describe('Utilities', () => {
     it('converts seconds into HH:MM:SS format', () => {
