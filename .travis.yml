@@ -3,3 +3,4 @@ node_js:
   - "6.9.5"
 before_install: npm install
 script: npm run build
+script: npm run test
