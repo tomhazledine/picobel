@@ -306,7 +306,6 @@ export const PicobelMarkup = {
 };
 
 function Picobel(rawOptions = {}) {
-    console.log("picobel init'ed");
     /**
      * -------------------------------------------------------------------------
      * RUN THE CODE
@@ -413,7 +412,7 @@ function Picobel(rawOptions = {}) {
             node.elements.playhead[0].style.left = progressPercent + '%';
         },
         loadStart: () => {
-            console.log('loadStart');
+            // console.log('loadStart');
         },
         canplaythrough: function() {
             PicobelMarkup.setLengthDisplay(this);
@@ -422,13 +421,13 @@ function Picobel(rawOptions = {}) {
             PicobelMarkup.setMeta(meta, this.elements);
         },
         errors: error => {
-            console.log(error);
+            // console.log(error);
         },
         stalled: () => {
-            console.log('stalled');
+            // console.log('stalled');
         },
         progress: () => {
-            console.log('progress');
+            // console.log('progress');
         },
         sliderScrub: event => {
             let index = _helpers.findParentIndex(event.srcElement);
@@ -499,17 +498,9 @@ function Picobel(rawOptions = {}) {
 
     // Save new DOM elements to our node list
     state.audioNodes = PicobelMarkup.elementHooks(state.audioNodes);
-    // state.audioNodes = PicobelAudio.setupListeners(state.audioNodes);
-    state.audioNodes = _setupLocalListeners(state.audioNodes);
-
-    // Replace audio elements in DOM with new markup
-    // _replaceNodes(state.audioNodes, markup);
-
-    // state.audioNodes = PicobelAudio.init(state.audioNodes);
 
     // Setup event listeners
-
-    // Provide methods for external use?
+    state.audioNodes = _setupLocalListeners(state.audioNodes);
 
     return {
         state
