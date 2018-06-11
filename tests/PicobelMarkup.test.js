@@ -11,7 +11,35 @@ const EXPECTED_COMPONENTS = {
     timer: true
 };
 
-describe('Markup helpers', () => {
+// Create some test nodes to trigger markup generation.
+const TEST_NODES = [
+    {
+        key: 0,
+        preload: 'metadata',
+        url: 'http://audio.eatenbymonsters.com/reviews/daughter/human.mp3',
+        className: 'customPlayer',
+        duration: 211,
+        elements: {
+            durationDisplay: [{ innerHTML: '' }],
+            artistDisplay: [{ innerHTML: '' }],
+            titleDisplay: [{ innerHTML: '' }]
+        }
+    },
+    {
+        key: 1,
+        preload: 'metadata',
+        url: 'http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3',
+        className: '',
+        duration: 1345,
+        elements: {
+            durationDisplay: [{ innerHTML: '' }],
+            artistDisplay: [{ innerHTML: '' }],
+            titleDisplay: [{ innerHTML: '' }]
+        }
+    }
+];
+
+describe('markup helpers', () => {
     it('can create a slider', () => {
         const NAMESPACE = 'progress';
         const MIN = 0;
@@ -52,22 +80,6 @@ describe('Markup helpers', () => {
 });
 
 describe('markup generation', () => {
-    // Create some test nodes to trigger markup generation.
-    const TEST_NODES = [
-        {
-            key: 0,
-            preload: 'metadata',
-            url: 'http://audio.eatenbymonsters.com/reviews/daughter/human.mp3',
-            className: 'customPlayer'
-        },
-        {
-            key: 1,
-            preload: 'metadata',
-            url: 'http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3',
-            className: ''
-        }
-    ];
-
     it('generates a div for each audio element', () => {
         // With three arbitrary array entries.
         let markup = PicobelMarkup.generateMarkup(
@@ -104,5 +116,21 @@ describe('markup generation', () => {
         let secondIndicator = markup[1].getElementsByTagName('div');
         expect(secondIndicator.length).toBeTruthy();
         expect(secondIndicator[0].classList).toContain('loader');
+    });
+});
+
+describe('content display', () => {
+    it('displays the duration value', () => {
+        let nodeOne = PicobelMarkup.setLengthDisplay(TEST_NODES[0]);
+        expect(nodeOne.elements.durationDisplay[0].innerHTML).toEqual('3:31');
+        let nodeTwo = PicobelMarkup.setLengthDisplay(TEST_NODES[1]);
+        expect(nodeTwo.elements.durationDisplay[0].innerHTML).toEqual('22:25');
+    });
+
+    it("displays the node's meta", () => {
+        const TEST_META = { artist: 'an artist name', title: 'a title for a node' };
+        let elements = PicobelMarkup.setMeta(TEST_META, TEST_NODES[0].elements);
+        expect(elements.artistDisplay[0].innerHTML).toEqual('an artist name');
+        expect(elements.titleDisplay[0].innerHTML).toEqual('a title for a node');
     });
 });

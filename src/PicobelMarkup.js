@@ -47,6 +47,7 @@ export const PicobelMarkup = {
     setLengthDisplay: item => {
         let duration = _helpers.parseTime(item.duration);
         item.elements.durationDisplay[0].innerHTML = duration;
+        return item;
     },
 
     setMeta: (meta, elements) => {
@@ -54,6 +55,7 @@ export const PicobelMarkup = {
             elements.artistDisplay[0].innerHTML = meta.artist;
         }
         elements.titleDisplay[0].innerHTML = meta.title;
+        return elements;
     },
 
     generateMarkup: (nodes = [], components) => {
