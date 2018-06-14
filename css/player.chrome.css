@@ -1,0 +1,153 @@
+.chrome.customAudioPlayer {
+  background: #fafafa;
+  color: #5a5a5a;
+  margin: 0 0 1em 0;
+}
+
+.chrome.customAudioPlayer .playerTrigger {
+  border: none;
+  appearance: none;
+  width: 3em;
+  height: 3em;
+  font-size: 1em;
+  background: none;
+  position: relative;
+  cursor: pointer;
+}
+
+.chrome.customAudioPlayer .playerTrigger .buttonText {
+  display: none;
+}
+
+.chrome.customAudioPlayer .playerTrigger:focus {
+  outline: none;
+}
+
+.chrome.customAudioPlayer .playerTrigger:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -50%);
+  border-top: 0.7em solid transparent;
+  border-left: 1em solid #5a5a5a;
+  border-bottom: 0.7em solid transparent;
+}
+
+.chrome.customAudioPlayer .playerTrigger:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  height: 1.3em;
+  transform: translate(0.6em, -50%);
+  border-top: 0;
+  border-left: 0.4em solid #5a5a5a;
+  border-bottom: 0;
+  opacity: 0;
+}
+
+.chrome.customAudioPlayer .playerTrigger.songPlaying:before {
+  height: 1.3em;
+  transform: translate(-0.6em, -50%);
+  border-top: 0;
+  border-left: 0.4em solid #5a5a5a;
+  border-bottom: 0;
+}
+
+.chrome.customAudioPlayer .playerTrigger.songPlaying:after {
+  opacity: 1;
+}
+
+.chrome.customAudioPlayer .songVolume {
+  height: 3em;
+  position: relative;
+  padding-left: 3em;
+}
+
+.chrome.customAudioPlayer .songMuteButton {
+  width: 3em;
+  height: 3em;
+  font-size: 1em;
+  border: 0;
+  appearance: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  background: none;
+  color: transparent;
+}
+
+.chrome.customAudioPlayer .songMuteButton:before {
+  display: block;
+  width: 0.5em;
+  height: 0.5em;
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  transform: translate(-0.7em, -50%);
+  background: #5a5a5a;
+}
+
+.chrome.customAudioPlayer .songMuteButton:after {
+  display: block;
+  width: 0.3em;
+  height: 0.2em;
+  position: absolute;
+  content: '';
+  top: 50%;
+  left: 50%;
+  transform: translate(-100%, -50%);
+  border-top: 0.5em solid transparent;
+  border-right: 0.5em solid #5a5a5a;
+  border-bottom: 0.5em solid transparent;
+}
+
+.chrome.customAudioPlayer .songMuteButton:focus {
+  outline: none;
+}
+
+.chrome.customAudioPlayer .songVolumeLabel {
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  top: 50%;
+  height: 1em;
+  color: transparent;
+  width: 0.5em;
+  font-size: 1em;
+  left: 1.5em;
+  border-top: 0.18em solid #5a5a5a;
+  border-right: 0.18em solid #5a5a5a;
+  border-bottom: 0.18em solid #5a5a5a;
+  border-radius: 0 1em 1em 0;
+  transform: translate(0.2em, -50%);
+}
+
+.chrome.customAudioPlayer .songVolumeValue {
+  pointer-events: none;
+  display: block;
+  position: absolute;
+  top: 50%;
+  height: 0.5em;
+  color: transparent;
+  width: 0.25em;
+  font-size: 1em;
+  left: 1.5em;
+  background: #5a5a5a;
+  border-radius: 0 1em 1em 0;
+  transform: translate(0.2em, -50%);
+}
+
+.chrome.customAudioPlayer .songMuteButton.songMuted + .songVolumeLabelWrapper .songVolumeValue {
+  background: #fafafa;
+  border-radius: 0;
+  height: 0.1em;
+  width: 2em;
+  border-bottom: #5a5a5a solid 0.2em;
+  transform: translate(-45%, -90%) rotate(45deg);
+}
