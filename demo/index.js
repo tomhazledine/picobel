@@ -3,7 +3,7 @@ import Picobel from '../esm/Picobel';
 // import 'picobel/css/player.default.css';
 
 // console.log('file loaded');
-let picobel_instance = Picobel({ theme: 'skeleton' });
+let picobel_instance = Picobel({ theme: 'chrome' });
 
 console.log(picobel_instance.state);
 

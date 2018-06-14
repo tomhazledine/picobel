@@ -7,6 +7,7 @@
   "scripts": {
     "test": "jest --verbose",
     "build": "webpack --mode production && npm run styles && npm run common",
+    "dev": "node-sass --output-style expanded -o css scss --watch",
     "common": "babel esm --out-dir cjs",
     "prepublishOnly": "npm run build",
     "styles": "npm run sass && npm run autoprefix",
@@ -43,10 +44,7 @@
         "env",
         {
           "targets": {
-            "browsers": [
-              "last 2 versions",
-              "safari >= 7"
-            ]
+            "browsers": ["last 2 versions", "safari >= 7"]
           }
         }
       ]
