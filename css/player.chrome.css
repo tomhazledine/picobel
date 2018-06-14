@@ -2,6 +2,10 @@
   background: #fafafa;
   color: #5a5a5a;
   margin: 0 0 1em 0;
+  padding-right: 0.5em;
+  display: flex;
+  align-content: stretch;
+  font-size: 0.8em;
 }
 
 .chrome.customAudioPlayer .playerTrigger {
@@ -59,6 +63,143 @@
 
 .chrome.customAudioPlayer .playerTrigger.songPlaying:after {
   opacity: 1;
+}
+
+.chrome.customAudioPlayer .metaWrapper {
+  display: none;
+}
+
+.chrome.customAudioPlayer .timingsWrapper {
+  height: 3em;
+  padding-left: 6em;
+  position: relative;
+  flex-grow: 1;
+}
+
+.chrome.customAudioPlayer .timingsWrapper .songPlayTimer,
+.chrome.customAudioPlayer .timingsWrapper .songDuration {
+  position: absolute;
+  display: block;
+  top: 0;
+  height: 3em;
+  width: 3em;
+  border: 0;
+  padding: 1em 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.chrome.customAudioPlayer .timingsWrapper .songPlayTimer {
+  left: 0em;
+  text-align: right;
+  padding-right: 0.2em;
+}
+
+.chrome.customAudioPlayer .timingsWrapper .songDuration {
+  text-align: left;
+  left: 3em;
+}
+
+.chrome.customAudioPlayer .timingsWrapper .songDuration:before {
+  content: '/ ';
+}
+
+.chrome.customAudioPlayer .volume-slider__wrapper,
+.chrome.customAudioPlayer .progress-slider__wrapper {
+  height: 3em;
+  line-height: 1;
+  position: relative;
+  margin: 0 0.5em;
+}
+
+.chrome.customAudioPlayer .volume-slider__wrapper .volume-slider__range,
+.chrome.customAudioPlayer .volume-slider__wrapper .progress-slider__range,
+.chrome.customAudioPlayer .progress-slider__wrapper .volume-slider__range,
+.chrome.customAudioPlayer .progress-slider__wrapper .progress-slider__range {
+  font-size: 1em;
+  width: 100%;
+  padding: 0;
+  height: 3em;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.chrome.customAudioPlayer .volume-slider__wrapper .volume-slider__background,
+.chrome.customAudioPlayer .volume-slider__wrapper .progress-slider__background,
+.chrome.customAudioPlayer .progress-slider__wrapper .volume-slider__background,
+.chrome.customAudioPlayer .progress-slider__wrapper .progress-slider__background {
+  height: 0.2em;
+  position: absolute;
+  top: 1.4em;
+  left: 0;
+  background: #dadada;
+  width: 100%;
+}
+
+.chrome.customAudioPlayer .volume-slider__wrapper .volume-slider__progress-indicator,
+.chrome.customAudioPlayer .volume-slider__wrapper .progress-slider__progress-indicator,
+.chrome.customAudioPlayer .progress-slider__wrapper .volume-slider__progress-indicator,
+.chrome.customAudioPlayer .progress-slider__wrapper .progress-slider__progress-indicator {
+  width: 0%;
+  height: 0.2em;
+  position: absolute;
+  top: 1.4em;
+  left: 0;
+  background: #4285f4;
+}
+
+.chrome.customAudioPlayer .volume-slider__wrapper .volume-slider__progress-indicator,
+.chrome.customAudioPlayer .progress-slider__wrapper .volume-slider__progress-indicator {
+  width: 100%;
+}
+
+.chrome.customAudioPlayer .volume-slider__wrapper .volume-slider__playhead,
+.chrome.customAudioPlayer .volume-slider__wrapper .progress-slider__playhead,
+.chrome.customAudioPlayer .progress-slider__wrapper .volume-slider__playhead,
+.chrome.customAudioPlayer .progress-slider__wrapper .progress-slider__playhead {
+  background: #4285f4;
+  width: 1em;
+  height: 1em;
+  border-radius: 0.5em;
+  position: absolute;
+  top: 1em;
+  left: 0%;
+  margin-left: -0.5em;
+}
+
+.chrome.customAudioPlayer .volume-slider__wrapper .volume-slider__playhead,
+.chrome.customAudioPlayer .progress-slider__wrapper .volume-slider__playhead {
+  left: 100%;
+}
+
+.chrome.customAudioPlayer input[type='range'].volume-slider__range::-webkit-slider-runnable-track,
+.chrome.customAudioPlayer input[type='range'].progress-slider__range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 3em;
+  cursor: pointer;
+}
+
+.chrome.customAudioPlayer input[type='range'].volume-slider__range::-moz-range-track,
+.chrome.customAudioPlayer input[type='range'].progress-slider__range::-moz-range-track {
+  width: 100%;
+  height: 3em;
+  cursor: pointer;
+}
+
+.chrome.customAudioPlayer input[type='range'].volume-slider__range::-ms-track,
+.chrome.customAudioPlayer input[type='range'].progress-slider__range::-ms-track {
+  width: 100%;
+  height: 3em;
+  cursor: pointer;
+}
+
+.chrome.customAudioPlayer .volume-slider__wrapper {
+  min-width: 3em;
 }
 
 .chrome.customAudioPlayer .songVolume {
