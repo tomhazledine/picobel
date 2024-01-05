@@ -1,38 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Picobel.js Test Page</title>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Picobel.js Test Page</title>
 
-    <!-- Load the Picobel CSS -->
-    <link rel='stylesheet' href='../css/all.css' type='text/css'/>
+        <!-- Load the Picobel CSS -->
+        <link rel="stylesheet" href="../build/all.css" type="text/css" />
+    </head>
+    <body style="font-family: sans-serif">
+        <div class="generic-wrapper">
+            <!-- Include an <audio> element. This will be replaced by Picobel. -->
+            <audio
+                src="https://eatenbymonsters.com/audio/christmas/web/MasterSlashSlave_AllIWantForChristmas.mp3"
+                title="All I Want for Christmas"
+                data-artist="Master Slash Slave"
+                controls
+            >
+                Your browser does not support the <code>audio</code> element.
+            </audio>
 
-</head>
-<body style="font-family:sans-serif;">
+            <h1>Some stuff...</h1>
+            <p>...inbetween the audio elements</p>
 
-    <div class="generic-wrapper">
-        <!-- Include an <audio> element. This will be replaced by Picobel. -->
-        <audio class="customPlayer" src="http://audio.eatenbymonsters.com/reviews/daughter/human.mp3" title="Human" data-artist="Daughter" controls>
+            <audio
+                src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3"
+                title="Lost That Easy"
+                data-artist="Cold War Kids"
+                controls
+            >
+                Your browser does not support the <code>audio</code> element.
+            </audio>
+        </div>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
+            recusandae deleniti ut, sit in aliquam vel repellat nulla id
+            temporibus iure pariatur doloribus, magnam voluptatibus? Inventore
+            natus earum nisi ducimus.
+        </p>
+
+        <audio
+            class="testClass--one__OOPS__testClass--two"
+            src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3"
+            controls
+        >
             Your browser does not support the <code>audio</code> element.
         </audio>
-        
-        <h1>Some stuff...</h1>
-        <p>...inbetween the audio elements</p>
 
-        <audio src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3" title="Lost That Easy" data-artist="Cold War Kids" controls>
-            Your browser does not support the <code>audio</code> element.
-        </audio>
-
-    </div>
-
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta recusandae deleniti ut, sit in aliquam vel repellat nulla id temporibus iure pariatur doloribus, magnam voluptatibus? Inventore natus earum nisi ducimus.</p>
-
-    <audio class="testClass--one__OOPS__testClass--two" src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3" controls>
-        Your browser does not support the <code>audio</code> element.
-    </audio>
-    
-    <!-- Load Scripts -->
-    <script type='text/javascript' src='./build/index.js'></script>
-
-</body>
+        <!-- Load Scripts -->
+        <script type="text/javascript" src="./build/picobel-demo.js"></script>
+    </body>
 </html>
