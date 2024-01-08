@@ -1,19 +1,6 @@
 {
-  "name": "picobel-demo",
-  "version": "1.0.0",
-  "description": "Demo page for Picobel",
-  "main": "index.js",
-  "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack --mode production --watch"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.7.0",
-    "webpack": "^4.9.1",
-    "webpack-cli": "^2.1.4"
-  }
+    "name": "picobel-demo",
+    "version": "1.0.0",
+    "description": "Demo page for Picobel",
+    "type": "module"
 }

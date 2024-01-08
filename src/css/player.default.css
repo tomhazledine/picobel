@@ -1,0 +1,420 @@
+.default.customAudioPlayer {
+    --black: #555;
+    --white: #ffffff;
+    --grey: #dad8d2;
+    --greyDark: darken(var(--grey), 20%);
+    --primary: #ddd;
+    --highlight: #00b7c6;
+    --background_grey_dark: #e6e6e6;
+    --background_grey_light: #f1f1f1;
+}
+
+/* Simulates an infinite slide-to-the-right effect. */
+@keyframes background_slide {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 2em 0;
+    }
+}
+
+/* Global */
+.default.customAudioPlayer {
+    font-size: 10px;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 1;
+
+    /* Wrapper */
+    margin: 1em 0;
+    height: 6em;
+    border-radius: 0.3em;
+    box-shadow: rgba(black, 0.3) 0 0.1em 0.2em 0;
+}
+
+.default.customAudioPlayer *,
+.default.customAudioPlayer *:before,
+.default.customAudioPlayer *:after {
+    box-sizing: inherit;
+}
+
+/* The loading-state indicator */
+.default.customAudioPlayer .loader {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 5em;
+    right: 0;
+    height: 2em;
+    opacity: 0;
+    transition: opacity 0.2s;
+    background: linear-gradient(
+        to right,
+        var(--highlight) 50%,
+        var(--black) 50%
+    );
+    background-size: 2em 2em;
+    background-repeat: repeat;
+    background-position: 0 0;
+    animation: background_slide linear infinite 0.4s;
+}
+
+/* Only show the loader when we're loading */
+.default.customAudioPlayer.loading .loader {
+    opacity: 1;
+}
+
+/* The play-pause button */
+.default.customAudioPlayer .playerTrigger {
+    font-size: 1em;
+    border: none;
+    appearance: none;
+    width: 4em;
+    height: 6em;
+    color: var(--white);
+    background: var(--black);
+    background-image: linear-gradient(lighten(var(--black), 10%), var(--black));
+    box-shadow: inset lighten(var(--black), 10%) -1px 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+.default.customAudioPlayer .playerTrigger .buttonText {
+    display: none;
+}
+.default.customAudioPlayer .playerTrigger:focus {
+    outline: none;
+}
+
+/* The "play" icon */
+.default.customAudioPlayer .playerTrigger:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -0.8em;
+    margin-left: -0.4em;
+    border-top: 0.8em solid transparent;
+    border-left: 1em solid var(--white);
+    border-bottom: 0.8em solid transparent;
+}
+
+/* Hidden right side of "pause" icon (shown when paused) */
+.default.customAudioPlayer .playerTrigger:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    height: 1.4em;
+    margin-top: -0.7em;
+    margin-right: -0.7em;
+    border-top: 0;
+    border-left: 0.5em solid var(--white);
+    border-bottom: 0;
+    opacity: 0;
+}
+
+/* The left side of the "pause" icon */
+.default.customAudioPlayer .playerTrigger.songPlaying:before {
+    height: 1.4em;
+    margin-top: -0.7em;
+    margin-left: -0.7em;
+    border-top: 0;
+    border-left: 0.5em solid var(--white);
+    border-bottom: 0;
+}
+
+/* Make the right side visible */
+.default.customAudioPlayer .playerTrigger.songPlaying:after {
+    opacity: 1;
+}
+
+/* Display song info */
+.default.customAudioPlayer .metaWrapper {
+    padding: 1em 2em 1em 7em;
+    height: 4.4em;
+    overflow: hidden;
+    background: var(--primary);
+    color: var(--black);
+    text-shadow: var(--white) 0 0.1em 0;
+    background-image: linear-gradient(
+        var(--background_grey_light),
+        var(--background_grey_dark)
+    );
+}
+.default.customAudioPlayer .metaWrapper .titleDisplay {
+    display: inline-block;
+    line-height: 1;
+    font-weight: bold;
+    margin-right: 0.5em;
+    font-family: monospace;
+}
+.default.customAudioPlayer .metaWrapper .titleDisplay:after {
+    content: " – ";
+}
+
+.default.customAudioPlayer .metaWrapper .artistDisplay {
+    font-family: monospace;
+    display: inline-block;
+    line-height: 1;
+}
+
+/* Display info about time-played and song-duration */
+.default.customAudioPlayer .timingsWrapper {
+    position: absolute;
+    bottom: 0;
+    left: 5.6em;
+    right: 0;
+    height: 1.6em;
+}
+.default.customAudioPlayer .timingsWrapper .songPlayTimer,
+.default.customAudioPlayer .timingsWrapper .songDuration {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    width: 6em;
+    text-align: left;
+    background: transparent;
+    color: var(--white);
+    line-height: 1;
+    height: 1em;
+    pointer-events: none;
+    font-size: 1em;
+    padding: 0 0.5em 0 1em;
+    padding-top: 0.3em;
+    font-family: monospace;
+}
+.default.customAudioPlayer .timingsWrapper .songPlayTimer {
+    left: 0;
+}
+.default.customAudioPlayer .timingsWrapper .songDuration {
+    right: 0;
+    text-align: right;
+}
+
+/* Hide song-timings when we're loading */
+.default.customAudioPlayer .loading .songPlayTimer,
+.default.customAudioPlayer .loading .songDuration {
+    display: none;
+}
+
+/* The "fake" range slider */
+.default.customAudioPlayer .progress-slider__wrapper {
+    height: 2em;
+    font-size: 1em;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--black);
+    overflow: hidden;
+    border-bottom-right-radius: 0.2em;
+}
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.default.customAudioPlayer .progress-slider__wrapper .progress-slider__range {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.default.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__progress-indicator {
+    height: 2em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(var(--primary), 0.4);
+    width: 0%;
+}
+.default.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__playhead {
+    width: 0.5em;
+    height: 2em;
+    position: absolute;
+    top: 0;
+    left: 0%;
+    margin-left: -0.2em;
+    background: var(--highlight);
+}
+
+/* Hide dynamic elements until loading has finished */
+.default.customAudioPlayer .loading .progress-slider__progress-indicator,
+.default.customAudioPlayer .loading .progress-slider__playhead {
+    display: none;
+}
+
+/* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
+.default.customAudioPlayer
+    input[type="range"].progress-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    font-size: 1em;
+    height: 2em;
+    cursor: pointer;
+}
+.default.customAudioPlayer
+    input[type="range"].progress-slider__range::-moz-range-track {
+    width: 100%;
+    height: 2em;
+    cursor: pointer;
+}
+.default.customAudioPlayer
+    input[type="range"].progress-slider__range::-ms-track {
+    width: 100%;
+    height: 2em;
+    cursor: pointer;
+}
+
+/* Position the volume controls */
+.default.customAudioPlayer .songVolume {
+    position: absolute;
+    top: 0;
+    left: 4em;
+    width: 1.6em;
+    height: 6em;
+    overflow: hidden;
+    z-index: 2;
+}
+.default.customAudioPlayer .songVolume .songMuteButton {
+    display: block;
+    width: 1.6em;
+    height: 1.6em;
+    font-size: 1em;
+    color: transparent;
+    border: 0;
+    appearance: none;
+    background: var(--black);
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+/* Rectangle part of "speaker cone" icon */
+.default.customAudioPlayer .songVolume .songMuteButton:before {
+    display: block;
+    width: 0.4em;
+    height: 0.3em;
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: 50%;
+    margin-right: -0.1em;
+    transform: translateY(-50%);
+    background: var(--white);
+}
+
+/* Triangle part of "speaker cone" icon */
+.default.customAudioPlayer .songVolume .songMuteButton :after {
+    display: block;
+    width: 0.4em;
+    height: 0.4em;
+    position: absolute;
+    content: "";
+    top: 50%;
+    margin-top: -0.4em;
+    right: 50%;
+    margin-right: -0.2em;
+    border-top: 0.4em solid transparent;
+    border-right: 0.4em solid var(--white);
+    border-bottom: 0.4em solid transparent;
+}
+
+/* Change icon when muted */
+.default.customAudioPlayer .songVolume .songMuteButton .songMuted:before {
+    background: var(--grey);
+}
+.default.customAudioPlayer .songVolume .songMuteButton .songMuted:after {
+    border-right-color: var(--grey);
+}
+
+.default.customAudioPlayer .songVolumeValue {
+    margin-left: 0.2em;
+}
+
+.default.customAudioPlayer .songVolumeLabelWrapper {
+    display: none;
+}
+
+/* As with the playback indicator, we're using a range element to power the volume slider functionality */
+.default.customAudioPlayer .volume-slider__wrapper {
+    display: block;
+    height: 1.6em;
+    position: absolute;
+    top: 1.6em;
+    left: 0;
+    z-index: 3;
+    background: var(--greyDark);
+    width: 4.4em;
+    transform: rotate(90deg) translateY(-100%);
+    transform-origin: top left;
+    overflow: hidden;
+}
+.default.customAudioPlayer .volume-slider__wrapper:after {
+    content: "";
+    display: block;
+    width: 100%;
+    border-right: 4.4em solid var(--black);
+    border-bottom: 1.6em solid transparent;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.default.customAudioPlayer .volume-slider__wrapper .volume-slider__range {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 1.6em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: rotate(180deg);
+}
+.default.customAudioPlayer
+    .volume-slider__wrapper
+    .volume-slider__progress-indicator {
+    height: 1.6em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--highlight);
+    width: 100%;
+    transform: rotate(180deg);
+}
+.default.customAudioPlayer .volume-slider__wrapper .volume-slider__playhead {
+    display: none;
+}
+
+/* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
+.default.customAudioPlayer
+    input[type="range"].volume-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    font-size: 1em;
+    height: 1.5em;
+    cursor: pointer;
+}
+.default.customAudioPlayer
+    input[type="range"].volume-slider__range::-moz-range-track {
+    width: 100%;
+    height: 1.5em;
+    cursor: pointer;
+}
+.default.customAudioPlayer input[type="range"].volume-slider__range::-ms-track {
+    width: 100%;
+    height: 1.5em;
+    cursor: pointer;
+}

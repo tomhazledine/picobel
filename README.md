@@ -1,8 +1,6 @@
-<p align="center"><a href="https://audio.tomhazledine.com" target="_blank"><img width="200"src="https://audio.tomhazledine.com/assets/images/heroLogo.png"></a></p>
+<p align="center"><a href="https://audio.tomhazledine.com" target="_blank"><img width="200"src="https://github.com/tomhazledine/picobel/blob/main/images/heroLogo.png"></a></p>
 
 <h1 align="center">Picobel.js</h1>
-
-<p align="center" markdown="1"><a href="https://travis-ci.org/tomhazledine/picobel"><img src="https://travis-ci.org/tomhazledine/picobel.svg?branch=master" alt="Build Status"></a></p>
 
 Picobel.js (pronounced _peek-o-bell_, as in _decibel_) is a lightweight dependency-free Javascript tool that converts html audio tags into styleable markup.
 
