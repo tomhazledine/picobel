@@ -1,6 +1,8 @@
-<p align="center"><a href="https://audio.tomhazledine.com" target="_blank"><img width="200"src="https://github.com/tomhazledine/picobel/blob/main/images/heroLogo.png"></a></p>
+<p align="center"><a href="https://github.com/tomhazledine/picobel" target="_blank"><img width="200"src="https://github.com/tomhazledine/picobel/blob/main/images/heroLogo.png"></a></p>
 
 <h1 align="center">Picobel.js</h1>
+
+[![Node.js CI](https://github.com/tomhazledine/picobel/actions/workflows/node.js.yml/badge.svg)](https://github.com/tomhazledine/picobel/actions/workflows/node.js.yml)
 
 Picobel.js (pronounced _peek-o-bell_, as in _decibel_) is a lightweight dependency-free Javascript tool that converts html audio tags into styleable markup.
 
@@ -13,7 +15,7 @@ Picobel.js (pronounced _peek-o-bell_, as in _decibel_) is a lightweight dependen
 
 ## Why would I need this?
 
-There are two reasons you might want to use Picobel...
+There are two reasons you might want to use Picobel:
 
 1. You want a uniform cross-browser experience for the audio players on your site. Pick a pre-made Picobel theme, and you're all set.
 
@@ -37,29 +39,35 @@ _Picobel-styled audio players_
 
 ### Install with NPM
 
-`npm install picobel` will install Picobel in your `node_modules` directory. Then you can include Picobel in your javascript like this:
+`npm install picobel` (or `yarn add picobel`) will install Picobel in your `node_modules` directory. Then you can include Picobel in your javascript like this:
 
-    // Include Picobel in your project:
-    import Picobel from 'picobel';
+```js
+// Include Picobel in your project:
+import picobel from 'picobel';
 
-    // Initialise Picobel:
-    Picobel()
+// Initialise picobel:
+picobel()
 
-    // ...or initialise Picobel with your chosen options:
-    Picobel({ theme: 'default' })
+// ...or initialise picobel with your chosen options:
+picobel({ theme: 'default' })
+```
 
 If you are using WebPack (or similar) to bundle your scripts, you can include the stylesheet for your chosen Picobel theme here too:
 
-    // Include the styles for *all* the themes:
-    import 'picobel/css/all.css';
+```js
+// Include the styles for *all* the themes:
+import 'picobel/css/all.css';
 
-    // ...or include only the styles for a specific theme:
-    import 'picobel/css/player.default.css';
+// ...or include only the styles for a specific theme:
+import 'picobel/css/player.default.css';
+```
 
 Alternatively you could include the stylesheets manually with a `<link>` tag in your `index.html`:
 
-    <!-- Load the Picobel CSS -->
-    <link rel='stylesheet' href='node_modules/picobel/css/player.default.css' type='text/css'/>
+```html
+<!-- Load the Picobel CSS -->
+<link rel='stylesheet' href='node_modules/picobel/css/player.default.css' type='text/css'/>
+```
 
 When your page loads, Picobel will replace any default `<audio>` elements with a block of custom-markup, complete with classes that you can use to apply your custom CSS.
 
@@ -67,20 +75,26 @@ When your page loads, Picobel will replace any default `<audio>` elements with a
 
 To use **Picobel.js** you'll need to include the `picobel.js` file (found here: [picobel.legacy.min.js](https://github.com/tomhazledine/picobel/blob/master/picobel.legacy.min.js)) in your project. This needs to be called before your custom scripts, and ideally in the `<footer>` of your page.
 
-    <!-- Load Picobel -->
-    <script type='text/javascript' src='picobel.min.js'></script>
+```html
+<!-- Load Picobel -->
+<script type='text/javascript' src='picobel.min.js'></script>
+```
 
 You will also need the CSS styles. Choose which "theme" you'd like to use, and load that stylesheet. All current themes can be previewed in the [Picobel.js CodePen Collection](http://codepen.io/collection/XpZEor/), and all the css files can be found in the repo, [here](https://github.com/tomhazledine/picobel/tree/master/css).
 
-    <!-- Load the Picobel CSS -->
-    <link rel='stylesheet' href='player.default.css' type='text/css'/>
+```html
+<!-- Load the Picobel CSS -->
+<link rel='stylesheet' href='player.default.css' type='text/css'/>
+```
 
 Then initialize the function. For simplicity, the example below does this in an in-line `<script>` tag, but you can add this to your master JS file. Just make sure you initialise Picobel _after_ the picobel.min.js file has been called.
 
-    <!-- Initialise Picobel -->
-    <script>
-        Picobel();
-    </script>
+```html
+<!-- Initialise Picobel -->
+<script>
+    Picobel();
+</script>
+```
 
 When your page loads, Picobel will replace any default `<audio>` elements with a block of custom-markup, complete with classes that you can use to apply your custom CSS.
 
@@ -88,65 +102,75 @@ When your page loads, Picobel will replace any default `<audio>` elements with a
 
 If you're using a theme other than "basic", you'll need to specify the theme name in the options object when you intialise Picobel.
 
-    Picobel( { theme: 'themename' } );
+```js
+Picobel( { theme: 'themename' } );
+```
 
 This adds a class to the container of each audio element, so if you've made your own styles you can use this to make sure your CSS is nicely namespaced.
 
 ### This:
 
-    <audio src="http://path/to/audio/file.mp3"></audio>
+```html
+<audio src="http://path/to/audio/file.mp3"></audio>
+```
 
 ### Gets turned into this:
 
-    <div class="customAudioPlayer player_0" data-song-index="0">
-        <div class="loader"></div>
-        <button class="playerTrigger">
-            <span class="buttonText">play</span>
-        </button>
-        <div class="metaWrapper">
-            <span class="titleDisplay">file.mp3</span>
-            <span class="artistDisplay"></span>
+```html
+<div class="customAudioPlayer player_0" data-song-index="0">
+    <div class="loader"></div>
+    <button class="playerTrigger">
+        <span class="buttonText">play</span>
+    </button>
+    <div class="metaWrapper">
+        <span class="titleDisplay">file.mp3</span>
+        <span class="artistDisplay"></span>
+    </div>
+    <div class="timingsWrapper">
+        <span class="songPlayTimer">0:00</span>
+        <div class="songProgressSliderWrapper">
+            <div class="pseudoProgressBackground"></div>
+            <div class="pseudoProgressIndicator"></div>
+            <div class="pseudoProgressPlayhead"></div>
+            <input type="range" min="0" max="100" class="songProgressSlider">
         </div>
-        <div class="timingsWrapper">
-            <span class="songPlayTimer">0:00</span>
-            <div class="songProgressSliderWrapper">
-                <div class="pseudoProgressBackground"></div>
-                <div class="pseudoProgressIndicator"></div>
-                <div class="pseudoProgressPlayhead"></div>
-                <input type="range" min="0" max="100" class="songProgressSlider">
-            </div>
-            <span class="songDuration">3:51</span>
+        <span class="songDuration">3:51</span>
+    </div>
+    <div class="songVolume">
+        <div class="songVolumeLabelWrapper">
+            <span class="songVolumeLabel">Volume</span>
+            <span class="songVolumeValue">10</span>
         </div>
-        <div class="songVolume">
-            <div class="songVolumeLabelWrapper">
-                <span class="songVolumeLabel">Volume</span>
-                <span class="songVolumeValue">10</span>
-            </div>
-            <div class="songVolumeSliderWrapper">
-                <div class="pseudoVolumeBackground"></div>
-                <div class="pseudoVolumeIndicator"></div>
-                <div class="pseudoVolumePlayhead"></div>
-                <input type="range" min="0" max="1" step="0.1" class="songVolumeSlider">
-            </div>
+        <div class="songVolumeSliderWrapper">
+            <div class="pseudoVolumeBackground"></div>
+            <div class="pseudoVolumeIndicator"></div>
+            <div class="pseudoVolumePlayhead"></div>
+            <input type="range" min="0" max="1" step="0.1" class="songVolumeSlider">
         </div>
     </div>
+</div>
+```
 
 ## Setting "artist" and "track name" values
 
 Applying metadata to your audio file requires adding data-attributes to your `<audio>` markup. Picobel gets the track name from the regular `title` attribute, and looks for artist information in the `data-artist` attribute. For the demo at the top of this page, the markup looks like this:
 
-    <audio src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3" title="Lost that easy" data-artist="Cold War Kids" controls>
-        Your browser does not support the <code>audio</code> element.
-    </audio>
+```html
+<audio src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3" title="Lost that easy" data-artist="Cold War Kids" controls>
+    Your browser does not support the <code>audio</code> element.
+</audio>
+```
 
 ## Pre-made themes
 
 Picobel comes with many pre-made themes. To use a theme, make sure you've downloaded the correct stylesheet from the [Picobel CSS library](https://github.com/tomhazledine/picobel/tree/master/css) and then reference the chosen theme name as an option when you initialize Picobel in your JS.
 
-    <!-- Initialise Picobel with a theme-->
-    <script>
-        Picobel( { theme: "chosenThemeName" } );
-    </script>
+```html
+<!-- Initialise Picobel with a theme-->
+<script>
+    Picobel( { theme: "chosenThemeName" } );
+</script>
+```
 
 So if you wanted to use the "iTunes" theme, your Picobel call would look like this: `Picobel({theme:"itunes"});`. If you don't explicitly choose a theme, then the Default theme will be used. The current options are: `skeleton`, `itunes`, `bbc`, `soundcloud`, `pitchfork`, & `eatenbymonsters`.
 
@@ -180,10 +204,3 @@ This started out as a "scratch your own itch" tool for a specific project. I'm o
 I'm hoping Picobel can be of use to as many people as possible. If you have an improvement or bug-fix or new feature, get in touch! Make a pull request on the [Picobel.js Github repo](https://github.com/tomhazledine/picobel). I'm just getting started with "open source", so I'd be very glad of any help or suggestions or advice.
 
 Read more about contribute in this project's [Contribution Guide](https://github.com/tomhazledine/picobel/blob/master/CONTRIBUTING.md)
-
----
-
-* MIT license
-* No dependencies
-* v1.0.10
-* Most recent release date: 20180529
