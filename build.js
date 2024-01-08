@@ -29,7 +29,16 @@ const config = {
     },
     css: {
         ...globalConfig,
-        entryPoints: ["src/css/player.default.css", "src/css/all.css"]
+        entryPoints: [
+            "src/css/all.css",
+            "src/css/player.default.css",
+            "src/css/player.skeleton.css",
+            "src/css/player.bbc.css",
+            "src/css/player.eatenbymonsters.css",
+            "src/css/player.itunes.css",
+            "src/css/player.pitchfork.css",
+            "src/css/player.soundcloud.css"
+        ]
     }
 };
 
