@@ -22,8 +22,11 @@
         "url": "https://github.com/tomhazledine/picobel/issues"
     },
     "devDependencies": {
+        "@babel/core": "^7.23.7",
         "@babel/preset-env": "^7.23.7",
+        "babel-jest": "^29.7.0",
         "esbuild": "^0.18.6",
-        "jest": "^23.0.1"
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0"
     }
 }

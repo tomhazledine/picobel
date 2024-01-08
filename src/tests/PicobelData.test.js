@@ -1,4 +1,4 @@
-import PicobelData from "../src/js/PicobelData";
+import PicobelData from "../js/PicobelData";
 
 const TEST_DOM = `
     <!DOCTYPE html>

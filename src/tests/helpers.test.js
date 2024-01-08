@@ -1,4 +1,4 @@
-import helpers from "../src/js/helpers.js";
+import helpers from "./../js/helpers.js";
 
 describe("Utilities", () => {
     it("converts seconds into HH:MM:SS format", () => {
