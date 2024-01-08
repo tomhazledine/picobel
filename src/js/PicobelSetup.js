@@ -10,10 +10,10 @@ const PicobelSetup = {
     parseOptions: (rawOptions = {}) => {
         // Define our default options.
         const defaultOptions = {
-            theme: 'default',
+            theme: "default",
             preload: false,
             components: {
-                theme: 'default',
+                theme: "default",
                 playPause: true,
                 progress: true,
                 volume: true,
@@ -33,7 +33,7 @@ const PicobelSetup = {
     setState: (oldState, changes) => Object.assign(oldState, changes),
 
     // Return a `components` object that matches the provided themename.
-    setComponentsByTheme: (themename = 'default', rawComponents = {}) => {
+    setComponentsByTheme: (themename = "default", rawComponents = {}) => {
         const defaultComponents = {
             theme: themename,
             playPause: true,
@@ -44,7 +44,10 @@ const PicobelSetup = {
             duration: true,
             timer: true
         };
-        const activeComponents = Object.assign(defaultComponents, rawComponents);
+        const activeComponents = Object.assign(
+            defaultComponents,
+            rawComponents
+        );
         return activeComponents;
     }
 };
