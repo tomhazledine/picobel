@@ -1,0 +1,383 @@
+.eatenbymonsters.customAudioPlayer {
+    --black: #555;
+    --white: #ffffff;
+    --grey: #dad8d2;
+    --primary: #00b7c6; /* rgb(0, 183, 198), hsl(184, 100%, 39%) */
+    --primary--opacity: rgba(0, 183, 198, 0.3);
+    --primary--dark: hsl(184, 100%, 29%);
+}
+
+/* Simulates an infinite slide-to-the-right effect. */
+@keyframes background_slide {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 2em 0;
+    }
+}
+
+/* Wrapper */
+.eatenbymonsters.customAudioPlayer {
+    margin: 2em 0;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    height: 6em;
+}
+/* Global */
+.eatenbymonsters.customAudioPlayer *,
+.eatenbymonsters.customAudioPlayer *:before,
+.eatenbymonsters.customAudioPlayer *:after {
+    box-sizing: inherit;
+}
+
+/* The loading-state indicator */
+.eatenbymonsters.customAudioPlayer .loader {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2em;
+    overflow: hidden;
+    display: none;
+    z-index: 2;
+    transition: opacity 0.2s;
+    background: linear-gradient(
+        to right,
+        var(--primary) 50%,
+        var(--primary--dark) 50%
+    );
+    background-size: 2em 2em;
+    background-repeat: repeat;
+    background-position: 0 0;
+    animation: background_slide linear infinite 0.4s;
+}
+
+/* Only show the loader when we're loading */
+.eatenbymonsters.customAudioPlayer.loading .loader {
+    display: block;
+}
+
+/* The play-pause button */
+.eatenbymonsters.customAudioPlayer .playerTrigger {
+    border: none;
+    appearance: none;
+    width: 3em;
+    height: 4em;
+    font-size: 1em;
+    color: var(--white);
+    background: var(--black);
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+.eatenbymonsters.customAudioPlayer .playerTrigger .buttonText {
+    display: none;
+}
+.eatenbymonsters.customAudioPlayer .playerTrigger:focus {
+    outline: none;
+}
+/* The "play" icon */
+.eatenbymonsters.customAudioPlayer .playerTrigger:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -0.6em;
+    margin-left: -0.25em;
+    border-top: 0.6em solid transparent;
+    border-left: 0.8em solid var(--white);
+    border-bottom: 0.6em solid transparent;
+}
+/* Hidden right side of "pause" icon (shown when paused) */
+.eatenbymonsters.customAudioPlayer .playerTrigger:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    height: 1em;
+    margin-top: -0.5em;
+    margin-right: -0.5em;
+    border-top: 0;
+    border-left: 0.4em solid var(--white);
+    border-bottom: 0;
+    opacity: 0;
+}
+/* The left side of the "pause" icon */
+.eatenbymonsters.customAudioPlayer .playerTrigger.songPlaying:before {
+    height: 1em;
+    margin-top: -0.5em;
+    margin-left: -0.5em;
+    border-top: 0;
+    border-left: 0.4em solid var(--white);
+    border-bottom: 0;
+}
+/* Make the right side visible */
+.eatenbymonsters.customAudioPlayer .playerTrigger.songPlaying:after {
+    opacity: 1;
+}
+
+/* Display song info */
+.eatenbymonsters.customAudioPlayer .metaWrapper {
+    padding: 0.5em 1.5em 0.5em 3.5em;
+    height: 4em;
+    overflow: auto;
+    background: var(--primary);
+    background: var(--primary--opacity);
+}
+.eatenbymonsters.customAudioPlayer .metaWrapper .titleDisplay {
+    display: block;
+    line-height: 1;
+    font-weight: bold;
+}
+.eatenbymonsters.customAudioPlayer .metaWrapper .artistDisplay {
+    display: block;
+    line-height: 1;
+}
+
+/* Display info about time-played and song-duration */
+.eatenbymonsters.customAudioPlayer .timingsWrapper {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 2em;
+    background: red;
+}
+.eatenbymonsters.customAudioPlayer .timingsWrapper .songPlayTimer,
+.eatenbymonsters.customAudioPlayer .timingsWrapper .songDuration {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    width: 4em;
+    text-align: center;
+    background: transparent;
+    color: var(--white);
+    line-height: 2;
+    height: 2em;
+    pointer-events: none;
+}
+.eatenbymonsters.customAudioPlayer .timingsWrapper .songPlayTimer {
+    left: 0;
+}
+.eatenbymonsters.customAudioPlayer .timingsWrapper .songDuration {
+    right: 0;
+}
+
+/* ...and hide them when we're loading */
+.eatenbymonsters.customAudioPlayer.loading .songPlayTimer,
+.eatenbymonsters.customAudioPlayer.loading .songDuration {
+    display: none;
+}
+
+/* The "fake" range slider */
+.eatenbymonsters.customAudioPlayer .progress-slider__wrapper {
+    height: 2em;
+    font-size: 1em;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: var(--black);
+    overflow: hidden;
+}
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.eatenbymonsters.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__range {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.eatenbymonsters.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__progress-indicator {
+    height: 2em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--primary--opacity);
+    width: 0%;
+}
+.eatenbymonsters.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__playhead {
+    width: 1em;
+    height: 2em;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    margin-top: -1em;
+    margin-left: -0.5em;
+    background: var(--primary);
+}
+
+/* Hide dynamic elements until loading has finished */
+.eatenbymonsters.customAudioPlayer.loading .progress-slider__progress-indicator,
+.eatenbymonsters.customAudioPlayer.loading .progress-slider__playhead {
+    display: none;
+}
+
+/* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
+.eatenbymonsters.customAudioPlayer
+    input[type="range"].progress-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    font-size: 1em;
+    height: 2.2em;
+    cursor: pointer;
+}
+.eatenbymonsters.customAudioPlayer
+    input[type="range"].progress-slider__range::-moz-range-track {
+    width: 100%;
+    height: 2em;
+    cursor: pointer;
+}
+.eatenbymonsters.customAudioPlayer
+    input[type="range"].progress-slider__range::-ms-track {
+    width: 100%;
+    height: 2em;
+    cursor: pointer;
+}
+
+/* Position the volume controls */
+.eatenbymonsters.customAudioPlayer .songVolume {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1.5em;
+    height: 4em;
+    overflow: hidden;
+    z-index: 2;
+}
+.eatenbymonsters.customAudioPlayer .songVolume .songMuteButton {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 0;
+    border: 0;
+    appearance: none;
+    background: var(--black);
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+/* Rectangle part of "speaker cone" icon */
+.eatenbymonsters.customAudioPlayer .songVolume .songMuteButton:before {
+    display: block;
+    width: 0.4rem;
+    height: 0.3rem;
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: 50%;
+    margin-right: -0.1rem;
+    transform: translateY(-50%);
+    background: var(--white);
+}
+/* Triangle part of "speaker cone" icon */
+.eatenbymonsters.customAudioPlayer .songVolume .songMuteButton:after {
+    display: block;
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    content: "";
+    top: 50%;
+    margin-top: -0.4rem;
+    right: 50%;
+    margin-right: -0.2rem;
+    border-top: 0.4rem solid transparent;
+    border-right: 0.4rem solid var(--white);
+    border-bottom: 0.4rem solid transparent;
+}
+/* Change icon when muted */
+.eatenbymonsters.customAudioPlayer .songVolume .songMuteButton.songMuted {
+    &:before {
+        background: var(--grey);
+    }
+    &:after {
+        border-right-color: var(--grey);
+    }
+}
+
+.eatenbymonsters.customAudioPlayer .songVolumeValue {
+    margin-left: 0.2em;
+}
+
+.eatenbymonsters.customAudioPlayer .songVolumeLabelWrapper {
+    display: none;
+}
+
+/* As with the playback indicator, we're using a range element to power the volume slider functionality */
+.eatenbymonsters.customAudioPlayer .volume-slider__wrapper {
+    display: block;
+    height: 1.5em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    background: var(--black);
+    width: 2.5em;
+    transform: rotate(90deg);
+    transform-origin: bottom left;
+}
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.eatenbymonsters.customAudioPlayer
+    .volume-slider__wrapper
+    .volume-slider__range {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 1.5em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: rotate(180deg);
+}
+.eatenbymonsters.customAudioPlayer
+    .volume-slider__wrapper
+    .volume-slider__progress-indicator {
+    height: 1.5em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--primary);
+    width: 100%;
+    transform: rotate(180deg);
+}
+.eatenbymonsters.customAudioPlayer
+    .volume-slider__wrapper
+    .volume-slider__playhead {
+    display: none;
+}
+
+/* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
+.eatenbymonsters.customAudioPlayer
+    input[type="range"].volume-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    font-size: 1em;
+    height: 1.5em;
+    cursor: pointer;
+}
+.eatenbymonsters.customAudioPlayer
+    input[type="range"].volume-slider__range::-moz-range-track {
+    width: 100%;
+    height: 1.5em;
+    cursor: pointer;
+}
+.eatenbymonsters.customAudioPlayer
+    input[type="range"].volume-slider__range::-ms-track {
+    width: 100%;
+    height: 1.5em;
+    cursor: pointer;
+}

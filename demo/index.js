@@ -1,3 +1,3 @@
 import Picobel from "../build/picobel.js";
 
-Picobel({ theme: "bbc" });
+Picobel({ theme: "eatenbymonsters" });
