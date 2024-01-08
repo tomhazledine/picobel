@@ -1,7 +1,7 @@
-import _helpers from './helpers';
-import PicobelSetup from './PicobelSetup';
-import PicobelData from './PicobelData';
-import PicobelMarkup from './PicobelMarkup';
+import _helpers from "./helpers";
+import PicobelSetup from "./PicobelSetup";
+import PicobelData from "./PicobelData";
+import PicobelMarkup from "./PicobelMarkup";
 
 /**
  * -----------------------------------------------------------------------------
@@ -53,24 +53,40 @@ function Picobel(rawOptions = {}) {
     const _setupLocalListeners = nodes =>
         nodes.map((node, key) => {
             // Audio event listeners
-            node.addEventListener('timeupdate', PicobelAudio.triggerUpdateProgress, false);
-            node.addEventListener('loadstart', PicobelAudio.loadStart, false);
-            node.addEventListener('canplaythrough', PicobelAudio.canplaythrough, false);
-            node.addEventListener('error', PicobelAudio.errors, false);
-            node.addEventListener('stalled', PicobelAudio.stalled, false);
-            node.addEventListener('waiting', PicobelAudio.errors, false);
-            node.addEventListener('progress', PicobelAudio.progress, false);
+            node.addEventListener(
+                "timeupdate",
+                PicobelAudio.triggerUpdateProgress,
+                false
+            );
+            node.addEventListener(
+                "canplaythrough",
+                PicobelAudio.canplaythrough,
+                false
+            );
+            node.addEventListener(
+                "error",
+                () => PicobelAudio.errors(key),
+                false
+            );
 
             // DOM interaction event listeners
             node.elements.playPauseButton[0].addEventListener(
-                'click',
+                "click",
                 PicobelAudio.triggerPlayPauseAudio,
                 false
             );
-            node.elements.progressBar[0].addEventListener('input', PicobelAudio.sliderScrub, false);
-            node.elements.volumeControl[0].addEventListener('input', PicobelAudio.volume, false);
+            node.elements.progressBar[0].addEventListener(
+                "input",
+                PicobelAudio.sliderScrub,
+                false
+            );
+            node.elements.volumeControl[0].addEventListener(
+                "input",
+                PicobelAudio.volume,
+                false
+            );
             node.elements.muteButton[0].addEventListener(
-                'click',
+                "click",
                 PicobelAudio.muteUnmuteAudio,
                 false
             );
@@ -79,7 +95,7 @@ function Picobel(rawOptions = {}) {
 
     const PicobelAudio = {
         pauseAll: () => {
-            const paused = state.audioNodes.map(node => {
+            state.audioNodes.forEach(node => {
                 PicobelAudio.pause(node);
             });
         },
@@ -99,16 +115,17 @@ function Picobel(rawOptions = {}) {
         play: node => {
             node.play();
             let button = node.elements.playPauseButton[0];
-            button.classList.remove('songPaused');
-            button.classList.add('songPlaying');
+            button.classList.remove("songPaused");
+            button.classList.add("songPlaying");
         },
         pause: node => {
             node.pause();
             let button = node.elements.playPauseButton[0];
-            button.classList.remove('songPlaying');
-            button.classList.add('songPaused');
+            button.classList.remove("songPlaying");
+            button.classList.add("songPaused");
         },
-        triggerUpdateProgress: event => PicobelAudio.updateProgress(event.srcElement),
+        triggerUpdateProgress: event =>
+            PicobelAudio.updateProgress(event.srcElement),
 
         updateProgress: node => {
             let progress = node.currentTime;
@@ -116,31 +133,26 @@ function Picobel(rawOptions = {}) {
             let progressParsed = _helpers.parseTime(progress);
             node.elements.playTimer[0].innerHTML = progressParsed;
             if (progress >= duration) {
-                node.elements.playPauseButton[0].classList.remove('songPlaying');
+                node.elements.playPauseButton[0].classList.remove(
+                    "songPlaying"
+                );
             }
-            let progressPercent = (progress / duration * 100).toFixed(2);
+            let progressPercent = ((progress / duration) * 100).toFixed(2);
             node.elements.progressBar[0].value = progressPercent;
-            // console.log(node.elements.indicator);
-            node.elements.indicator[0].style.width = progressPercent + '%';
-            node.elements.playhead[0].style.left = progressPercent + '%';
+            node.elements.indicator[0].style.width = progressPercent + "%";
+            node.elements.playhead[0].style.left = progressPercent + "%";
         },
-        loadStart: () => {
-            // console.log('loadStart');
-        },
-        canplaythrough: function() {
+        canplaythrough: function () {
             PicobelMarkup.setLengthDisplay(this);
-            this.elements.wrapper.classList.remove('loading');
+            this.elements.wrapper.classList.remove("loading");
             let meta = PicobelData.getMeta(this);
             PicobelMarkup.setMeta(meta, this.elements);
         },
-        errors: error => {
-            // console.log(error);
-        },
-        stalled: () => {
-            // console.log('stalled');
-        },
-        progress: () => {
-            // console.log('progress');
+        errors: i => {
+            const { elements } = state.audioNodes[i];
+            elements.wrapper.classList.add("error");
+            elements.wrapper.classList.remove("loading");
+            elements.wrapper.innerHTML = `<div class="error" style="display:flex;height: 100%;align-items:  center;justify-content: center;"><span class="error__icon"></span><span class="error__message">Error loading audio file</span></div>`;
         },
         sliderScrub: event => {
             let index = _helpers.findParentIndex(event.srcElement);
@@ -164,8 +176,8 @@ function Picobel(rawOptions = {}) {
             node.volume = value;
             node.elements.volumeDisplay[0].innerHTML = valueMapped;
             node.elements.volumeControl[0].value = value;
-            node.elements.volumeIndicator[0].style.width = volumePercent + '%';
-            node.elements.volumePlayhead[0].style.left = volumePercent + '%';
+            node.elements.volumeIndicator[0].style.width = volumePercent + "%";
+            node.elements.volumePlayhead[0].style.left = volumePercent + "%";
         },
         muteUnmuteAudio: event => {
             let index = _helpers.findParentIndex(event.srcElement);
@@ -179,24 +191,30 @@ function Picobel(rawOptions = {}) {
             if (node.mute) {
                 node.tmpVolume = node.volume;
                 PicobelAudio.setVolume(node, 0);
-                button.classList.add('songMuted');
-                button.classList.remove('songUnmuted');
-                button.innerHTML = 'unmute';
+                button.classList.add("songMuted");
+                button.classList.remove("songUnmuted");
+                button.innerHTML = "unmute";
             } else {
-                if (typeof node.tmpVolume != 'undefined' && node.tmpVolume > 0) {
+                if (
+                    typeof node.tmpVolume != "undefined" &&
+                    node.tmpVolume > 0
+                ) {
                     PicobelAudio.setVolume(node, node.tmpVolume);
                 } else {
                     PicobelAudio.setVolume(node, 1);
                 }
-                button.classList.remove('songMuted');
-                button.classList.add('songUnmuted');
-                button.innerHTML = 'mute';
+                button.classList.remove("songMuted");
+                button.classList.add("songUnmuted");
+                button.innerHTML = "mute";
             }
         }
     };
 
     // Set `components` based on theme (but overridden by explicit `options`).
-    state.components = PicobelSetup.setComponentsByTheme(state.theme, rawOptions.components);
+    state.components = PicobelSetup.setComponentsByTheme(
+        state.theme,
+        rawOptions.components
+    );
 
     // Get audio elements from page, and save their details to state.
     state.audioNodes = PicobelData.findAudio();
@@ -204,7 +222,10 @@ function Picobel(rawOptions = {}) {
     state.audioNodes = PicobelData.getRawData(state.audioNodes);
 
     // Build markup for each element, based on `components`
-    const markup = PicobelMarkup.generateMarkup(state.audioNodes, state.components);
+    const markup = PicobelMarkup.generateMarkup(
+        state.audioNodes,
+        state.components
+    );
 
     // Replace audio elements in DOM with new markup
     _replaceNodes(state.audioNodes, markup);
@@ -214,6 +235,14 @@ function Picobel(rawOptions = {}) {
 
     // Setup event listeners
     state.audioNodes = _setupLocalListeners(state.audioNodes);
+
+    // Check status
+    state.audioNodes.forEach(node => {
+        const { readyState } = node;
+        if (readyState === 4) {
+            PicobelAudio.canplaythrough.call(node);
+        }
+    });
 
     return {
         state,
