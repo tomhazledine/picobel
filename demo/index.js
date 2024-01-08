@@ -1,3 +1,3 @@
 import Picobel from "../build/picobel.js";
 
-Picobel({ theme: "itunes" });
+Picobel({ theme: "pitchfork" });
