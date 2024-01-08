@@ -1,9 +1,12 @@
 .default.customAudioPlayer {
-    --black: #555;
+    --black: #555; /* (0, 0%, 33.3%) */
+    --black--light: hsl(0, 0%, 43.3%);
+    --black--opacity: rgba(0, 0, 0, 0.3);
     --white: #ffffff;
-    --grey: #dad8d2;
-    --greyDark: darken(var(--grey), 20%);
+    --grey: #dad8d2; /* hsl(30, 10%, 85%) */
+    --greyDark: hsl(30, 10%, 65%);
     --primary: #ddd;
+    --primary--opacity: rgba(221, 221, 221, 0.4);
     --highlight: #00b7c6;
     --background_grey_dark: #e6e6e6;
     --background_grey_light: #f1f1f1;
@@ -31,7 +34,11 @@
     margin: 1em 0;
     height: 6em;
     border-radius: 0.3em;
-    box-shadow: rgba(black, 0.3) 0 0.1em 0.2em 0;
+    box-shadow: var(--black--opacity) 0 0.1em 0.2em 0;
+    background-image: linear-gradient(
+        var(--background_grey_light),
+        var(--background_grey_dark)
+    );
 }
 
 .default.customAudioPlayer *,
@@ -75,8 +82,8 @@
     height: 6em;
     color: var(--white);
     background: var(--black);
-    background-image: linear-gradient(lighten(var(--black), 10%), var(--black));
-    box-shadow: inset lighten(var(--black), 10%) -1px 0 0 0;
+    background-image: linear-gradient(var(--black--light), var(--black));
+    box-shadow: inset var(--black--light) -1px 0 0 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -233,7 +240,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: rgba(var(--primary), 0.4);
+    background: var(--primary--opacity);
     width: 0%;
 }
 .default.customAudioPlayer
