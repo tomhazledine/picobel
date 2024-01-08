@@ -1,0 +1,433 @@
+.soundcloud.customAudioPlayer {
+    --white: #ffffff;
+    --black: #333333;
+    --orange: #fa5300;
+    --volume_bg: #f2f2f2;
+    --border: #cecece;
+    --unplayed: #c8c8c8;
+    --text_dark: #666666;
+    --icon_grey: #7f7f7f;
+    --background_grey_dark: #dedede;
+    --background_grey_light: #f2f2f2;
+    --text_light: #969696;
+    --progressHeight: 0.6rem;
+}
+
+.soundcloud.customAudioPlayer {
+    margin: 2em 0;
+    padding: 0em;
+    padding-left: 4em;
+    position: relative;
+    border: 1px solid var(--border);
+    overflow: visible;
+    box-sizing: border-box;
+    background: var(--white);
+    font-family: "Arial", sans-serif;
+    color: var(--text_light);
+    height: 3em;
+
+    background-image: linear-gradient(
+        var(--background_grey_light),
+        var(--background_grey_dark)
+    );
+}
+.soundcloud.customAudioPlayer *,
+.soundcloud.customAudioPlayer *:before,
+.soundcloud.customAudioPlayer *:after {
+    box-sizing: inherit;
+}
+
+.soundcloud.customAudioPlayer .loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3em;
+    background: var(--black);
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    text-align: center;
+    line-height: 1;
+    padding: 1em;
+    overflow: hidden;
+    background: linear-gradient(to right, var(--white) 50%, var(--orange) 50%);
+    background-size: 2em 2em;
+    background-repeat: repeat;
+    background-position: 0 0;
+    animation: background_slide linear infinite 0.4s;
+}
+.soundcloud.customAudioPlayer.loading .loader {
+    opacity: 0.2;
+}
+
+.soundcloud.customAudioPlayer .playerTrigger {
+    border: none;
+    appearance: none;
+    width: 2.6em;
+    height: 2.6em;
+    font-size: 1em;
+    color: var(--icon_grey);
+    background: none;
+    position: absolute;
+    top: 50%;
+    margin-top: -1.3em;
+    left: 1em;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.soundcloud.customAudioPlayer .playerTrigger .buttonText {
+    display: none;
+}
+.soundcloud.customAudioPlayer .playerTrigger:focus {
+    outline: none;
+}
+.soundcloud.customAudioPlayer .playerTrigger:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -0.6em;
+    margin-left: -0.25em;
+    border-top: 0.6em solid transparent;
+    border-left: 0.8em solid var(--black);
+    border-bottom: 0.6em solid transparent;
+}
+.soundcloud.customAudioPlayer .playerTrigger:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    height: 1em;
+    margin-top: -0.5em;
+    margin-right: -0.5em;
+    border-top: 0;
+    border-left: 0.4em solid var(--black);
+    border-bottom: 0;
+    opacity: 0;
+}
+.soundcloud.customAudioPlayer .playerTrigger.songPlaying:before {
+    height: 1em;
+    margin-top: -0.5em;
+    margin-left: -0.5em;
+    border-top: 0;
+    border-left: 0.4em solid var(--black);
+    border-bottom: 0;
+}
+.soundcloud.customAudioPlayer .playerTrigger.songPlaying:after {
+    opacity: 1;
+}
+
+.soundcloud.customAudioPlayer .metaWrapper {
+    color: var(--black);
+    padding: 0 1em;
+    margin-bottom: 1em;
+    float: right;
+    width: 25%;
+    margin-top: 0.7em;
+}
+
+.soundcloud.customAudioPlayer .titleDisplay {
+    display: block;
+    font-size: 0.7em;
+    line-height: 1;
+    padding-bottom: 0.2em;
+    color: var(--text_light);
+}
+
+.soundcloud.customAudioPlayer .artistDisplay {
+    display: block;
+    font-size: 0.7em;
+    line-height: 1;
+    color: var(text_dark);
+    font-weight: bold;
+}
+
+.soundcloud.customAudioPlayer .songPlayTimer {
+    position: absolute;
+    bottom: 1em;
+    left: 5em;
+    color: var(--orange);
+}
+.soundcloud.customAudioPlayer .songDuration {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
+
+.soundcloud.customAudioPlayer .timingsWrapper {
+    padding: 0 4em;
+    position: relative;
+    font-size: 0.8em;
+    width: 70%;
+    float: left;
+    margin-top: 1.5em;
+}
+.soundcloud.customAudioPlayer .timingsWrapper .songPlayTimer,
+.soundcloud.customAudioPlayer .timingsWrapper .songDuration {
+    position: absolute;
+    top: -0.2em;
+    width: 4em;
+    text-align: center;
+    line-height: 1;
+}
+.soundcloud.customAudioPlayer .timingsWrapper .songPlayTimer {
+    left: 0;
+    border-radius: 0.5em 0 0 0.5em;
+}
+.soundcloud.customAudioPlayer .timingsWrapper .songDuration {
+    right: 0;
+    border-radius: 0 0.5em 0.5em 0;
+}
+
+.soundcloud.customAudioPlayer .progress-slider__wrapper {
+    height: var(--progressHeight);
+    line-height: 1;
+    position: relative;
+    border-radius: 0.2rem;
+}
+.soundcloud.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__range {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.soundcloud.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__background {
+    height: 0.1rem;
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    background: var(--unplayed);
+    width: 100%;
+}
+.soundcloud.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__progress-indicator {
+    height: 0.1rem;
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    background: var(--orange);
+    width: 0%;
+}
+.soundcloud.customAudioPlayer
+    .progress-slider__wrapper
+    .progress-slider__playhead {
+    background: var(--orange);
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    bottom: 50%;
+    margin-bottom: -0.2rem;
+    left: 0%;
+    border-radius: 50%;
+    margin-left: calc(0 - (var(--progressHeight) / 2));
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.soundcloud.customAudioPlayer
+    .progress-slider__wrapper:hover
+    .progress-slider__playhead {
+    opacity: 1;
+}
+
+/* Make sure the range Track is the right size and shape */
+.soundcloud.customAudioPlayer
+    input[type="range"].progress-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    font-size: var(--progressHeight);
+    height: 2.2em;
+    cursor: pointer;
+}
+.soundcloud.customAudioPlayer
+    input[type="range"].progress-slider__range::-moz-range-track {
+    width: 100%;
+    height: var(--progressHeight);
+    cursor: pointer;
+}
+.soundcloud.customAudioPlayer
+    input[type="range"].progress-slider__range::-ms-track {
+    width: 100%;
+    height: var(--progressHeight);
+    cursor: pointer;
+}
+
+.soundcloud.customAudioPlayer .songMuteButton {
+    display: none;
+}
+
+.soundcloud.customAudioPlayer .songVolume {
+    width: 5%;
+    height: 3em;
+    float: left;
+    position: relative;
+    cursor: pointer;
+}
+.soundcloud.customAudioPlayer .songVolume:before {
+    display: block;
+    width: 0.5em;
+    height: 0.4em;
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: 50%;
+    margin-right: 0.1em;
+    margin-top: -0.2em;
+    background: var(--black);
+}
+.soundcloud.customAudioPlayer .songVolume:after {
+    display: block;
+    width: 0.5em;
+    position: absolute;
+    content: "";
+    top: 50%;
+    margin-top: -0.5em;
+    right: 50%;
+    border-top: 0.5em solid transparent;
+    border-right: 0.5em solid var(--black);
+    border-bottom: 0.5em solid transparent;
+}
+
+.soundcloud.customAudioPlayer .songVolumeValue {
+    display: none;
+}
+
+.soundcloud.customAudioPlayer .songVolumeLabelWrapper {
+    display: none;
+}
+
+.soundcloud.customAudioPlayer .volume-slider__wrapper {
+    display: none;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+    position: absolute;
+    top: 0.5em;
+    left: 50%;
+    margin-left: -1.5em;
+    background: blue;
+    height: 1em;
+    font-size: 0.8em;
+    position: relative;
+    background: var(--volume_bg);
+    border: 1px solid var(--border);
+    width: 10em;
+    float: left;
+    padding: 1em;
+    box-shadow: rgba(black, 0.3) -0.2em 0em 1em -0.2em;
+}
+.soundcloud.customAudioPlayer .volume-slider__wrapper:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    left: -8px;
+
+    border-top: 8px solid transparent;
+    border-right: 8px solid var(--border);
+    border-bottom: 8px solid transparent;
+}
+.soundcloud.customAudioPlayer .volume-slider__wrapper:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    left: -7px;
+
+    border-top: 8px solid transparent;
+    border-right: 8px solid var(--volume_bg);
+    border-bottom: 8px solid transparent;
+}
+
+.soundcloud.customAudioPlayer .volume-slider__wrapper .volume-slider__range {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0.5em;
+    height: 2em;
+    left: 0;
+    opacity: 0;
+}
+
+.soundcloud.customAudioPlayer
+    .volume-slider__wrapper
+    .volume-slider__background {
+    height: 1px;
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    background: var(--unplayed);
+    width: 100%;
+}
+.soundcloud.customAudioPlayer
+    .volume-slider__wrapper
+    .volume-slider__progress-indicator {
+    height: 1px;
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    background: var(--orange);
+    width: 0%;
+}
+.soundcloud.customAudioPlayer .volume-slider__wrapper .volume-slider__playhead {
+    background: var(--orange);
+    width: 0.4rem;
+    height: 0.4rem;
+    position: absolute;
+    bottom: 50%;
+    margin-bottom: -0.2rem;
+    left: 0%;
+    border-radius: 50%;
+    margin-left: 0 - (var(--progressHeight) / 2);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.soundcloud.customAudioPlayer .songVolume:hover .volume-slider__wrapper {
+    display: block;
+}
+
+/* Make sure the range Track is the right size and shape */
+.soundcloud.customAudioPlayer
+    input[type="range"].volume-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    font-size: 1em;
+    height: 2em;
+    cursor: pointer;
+}
+.soundcloud.customAudioPlayer
+    input[type="range"].volume-slider__range::-moz-range-track {
+    width: 100%;
+    height: 2em;
+    cursor: pointer;
+}
+.soundcloud.customAudioPlayer
+    input[type="range"].volume-slider__range::-ms-track {
+    width: 100%;
+    height: 2em;
+    cursor: pointer;
+}
+
+/* Simulates an infinite slide-to-the-right effect. */
+@keyframes background_slide {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 2em 0;
+    }
+}
