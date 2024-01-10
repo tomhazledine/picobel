@@ -10,6 +10,8 @@
     --highlight: #00b7c6;
     --background_grey_dark: #e6e6e6;
     --background_grey_light: #f1f1f1;
+
+    --progress-bar-height: 2em;
 }
 
 /* Simulates an infinite slide-to-the-right effect. */
@@ -27,7 +29,7 @@
     font-size: 10px;
     position: relative;
     box-sizing: border-box;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 1;
 
     /* Wrapper */
@@ -52,9 +54,9 @@
     position: absolute;
     z-index: 2;
     bottom: 0;
-    left: 5em;
+    left: 5.6em;
     right: 0;
-    height: 2em;
+    height: var(--progress-bar-height);
     opacity: 0;
     transition: opacity 0.2s;
     pointer-events: none;
@@ -63,7 +65,7 @@
         var(--highlight) 50%,
         var(--black) 50%
     );
-    background-size: 2em 2em;
+    background-size: var(--progress-bar-height) var(--progress-bar-height);
     background-repeat: repeat;
     background-position: 0 0;
     animation: background_slide linear infinite 0.4s;
@@ -90,12 +92,16 @@
     left: 0;
     cursor: pointer;
 }
+.default.customAudioPlayer .playerTrigger:focus {
+    z-index: 3;
+    outline: var(--highlight) dashed 2px;
+}
 .default.customAudioPlayer .playerTrigger .buttonText {
     display: none;
 }
-.default.customAudioPlayer .playerTrigger:focus {
+/* .default.customAudioPlayer .playerTrigger:focus {
     outline: none;
-}
+} */
 
 /* The "play" icon */
 .default.customAudioPlayer .playerTrigger:before {
@@ -146,7 +152,7 @@
 .default.customAudioPlayer .metaWrapper {
     padding: 1em 2em 1em 7em;
     height: 4.4em;
-    overflow: hidden;
+    /* overflow: hidden; */
     background: var(--primary);
     color: var(--black);
     text-shadow: var(--white) 0 0.1em 0;
@@ -178,7 +184,8 @@
     bottom: 0;
     left: 5.6em;
     right: 0;
-    height: 1.6em;
+    height: var(--progress-bar-height);
+    background: red;
 }
 .default.customAudioPlayer .timingsWrapper .songPlayTimer,
 .default.customAudioPlayer .timingsWrapper .songDuration {
@@ -189,12 +196,11 @@
     text-align: left;
     background: transparent;
     color: var(--white);
-    line-height: 1;
-    height: 1em;
+    line-height: 1em;
+    height: var(--progress-bar-height);
     pointer-events: none;
     font-size: 1em;
-    padding: 0 0.5em 0 1em;
-    padding-top: 0.3em;
+    padding: 0.5em 0.5em 0.5em 1em;
     font-family: monospace;
 }
 .default.customAudioPlayer .timingsWrapper .songPlayTimer {
@@ -211,22 +217,33 @@
     display: none;
 }
 
-/* The "fake" range slider */
+/* Progress slider positioner */
 .default.customAudioPlayer .progress-slider__wrapper {
-    height: 2em;
-    font-size: 1em;
-    line-height: 1;
+    height: var(--progress-bar-height);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+/* The "fake" range slider */
+.default.customAudioPlayer .progress-slider__replacement {
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     background: var(--black);
-    overflow: hidden;
     border-bottom-right-radius: 0.2em;
+    overflow: hidden;
+}
+.default.customAudioPlayer .progress-slider__replacement.focus {
+    outline: var(--highlight) dashed 2px;
 }
 /* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
 .default.customAudioPlayer .progress-slider__wrapper .progress-slider__range {
     width: 100%;
+    height: var(--progress-bar-height);
+    font-size: inherit;
     padding: 0;
     margin: 0;
     position: absolute;
@@ -237,7 +254,7 @@
 .default.customAudioPlayer
     .progress-slider__wrapper
     .progress-slider__progress-indicator {
-    height: 2em;
+    height: var(--progress-bar-height);
     position: absolute;
     top: 0;
     left: 0;
@@ -248,7 +265,7 @@
     .progress-slider__wrapper
     .progress-slider__playhead {
     width: 0.5em;
-    height: 2em;
+    height: var(--progress-bar-height);
     position: absolute;
     top: 0;
     left: 0%;
@@ -290,7 +307,7 @@
     left: 4em;
     width: 1.6em;
     height: 6em;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 2;
 }
 .default.customAudioPlayer .songVolume .songMuteButton {
@@ -306,6 +323,10 @@
     top: 0;
     right: 0;
     cursor: pointer;
+    overflow: hidden;
+}
+.default.customAudioPlayer .songVolume .songMuteButton:focus {
+    outline: var(--highlight) dashed 2px;
 }
 
 /* Rectangle part of "speaker cone" icon */
@@ -323,7 +344,7 @@
 }
 
 /* Triangle part of "speaker cone" icon */
-.default.customAudioPlayer .songVolume .songMuteButton :after {
+.default.customAudioPlayer .songVolume .songMuteButton:after {
     display: block;
     width: 0.4em;
     height: 0.4em;
@@ -362,13 +383,22 @@
     top: 1.6em;
     left: 0;
     z-index: 3;
-    background: var(--greyDark);
     width: 4.4em;
     transform: rotate(90deg) translateY(-100%);
     transform-origin: top left;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
-.default.customAudioPlayer .volume-slider__wrapper:after {
+.default.customAudioPlayer .volume-slider__replacement {
+    display: block;
+    height: 1.6em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--greyDark);
+    width: 4.4em;
+    /* overflow: hidden; */
+}
+.default.customAudioPlayer .volume-slider__replacement:after {
     content: "";
     display: block;
     width: 100%;
@@ -378,6 +408,9 @@
     bottom: 0;
     left: 0;
     pointer-events: none;
+}
+.default.customAudioPlayer .volume-slider__replacement.focus {
+    outline: var(--highlight) dashed 2px;
 }
 
 /* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
@@ -392,6 +425,10 @@
     opacity: 0;
     transform: rotate(180deg);
 }
+.default.customAudioPlayer .volume-slider__wrapper .volume-slider__range:focus {
+    outline: red solid 1px;
+}
+
 .default.customAudioPlayer
     .volume-slider__wrapper
     .volume-slider__progress-indicator {
