@@ -1,15 +1,14 @@
-import PicobelMarkup from "../js/PicobelMarkup";
+import PicobelMarkup, { buildSlider } from "../js/PicobelMarkup";
 
-const EXPECTED_COMPONENTS = {
-    theme: "default",
-    playPause: false,
-    progress: true,
-    volume: true,
-    download: false,
-    mute: true,
-    duration: true,
-    timer: true
-};
+const EXPECTED_COMPONENTS = [
+    "playPause",
+    "progress",
+    "volume",
+    "download",
+    "mute",
+    "duration",
+    "timer"
+];
 
 // Create some test nodes to trigger markup generation.
 const TEST_NODES = [
@@ -46,7 +45,7 @@ describe("markup helpers", () => {
         const MAX = 100;
         const VALUE = 50;
 
-        let slider = PicobelMarkup.buildSlider(NAMESPACE, MIN, MAX, VALUE);
+        let slider = buildSlider(NAMESPACE, MIN, MAX, VALUE);
         expect(slider.localName).toEqual("div");
         expect(slider.classList).toContain(`${NAMESPACE}-slider__wrapper`);
         expect(slider.children.length).toEqual(2);
@@ -134,9 +133,9 @@ describe("markup generation", () => {
 describe("content display", () => {
     it("displays the duration value", () => {
         let nodeOne = PicobelMarkup.setLengthDisplay(TEST_NODES[0]);
-        expect(nodeOne.elements.durationDisplay[0].innerHTML).toEqual("3:31");
+        expect(nodeOne.elements.durationDisplay.innerHTML).toEqual("3:31");
         let nodeTwo = PicobelMarkup.setLengthDisplay(TEST_NODES[1]);
-        expect(nodeTwo.elements.durationDisplay[0].innerHTML).toEqual("22:25");
+        expect(nodeTwo.elements.durationDisplay.innerHTML).toEqual("22:25");
     });
 
     it("displays the node's meta", () => {
@@ -145,9 +144,7 @@ describe("content display", () => {
             title: "a title for a node"
         };
         let elements = PicobelMarkup.setMeta(TEST_META, TEST_NODES[0].elements);
-        expect(elements.artistDisplay[0].innerHTML).toEqual("an artist name");
-        expect(elements.titleDisplay[0].innerHTML).toEqual(
-            "a title for a node"
-        );
+        expect(elements.artistDisplay.innerHTML).toEqual("an artist name");
+        expect(elements.titleDisplay.innerHTML).toEqual("a title for a node");
     });
 });

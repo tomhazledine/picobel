@@ -1,7 +1,7 @@
 import _helpers from "./helpers";
 import PicobelData from "./PicobelData";
 
-const buildSlider = (
+export const buildSlider = (
     namespace = "picobel",
     min = 0,
     max = 100,
