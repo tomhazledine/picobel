@@ -2,9 +2,9 @@ import _helpers from "./helpers";
 
 const PicobelData = {
     // Return an array of all the <audio> elements found on the page.
-    findAudio: () => {
+    findAudio: context => {
         // Get all the <audio> occurrences in the page.
-        let audioElements = document.getElementsByTagName("audio");
+        let audioElements = context.getElementsByTagName("audio");
         // Save our audioElements as an array (so we can manipulate the DOM but
         // still access our items).
         let items = [].slice.call(audioElements);

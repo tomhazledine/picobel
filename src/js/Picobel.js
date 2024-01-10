@@ -217,7 +217,7 @@ function Picobel(rawOptions = {}) {
     );
 
     // Get audio elements from page, and save their details to state.
-    state.audioNodes = PicobelData.findAudio();
+    state.audioNodes = PicobelData.findAudio(options.context);
 
     state.audioNodes = PicobelData.getRawData(state.audioNodes);
 
@@ -231,7 +231,10 @@ function Picobel(rawOptions = {}) {
     _replaceNodes(state.audioNodes, markup);
 
     // Save new DOM elements to our node list
-    state.audioNodes = PicobelMarkup.elementHooks(state.audioNodes);
+    state.audioNodes = PicobelMarkup.elementHooks(
+        state.audioNodes,
+        options.context
+    );
 
     // Setup event listeners
     state.audioNodes = _setupLocalListeners(state.audioNodes);

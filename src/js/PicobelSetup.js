@@ -10,6 +10,7 @@ const PicobelSetup = {
     parseOptions: (rawOptions = {}) => {
         // Define our default options.
         const defaultOptions = {
+            context: document,
             theme: "default",
             preload: false,
             components: {

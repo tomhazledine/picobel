@@ -238,9 +238,9 @@ export const PicobelMarkup = {
         return markupArray;
     },
 
-    elementHooks: nodes =>
+    elementHooks: (nodes, context) =>
         nodes.map(node => {
-            let wrapper = document.querySelectorAll(
+            let wrapper = context.querySelectorAll(
                 `[data-song-index='${node.key}']`
             );
             node.elements = {

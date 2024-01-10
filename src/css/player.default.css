@@ -57,6 +57,7 @@
     height: 2em;
     opacity: 0;
     transition: opacity 0.2s;
+    pointer-events: none;
     background: linear-gradient(
         to right,
         var(--highlight) 50%,
