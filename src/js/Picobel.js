@@ -80,9 +80,29 @@ function Picobel(rawOptions = {}) {
                 PicobelAudio.sliderScrub,
                 false
             );
+            node.elements.progressBar[0].addEventListener(
+                "focus",
+                e => PicobelAudio.sliderFocus(e, true),
+                false
+            );
+            node.elements.progressBar[0].addEventListener(
+                "blur",
+                e => PicobelAudio.sliderFocus(e, false),
+                false
+            );
             node.elements.volumeControl[0].addEventListener(
                 "input",
                 PicobelAudio.volume,
+                false
+            );
+            node.elements.volumeControl[0].addEventListener(
+                "focus",
+                e => PicobelAudio.volumeFocus(e, true),
+                false
+            );
+            node.elements.volumeControl[0].addEventListener(
+                "blur",
+                e => PicobelAudio.volumeFocus(e, false),
                 false
             );
             node.elements.muteButton[0].addEventListener(
@@ -163,12 +183,22 @@ function Picobel(rawOptions = {}) {
             activeNode.currentTime = targetTime;
             PicobelAudio.updateProgress(activeNode);
         },
+        sliderFocus: (event, focus) => {
+            let index = _helpers.findParentIndex(event.srcElement);
+            let node = state.audioNodes.find(node => node.key == index);
+            node.elements.progressWrapper[0].classList.toggle("focus", focus);
+        },
         volume: event => {
             let index = _helpers.findParentIndex(event.srcElement);
             let node = state.audioNodes.find(node => node.key == index);
             let volume = event.srcElement.value;
             PicobelAudio.mute(node, false);
             PicobelAudio.setVolume(node, volume);
+        },
+        volumeFocus: (event, focus) => {
+            let index = _helpers.findParentIndex(event.srcElement);
+            let node = state.audioNodes.find(node => node.key == index);
+            node.elements.volumeWrapper[0].classList.toggle("focus", focus);
         },
         setVolume: (node, value) => {
             let valueMapped = value * 10;

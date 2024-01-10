@@ -16,27 +16,34 @@ export const PicobelMarkup = {
             `${namespace}-slider__wrapper`
         );
 
+        let replacement = PicobelMarkup.createElement(
+            "div",
+            `${namespace}-slider__replacement`
+        );
+
         // Create a background div
         let background = PicobelMarkup.createElement(
             "div",
             `${namespace}-slider__background`
         );
         // Add the background to the container
-        wrapper.appendChild(background);
+        replacement.appendChild(background);
 
         // Create a progress indicator
         let progressIndicator = PicobelMarkup.createElement(
             "div",
             `${namespace}-slider__progress-indicator`
         );
-        wrapper.appendChild(progressIndicator);
+        replacement.appendChild(progressIndicator);
 
         // Create a "playhead"
         let playhead = PicobelMarkup.createElement(
             "div",
             `${namespace}-slider__playhead`
         );
-        wrapper.appendChild(playhead);
+        replacement.appendChild(playhead);
+
+        wrapper.appendChild(replacement);
 
         // Create an (invisible) input (html range)
         let progress = PicobelMarkup.createElement(
@@ -252,6 +259,9 @@ export const PicobelMarkup = {
                 durationDisplay: wrapper[0].querySelectorAll(".songDuration"),
                 titleDisplay: wrapper[0].querySelectorAll(".titleDisplay"),
                 artistDisplay: wrapper[0].querySelectorAll(".artistDisplay"),
+                progressWrapper: wrapper[0].querySelectorAll(
+                    ".progress-slider__replacement"
+                ),
                 progressBar: wrapper[0].querySelectorAll(
                     ".progress-slider__range"
                 ),
@@ -260,6 +270,9 @@ export const PicobelMarkup = {
                 ),
                 indicator: wrapper[0].querySelectorAll(
                     ".progress-slider__progress-indicator"
+                ),
+                volumeWrapper: wrapper[0].querySelectorAll(
+                    ".volume-slider__replacement"
                 ),
                 volumeControl: wrapper[0].querySelectorAll(
                     ".volume-slider__range"
