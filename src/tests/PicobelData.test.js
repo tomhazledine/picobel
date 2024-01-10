@@ -42,11 +42,11 @@ describe("data handling", () => {
     it("finds the audio nodes", () => {
         // With test DOM:
         document.body.innerHTML = TEST_DOM;
-        let nodes = PicobelData.findAudio();
+        let nodes = PicobelData.findAudio(document);
         expect(nodes.length).toEqual(2);
         // With empty DOM:
         document.body.innerHTML = "";
-        nodes = PicobelData.findAudio();
+        nodes = PicobelData.findAudio(document);
         expect(nodes.length).toEqual(0);
     });
 

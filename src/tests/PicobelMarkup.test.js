@@ -49,11 +49,11 @@ describe("markup helpers", () => {
         let slider = PicobelMarkup.buildSlider(NAMESPACE, MIN, MAX, VALUE);
         expect(slider.localName).toEqual("div");
         expect(slider.classList).toContain(`${NAMESPACE}-slider__wrapper`);
-        expect(slider.children.length).toEqual(4);
-        expect(slider.children[3].localName).toEqual("input");
-        expect(slider.children[3].min).toEqual(MIN.toString());
-        expect(slider.children[3].max).toEqual(MAX.toString());
-        expect(slider.children[3].value).toEqual(VALUE.toString());
+        expect(slider.children.length).toEqual(2);
+        expect(slider.children[1].localName).toEqual("input");
+        expect(slider.children[1].min).toEqual(MIN.toString());
+        expect(slider.children[1].max).toEqual(MAX.toString());
+        expect(slider.children[1].value).toEqual(VALUE.toString());
     });
 
     it("can create new elements", () => {
