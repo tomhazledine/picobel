@@ -162,7 +162,10 @@ export const PicobelMarkup = {
             let loading = PicobelMarkup.createElement("div", "loader");
             newPlayer.appendChild(loading);
 
+            // Add the components to the player in the order they are listed
             components.forEach(component => {
+                // If the component is a string and we have a function to build it
+                // then build it and add it to the player.
                 if (
                     typeof component === "string" &&
                     buildComponent[component]
@@ -171,6 +174,8 @@ export const PicobelMarkup = {
                     newPlayer.appendChild(markup);
                     return;
                 }
+                // If the component is an array, build a wrapper and add each
+                // component to the wrapper.
                 if (Array.isArray(component) && component.length) {
                     const wrapper = PicobelMarkup.createElement(
                         "div",
