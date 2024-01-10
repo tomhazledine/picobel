@@ -7,7 +7,9 @@
     "scripts": {
         "test": "jest --verbose",
         "build": "node build.js",
-        "demo.build": "node build.js && node demo/build.js",
+        "build:dev": "node build.js --mode=development",
+        "build:demo": "node build.js && node demo/build.js",
+        "build:demo:dev": "node build.js --mode=development && node demo/build.js --mode=development",
         "prepublish": "npm run build",
         "prepublishOnly": "npm run build"
     },
