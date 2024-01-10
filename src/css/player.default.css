@@ -149,7 +149,7 @@
 }
 
 /* Display song info */
-.default.customAudioPlayer .metaWrapper {
+.default.customAudioPlayer .wrapper--title-artist {
     padding: 1em 2em 1em 7em;
     height: 4.4em;
     /* overflow: hidden; */
@@ -161,34 +161,33 @@
         var(--background_grey_dark)
     );
 }
-.default.customAudioPlayer .metaWrapper .titleDisplay {
+.default.customAudioPlayer .wrapper--title-artist .titleDisplay {
     display: inline-block;
     line-height: 1;
     font-weight: bold;
     margin-right: 0.5em;
     font-family: monospace;
 }
-.default.customAudioPlayer .metaWrapper .titleDisplay:after {
+.default.customAudioPlayer .wrapper--title-artist .titleDisplay:after {
     content: " – ";
 }
 
-.default.customAudioPlayer .metaWrapper .artistDisplay {
+.default.customAudioPlayer .wrapper--title-artist .artistDisplay {
     font-family: monospace;
     display: inline-block;
     line-height: 1;
 }
 
 /* Display info about time-played and song-duration */
-.default.customAudioPlayer .timingsWrapper {
+.default.customAudioPlayer .wrapper--timer-progress-duration {
     position: absolute;
     bottom: 0;
     left: 5.6em;
     right: 0;
     height: var(--progress-bar-height);
-    background: red;
 }
-.default.customAudioPlayer .timingsWrapper .songPlayTimer,
-.default.customAudioPlayer .timingsWrapper .songDuration {
+.default.customAudioPlayer .wrapper--timer-progress-duration .songPlayTimer,
+.default.customAudioPlayer .wrapper--timer-progress-duration .songDuration {
     position: absolute;
     top: 0;
     z-index: 3;
@@ -203,10 +202,10 @@
     padding: 0.5em 0.5em 0.5em 1em;
     font-family: monospace;
 }
-.default.customAudioPlayer .timingsWrapper .songPlayTimer {
+.default.customAudioPlayer .wrapper--timer-progress-duration .songPlayTimer {
     left: 0;
 }
-.default.customAudioPlayer .timingsWrapper .songDuration {
+.default.customAudioPlayer .wrapper--timer-progress-duration .songDuration {
     right: 0;
     text-align: right;
 }
@@ -301,7 +300,7 @@
 }
 
 /* Position the volume controls */
-.default.customAudioPlayer .songVolume {
+.default.customAudioPlayer .wrapper--mute-volume {
     position: absolute;
     top: 0;
     left: 4em;
@@ -310,7 +309,7 @@
     /* overflow: hidden; */
     z-index: 2;
 }
-.default.customAudioPlayer .songVolume .songMuteButton {
+.default.customAudioPlayer .wrapper--mute-volume .songMuteButton {
     display: block;
     width: 1.6em;
     height: 1.6em;
@@ -325,12 +324,12 @@
     cursor: pointer;
     overflow: hidden;
 }
-.default.customAudioPlayer .songVolume .songMuteButton:focus {
+.default.customAudioPlayer .wrapper--mute-volume .songMuteButton:focus {
     outline: var(--highlight) dashed 2px;
 }
 
 /* Rectangle part of "speaker cone" icon */
-.default.customAudioPlayer .songVolume .songMuteButton:before {
+.default.customAudioPlayer .wrapper--mute-volume .songMuteButton:before {
     display: block;
     width: 0.4em;
     height: 0.3em;
@@ -344,7 +343,7 @@
 }
 
 /* Triangle part of "speaker cone" icon */
-.default.customAudioPlayer .songVolume .songMuteButton:after {
+.default.customAudioPlayer .wrapper--mute-volume .songMuteButton:after {
     display: block;
     width: 0.4em;
     height: 0.4em;
@@ -360,10 +359,16 @@
 }
 
 /* Change icon when muted */
-.default.customAudioPlayer .songVolume .songMuteButton .songMuted:before {
+.default.customAudioPlayer
+    .wrapper--mute-volume
+    .songMuteButton
+    .songMuted:before {
     background: var(--grey);
 }
-.default.customAudioPlayer .songVolume .songMuteButton .songMuted:after {
+.default.customAudioPlayer
+    .wrapper--mute-volume
+    .songMuteButton
+    .songMuted:after {
     border-right-color: var(--grey);
 }
 
@@ -424,9 +429,6 @@
     left: 0;
     opacity: 0;
     transform: rotate(180deg);
-}
-.default.customAudioPlayer .volume-slider__wrapper .volume-slider__range:focus {
-    outline: red solid 1px;
 }
 
 .default.customAudioPlayer
