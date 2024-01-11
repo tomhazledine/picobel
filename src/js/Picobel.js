@@ -4,7 +4,7 @@ import PicobelData from "./PicobelData";
 import PicobelMarkup from "./PicobelMarkup";
 
 /**
- * -----------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------
  *  ____  _           _          _    _
  * |  _ \(_) ___ ___ | |__   ___| |  (_)___
  * | |_) | |/ __/ _ \| '_ \ / _ \ |  | / __|
@@ -13,23 +13,23 @@ import PicobelMarkup from "./PicobelMarkup";
  * Picobel.js                       _/ |
  * tomhazledine.com/audio          |__/
  *
- * =============================================================================
+ * ===========================================================================
  *
- * Replace any native <audio> instances with standard elements (spans, buttons &
- * divs) that we can style however we like.
+ * Replace any native <audio> instances with standard elements (spans,
+ * buttons & divs) that we can style however we like.
  *
  * Functionality powered by Web Audio API.
- * -----------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------
  */
 
 function Picobel(rawOptions = {}) {
     /**
-     * -------------------------------------------------------------------------
+     * -----------------------------------------------------------------------
      * RUN THE CODE
      *
-     * This is where the methods are called. Reading these lines should give you
-     * a step-by-step overview of what Picobel does.
-     * -------------------------------------------------------------------------
+     * This is where the methods are called. Reading these lines should
+     * give you a step-by-step overview of what Picobel does.
+     * -----------------------------------------------------------------------
      */
 
     // Parse the options
@@ -148,15 +148,26 @@ function Picobel(rawOptions = {}) {
         },
         play: node => {
             node.play();
-            let button = node.elements.playPauseButton;
-            button.classList.remove("songPaused");
-            button.classList.add("songPlaying");
+            const button = node.elements.playPauseButton;
+            const buttonText = node.elements.playPauseButtonText;
+            button.classList.remove("paused");
+            buttonText.innerHTML = "Pause";
+            button.classList.add("playing");
         },
         pause: node => {
             node.pause();
-            let button = node.elements.playPauseButton;
-            button.classList.remove("songPlaying");
-            button.classList.add("songPaused");
+            const button = node.elements.playPauseButton;
+            const buttonText = node.elements.playPauseButtonText;
+            button.classList.remove("playing");
+            buttonText.innerHTML = "Play";
+            button.classList.add("paused");
+        },
+        stop: node => {
+            node.pause();
+            const button = node.elements.playPauseButton;
+            const buttonText = node.elements.playPauseButtonText;
+            button.classList.remove("playing");
+            buttonText.innerHTML = "Play";
         },
         triggerUpdateProgress: event =>
             PicobelAudio.updateProgress(event.srcElement),
@@ -167,7 +178,7 @@ function Picobel(rawOptions = {}) {
             let progressParsed = _helpers.parseTime(progress);
             node.elements.playTimer.innerHTML = progressParsed;
             if (progress >= duration) {
-                node.elements.playPauseButton.classList.remove("songPlaying");
+                PicobelAudio.stop(node);
             }
             let progressPercent = ((progress / duration) * 100).toFixed(2);
             node.elements.progressBar.value = progressPercent;
@@ -204,7 +215,9 @@ function Picobel(rawOptions = {}) {
             let index = _helpers.findParentIndex(event.srcElement);
             let node = state.audioNodes.find(node => node.key == index);
             let volume = event.srcElement.value;
-            PicobelAudio.mute(node, false);
+            node.tmpVolume = node.volume;
+            node.mute = false;
+            PicobelAudio.mute(node);
             PicobelAudio.setVolume(node, volume);
         },
         volumeFocus: (event, focus) => {
@@ -216,6 +229,7 @@ function Picobel(rawOptions = {}) {
             let valueMapped = value * 10;
             let volumePercent = value * 100;
             node.volume = value;
+            console.log;
             node.elements.volumeDisplay.innerHTML = valueMapped;
             node.elements.volumeControl.value = value;
             node.elements.volumeIndicator.style.width = volumePercent + "%";
@@ -225,17 +239,17 @@ function Picobel(rawOptions = {}) {
             let index = _helpers.findParentIndex(event.srcElement);
             let node = state.audioNodes.find(node => node.key == index);
             node.mute = !node.mute;
-            PicobelAudio.mute(node, node.mute);
+            PicobelAudio.mute(node);
         },
-        mute: (node, mute) => {
-            // node.mute = !mute;
-            let button = node.elements.muteButton;
+        mute: node => {
+            const button = node.elements.muteButton;
+
             if (node.mute) {
                 node.tmpVolume = node.volume;
                 PicobelAudio.setVolume(node, 0);
-                button.classList.add("songMuted");
-                button.classList.remove("songUnmuted");
-                button.innerHTML = "unmute";
+                button.classList.add("muted");
+                button.classList.remove("unmuted");
+                button.innerHTML = "Unmute";
             } else {
                 if (
                     typeof node.tmpVolume != "undefined" &&
@@ -245,9 +259,9 @@ function Picobel(rawOptions = {}) {
                 } else {
                     PicobelAudio.setVolume(node, 1);
                 }
-                button.classList.remove("songMuted");
-                button.classList.add("songUnmuted");
-                button.innerHTML = "mute";
+                button.classList.remove("muted");
+                button.classList.add("unmuted");
+                button.innerHTML = "Mute";
             }
         }
     };
@@ -270,7 +284,8 @@ function Picobel(rawOptions = {}) {
     // Save new DOM elements to our node list
     state.audioNodes = PicobelMarkup.elementHooks(
         state.audioNodes,
-        options.context
+        options.context,
+        state.theme
     );
 
     // Setup event listeners

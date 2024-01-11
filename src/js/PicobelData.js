@@ -13,7 +13,7 @@ const PicobelData = {
 
     // Build an array of classes to add to each new "player" element
     prepareClasses: (index, classes, theme) => {
-        const classesString = `picobel loading player_${index} ${classes}`;
+        const classesString = `picobel loading picobel--index-${index} ${classes}`;
         const classesArray = classesString.trim().split(" ");
         classesArray.push(theme);
         return classesArray;
