@@ -59,7 +59,7 @@ describe("data handling", () => {
 
         expect(Array.isArray(classList)).toEqual(true);
         expect(classList.length).toEqual(6);
-        expect(classList).toContain("customAudioPlayer");
+        expect(classList).toContain("picobel");
         expect(classList).toContain("loading");
         expect(classList).toContain("player_0");
         expect(classList).toContain("some");
@@ -69,7 +69,7 @@ describe("data handling", () => {
         classList = PicobelData.prepareClasses(2, "", "something");
         expect(Array.isArray(classList)).toEqual(true);
         expect(classList.length).toEqual(4);
-        expect(classList).toContain("customAudioPlayer");
+        expect(classList).toContain("picobel");
         expect(classList).toContain("loading");
         expect(classList).toContain("player_2");
         expect(classList).toContain("something");

@@ -21,14 +21,14 @@ const config = {
     css: {
         ...globalConfig,
         entryPoints: [
-            "src/css/all.css",
-            "src/css/player.default.css",
-            "src/css/player.skeleton.css",
-            "src/css/player.bbc.css",
-            "src/css/player.eatenbymonsters.css",
-            "src/css/player.itunes.css",
-            "src/css/player.pitchfork.css",
-            "src/css/player.soundcloud.css"
+            "src/css/picobel.all.css",
+            "src/css/picobel.default.css",
+            "src/css/picobel.skeleton.css",
+            "src/css/picobel.bbc.css",
+            "src/css/picobel.eatenbymonsters.css",
+            "src/css/picobel.itunes.css",
+            "src/css/picobel.pitchfork.css",
+            "src/css/picobel.soundcloud.css"
         ]
     }
 };
