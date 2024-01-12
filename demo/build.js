@@ -9,8 +9,8 @@ const config = {
     minify: args.mode !== "development",
     treeShaking: args.mode !== "development",
     sourcemap: args.mode === "development",
-    entryPoints: ["demo/index.js"],
-    entryNames: "picobel-demo"
+    entryPoints: ["demo/index.js", "demo/composable.js"],
+    entryNames: "picobel-demo-[name]"
 };
 
 const build = async config => {

@@ -13,18 +13,17 @@
     </head>
     <body style="font-family: sans-serif">
         <div class="generic-wrapper">
-            <!-- Include an <audio> element. This will be replaced by Picobel. -->
-            <audio
-                src="https://eatenbymonsters.com/audio/christmas/web/MasterSlashSlave_AllIWantForChristmas.mp3"
-                title="All I Want for Christmas"
-                data-artist="Master Slash Slave"
-                controls
-            >
-                Your browser does not support the <code>audio</code> element.
-            </audio>
-
-            <button type="button">noop</button>
-            <input type="text" value="noop" />
+            <div id="section-01">
+                <audio
+                    src="./audio-examples/taken-at-the-flood.mp3"
+                    title="Taken at the Flood"
+                    data-artist="Freeze Them"
+                    controls
+                >
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </div>
 
             <h1>Some stuff...</h1>
             <p>...inbetween the audio elements</p>
@@ -57,7 +56,7 @@
         <!-- Load Scripts -->
         <script
             type="text/javascript"
-            src="./build/picobel-demo-index.js"
+            src="./build/picobel-demo-composable.js"
         ></script>
     </body>
 </html>
