@@ -42,7 +42,7 @@
 }
 
 /* The loading-state indicator */
-.skeleton.picobel .loader {
+.skeleton__loader {
     position: absolute;
     display: none;
     z-index: 2;
@@ -60,12 +60,12 @@
 }
 
 /* Only show the loader when we're loading */
-.skeleton.picobel.loading .loader {
+.skeleton.loading .skeleton__loader {
     display: block;
 }
 
 /* The play-pause button */
-.skeleton.picobel .playerTrigger {
+.skeleton__play-pause {
     font-size: 10px;
     border: 1px solid var(--black);
     appearance: none;
@@ -77,16 +77,17 @@
     left: -1px;
     cursor: pointer;
 }
-.skeleton.picobel .playerTrigger .buttonText {
+
+.skeleton__play-pause__text {
     display: none;
 }
-.skeleton.picobel .playerTrigger:focus {
-    /* outline: none; */
+
+.skeleton__play-pause:focus {
     z-index: 3;
 }
 
 /* The "play" icon */
-.skeleton.picobel .playerTrigger:before {
+.skeleton__play-pause:before {
     content: "";
     display: block;
     position: absolute;
@@ -99,7 +100,7 @@
 }
 
 /* The "pause" icon */
-.skeleton.picobel .playerTrigger.songPlaying:before {
+.skeleton__play-pause.playing:before {
     height: 18px;
     width: 16px;
     transform: translate(-50%, -50%);
@@ -110,32 +111,32 @@
 }
 
 /* Display song info */
-.skeleton.picobel .wrapper--title-artist {
+.skeleton__wrapper--title-artist {
     padding: 0 10px 0 74px;
     height: 64px;
     background: var(--white);
     color: var(--black);
     line-height: 1.6;
 }
-.skeleton.picobel .wrapper--title-artist .titleDisplay {
+.skeleton__title {
     display: inline-block;
     line-height: 1;
     font-weight: bold;
     margin-right: 5px;
     font-family: monospace;
 }
-.skeleton.picobel .wrapper--title-artist .titleDisplay :after {
+.skeleton__title:after {
     content: " – ";
 }
 
-.skeleton.picobel .wrapper--title-artist .artistDisplay {
+.skeleton__artist {
     font-family: monospace;
     display: inline-block;
     line-height: 1;
 }
 
 /* Display info about time-played and song-duration */
-.skeleton.picobel .wrapper--timer-progress-duration {
+.skeleton__wrapper--timer-progress-duration {
     position: absolute;
     bottom: -1px;
     left: 182px;
@@ -143,8 +144,8 @@
     height: 32px;
     border-left: 1px solid var(--black);
 }
-.skeleton.picobel .wrapper--timer-progress-duration .songPlayTimer,
-.skeleton.picobel .wrapper--timer-progress-duration .songDuration {
+.skeleton__timer,
+.skeleton__duration {
     position: absolute;
     bottom: 0;
     z-index: 4;
@@ -159,22 +160,22 @@
     padding: 10px 5px 9px 10px;
     font-family: monospace;
 }
-.skeleton.picobel .wrapper--timer-progress-duration .songPlayTimer {
+.skeleton__timer {
     left: 0;
 }
-.skeleton.picobel .wrapper--timer-progress-duration .songDuration {
+.skeleton__duration {
     right: 0;
     text-align: right;
 }
 
 /* Hide song-timings when we're loading */
-.skeleton.picobel.loading .wrapper--timer-progress-duration .songPlayTimer,
-.skeleton.picobel.loading .wrapper--timer-progress-duration .songDuration {
+.skeleton.loading .skeleton__timer,
+.skeleton.loading .skeleton__duration {
     display: none;
 }
 
 /* The "fake" range slider */
-.skeleton.picobel .progress-slider__wrapper {
+.skeleton__progress-slider__wrapper {
     height: var(--progress-height);
     font-size: 10px;
     line-height: 1;
@@ -183,7 +184,7 @@
     left: 0;
     width: 100%;
 }
-.skeleton.picobel .progress-slider__replacement {
+.skeleton__progress-slider__replacement {
     position: relative;
     background: var(--white);
     border-top: 1px solid var(--black);
@@ -191,27 +192,13 @@
     height: var(--progress-height);
     overflow: hidden;
 }
-.skeleton.picobel .progress-slider__replacement.focus {
+.skeleton__progress-slider__replacement.focus {
     outline: 2px solid var(--focus);
     outline-offset: 1px;
     border-radius: 2px;
     z-index: 3;
 }
-/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
-.skeleton.picobel .progress-slider__wrapper .progress-slider__range {
-    width: 100%;
-    height: var(--progress-height);
-    padding: 0;
-    margin: 0;
-    z-index: 4;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-}
-.skeleton.picobel
-    .progress-slider__wrapper
-    .progress-slider__progress-indicator {
+.skeleton__progress-slider__indicator {
     height: var(--progress-inner-height);
     position: absolute;
     top: 0;
@@ -219,7 +206,7 @@
     background: var(--grey);
     width: 0%;
 }
-.skeleton.picobel .progress-slider__wrapper .progress-slider__playhead {
+.skeleton__progress-slider__playhead {
     width: 8px;
     height: var(--progress-inner-height);
     position: absolute;
@@ -230,33 +217,43 @@
 }
 
 /* Hide dynamic elements until loading has finished */
-.skeleton.picobel.loading .progress-slider__progress-indicator,
-.skeleton.picobel.loading .progress-slider__playhead {
+.skeleton.loading .skeleton__progress-slider__indicator,
+.skeleton.loading .skeleton__progress-slider__playhead {
     display: none;
 }
 
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.skeleton__progress-slider__range {
+    width: 100%;
+    height: var(--progress-height);
+    padding: 0;
+    margin: 0;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
 /* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
-.skeleton.picobel
-    input[type="range"].progress-slider__range::-webkit-slider-runnable-track {
-    width: 100%;
-    height: var(--progress-height);
-    font-size: 10px;
-    height: 18px;
-    cursor: pointer;
-}
-.skeleton.picobel input[type="range"].progress-slider__range::-moz-range-track {
+.skeleton__progress-slider__range::-webkit-slider-runnable-track {
     width: 100%;
     height: var(--progress-height);
     cursor: pointer;
 }
-.skeleton.picobel input[type="range"].progress-slider__range::-ms-track {
+.skeleton__progress-slider__range::-moz-range-track {
+    width: 100%;
+    height: var(--progress-height);
+    cursor: pointer;
+}
+.skeleton__progress-slider__range::-ms-track {
     width: 100%;
     height: var(--progress-height);
     cursor: pointer;
 }
 
 /* Position the volume controls */
-.skeleton.picobel .wrapper--mute-volume {
+.skeleton__wrapper--mute-volume {
     position: absolute;
     bottom: -1px;
     left: 62px;
@@ -269,7 +266,7 @@
     display: flex;
     align-items: center;
 }
-.skeleton.picobel .wrapper--mute-volume .songMuteButton {
+.skeleton__mute {
     display: block;
     z-index: 2;
     float: left;
@@ -286,12 +283,12 @@
     overflow: hidden;
     flex-shrink: 0;
 }
-.skeleton.picobel .wrapper--mute-volume .songMuteButton:focus {
+.skeleton__mute:focus {
     /* outline: none; */
 }
 
 /* Rectangle part of "speaker cone" icon */
-.skeleton.picobel .wrapper--mute-volume .songMuteButton:before {
+.skeleton__mute:before {
     display: block;
     width: 6px;
     height: 6px;
@@ -305,7 +302,7 @@
 }
 
 /* Triangle part of "speaker cone" icon */
-.skeleton.picobel .wrapper--mute-volume .songMuteButton:after {
+.skeleton__mute:after {
     display: block;
     width: 5px;
     height: 5px;
@@ -321,14 +318,14 @@
 }
 
 /* Change icon when muted */
-.skeleton.picobel .wrapper--mute-volume .songMuteButton.songMuted:before {
+.skeleton__mute.muted:before {
     background: var(--grey);
 }
-.skeleton.picobel .wrapper--mute-volume .songMuteButton.songMuted:after {
+.skeleton__mute.muted:after {
     border-right-color: var(--grey);
 }
 
-.songVolume {
+.skeleton__volume {
     --volume-padding: 6px;
     --volume-height: 20px;
     --volume-width: 76px;
@@ -337,21 +334,17 @@
     padding: var(--volume-padding);
 }
 
-.songVolumeValue {
-    margin-left: 0.2px;
-}
-
-.songVolumeLabelWrapper {
+.skeleton__volume-label {
     display: none;
 }
 
 /* As with the playback indicator, we're using a range element to power the volume slider functionality */
-.skeleton.picobel .volume-slider__wrapper {
+.skeleton__volume-slider__wrapper {
     width: var(--volume-width);
     height: var(--volume-height);
     position: relative;
 }
-.skeleton.picobel .volume-slider__wrapper .volume-slider__replacement {
+.skeleton__volume-slider__replacement {
     display: block;
     height: var(--volume-height);
     width: var(--volume-width);
@@ -363,7 +356,7 @@
     float: left;
     transform: rotate(180deg);
 }
-.skeleton.picobel .volume-slider__wrapper .volume-slider__replacement:after {
+.skeleton__volume-slider__replacement:after {
     content: "";
     display: block;
     border-right: var(--volume-width) solid var(--white);
@@ -373,15 +366,27 @@
     left: 0;
     pointer-events: none;
 }
-.skeleton.picobel .volume-slider__wrapper .volume-slider__replacement.focus {
+.skeleton__volume-slider__replacement.focus {
     outline: 2px solid var(--focus);
     outline-offset: 1px;
     border-radius: 2px;
 }
 
-/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
-.skeleton.picobel .volume-slider__wrapper .volume-slider__range {
+.skeleton__volume-slider__indicator {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--black);
     width: var(--volume-width);
+}
+.skeleton__volume-slider__playhead {
+    display: none;
+}
+
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.skeleton__volume-slider__range {
+    width: 100%;
     height: var(--volume-height);
     padding: 0;
     margin: 0;
@@ -391,33 +396,20 @@
     left: 0;
     opacity: 0;
 }
-.skeleton.picobel .volume-slider__wrapper .volume-slider__progress-indicator {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: var(--black);
-    width: var(--volume-width);
-}
-.skeleton.picobel .volume-slider__wrapper .volume-slider__playhead {
-    display: none;
-}
 
 /* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
-.skeleton.picobel
-    input[type="range"].volume-slider__range::-webkit-slider-runnable-track {
-    width: var(--volume-width);
-    font-size: 10px;
+.skeleton__volume-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
     height: var(--volume-height);
     cursor: pointer;
 }
-.skeleton.picobel input[type="range"].volume-slider__range::-moz-range-track {
-    width: var(--volume-width);
+.skeleton__volume-slider__range::-moz-range-track {
+    width: 100%;
     height: var(--volume-height);
     cursor: pointer;
 }
-.skeleton.picobel input[type="range"].volume-slider__range::-ms-track {
-    width: var(--volume-width);
+.skeleton__volume-slider__range::-ms-track {
+    width: 100%;
     height: var(--volume-height);
     cursor: pointer;
 }
