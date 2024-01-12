@@ -1,6 +1,7 @@
 import Picobel from "../build/picobel.js";
 
 // Picobel();
+// Picobel({ theme: "bare" });
 // Picobel({ theme: "default" });
 Picobel({ theme: "skeleton" });
 // Picobel({ theme: "bbc" });
