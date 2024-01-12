@@ -175,19 +175,23 @@ function Picobel(rawOptions = {}) {
         updateProgress: node => {
             let progress = node.currentTime;
             let duration = node.duration;
-            let progressParsed = _helpers.parseTime(progress);
-            node.elements.playTimer.innerHTML = progressParsed;
+            if (node.elements.playTimer) {
+                let progressParsed = _helpers.parseTime(progress);
+                node.elements.playTimer.innerHTML = progressParsed;
+            }
             if (progress >= duration) {
                 PicobelAudio.stop(node);
             }
             let progressPercent = ((progress / duration) * 100).toFixed(2);
-            node.elements.progressBar.value = progressPercent;
-            node.elements.indicator.style.width = progressPercent + "%";
-            node.elements.playhead.style.left = progressPercent + "%";
+            if (node.elements.progressBar) {
+                node.elements.progressBar.value = progressPercent;
+                node.elements.indicator.style.width = progressPercent + "%";
+                node.elements.playhead.style.left = progressPercent + "%";
+            }
         },
         canplaythrough: function () {
             PicobelMarkup.setLengthDisplay(this);
-            this.elements.wrapper.classList.remove("loading");
+            // this.elements.wrapper.classList.remove("loading");
             let meta = PicobelData.getMeta(this);
             PicobelMarkup.setMeta(meta, this.elements);
         },

@@ -8,16 +8,6 @@
     --progress-inner-height: 30px;
 }
 
-/* Simulates an infinite slide-to-the-right effect. */
-@keyframes background_slide {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 20px 0;
-    }
-}
-
 /* Global */
 .skeleton.picobel *,
 .skeleton.picobel *:before,
@@ -41,11 +31,21 @@
     border: 1px solid var(--black);
 }
 
+/* Simulates an infinite slide-to-the-right effect. */
+@keyframes background_slide {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 20px 0;
+    }
+}
+
 /* The loading-state indicator */
 .skeleton__loader {
     position: absolute;
     display: none;
-    z-index: 2;
+    z-index: 5;
     bottom: -1px;
     left: 183px;
     right: 0;

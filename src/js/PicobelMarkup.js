@@ -18,7 +18,7 @@ export const PicobelMarkup = {
             elements.artistDisplay.innerHTML = meta.artist;
         }
         if (elements.titleDisplay) {
-            elements.titleDisplay.innerHTML = meta.title;
+            elements.titleDisplay.innerHTML = meta.title + " ";
         }
         return elements;
     },
