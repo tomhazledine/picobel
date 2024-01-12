@@ -283,9 +283,6 @@
     overflow: hidden;
     flex-shrink: 0;
 }
-.skeleton__mute:focus {
-    /* outline: none; */
-}
 
 /* Rectangle part of "speaker cone" icon */
 .skeleton__mute:before {

@@ -10,6 +10,7 @@
     --highlight: #00b7c6;
     --background_grey_dark: #e6e6e6;
     --background_grey_light: #f1f1f1;
+    --focus: #015ecc;
 
     --progress-bar-height: 2em;
 }
@@ -29,7 +30,6 @@
     font-size: 10px;
     position: relative;
     box-sizing: border-box;
-    /* overflow: hidden; */
     z-index: 1;
 
     /* Wrapper */
@@ -49,8 +49,14 @@
     box-sizing: inherit;
 }
 
+.default.picobel *:focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 2px;
+}
+
 /* The loading-state indicator */
-.default.picobel .loader {
+.default__loader {
     position: absolute;
     z-index: 2;
     bottom: 0;
@@ -72,12 +78,12 @@
 }
 
 /* Only show the loader when we're loading */
-.default.picobel.loading .loader {
+.default.loading .default__loader {
     opacity: 1;
 }
 
 /* The play-pause button */
-.default.picobel .playerTrigger {
+.default__play-pause {
     font-size: 1em;
     border: none;
     appearance: none;
@@ -92,19 +98,15 @@
     left: 0;
     cursor: pointer;
 }
-.default.picobel .playerTrigger:focus {
+.default__play-pause:focus {
     z-index: 3;
-    outline: var(--highlight) dashed 2px;
 }
-.default.picobel .playerTrigger .buttonText {
+.default__play-pause__text {
     display: none;
 }
-/* .default.picobel .playerTrigger:focus {
-    outline: none;
-} */
 
 /* The "play" icon */
-.default.picobel .playerTrigger:before {
+.default__play-pause:before {
     content: "";
     display: block;
     position: absolute;
@@ -118,7 +120,7 @@
 }
 
 /* Hidden right side of "pause" icon (shown when paused) */
-.default.picobel .playerTrigger:after {
+.default__play-pause:after {
     content: "";
     display: block;
     position: absolute;
@@ -134,7 +136,7 @@
 }
 
 /* The left side of the "pause" icon */
-.default.picobel .playerTrigger.songPlaying:before {
+.default__play-pause.playing:before {
     height: 1.4em;
     margin-top: -0.7em;
     margin-left: -0.7em;
@@ -144,15 +146,14 @@
 }
 
 /* Make the right side visible */
-.default.picobel .playerTrigger.songPlaying:after {
+.default__play-pause.playing:after {
     opacity: 1;
 }
 
 /* Display song info */
-.default.picobel .wrapper--title-artist {
+.default__wrapper--title-artist {
     padding: 1em 2em 1em 7em;
     height: 4.4em;
-    /* overflow: hidden; */
     background: var(--primary);
     color: var(--black);
     text-shadow: var(--white) 0 0.1em 0;
@@ -161,33 +162,33 @@
         var(--background_grey_dark)
     );
 }
-.default.picobel .wrapper--title-artist .titleDisplay {
+.default__title {
     display: inline-block;
     line-height: 1;
     font-weight: bold;
     margin-right: 0.5em;
     font-family: monospace;
 }
-.default.picobel .wrapper--title-artist .titleDisplay:after {
+.default__title:after {
     content: " – ";
 }
 
-.default.picobel .wrapper--title-artist .artistDisplay {
+.default__artist {
     font-family: monospace;
     display: inline-block;
     line-height: 1;
 }
 
 /* Display info about time-played and song-duration */
-.default.picobel .wrapper--timer-progress-duration {
+.default__wrapper--timer-progress-duration {
     position: absolute;
     bottom: 0;
     left: 5.6em;
     right: 0;
     height: var(--progress-bar-height);
 }
-.default.picobel .wrapper--timer-progress-duration .songPlayTimer,
-.default.picobel .wrapper--timer-progress-duration .songDuration {
+.default__timer,
+.default__duration {
     position: absolute;
     top: 0;
     z-index: 3;
@@ -202,22 +203,22 @@
     padding: 0.5em 0.5em 0.5em 1em;
     font-family: monospace;
 }
-.default.picobel .wrapper--timer-progress-duration .songPlayTimer {
+.default__timer {
     left: 0;
 }
-.default.picobel .wrapper--timer-progress-duration .songDuration {
+.default__duration {
     right: 0;
     text-align: right;
 }
 
 /* Hide song-timings when we're loading */
-.default.picobel .loading .songPlayTimer,
-.default.picobel .loading .songDuration {
+.default.loading .default__timer,
+.default.loading .default__duration {
     display: none;
 }
 
 /* Progress slider positioner */
-.default.picobel .progress-slider__wrapper {
+.default__progress-slider__wrapper {
     height: var(--progress-bar-height);
     position: absolute;
     top: 0;
@@ -225,7 +226,7 @@
     width: 100%;
 }
 /* The "fake" range slider */
-.default.picobel .progress-slider__replacement {
+.default__progress-slider__replacement {
     height: 100%;
     position: absolute;
     top: 0;
@@ -235,24 +236,12 @@
     border-bottom-right-radius: 0.2em;
     overflow: hidden;
 }
-.default.picobel .progress-slider__replacement.focus {
-    outline: var(--highlight) dashed 2px;
+.default__progress-slider__replacement.focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 2px;
 }
-/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
-.default.picobel .progress-slider__wrapper .progress-slider__range {
-    width: 100%;
-    height: var(--progress-bar-height);
-    font-size: inherit;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-}
-.default.picobel
-    .progress-slider__wrapper
-    .progress-slider__progress-indicator {
+.default__progress-slider__indicator {
     height: var(--progress-bar-height);
     position: absolute;
     top: 0;
@@ -260,7 +249,7 @@
     background: var(--primary--opacity);
     width: 0%;
 }
-.default.picobel .progress-slider__wrapper .progress-slider__playhead {
+.default__progress-slider__playhead {
     width: 0.5em;
     height: var(--progress-bar-height);
     position: absolute;
@@ -271,32 +260,43 @@
 }
 
 /* Hide dynamic elements until loading has finished */
-.default.picobel .loading .progress-slider__progress-indicator,
-.default.picobel .loading .progress-slider__playhead {
+.default.loading .default__progress-slider__indicator,
+.default.loading .default__progress-slider__playhead {
     display: none;
 }
 
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.default__progress-slider__range {
+    width: 100%;
+    height: var(--progress-bar-height);
+    font-size: inherit;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
 /* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
-.default.picobel
-    input[type="range"].progress-slider__range::-webkit-slider-runnable-track {
+.default__progress-slider__range::-webkit-slider-runnable-track {
     width: 100%;
     font-size: 1em;
     height: 2em;
     cursor: pointer;
 }
-.default.picobel input[type="range"].progress-slider__range::-moz-range-track {
+.default__progress-slider__range::-moz-range-track {
     width: 100%;
     height: 2em;
     cursor: pointer;
 }
-.default.picobel input[type="range"].progress-slider__range::-ms-track {
+.default__progress-slider__range::-ms-track {
     width: 100%;
     height: 2em;
     cursor: pointer;
 }
 
 /* Position the volume controls */
-.default.picobel .wrapper--mute-volume {
+.default__wrapper--mute-volume {
     position: absolute;
     top: 0;
     left: 4em;
@@ -305,7 +305,7 @@
     /* overflow: hidden; */
     z-index: 2;
 }
-.default.picobel .wrapper--mute-volume .songMuteButton {
+.default__mute {
     display: block;
     width: 1.6em;
     height: 1.6em;
@@ -320,12 +320,9 @@
     cursor: pointer;
     overflow: hidden;
 }
-.default.picobel .wrapper--mute-volume .songMuteButton:focus {
-    outline: var(--highlight) dashed 2px;
-}
 
 /* Rectangle part of "speaker cone" icon */
-.default.picobel .wrapper--mute-volume .songMuteButton:before {
+.default__mute:before {
     display: block;
     width: 0.4em;
     height: 0.3em;
@@ -339,7 +336,7 @@
 }
 
 /* Triangle part of "speaker cone" icon */
-.default.picobel .wrapper--mute-volume .songMuteButton:after {
+.default__mute:after {
     display: block;
     width: 0.4em;
     height: 0.4em;
@@ -355,23 +352,19 @@
 }
 
 /* Change icon when muted */
-.default.picobel .wrapper--mute-volume .songMuteButton .songMuted:before {
+.default__mute.muted:before {
     background: var(--grey);
 }
-.default.picobel .wrapper--mute-volume .songMuteButton .songMuted:after {
+.default__mute.muted:after {
     border-right-color: var(--grey);
 }
 
-.default.picobel .songVolumeValue {
-    margin-left: 0.2em;
-}
-
-.default.picobel .songVolumeLabelWrapper {
+.default__volume-label {
     display: none;
 }
 
 /* As with the playback indicator, we're using a range element to power the volume slider functionality */
-.default.picobel .volume-slider__wrapper {
+.default__volume-slider__wrapper {
     display: block;
     height: 1.6em;
     position: absolute;
@@ -381,9 +374,8 @@
     width: 4.4em;
     transform: rotate(90deg) translateY(-100%);
     transform-origin: top left;
-    /* overflow: hidden; */
 }
-.default.picobel .volume-slider__replacement {
+.default__volume-slider__replacement {
     display: block;
     height: 1.6em;
     position: absolute;
@@ -391,9 +383,8 @@
     left: 0;
     background: var(--greyDark);
     width: 4.4em;
-    /* overflow: hidden; */
 }
-.default.picobel .volume-slider__replacement:after {
+.default__volume-slider__replacement:after {
     content: "";
     display: block;
     width: 100%;
@@ -404,12 +395,27 @@
     left: 0;
     pointer-events: none;
 }
-.default.picobel .volume-slider__replacement.focus {
-    outline: var(--highlight) dashed 2px;
+.default__volume-slider__replacement.focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 2px;
+}
+
+.default__volume-slider__indicator {
+    height: 1.6em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--highlight);
+    width: 100%;
+    transform: rotate(180deg);
+}
+.default__volume-slider__playhead {
+    display: none;
 }
 
 /* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
-.default.picobel .volume-slider__wrapper .volume-slider__range {
+.default__volume-slider__range {
     width: 100%;
     padding: 0;
     margin: 0;
@@ -421,33 +427,19 @@
     transform: rotate(180deg);
 }
 
-.default.picobel .volume-slider__wrapper .volume-slider__progress-indicator {
-    height: 1.6em;
-    position: absolute;
-    top: 0;
-    right: 0;
-    background: var(--highlight);
-    width: 100%;
-    transform: rotate(180deg);
-}
-.default.picobel .volume-slider__wrapper .volume-slider__playhead {
-    display: none;
-}
-
 /* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
-.default.picobel
-    input[type="range"].volume-slider__range::-webkit-slider-runnable-track {
+.default__volume-slider__range::-webkit-slider-runnable-track {
     width: 100%;
     font-size: 1em;
     height: 1.5em;
     cursor: pointer;
 }
-.default.picobel input[type="range"].volume-slider__range::-moz-range-track {
+.default__volume-slider__range::-moz-range-track {
     width: 100%;
     height: 1.5em;
     cursor: pointer;
 }
-.default.picobel input[type="range"].volume-slider__range::-ms-track {
+.default__volume-slider__range::-ms-track {
     width: 100%;
     height: 1.5em;
     cursor: pointer;
