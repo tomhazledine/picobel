@@ -22,6 +22,7 @@ const config = {
         ...globalConfig,
         entryPoints: [
             "src/css/picobel.all.css",
+            "src/css/picobel.main.css",
             "src/css/picobel.default.css",
             "src/css/picobel.skeleton.css",
             "src/css/picobel.bbc.css",
