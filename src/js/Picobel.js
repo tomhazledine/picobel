@@ -191,7 +191,7 @@ function Picobel(rawOptions = {}) {
         },
         canplaythrough: function () {
             PicobelMarkup.setLengthDisplay(this);
-            // this.elements.wrapper.classList.remove("loading");
+            this.elements.wrapper.classList.remove("loading");
             let meta = PicobelData.getMeta(this);
             PicobelMarkup.setMeta(meta, this.elements);
         },
