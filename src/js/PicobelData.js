@@ -32,7 +32,7 @@ const PicobelData = {
     getMeta: item => {
         let meta = {};
         // Get the filename and type
-        meta.url = item.src;
+        meta.url = item.currentSrc;
         meta.fileType = _helpers.getFileType(meta.url);
         meta.fileName = _helpers.getFileName(meta.url);
         // If there is a valid title, get that title, otherwise get the file name.
