@@ -9,7 +9,7 @@ const config = {
     minify: args.mode !== "development",
     treeShaking: args.mode !== "development",
     sourcemap: args.mode === "development",
-    entryPoints: ["demo/index.js", "demo/composable.js"],
+    entryPoints: ["demo/index.js", "demo/composable.js", "demo/types.js"],
     entryNames: "picobel-demo-[name]"
 };
 
