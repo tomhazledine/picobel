@@ -22,7 +22,7 @@ import PicobelMarkup from "./PicobelMarkup";
  * ---------------------------------------------------------------------------
  */
 
-function Picobel(rawOptions = {}) {
+export const picobel = (rawOptions = {}) => {
     /**
      * -----------------------------------------------------------------------
      * RUN THE CODE
@@ -307,6 +307,4 @@ function Picobel(rawOptions = {}) {
         state,
         PicobelAudio
     };
-}
-
-export default Picobel;
+};

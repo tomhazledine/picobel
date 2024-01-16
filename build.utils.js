@@ -30,3 +30,9 @@ export const watchFiles = (files, onChange) => {
         });
     });
 };
+
+export const getPackageVersion = () => {
+    const packageJson = fs.readFileSync("./package.json");
+    const { version } = JSON.parse(packageJson);
+    return version;
+};

@@ -1,5 +1,7 @@
 import * as esbuild from "esbuild";
-import { parseArgs, watchFiles } from "./build.utils.js";
+import { parseArgs, getPackageVersion, watchFiles } from "./build.utils.js";
+
+const version = getPackageVersion();
 
 const args = parseArgs(process.argv);
 
@@ -15,8 +17,14 @@ const config = {
     js: {
         ...globalConfig,
         format: "esm",
-        entryPoints: ["src/js/Picobel.js"],
+        entryPoints: ["src/js/index.js"],
         entryNames: "picobel"
+    },
+    legacy: {
+        ...globalConfig,
+        entryPoints: ["src/js/legacy.js"],
+        entryNames: `picobel.${version}`,
+        format: "iife"
     },
     css: {
         ...globalConfig,
@@ -38,8 +46,11 @@ const build = async config => {
     try {
         await esbuild.build(config.js);
         await esbuild.build(config.css);
+        await esbuild.build(config.legacy);
     } catch (e) {
-        console.log({ location: e.errors[0].location });
+        if (e.errors && e.errors[0].location) {
+            console.log({ location: e.errors[0].location });
+        }
         console.warn("esbuild error", e);
     }
 };
