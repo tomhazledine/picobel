@@ -166,17 +166,17 @@
     display: inline-block;
     line-height: 1;
     font-weight: bold;
-    margin-right: 0.5em;
     font-family: monospace;
-}
-.default__title:after {
-    content: " – ";
 }
 
 .default__artist {
     font-family: monospace;
     display: inline-block;
     line-height: 1;
+    margin-left: 0.5em;
+}
+.default__artist:not(:empty):before {
+    content: " – ";
 }
 
 /* Display info about time-played and song-duration */

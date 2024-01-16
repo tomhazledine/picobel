@@ -122,17 +122,17 @@
     display: inline-block;
     line-height: 1;
     font-weight: bold;
-    margin-right: 5px;
     font-family: monospace;
-}
-.skeleton__title:after {
-    content: " – ";
 }
 
 .skeleton__artist {
     font-family: monospace;
     display: inline-block;
+    margin-left: 5px;
     line-height: 1;
+}
+.skeleton__artist:not(:empty):before {
+    content: " – ";
 }
 
 /* Display info about time-played and song-duration */
