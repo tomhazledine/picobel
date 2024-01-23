@@ -27,8 +27,12 @@ export const parseOptions = (rawOptions = {}) => {
         theme: "default",
         preload: false
     };
+    const { components: userComponents, ...otherOptions } = rawOptions;
     const components = setComponentsByTheme(rawOptions.theme);
-    const options = { ...defaultOptions, components, ...rawOptions };
+    const options = { ...defaultOptions, components, ...otherOptions };
+    if (userComponents && Array.isArray(userComponents)) {
+        options.components = userComponents;
+    }
 
     return options;
 };

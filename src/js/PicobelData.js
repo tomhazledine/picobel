@@ -15,8 +15,7 @@ const PicobelData = {
     prepareClasses: (index, classes, theme) => {
         const classesString = `picobel loading picobel--index-${index} ${classes}`;
         const classesArray = classesString.trim().split(" ");
-        classesArray.push(theme);
-        return classesArray;
+        return [...classesArray, theme];
     },
 
     // Get the url for each audio file we want to load [using elements found by findAudio()]
