@@ -1,7 +1,7 @@
 import _helpers from "./helpers";
 import PicobelData from "./PicobelData";
 import * as componentConstructors from "./markup/components";
-import { createElement } from "./markup/utils";
+import { createElement, buildComponents } from "./markup/utils";
 
 export const PicobelMarkup = {
     // Set the value of the song-length display
@@ -44,41 +44,12 @@ export const PicobelMarkup = {
             newPlayer.appendChild(loading);
 
             // Add the components to the player in the order they are listed
-            components.forEach(component => {
-                // If the component is a string and we have a function to build it
-                // then build it and add it to the player.
-                if (
-                    typeof component === "string" &&
-                    componentConstructors[component]
-                ) {
-                    const markup = componentConstructors[component](
-                        namespace,
-                        node.key
-                    );
-                    newPlayer.appendChild(markup);
-                    return;
-                }
-                // If the component is an array, build a wrapper and add each
-                // component to the wrapper.
-                if (Array.isArray(component) && component.length) {
-                    const wrapper = createElement(
-                        "div",
-                        `${namespace}__wrapper--${component.join("-")}`
-                    );
-                    component.forEach(subComponent => {
-                        if (componentConstructors[subComponent]) {
-                            const markup = componentConstructors[subComponent](
-                                namespace,
-                                node.key
-                            );
-                            wrapper.appendChild(markup);
-                        }
-                    });
-                    newPlayer.appendChild(wrapper);
-                }
+            return buildComponents({
+                key: node.key,
+                container: newPlayer,
+                components,
+                namespace
             });
-
-            return newPlayer;
         });
 
         return markupArray;
