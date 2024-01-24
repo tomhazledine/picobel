@@ -7,7 +7,7 @@ export const buildSlider = ({
     value = 0,
     step = false,
     index = 0,
-    label = ""
+    label = "slider"
 }) => {
     const container = createElement("div", namespace);
     // Create a container element to hold all the parts
@@ -52,7 +52,11 @@ export const buildSlider = ({
 
     // Create a label
     const inputLabel = createElement("label", `${namespace}-label`);
-    inputLabel.appendChild(label);
+    if (typeof label === "string") {
+        inputLabel.innerHTML = label;
+    } else {
+        inputLabel.appendChild(label);
+    }
     inputLabel.setAttribute("for", inputId);
 
     container.appendChild(inputLabel);
