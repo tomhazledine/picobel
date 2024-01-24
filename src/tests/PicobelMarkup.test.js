@@ -1,4 +1,6 @@
-import PicobelMarkup, { buildSlider } from "../js/PicobelMarkup";
+import PicobelMarkup from "../js/PicobelMarkup";
+import { buildSlider } from "../js/markup/slider.js";
+import { createElement } from "../js/markup/utils";
 
 const EXPECTED_COMPONENTS = [
     "playPause",
@@ -45,37 +47,45 @@ describe("markup helpers", () => {
         const MAX = 100;
         const VALUE = 50;
 
-        let slider = buildSlider(NAMESPACE, MIN, MAX, VALUE);
-        expect(slider.localName).toEqual("div");
-        expect(slider.classList).toContain(`${NAMESPACE}-slider__wrapper`);
-        expect(slider.children.length).toEqual(2);
-        expect(slider.children[1].localName).toEqual("input");
-        expect(slider.children[1].min).toEqual(MIN.toString());
-        expect(slider.children[1].max).toEqual(MAX.toString());
-        expect(slider.children[1].value).toEqual(VALUE.toString());
+        let slider = buildSlider({
+            namespace: NAMESPACE,
+            min: MIN,
+            max: MAX,
+            value: VALUE
+        });
+        // Renders a container with two children: a label and a slider wrapper div.
+        expect(slider.localName).toBe("div");
+        expect(slider.children.length).toBe(2);
+        expect(slider.children[0].classList).toContain(`${NAMESPACE}-label`);
+        expect(slider.children[0].localName).toBe("label");
+        expect(slider.children[1].classList).toContain(
+            `${NAMESPACE}-slider__wrapper`
+        );
+        expect(slider.children[1].children.length).toBe(2);
+        expect(slider.children[1].children[1].localName).toBe("input");
+        expect(slider.children[1].children[1].min).toBe(MIN.toString());
+        expect(slider.children[1].children[1].max).toBe(MAX.toString());
+        expect(slider.children[1].children[1].value).toBe(VALUE.toString());
     });
 
     it("can create new elements", () => {
         // Works without second arg
-        let elementNoClass = PicobelMarkup.createElement("div");
+        let elementNoClass = createElement("div");
         expect(elementNoClass.localName).toEqual("div");
         // Creates a span
-        let elementSpan = PicobelMarkup.createElement(
-            "span",
-            "songVolumeValue"
-        );
+        let elementSpan = createElement("span", "songVolumeValue");
         expect(elementSpan.localName).toEqual("span");
         expect(elementSpan.classList).toContain("songVolumeValue");
         // Creates a div
-        let elementDiv = PicobelMarkup.createElement("div", "test");
+        let elementDiv = createElement("div", "test");
         expect(elementDiv.localName).toEqual("div");
         expect(elementDiv.classList).toContain("test");
         // Creates a button
-        let elementButton = PicobelMarkup.createElement("button", "testing");
+        let elementButton = createElement("button", "testing");
         expect(elementButton.localName).toEqual("button");
         expect(elementButton.classList).toContain("testing");
         // Creates an input
-        let elementInput = PicobelMarkup.createElement("input", "something");
+        let elementInput = createElement("input", "something");
         expect(elementInput.localName).toEqual("input");
         expect(elementInput.classList).toContain("something");
     });
@@ -110,23 +120,26 @@ describe("markup generation", () => {
             TEST_NODES,
             EXPECTED_COMPONENTS
         );
-        expect(markup[0].getAttribute("data-song-index")).toEqual("0");
-        expect(markup[1].getAttribute("data-song-index")).toEqual("1");
+        expect(markup[0].getAttribute("data-picobel-index")).toEqual("0");
+        expect(markup[1].getAttribute("data-picobel-index")).toEqual("1");
     });
 
     it("adds a loading indicator each audio element", () => {
+        const namespace = "TEST_NAMESPACE";
         const markup = PicobelMarkup.generateMarkup(
             TEST_NODES,
-            EXPECTED_COMPONENTS
+            EXPECTED_COMPONENTS,
+            namespace
         );
 
-        let firstIndicator = markup[0].getElementsByClassName("loader");
+        let firstIndicator = markup[0].getElementsByClassName(
+            `${namespace}__loader`
+        );
         expect(firstIndicator.length).toEqual(1);
-        expect(firstIndicator[0].classList).toContain("loader");
 
         let secondIndicator = markup[1].getElementsByTagName("div");
         expect(secondIndicator.length).toBeTruthy();
-        expect(secondIndicator[0].classList).toContain("loader");
+        expect(secondIndicator[0].classList).toContain(`${namespace}__loader`);
     });
 });
 

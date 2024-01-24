@@ -20,21 +20,24 @@ const TEST_DOM = `
 
 const TEST_NODES = [
     {
-        src: "http://audio.eatenbymonsters.com/reviews/daughter/human.mp3",
+        currentSrc:
+            "http://audio.eatenbymonsters.com/reviews/daughter/human.mp3",
         title: "Human",
         dataset: {
             artist: "Daughter"
         }
     },
     {
-        src: "http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3",
+        currentSrc:
+            "http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3",
         title: "Lost That Easy",
         dataset: {
             artist: "Cold War Kids"
         }
     },
     {
-        src: "http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3"
+        currentSrc:
+            "http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3"
     }
 ];
 
@@ -61,7 +64,7 @@ describe("data handling", () => {
         expect(classList.length).toEqual(6);
         expect(classList).toContain("picobel");
         expect(classList).toContain("loading");
-        expect(classList).toContain("player_0");
+        expect(classList).toContain("picobel--index-0");
         expect(classList).toContain("some");
         expect(classList).toContain("classes");
         expect(classList).toContain("themeName");
@@ -71,7 +74,7 @@ describe("data handling", () => {
         expect(classList.length).toEqual(4);
         expect(classList).toContain("picobel");
         expect(classList).toContain("loading");
-        expect(classList).toContain("player_2");
+        expect(classList).toContain("picobel--index-2");
         expect(classList).toContain("something");
     });
 

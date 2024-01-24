@@ -1,10 +1,10 @@
-import Picobel from "../js/Picobel";
+import Picobel from "../js/index.js";
 import { parseOptions } from "../js/PicobelSetup";
 
 const EXPECTED_COMPONENTS = [
     "playPause",
+    ["mute", "volume"],
     ["title", "artist"],
-    ["volume", "mute"],
     ["timer", "progress", "duration"]
 ];
 
