@@ -25,7 +25,7 @@
     box-sizing: inherit;
 }
 
-.bbc.picobel .loader {
+.bbc.picobel .bbc__loader {
     position: absolute;
     top: 0;
     left: 0;
@@ -50,7 +50,7 @@
     background-position: 0 0;
     animation: background_slide linear infinite 0.4s;
 }
-.bbc.picobel .loader:after {
+.bbc.picobel .bbc__loader:after {
     content: "Loading";
     display: block;
     width: 6em;
@@ -64,11 +64,11 @@
     margin-left: -3em;
     z-index: 2;
 }
-.bbc.picobel.loading .loader {
+.bbc.picobel.loading .bbc__loader {
     display: block;
 }
 
-.bbc.picobel .playerTrigger {
+.bbc.picobel .bbc__play-pause {
     border: none;
     appearance: none;
     width: 3em;
@@ -83,16 +83,16 @@
     cursor: pointer;
     transition: background 0.2s;
 }
-.bbc.picobel .playerTrigger .buttonText {
+.bbc.picobel .bbc__play-pause .bbc__play-pause__text {
     display: none;
 }
-.bbc.picobel .playerTrigger:focus {
+.bbc.picobel .bbc__play-pause:focus {
     outline: none;
 }
-.bbc.picobel .playerTrigger:hover {
+.bbc.picobel .bbc__play-pause:hover {
     background: var(--highlight);
 }
-.bbc.picobel .playerTrigger:before {
+.bbc.picobel .bbc__play-pause:before {
     content: "";
     display: block;
     position: absolute;
@@ -104,7 +104,7 @@
     border-left: 0.8em solid var(--white);
     border-bottom: 0.6em solid transparent;
 }
-.bbc.picobel .playerTrigger:after {
+.bbc.picobel .bbc__play-pause:after {
     content: "";
     display: block;
     position: absolute;
@@ -118,7 +118,7 @@
     border-bottom: 0;
     opacity: 0;
 }
-.bbc.picobel .playerTrigger.songPlaying:before {
+.bbc.picobel .bbc__play-pause.playing:before {
     height: 1em;
     margin-top: -0.5em;
     margin-left: -0.5em;
@@ -126,11 +126,11 @@
     border-left: 0.4em solid var(--white);
     border-bottom: 0;
 }
-.bbc.picobel .playerTrigger.songPlaying:after {
+.bbc.picobel .bbc__play-pause.playing:after {
     opacity: 1;
 }
 
-.bbc.picobel .metaWrapper {
+.bbc.picobel .bbc__wrapper--title-artist {
     color: var(--white);
     background: var(--black);
     padding: 1em;
@@ -142,18 +142,18 @@
     right: 6em;
 }
 
-.bbc.picobel .titleDisplay {
+.bbc.picobel .bbc__title {
     line-height: 1;
     padding-bottom: 0.2em;
 }
 
-.bbc.picobel .artistDisplay {
+.bbc.picobel .bbc__artist {
     color: var(--grey);
     margin-left: 1em;
     line-height: 1;
 }
 
-.bbc.picobel .timingsWrapper {
+.bbc.picobel .bbc__wrapper--timer-progress-duration {
     padding: 1em;
     position: absolute;
     top: 0;
@@ -164,8 +164,8 @@
     float: left;
     background: var(--black--opacity);
 }
-.bbc.picobel .timingsWrapper .songPlayTimer,
-.bbc.picobel .timingsWrapper .songDuration {
+.bbc.picobel .bbc__wrapper--timer-progress-duration .bbc__timer,
+.bbc.picobel .bbc__wrapper--timer-progress-duration .bbc__duration {
     position: absolute;
     display: block;
     top: 3em;
@@ -178,7 +178,7 @@
     text-align: right;
     border-radius: 0;
 }
-.bbc.picobel .timingsWrapper .songPlayTimer {
+.bbc.picobel .bbc__wrapper--timer-progress-duration .bbc__timer {
     right: 4.5em;
     padding-right: 0.3em;
     display: inline-block;
@@ -186,17 +186,17 @@
     padding-left: 1em;
     border-left: 1px solid var(--border);
 }
-.bbc.picobel .timingsWrapper .songDuration {
+.bbc.picobel .bbc__wrapper--timer-progress-duration .bbc__duration {
     text-align: left;
     right: 0;
     color: var(--grey);
 }
-.bbc.picobel .timingsWrapper .songDuration:before {
+.bbc.picobel .bbc__wrapper--timer-progress-duration .bbc__duration:before {
     padding-right: 0.2em;
     content: "/";
 }
 
-.bbc.picobel .progress-slider__wrapper {
+.bbc.picobel .bbc__progress-slider__wrapper {
     height: 1em;
     line-height: 1;
     position: absolute;
@@ -204,7 +204,17 @@
     left: 1em;
     right: 1em;
 }
-.bbc.picobel .progress-slider__wrapper .progress-slider__range {
+.bbc.picobel .bbc__progress-label-inner {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.bbc.picobel .bbc__progress-slider__wrapper .bbc__progress-slider__range {
     width: 100%;
     padding: 0;
     height: 1em;
@@ -215,7 +225,7 @@
     opacity: 0;
 }
 
-.bbc.picobel .progress-slider__wrapper .progress-slider__background {
+.bbc.picobel .bbc__progress-slider__wrapper .bbc__progress-slider__background {
     height: 0.5em;
     position: absolute;
     top: 0.25em;
@@ -223,7 +233,7 @@
     background: var(--black);
     width: 100%;
 }
-.bbc.picobel .progress-slider__wrapper .progress-slider__progress-indicator {
+.bbc.picobel .bbc__progress-slider__wrapper .bbc__progress-slider__indicator {
     height: 0.5em;
     position: absolute;
     top: 0.25em;
@@ -231,7 +241,7 @@
     background: var(--highlight);
     width: 0%;
 }
-.bbc.picobel .progress-slider__wrapper .progress-slider__playhead {
+.bbc.picobel .bbc__progress-slider__wrapper .bbc__progress-slider__playhead {
     background: var(--black);
     box-shadow: inset var(--white) 0 0 0 0.2em;
     width: 0.5em;
@@ -244,24 +254,24 @@
 
 /* Make sure the range Track is the right size and shape */
 .bbc.picobel
-    input[type="range"].progress-slider__range::-webkit-slider-runnable-track {
+    input[type="range"].bbc__progress-slider__range::-webkit-slider-runnable-track {
     width: 100%;
     font-size: var(--progressHeight);
     height: 2em;
     cursor: pointer;
 }
-.bbc.picobel input[type="range"].progress-slider__range::-moz-range-track {
+.bbc.picobel input[type="range"].bbc__progress-slider__range::-moz-range-track {
     width: 100%;
     height: var(--progressHeight);
     cursor: pointer;
 }
-.bbc.picobel input[type="range"].progress-slider__range::-ms-track {
+.bbc.picobel input[type="range"].bbc__progress-slider__range::-ms-track {
     width: 100%;
     height: var(--progressHeight);
     cursor: pointer;
 }
 
-.bbc.picobel .songVolume {
+.bbc.picobel .bbc__wrapper--mute-volume {
     width: 9em;
     height: 3em;
     position: absolute;
@@ -271,7 +281,7 @@
     border-right: 1px solid var(--border);
 }
 
-.bbc.picobel .songMuteButton {
+.bbc.picobel .bbc__mute {
     width: 3em;
     height: 3em;
     font-size: 1em;
@@ -284,7 +294,7 @@
     background: var(--black);
     color: transparent;
 }
-.bbc.picobel .songMuteButton:before {
+.bbc.picobel .bbc__mute:before {
     display: block;
     width: 0.5em;
     height: 0.5em;
@@ -296,7 +306,7 @@
     transform: translateY(-50%);
     background: var(--white);
 }
-.bbc.picobel .songMuteButton:after {
+.bbc.picobel .bbc__mute:after {
     display: block;
     width: 0.5em;
     height: 0.5em;
@@ -309,15 +319,15 @@
     border-right: 0.5em solid var(--white);
     border-bottom: 0.5em solid transparent;
 }
-.bbc.picobel .songMuteButton:focus {
+.bbc.picobel .bbc__mute:focus {
     outline: none;
 }
 
-.bbc.picobel .songVolume:hover .songMuteButton {
+.bbc.picobel .bbc__wrapper--mute-volume:hover .bbc__mute {
     background: var(--highlight);
 }
 
-.bbc.picobel .songVolumeLabel {
+.bbc.picobel .bbc__volume-label-key {
     display: block;
     position: absolute;
     top: 50%;
@@ -331,7 +341,7 @@
     border-radius: 0 0.8rem 0 0;
     transform: rotate(45deg);
 }
-.bbc.picobel .songVolumeValue {
+.bbc.picobel .bbc__volume-label-value {
     display: block;
     position: absolute;
     top: 50%;
@@ -346,10 +356,7 @@
     transform: rotate(45deg);
 }
 
-.bbc.picobel
-    .songMuteButton.songMuted
-    + .songVolumeLabelWrapper
-    .songVolumeLabel {
+.bbc.picobel .bbc__mute.muted + .bbc__volume .bbc__volume-label-key {
     border-right: 0;
     border-radius: 0;
     width: 0.6rem;
@@ -360,10 +367,7 @@
     margin-left: 0.2rem;
 }
 
-.bbc.picobel
-    .songMuteButton.songMuted
-    + .songVolumeLabelWrapper
-    .songVolumeValue {
+.bbc.picobel .bbc__mute.muted + .bbc__volume .bbc__volume-label-value {
     border-right: 0;
     border-radius: 0;
     height: 0;
@@ -373,7 +377,7 @@
     margin-left: 0.2rem;
 }
 
-.bbc.picobel .songVolumeLabelWrapper {
+.bbc.picobel .bbc__volume-label {
     position: absolute;
     height: 3em;
     width: 3em;
@@ -382,7 +386,7 @@
     pointer-events: none;
 }
 
-.bbc.picobel .volume-slider__wrapper {
+.bbc.picobel .bbc__volume-slider__wrapper {
     transform-origin: 0 0;
     position: absolute;
     top: 0;
@@ -391,10 +395,10 @@
     position: relative;
     background: var(--black);
     border-left: 1px solid var(--border);
-    width: 6em;
+    width: 5.9em;
 }
 
-.bbc.picobel .volume-slider__wrapper .volume-slider__range {
+.bbc.picobel .bbc__volume-slider__wrapper .bbc__volume-slider__range {
     width: 100%;
     padding: 0;
     margin: 0;
@@ -403,7 +407,7 @@
     opacity: 0;
 }
 
-.bbc.picobel .volume-slider__wrapper .volume-slider__background {
+.bbc.picobel .bbc__volume-slider__wrapper .bbc__volume-slider__background {
     height: 1.5em;
     position: absolute;
     bottom: 0.5em;
@@ -494,7 +498,7 @@
         var(--black) 10em
     );
 }
-.bbc.picobel .volume-slider__wrapper .volume-slider__progress-indicator {
+.bbc.picobel .bbc__volume-slider__wrapper .bbc__volume-slider__indicator {
     height: 1.5em;
     position: absolute;
     bottom: 0.5em;
@@ -585,7 +589,7 @@
         var(--black) 10em
     );
 }
-.bbc.picobel .volume-slider__wrapper .volume-slider__playhead {
+.bbc.picobel .bbc__volume-slider__wrapper .bbc__volume-slider__playhead {
     background: var(--white);
     width: 0.2em;
     height: 2em;
@@ -594,24 +598,24 @@
     left: 100%;
     margin-left: -0.1em;
 }
-.bbc.picobel .songVolume:hover .volume-slider__wrapper {
+/* .bbc.picobel .songVolume:hover .bbc__volume-slider__wrapper {
     display: block;
-}
+} */
 
 /* Make sure the range Track is the right size and shape */
 .bbc.picobel
-    input[type="range"].volume-slider__range::-webkit-slider-runnable-track {
+    input[type="range"].bbc__volume-slider__range::-webkit-slider-runnable-track {
     width: 100%;
     font-size: 1em;
     height: 3em;
     cursor: pointer;
 }
-.bbc.picobel input[type="range"].volume-slider__range::-moz-range-track {
+.bbc.picobel input[type="range"].bbc__volume-slider__range::-moz-range-track {
     width: 100%;
     height: 3em;
     cursor: pointer;
 }
-.bbc.picobel input[type="range"].volume-slider__range::-ms-track {
+.bbc.picobel input[type="range"].bbc__volume-slider__range::-ms-track {
     width: 100%;
     height: 3em;
     cursor: pointer;
