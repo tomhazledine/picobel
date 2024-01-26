@@ -13,6 +13,10 @@ Picobel.js (pronounced _peek-o-bell_, as in _decibel_) is a lightweight dependen
 * [Setting "artist" and "track name" values](#setting-artist-and-track-name-values)
 * [Pre-made themes](#pre-made-themes)
 
+> **Note:** Picobel v3 is very new! I'm still working on the full docs, which should launch soon. In the meantime, if you have any questions then hit me up on the fediverse (I'm [@thomashazledine@mastodon.social](https://mastodon.social/@tomhazledine))
+>
+> *2024-01-26*
+
 ## Why would I need this?
 
 There are two reasons you might want to use Picobel:
@@ -48,7 +52,7 @@ In your JS, initialise Picobel with your chosen class name:
 ```js
 import picobel from "picobel";
 
-picobel({theme: "my-awesome-audio-player"});
+picobel({ theme: "my-awesome-audio-player" });
 ```
 
 Picobel will then find any `<audio>` elements on the page and replace them with markup you can style with CSS.
@@ -58,7 +62,7 @@ Picobel will then find any `<audio>` elements on the page and replace them with 
 Applying metadata to your audio file requires adding data-attributes to your `<audio>` markup. Picobel gets the track name from the regular `title` attribute, and looks for artist information in the `data-artist` attribute. For the demo at the top of this page, the markup looks like this:
 
 ```html
-<audio src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3" title="Lost that easy" data-artist="Cold War Kids" controls>
+<audio src="http://path/to/audio/file.mp3" title="Song title" data-artist="The artist name" controls>
     Your browser does not support the <code>audio</code> element.
 </audio>
 ```
