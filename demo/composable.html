@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Picobel.js Test Page</title>
+
+        <!-- Load the Picobel CSS -->
+        <link
+            rel="stylesheet"
+            href="../src/css/picobel.all.css"
+            type="text/css"
+        />
+    </head>
+    <body style="font-family: sans-serif">
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Index</a>
+                </li>
+                <li>Composable</li>
+                <li><a href="types.html">Types</a></li>
+                <li><a href="manual.html">Manual</a></li>
+            </ul>
+        </nav>
+        <div class="generic-wrapper">
+            <h1>Testing Picobel: composable components</h1>
+            <div id="section-01">
+                <h2>Just play and progress</h2>
+                <audio
+                    src="./audio-examples/taken-at-the-flood.mp3"
+                    title="Taken at the Flood"
+                    data-artist="Freeze Them"
+                    controls
+                >
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </div>
+
+            <h1>Some stuff...</h1>
+            <p>...inbetween the audio elements</p>
+
+            <div id="section-02">
+                <audio
+                    src="./audio-examples/taken-at-the-flood.mp3"
+                    title="Taken at the Flood"
+                    data-artist="Freeze Them"
+                    controls
+                >
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </div>
+        </div>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
+            recusandae deleniti ut, sit in aliquam vel repellat nulla id
+            temporibus iure pariatur doloribus, magnam voluptatibus? Inventore
+            natus earum nisi ducimus.
+        </p>
+
+        <div id="section-03">
+            <audio
+                class="testClass--one__OOPS__testClass--two"
+                src="./audio-examples/taken-at-the-flood.mp3"
+                controls
+            >
+                Your browser does not support the <code>audio</code> element.
+            </audio>
+        </div>
+
+        <!-- Load Scripts -->
+        <script
+            type="text/javascript"
+            src="./build/picobel-demo-composable.js"
+        ></script>
+    </body>
+</html>

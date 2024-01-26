@@ -1,35 +1,26 @@
-import Picobel from "../js/Picobel";
-import PicobelSetup from "../js/PicobelSetup";
+import Picobel from "../js/index.js";
+import { parseOptions } from "../js/PicobelSetup";
 
-const EXPECTED_COMPONENTS = {
-    theme: "default",
-    playPause: false,
-    progress: true,
-    volume: true,
-    download: false,
-    mute: true,
-    duration: true,
-    timer: true
-};
+const EXPECTED_COMPONENTS = [
+    "playPause",
+    ["mute", "volume"],
+    ["title", "artist"],
+    ["timer", "progress", "duration"]
+];
 
 describe("setup", () => {
     it("sets the correct theme option", () => {
-        expect(PicobelSetup.parseOptions().theme).toEqual("default");
-        expect(PicobelSetup.parseOptions({ theme: "bbc" }).theme).toEqual(
-            "bbc"
-        );
+        expect(parseOptions().theme).toEqual("default");
+        expect(parseOptions({ theme: "bbc" }).theme).toEqual("bbc");
     });
 
-    it("correctly sets component state", () => {
-        const startingOptions = { components: { playPause: false } };
-        let picobel = Picobel(startingOptions);
-        // Does it work when called as part of the whole app?
+    it("correctly sets default components", () => {
+        let picobel = Picobel();
         expect(picobel.state.components).toEqual(EXPECTED_COMPONENTS);
-        // Does it work when called directly?
-        let components = PicobelSetup.setComponentsByTheme(
-            "default",
-            startingOptions.components
-        );
-        expect(components).toEqual(EXPECTED_COMPONENTS);
+    });
+    it("correctly sets manual components", () => {
+        const startingOptions = { components: ["playPause"] };
+        let picobel = Picobel(startingOptions);
+        expect(picobel.state.components).toEqual(["playPause"]);
     });
 });

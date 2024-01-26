@@ -1,14 +1,5 @@
 import * as esbuild from "esbuild";
-
-const parseArgs = rawArgs => {
-    const [a, b, ...relevant] = rawArgs;
-    return relevant
-        .map(arg => {
-            const [key, value] = arg.split("=");
-            return { [key.replace(/-/g, "")]: value || true };
-        })
-        .reduce((args, arg) => ({ ...args, ...arg }), {});
-};
+import { parseArgs, watchFiles } from "../build.utils.js";
 
 const args = parseArgs(process.argv);
 
@@ -18,8 +9,8 @@ const config = {
     minify: args.mode !== "development",
     treeShaking: args.mode !== "development",
     sourcemap: args.mode === "development",
-    entryPoints: ["demo/index.js"],
-    entryNames: "picobel-demo"
+    entryPoints: ["demo/index.js", "demo/composable.js", "demo/types.js"],
+    entryNames: "picobel-demo-[name]"
 };
 
 const build = async config => {
@@ -31,4 +22,14 @@ const build = async config => {
     }
 };
 
-build(config);
+if (args.mode === "development") {
+    // Development mode
+    watchFiles(["build", "demo/index.js"], async file => {
+        console.log(`Changes detected in ${file}.\nRebuilding...`);
+        await build(config);
+    });
+} else {
+    // Production mode
+    await build(config);
+    console.log("Build complete.");
+}

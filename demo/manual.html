@@ -14,17 +14,17 @@
     <body style="font-family: sans-serif">
         <nav>
             <ul>
-                <li>Home</li>
+                <li><a href="/">Home</a></li>
                 <li>
                     <a href="composable.html">Composable</a>
                 </li>
                 <li><a href="types.html">Types</a></li>
-                <li><a href="manual.html">Manual</a></li>
+                <li>Manual</li>
             </ul>
         </nav>
 
         <div class="generic-wrapper">
-            <h1>Testing Picobel: home</h1>
+            <h1>Testing Picobel: manual installation</h1>
             <!-- Include an <audio> element. This will be replaced by Picobel. -->
             <audio
                 src="./audio-examples/taken-at-the-flood.mp3"
@@ -59,7 +59,7 @@
         </p>
 
         <audio
-            class="testClass--one testClass--two"
+            class="testClass--one__OOPS__testClass--two"
             src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3"
             controls
         >
@@ -67,9 +67,10 @@
         </audio>
 
         <!-- Load Scripts -->
-        <script
-            type="text/javascript"
-            src="./build/picobel-demo-index.js"
-        ></script>
+        <script type="text/javascript" src="../build/picobel.2.1.0.js"></script>
+        <script>
+            console.log({ picobel });
+            picobel();
+        </script>
     </body>
 </html>

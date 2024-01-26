@@ -1,10 +1,12 @@
-import Picobel from "../build/picobel.js";
+import picobel from "../build/picobel.js";
 
-Picobel();
+// Picobel();
+// Picobel({ theme: "bare" });
 // Picobel({ theme: "default" });
-// Picobel({ theme: "skeleton" });
+const audio = picobel({ theme: "skeleton" });
 // Picobel({ theme: "bbc" });
 // Picobel({ theme: "eatenbymonsters" });
 // Picobel({ theme: "itunes" });
 // Picobel({ theme: "pitchfork" });
 // Picobel({ theme: "soundcloud" });
+console.log({ audio });

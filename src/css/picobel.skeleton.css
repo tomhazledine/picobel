@@ -1,0 +1,412 @@
+.skeleton.picobel {
+    --black: #555;
+    --white: #ffffff;
+    --grey: #ddd;
+    --focus: #015ecc;
+
+    --progress-height: 32px;
+    --progress-inner-height: 30px;
+}
+
+/* Global */
+.skeleton.picobel *,
+.skeleton.picobel *:before,
+.skeleton.picobel *:after {
+    box-sizing: inherit;
+}
+.skeleton.picobel *:focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 2px;
+}
+.skeleton.picobel {
+    font-size: inherit;
+    position: relative;
+    box-sizing: border-box;
+    z-index: 1;
+
+    /* Wrapper */
+    margin: 10px 0;
+    height: 64px;
+    border: 1px solid var(--black);
+}
+
+/* Simulates an infinite slide-to-the-right effect. */
+@keyframes background_slide {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 20px 0;
+    }
+}
+
+/* The loading-state indicator */
+.skeleton__loader {
+    position: absolute;
+    display: none;
+    z-index: 5;
+    bottom: -1px;
+    left: 183px;
+    right: 0;
+    height: var(--progress-height);
+    border-top: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
+    background: linear-gradient(to right, var(--white) 50%, var(--black) 50%);
+    background-size: 20px 20px;
+    background-repeat: repeat;
+    background-position: 0 0;
+    animation: background_slide linear infinite 0.4s;
+}
+
+/* Only show the loader when we're loading */
+.skeleton.loading .skeleton__loader {
+    display: block;
+}
+
+/* The play-pause button */
+.skeleton__play-pause {
+    font-size: 10px;
+    border: 1px solid var(--black);
+    appearance: none;
+    width: 64px;
+    height: 64px;
+    background: var(--white);
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    cursor: pointer;
+}
+
+.skeleton__play-pause__text {
+    display: none;
+}
+
+.skeleton__play-pause:focus {
+    z-index: 3;
+}
+
+/* The "play" icon */
+.skeleton__play-pause:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    border-top: 10px solid transparent;
+    border-left: 12px solid var(--black);
+    border-bottom: 10px solid transparent;
+}
+
+/* The "pause" icon */
+.skeleton__play-pause.playing:before {
+    height: 18px;
+    width: 16px;
+    transform: translate(-50%, -50%);
+    border-top: 0;
+    border-left: 6px solid var(--black);
+    border-right: 6px solid var(--black);
+    border-bottom: 0;
+}
+
+/* Display song info */
+.skeleton__wrapper--title-artist {
+    padding: 0 10px 0 74px;
+    height: 64px;
+    background: var(--white);
+    color: var(--black);
+    line-height: 1.6;
+}
+.skeleton__title {
+    display: inline-block;
+    line-height: 1;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.skeleton__artist {
+    font-family: monospace;
+    display: inline-block;
+    margin-left: 5px;
+    line-height: 1;
+}
+.skeleton__artist:not(:empty):before {
+    content: " – ";
+}
+
+/* Display info about time-played and song-duration */
+.skeleton__wrapper--timer-progress-duration {
+    position: absolute;
+    bottom: -1px;
+    left: 182px;
+    right: 0;
+    height: 32px;
+    border-left: 1px solid var(--black);
+}
+.skeleton__timer,
+.skeleton__duration {
+    position: absolute;
+    bottom: 0;
+    z-index: 4;
+    width: 60px;
+    text-align: left;
+    background: transparent;
+    color: var(--black);
+    line-height: 1;
+    pointer-events: none;
+    font-size: 14px;
+    height: 32px;
+    padding: 10px 5px 9px 10px;
+    font-family: monospace;
+}
+.skeleton__timer {
+    left: 0;
+}
+.skeleton__duration {
+    right: 0;
+    text-align: right;
+}
+
+/* Hide song-timings when we're loading */
+.skeleton.loading .skeleton__timer,
+.skeleton.loading .skeleton__duration {
+    display: none;
+}
+
+/* The "fake" range slider */
+.skeleton__progress-slider__wrapper {
+    height: var(--progress-height);
+    font-size: 10px;
+    line-height: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.skeleton__progress-slider__replacement {
+    position: relative;
+    background: var(--white);
+    border-top: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
+    height: var(--progress-height);
+    overflow: hidden;
+}
+.skeleton__progress-slider__replacement.focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 2px;
+    z-index: 3;
+}
+.skeleton__progress-slider__indicator {
+    height: var(--progress-inner-height);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--grey);
+    width: 0%;
+}
+.skeleton__progress-slider__playhead {
+    width: 8px;
+    height: var(--progress-inner-height);
+    position: absolute;
+    top: 0;
+    left: 0%;
+    margin-left: -4px;
+    background: var(--black);
+}
+
+/* Hide dynamic elements until loading has finished */
+.skeleton.loading .skeleton__progress-slider__indicator,
+.skeleton.loading .skeleton__progress-slider__playhead {
+    display: none;
+}
+
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.skeleton__progress-slider__range {
+    width: 100%;
+    height: var(--progress-height);
+    padding: 0;
+    margin: 0;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+/* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
+.skeleton__progress-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: var(--progress-height);
+    cursor: pointer;
+}
+.skeleton__progress-slider__range::-moz-range-track {
+    width: 100%;
+    height: var(--progress-height);
+    cursor: pointer;
+}
+.skeleton__progress-slider__range::-ms-track {
+    width: 100%;
+    height: var(--progress-height);
+    cursor: pointer;
+}
+
+/* Position the volume controls */
+.skeleton__wrapper--mute-volume {
+    position: absolute;
+    bottom: -1px;
+    left: 62px;
+    width: 120px;
+    height: 32px;
+    z-index: 2;
+    border-top: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+}
+.skeleton__mute {
+    display: block;
+    z-index: 2;
+    float: left;
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
+    color: transparent;
+    border: 0;
+    appearance: none;
+    background: var(--white);
+    border: 1px solid var(--black);
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Rectangle part of "speaker cone" icon */
+.skeleton__mute:before {
+    display: block;
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    content: "";
+    top: 50%;
+    right: 50%;
+    margin-right: -1px;
+    transform: translateY(-50%);
+    background: var(--black);
+}
+
+/* Triangle part of "speaker cone" icon */
+.skeleton__mute:after {
+    display: block;
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    content: "";
+    top: 50%;
+    transform: translateY(-50%);
+    right: 50%;
+    margin-right: -4px;
+    border-top: 8px solid transparent;
+    border-right: 8px solid var(--black);
+    border-bottom: 8px solid transparent;
+}
+
+/* Change icon when muted */
+.skeleton__mute.muted:before {
+    background: var(--grey);
+}
+.skeleton__mute.muted:after {
+    border-right-color: var(--grey);
+}
+
+.skeleton__volume {
+    --volume-padding: 6px;
+    --volume-height: 20px;
+    --volume-width: 76px;
+    width: var(--volume-width) + var(--volume-padding) * 2;
+    height: var(--volume-height) + var(--volume-padding) * 2;
+    padding: var(--volume-padding);
+}
+
+.skeleton__volume-label {
+    display: none;
+}
+
+/* As with the playback indicator, we're using a range element to power the volume slider functionality */
+.skeleton__volume-slider__wrapper {
+    width: var(--volume-width);
+    height: var(--volume-height);
+    position: relative;
+}
+.skeleton__volume-slider__replacement {
+    display: block;
+    height: var(--volume-height);
+    width: var(--volume-width);
+    position: relative;
+    left: 0;
+    z-index: 3;
+    background: var(--grey);
+    flex-grow: 1;
+    float: left;
+    transform: rotate(180deg);
+}
+.skeleton__volume-slider__replacement:after {
+    content: "";
+    display: block;
+    border-right: var(--volume-width) solid var(--white);
+    border-top: var(--volume-height) solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+.skeleton__volume-slider__replacement.focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 2px;
+}
+
+.skeleton__volume-slider__indicator {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--black);
+    width: var(--volume-width);
+}
+.skeleton__volume-slider__playhead {
+    display: none;
+}
+
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.skeleton__volume-slider__range {
+    width: 100%;
+    height: var(--volume-height);
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+/* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
+.skeleton__volume-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: var(--volume-height);
+    cursor: pointer;
+}
+.skeleton__volume-slider__range::-moz-range-track {
+    width: 100%;
+    height: var(--volume-height);
+    cursor: pointer;
+}
+.skeleton__volume-slider__range::-ms-track {
+    width: 100%;
+    height: var(--volume-height);
+    cursor: pointer;
+}

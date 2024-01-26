@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Picobel.js Test Page</title>
+
+        <!-- Load the Picobel CSS -->
+        <link
+            rel="stylesheet"
+            href="../src/css/picobel.all.css"
+            type="text/css"
+        />
+    </head>
+    <body style="font-family: sans-serif">
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Index</a>
+                </li>
+                <li><a href="composable.html">Composable</a></li>
+                <li>Types</li>
+                <li><a href="manual.html">Manual</a></li>
+            </ul>
+        </nav>
+        <h1>Testing Picobel: source types</h1>
+
+        <h2>Source: <code>.ogg</code> & <code>.mp3</code></h2>
+
+        <audio>
+            <source
+                src="./audio-examples/taken-at-the-flood.ogg"
+                type="audio/ogg"
+            />
+            <source src="foo/bar.mp3" type="audio/mpeg" />
+        </audio>
+
+        <audio
+            src="./audio-examples/taken-at-the-flood.ogg"
+            data-artist="Freeze Them"
+        ></audio>
+
+        <!-- Load Scripts -->
+        <script
+            type="text/javascript"
+            src="./build/picobel-demo-types.js"
+        ></script>
+    </body>
+</html>

@@ -1,45 +1,27 @@
 # Contribute
 
-This started out as a "scratch your own itch" tool for a specific project. I'm open-sourcing it in the hope it might prove useful to others too. There are _a few_ audio player tools/plugins out there, but most have too many features for my needs. I like simplicity, and I like any JS I add to my sites to be as lean as possible.
+Picobel started out in 2015 as a "scratch your own itch" tool for a specific project which I then open-sourced in the hope it might prove useful to others. 
 
-I'm hoping Picobel can be of use to as many people as possible. If you have an improvement or bug-fix or new feature, get in touch! Make a pull request on the [Picobel.js Github repo](https://github.com/tomhazledine/picobel). I'm just getting started with "open source", so I'd be very glad of any help or suggestions or advice.
+If you have an improvement or bug-fix or new feature, get in touch! Make a pull request on the [Picobel.js Github repo](https://github.com/tomhazledine/picobel). Contributions are encouraged and any feedback (positive or negative) is very welcome.
 
-## Dev dependencies
+## Making changes
 
-Once you've forked the repo, run `npm install` to install the development dependencies. I'm trying to keep the build chain as short as possible, so there's not too much to be installed:
+To make changes to Picobel, you'll need to follow these steps:
 
-* `babel-cli` and `babel-preset-env` are there to transpile the raw ES6 from [`/esm/picobel.js`](https://github.com/tomhazledine/picobel/blob/master/esm/picobel.js) into the ES5-compatible versions.
-* `node-sass` is there to compile the SCSS in [`/scss/`](https://github.com/tomhazledine/picobel/blob/master/scss) into vanilla CSS.
-* Once the regular SCSS has been compiled, it gets run through `autoprefixer` (using `postcss-cli`) to make sure the necessary browser prefixes are added to the raw CSS.
-* To compile the ES6/UMD modules, I've added `webpack` (and `webpack-cli` and `babel-loader`).
-* The test suite is run using `jest`.
+1. fork the repo and clone it to your local machine.
+2. install the dev dependencies with `yarn` (or `npm install`).
+3. make changes to the code in the `/src` directory.
+4. run `yarn build` (or `npm run build`) to compile the code. There is also `yarn build:dev` (or `npm run build:dev`) which will watch for changes and recompile automatically as well as generating source maps for the compiled files. Once built, the final code will appear in the `/build` directory.
+5. run `yarn test` (or `npm run test`) to run the test suite.
+6. commit your changes and make a pull request.
 
-## Editing the JS
+## Project structure
 
-The canonical source code lives with the [`/src`](https://github.com/tomhazledine/picobel/blob/master/src) directory. This is where you should make any changes to the JavaScript code.
+### JavaScript
 
-Wherever possible I've tried to keep all functions as ["pure"](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976) as possible: given the same arguments, they should always return the same result, without any side effects. I'm a recent convert to the world of "functional" programming, so accept that I might not always get it right - if you can suggest any improvements, I'll be more than happy to hear them 👍.
+Picobel is first-and-foremost a JavaScript project, and all the JS code lives in [`/src/js`](https://github.com/tomhazledine/picobel/blob/master/src/js) with the main file being [`/src/js/Picobel.js`](https://github.com/tomhazledine/picobel/blob/master/src/js/Picobel.js). The function `picobel()` is the default export from this file, and is the function that gets called when you use Picobel in your own code.
 
-### Modules
-
-The code is written using ES6 (UMD) module syntax (e.g. `import VARIABLE from 'PACKAGE_NAME';`).
-
-As far as code organization goes, I've batched functions into roughly-similar groups, and put those groups into their own modules. The groups take the form of objects, that can then be imported into the main app. For example:
-
-    // Module file:
-    const groupedFunctions = {
-        aCoolFunction: () => {/* the function code */},
-        somethingUsefull: () => {/* the function code */}
-    };
-    export default groupedFunctions;
-
-    // App file:
-    import groupedFunctions from './path-to-module-file';
-    function TheMainAPP() {
-        // Use one of the grouped functions:
-        groupedFunctions.aCoolFunction();
-    }
-    export default TheMainAPP;
+JS is written using ESM module syntax (e.g. `import { foo } from './bar.js';`), and helper-functions and utilities are imported from partials that also live in `/src/js`.
 
 There are several modules in this project:
 
@@ -49,16 +31,22 @@ There are several modules in this project:
 * `PicobelMarkup.js`: these functions handle creating the markup that Picobel replaces native `<audio>` elements with.
 * `PicobelSetup.js`: these functions initialize Picobel (parsing options, generating initial `state`, etc.).
 
-Once you've finished making changes, run `npm run build` to generate the UMD and CommonJS versions (which will appear in `/esm/picobel.js` and `/cjs/picobel.js` respectively).
+The JS is compiled into a production-ready build using [esbuild](https://esbuild.github.io/), which is setup and configured in [`/build.js`](https://github.com/tomhazledine/picobel/blob/master/build.js) and run with `yarn build` (or `npm run build`).
 
-### Tests
+### CSS
 
-There are tests for most Picobel functions. Picobel uses Jest for running tests. Test files live in the `/tests` directory, and match the main module files: for example, the `/src/helpers.js` file has a corresponding test file called `/tests/helpers.tests.js`
+Picobel supports several pre-build "themes". A Picobel theme is a set of namespaced CSS rules that apply specific styles based on the theme name. For example, the default theme is called `default` and all the CSS rules for this theme are namespaced with `.picobel.default`.
 
-## Editing the CSS
+The themes are all written in vanilla CSS and can be found in [`/src/css`](https://github.com/tomhazledine/picobel/blob/master/src/css). Running the build step (with `yarn build` etc.) will create minified versions of the themes in the `/build` directory.
 
-The CSS themes are written in [SCSS](https://sass-lang.com/guide) and compiled to vanilla CSS using the `npm run styles` command. `npm run styles` compiles the SCSS and then runs it through [Autoprefixer](https://github.com/postcss/autoprefixer) to add all the required vendor prefixes.
+There are several stylesheets available:
 
-New themes should be named with the following pattern: `/scss/player.NEW_THEME_NAME.scss`. They must also be included in the "all themes" stylesheet: [`/scss/all.scss`](https://github.com/tomhazledine/picobel/blob/master/scss/all.scss)
+* `picobel.all.css`: a single stylesheet that contains all the themes. (useful for experimentation, but not recommended for production).
+* `picobel.default.css`: the default theme.
+* `picobel.skeleton.css`: a "bare bones" theme with minimal styling intended as a jumping-off point for folks to write their own themes. Includes basic layout, loading state, custom-styled volume and progress range sliders, etc.
 
-    @import "player.NEW_THEME_NAME";
+* `picobel.bbc.css`: a theme that resembles the BBC iPlayer interface circa 2015.
+* `picobel.eatenbymonsters.css`: the theme built for [eatenbymonsters.com](https://eatenbymonsters.com) that was the initial inspiration for Picobel.
+* `picobel.itunes.css`: a theme that resembles the iTunes app mini-player interface circa 2015.
+* `picobel.pitchfork.css`: a theme that resembles the [Pitchfork](https://pitchfork.com/) web audio player interface circa 2015.
+* `picobel.soundcloud.css`: a theme that resembles the Soundcloud embedded web audio player interface circa 2015.

@@ -1,4 +1,4 @@
-.pitchfork.customAudioPlayer {
+.pitchfork.picobel {
     --grey: #dad8d2;
     --white: #ffffff;
     --black: #000;
@@ -11,7 +11,7 @@
     --progressHeight: 0.4rem;
 }
 
-.pitchfork.customAudioPlayer {
+.pitchfork.picobel {
     margin: 2em 0;
     padding: 1em;
     padding-left: 4em;
@@ -23,13 +23,13 @@
     font-family: "Arial", sans-serif;
     color: var(--text_light);
 }
-.pitchfork.customAudioPlayer *,
-.pitchfork.customAudioPlayer *:before,
-.pitchfork.customAudioPlayer *:after {
+.pitchfork.picobel *,
+.pitchfork.picobel *:before,
+.pitchfork.picobel *:after {
     box-sizing: inherit;
 }
 
-.pitchfork.customAudioPlayer .loader {
+.pitchfork.picobel .loader {
     position: absolute;
     top: 3.1em;
     left: 7.2em;
@@ -53,11 +53,11 @@
     background-position: 0 0;
     animation: background_slide linear infinite 0.3s;
 }
-.pitchfork.customAudioPlayer.loading .loader {
+.pitchfork.picobel.loading .loader {
     display: block;
 }
 
-.pitchfork.customAudioPlayer .playerTrigger {
+.pitchfork.picobel .playerTrigger {
     border: none;
     appearance: none;
     width: 2.6em;
@@ -74,13 +74,13 @@
     cursor: pointer;
 }
 
-.pitchfork.customAudioPlayer .playerTrigger .buttonText {
+.pitchfork.picobel .playerTrigger .buttonText {
     display: none;
 }
-.pitchfork.customAudioPlayer .playerTrigger:focus {
+.pitchfork.picobel .playerTrigger:focus {
     outline: none;
 }
-.pitchfork.customAudioPlayer .playerTrigger:before {
+.pitchfork.picobel .playerTrigger:before {
     content: "";
     display: block;
     position: absolute;
@@ -92,7 +92,7 @@
     border-left: 0.8em solid var(--black);
     border-bottom: 0.6em solid transparent;
 }
-.pitchfork.customAudioPlayer .playerTrigger:after {
+.pitchfork.picobel .playerTrigger:after {
     content: "";
     display: block;
     position: absolute;
@@ -106,7 +106,7 @@
     border-bottom: 0;
     opacity: 0;
 }
-.pitchfork.customAudioPlayer .playerTrigger.songPlaying:before {
+.pitchfork.picobel .playerTrigger.songPlaying:before {
     height: 1em;
     margin-top: -0.5em;
     margin-left: -0.5em;
@@ -114,73 +114,73 @@
     border-left: 0.4em solid var(--black);
     border-bottom: 0;
 }
-.pitchfork.customAudioPlayer .playerTrigger.songPlaying:after {
+.pitchfork.picobel .playerTrigger.songPlaying:after {
     opacity: 1;
 }
 
-.pitchfork.customAudioPlayer .metaWrapper {
+.pitchfork.picobel .metaWrapper {
     color: var(--black);
     padding: 0 1em;
     margin-bottom: 1em;
 }
 
-.pitchfork.customAudioPlayer .titleDisplay {
+.pitchfork.picobel .titleDisplay {
     font-weight: bold;
 }
-.pitchfork.customAudioPlayer .titleDisplay:before {
+.pitchfork.picobel .titleDisplay:before {
     content: "“";
 }
-.pitchfork.customAudioPlayer .titleDisplay:after {
+.pitchfork.picobel .titleDisplay:after {
     content: "”";
 }
 
-.pitchfork.customAudioPlayer .artistDisplay:before {
+.pitchfork.picobel .artistDisplay:before {
     content: " – ";
 }
 
-.pitchfork.customAudioPlayer .songPlayTimer {
+.pitchfork.picobel .songPlayTimer {
     position: absolute;
     bottom: 1em;
     left: 5em;
 }
-.pitchfork.customAudioPlayer .songDuration {
+.pitchfork.picobel .songDuration {
     position: absolute;
     bottom: 1em;
     right: 1em;
 }
 
-.pitchfork.customAudioPlayer .timingsWrapper {
+.pitchfork.picobel .timingsWrapper {
     padding: 0 4em;
     position: relative;
     font-size: 0.8em;
     width: 100%;
     float: left;
 }
-.pitchfork.customAudioPlayer .timingsWrapper .songPlayTimer,
-.pitchfork.customAudioPlayer .timingsWrapper .songDuration {
+.pitchfork.picobel .timingsWrapper .songPlayTimer,
+.pitchfork.picobel .timingsWrapper .songDuration {
     position: absolute;
     top: -0.2em;
     width: 4em;
     text-align: center;
     line-height: 1;
 }
-.pitchfork.customAudioPlayer .timingsWrapper .songPlayTimer {
+.pitchfork.picobel .timingsWrapper .songPlayTimer {
     left: 0;
     border-radius: 0.5em 0 0 0.5em;
 }
-.pitchfork.customAudioPlayer .timingsWrapper .songDuration {
+.pitchfork.picobel .timingsWrapper .songDuration {
     right: 0;
     border-radius: 0 0.5em 0.5em 0;
 }
 
-.pitchfork.customAudioPlayer .progress-slider__wrapper {
+.pitchfork.picobel .progress-slider__wrapper {
     height: var(--progressHeight);
     line-height: 1;
     position: relative;
     border-radius: 0.2rem;
     overflow: hidden;
 }
-.pitchfork.customAudioPlayer .progress-slider__wrapper .progress-slider__range {
+.pitchfork.picobel .progress-slider__wrapper .progress-slider__range {
     width: 100%;
     padding: 0;
     margin: 0;
@@ -190,9 +190,7 @@
     opacity: 0;
 }
 
-.pitchfork.customAudioPlayer
-    .progress-slider__wrapper
-    .progress-slider__background {
+.pitchfork.picobel .progress-slider__wrapper .progress-slider__background {
     height: var(--progressHeight);
     position: absolute;
     bottom: 0;
@@ -200,7 +198,7 @@
     background: var(--unplayed);
     width: 100%;
 }
-.pitchfork.customAudioPlayer
+.pitchfork.picobel
     .progress-slider__wrapper
     .progress-slider__progress-indicator {
     height: var(--progressHeight);
@@ -210,34 +208,31 @@
     background: var(--played);
     width: 0%;
 }
-.pitchfork.customAudioPlayer
-    .progress-slider__wrapper
-    .progress-slider__playhead {
+.pitchfork.picobel .progress-slider__wrapper .progress-slider__playhead {
     display: none;
 }
 
 /* Make sure the range Track is the right size and shape */
-.pitchfork.customAudioPlayer
+.pitchfork.picobel
     input[type="range"].progress-slider__range::-webkit-slider-runnable-track {
     width: 100%;
     font-size: var(--progressHeight);
     height: 2.2em;
     cursor: pointer;
 }
-.pitchfork.customAudioPlayer
+.pitchfork.picobel
     input[type="range"].progress-slider__range::-moz-range-track {
     width: 100%;
     height: var(--progressHeight);
     cursor: pointer;
 }
-.pitchfork.customAudioPlayer
-    input[type="range"].progress-slider__range::-ms-track {
+.pitchfork.picobel input[type="range"].progress-slider__range::-ms-track {
     width: 100%;
     height: var(--progressHeight);
     cursor: pointer;
 }
 
-.pitchfork.customAudioPlayer .songVolume {
+.pitchfork.picobel .songVolume {
     display: none;
 }
 

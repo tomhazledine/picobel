@@ -37,7 +37,7 @@ describe("Utilities", () => {
                 <title>Picobel.js Test Page</title>
             </head>
             <body>
-                <div id="elementWithIndex" data-song-index="2">
+                <div id="elementWithIndex" data-picobel-index="2">
                     <button id="childOfIndex"></button>
                     <div>
                         <div>

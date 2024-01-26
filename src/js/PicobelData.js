@@ -2,9 +2,9 @@ import _helpers from "./helpers";
 
 const PicobelData = {
     // Return an array of all the <audio> elements found on the page.
-    findAudio: () => {
+    findAudio: context => {
         // Get all the <audio> occurrences in the page.
-        let audioElements = document.getElementsByTagName("audio");
+        let audioElements = context.getElementsByTagName("audio");
         // Save our audioElements as an array (so we can manipulate the DOM but
         // still access our items).
         let items = [].slice.call(audioElements);
@@ -13,10 +13,9 @@ const PicobelData = {
 
     // Build an array of classes to add to each new "player" element
     prepareClasses: (index, classes, theme) => {
-        const classesString = `customAudioPlayer loading player_${index} ${classes}`;
+        const classesString = `picobel loading picobel--index-${index} ${classes}`;
         const classesArray = classesString.trim().split(" ");
-        classesArray.push(theme);
-        return classesArray;
+        return [...classesArray, theme];
     },
 
     // Get the url for each audio file we want to load [using elements found by findAudio()]
@@ -32,7 +31,7 @@ const PicobelData = {
     getMeta: item => {
         let meta = {};
         // Get the filename and type
-        meta.url = item.src;
+        meta.url = item.currentSrc;
         meta.fileType = _helpers.getFileType(meta.url);
         meta.fileName = _helpers.getFileName(meta.url);
         // If there is a valid title, get that title, otherwise get the file name.
