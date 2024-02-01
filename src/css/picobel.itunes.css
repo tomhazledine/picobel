@@ -11,34 +11,42 @@
     --playhead: #000000;
     --text_dark: #3c3c3c;
     --text_light: #7a7a7a;
-    --progressHeight: 1rem;
-}
+    --progress-height: 20px;
+    --progress-track-height: 10px;
+    --focus: #015ecc;
 
-.itunes.picobel {
     margin: 2em 0;
-    padding-left: 4em;
     position: relative;
     border: 1px solid var(--border);
     box-shadow: inset var(--white) 0 1px 0 0, var(--black--opacity) 0 1px 2px 0;
-    overflow: hidden;
-    height: 4em;
+    min-height: 4em;
     box-sizing: border-box;
     background-image: linear-gradient(
-        var(background_grey_light),
+        var(--background_grey_light),
         var(--background_grey_dark)
     );
-
     font-family: "Arial", sans-serif;
     color: var(--text_light);
     text-shadow: var(--white) 0 1px 0;
+    display: flex;
+    justify-content: stretch;
+    align-items: flex-end;
 }
+
 .itunes.picobel *,
 .itunes.picobel *:before,
 .itunes.picobel *:after {
     box-sizing: inherit;
 }
 
-.itunes.picobel .loader {
+.itunes.error {
+    height: 4em;
+}
+.itunes .error {
+    width: 100%;
+}
+
+.itunes__loader {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -58,31 +66,35 @@
     border-radius: 50%;
     animation: itunes_spin linear infinite 1s;
 }
-.itunes.picobel.loading .loader {
+
+.itunes.loading .itunes__loader {
     opacity: 1;
 }
 
-.itunes.picobel .playerTrigger {
+.itunes__play-pause {
     border: none;
     appearance: none;
+    position: relative;
     width: 4em;
     height: 4em;
     font-size: 1em;
     background: var(--white);
     color: var(--icon_grey);
-    position: absolute;
-    top: 0;
-    left: 0;
     border-right: 1px solid var(--border);
     cursor: pointer;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
-.itunes.picobel .playerTrigger .buttonText {
+
+.itunes__play-pause__text {
     display: none;
 }
-.itunes.picobel .playerTrigger:focus {
-    outline: none;
+
+.itunes__play-pause:focus {
+    /* outline: none; */
 }
-.itunes.picobel .playerTrigger:before {
+
+.itunes__play-pause:before {
     content: "";
     display: block;
     position: absolute;
@@ -94,7 +106,8 @@
     border-bottom: 0.8em solid transparent;
     border-left: 1em solid var(--icon_grey);
 }
-.itunes.picobel .playerTrigger:after {
+
+.itunes__play-pause:after {
     content: "";
     display: block;
     position: absolute;
@@ -108,7 +121,8 @@
     border-left: 0.6em solid var(--icon_grey);
     display: none;
 }
-.itunes.picobel .playerTrigger.songPlaying:before {
+
+.itunes__play-pause.playing:before {
     height: 1.4em;
     margin-top: -0.7em;
     margin-left: -0.7em;
@@ -116,80 +130,110 @@
     border-bottom: 0;
     border-left: 0.6em solid var(--icon_grey);
 }
-.itunes.picobel .playerTrigger.songPlaying:after {
+.itunes__play-pause.playing:after {
     display: block;
 }
 
-.itunes.picobel .metaWrapper {
-    padding: 0.5em;
+.itunes__wrapper--title-artist {
+    padding: 0.5em 0.5em 0.2em;
 }
 
-.itunes.picobel.loading .metaWrapper {
+.itunes.loading .itunes__wrapper--title-artist {
     display: none;
 }
 
-.itunes.picobel .titleDisplay {
+.itunes__title {
     display: block;
     text-align: center;
     color: var(--text_dark);
     font-weight: 500;
 }
 
-.itunes.picobel .artistDisplay {
+.itunes__artist {
     font-size: 0.8em;
     display: block;
     text-align: center;
 }
 
-.itunes.picobel .songPlayTimer {
-    position: absolute;
-    bottom: 1em;
-    left: 5em;
-}
-.itunes.picobel .songDuration {
-    position: absolute;
-    bottom: 1em;
-    right: 1em;
+.itunes__wrapper--title-artist-timer-progress-duration {
+    width: 100%;
+    flex-shrink: 1;
 }
 
-.itunes.picobel .progress-slider__wrapper {
-    height: var(--progressHeight);
-    line-height: 1;
-    position: absolute;
-    bottom: 0;
-    left: 4rem;
-    right: 0;
-    overflow: hidden;
+.itunes__wrapper--timer-progress-duration {
+    position: relative;
 }
-.itunes.picobel .progress-slider__wrapper .progress-slider__range {
-    width: 100%;
-    padding: 0;
-    margin: 0;
+
+.itunes__timer {
     position: absolute;
     top: 0;
-    left: 0;
-    opacity: 0;
+    left: 1em;
+    transform: translateY(-100%);
+}
+.itunes__duration {
+    position: absolute;
+    top: 0;
+    right: 1em;
+    transform: translateY(-100%);
 }
 
-.itunes.picobel .progress-slider__wrapper .progress-slider__background {
-    height: 0.5em;
+.itunes__progress-label {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+/* --- */
+/* The "fake" range slider */
+.itunes__progress-slider__wrapper {
+    position: relative;
+    line-height: 1;
+    width: 100%;
+}
+.itunes__progress-slider__replacement {
+    height: var(--progress-height);
+    position: relative;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    overflow: hidden;
+}
+
+.itunes__progress-slider__replacement.focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 2px;
+}
+.itunes__progress-slider__background {
+    height: var(--progress-track-height);
     position: absolute;
     bottom: 0;
     left: 0;
     background: var(--unplayed_grey);
     width: 100%;
 }
-.itunes.picobel .progress-slider__wrapper .progress-slider__progress-indicator {
-    height: 0.5em;
+.itunes__progress-slider__replacement.focus {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+    border-radius: 2px;
+    z-index: 3;
+}
+.itunes__progress-slider__indicator {
+    height: var(--progress-track-height);
     position: absolute;
     bottom: 0;
     left: 0;
     background: var(--played_grey);
     width: 0%;
 }
-.itunes.picobel .progress-slider__wrapper .progress-slider__playhead {
+.itunes__progress-slider__playhead {
     width: 0.3em;
-    height: var(--progressHeight);
+    height: 15px;
     position: absolute;
     bottom: 0;
     left: 0%;
@@ -197,29 +241,46 @@
     border-top-right-radius: 0.2em;
     margin-left: -0.15em;
     background: var(--playhead);
+    transition: height 0.2s;
+}
+.itunes__progress-slider__wrapper:hover .itunes__progress-slider__playhead {
+    height: var(--progress-height);
 }
 
-/* Make sure the range Track is the right size and shape */
-.itunes.picobel
-    input[type="range"].progress-slider__range::-webkit-slider-runnable-track {
-    width: 100%;
-    font-size: var(--progressHeight);
-    height: 2.2em;
-    cursor: pointer;
-}
-.itunes.picobel input[type="range"].progress-slider__range::-moz-range-track {
-    width: 100%;
-    height: var(--progressHeight);
-    cursor: pointer;
-}
-.itunes.picobel input[type="range"].progress-slider__range::-ms-track {
-    width: 100%;
-    height: var(--progressHeight);
-    cursor: pointer;
-}
-
-.itunes.picobel .songVolume {
+/* Hide dynamic elements until loading has finished */
+.itunes.loading .itunes__progress-slider__indicator,
+.itunes.loading .itunes__progress-slider__playhead {
     display: none;
+}
+
+/* Make sure the real range element is the same size as the fake one. Position it on-top of the fake and make it invisible (so we can still get the functionality) */
+.itunes__progress-slider__range {
+    width: 100%;
+    height: var(--progress-height);
+    padding: 0;
+    margin: 0;
+    z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+/* Make sure the range Track is the right size and shape. Needs prefixed versions to ensure cross-browser consistency. */
+.itunes__progress-slider__range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: var(--progress-height);
+    cursor: pointer;
+}
+.itunes__progress-slider__range::-moz-range-track {
+    width: 100%;
+    height: var(--progress-height);
+    cursor: pointer;
+}
+.itunes__progress-slider__range::-ms-track {
+    width: 100%;
+    height: var(--progress-height);
+    cursor: pointer;
 }
 
 @keyframes itunes_spin {

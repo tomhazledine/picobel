@@ -9,6 +9,14 @@
 // Return a `components` object that matches the provided themename.
 const setComponentsByTheme = (themename = "default") => {
     switch (themename) {
+        case "itunes":
+            return [
+                "playPause",
+                [
+                    ["title", "artist"],
+                    ["timer", "progress", "duration"]
+                ]
+            ];
         case "default":
         default:
             return [
