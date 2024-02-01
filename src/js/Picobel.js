@@ -234,10 +234,18 @@ export const picobel = (rawOptions = {}) => {
             let volumePercent = value * 100;
             node.volume = value;
             console.log;
-            node.elements.volumeDisplay.innerHTML = valueMapped;
-            node.elements.volumeControl.value = value;
-            node.elements.volumeIndicator.style.width = volumePercent + "%";
-            node.elements.volumePlayhead.style.left = volumePercent + "%";
+            if (node.elements.volumeDisplay) {
+                node.elements.volumeDisplay.innerHTML = valueMapped;
+            }
+            if (node.elements.volumeControl) {
+                node.elements.volumeControl.value = value;
+            }
+            if (node.elements.volumeIndicator) {
+                node.elements.volumeIndicator.style.width = volumePercent + "%";
+            }
+            if (node.elements.volumePlayhead) {
+                node.elements.volumePlayhead.style.left = volumePercent + "%";
+            }
         },
         muteUnmuteAudio: event => {
             let index = _helpers.findParentIndex(event.srcElement);
