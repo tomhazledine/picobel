@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Picobel.js Test Page</title>
+
+        <!-- Load the Picobel CSS -->
+        <link
+            rel="stylesheet"
+            href="../src/css/picobel.all.css"
+            type="text/css"
+        />
+    </head>
+    <body style="font-family: sans-serif">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li>
+                    <a href="composable.html">Composable</a>
+                </li>
+                <li><a href="types.html">Types</a></li>
+                <li><a href="types.html">Manual</a></li>
+                <li>Web Component</li>
+            </ul>
+        </nav>
+
+        <div class="generic-wrapper">
+            <h1>Testing Picobel: web component</h1>
+            <h2>
+                <code>&lt;picobel-player&gt;</code> loaded with no inbuilt
+                styles
+            </h2>
+
+            <picobel-player class="foo">
+                <audio
+                    src="https://eatenbymonsters.com/audio/christmas/web/MasterSlashSlave_AllIWantForChristmas.mp3"
+                    title="All I Want for Christmas"
+                    data-artist="Master Slash Slave"
+                    controls
+                >
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </picobel-player>
+
+            <h2>
+                <code>&lt;picobel-player-default&gt;</code> loaded (the
+                "default" theme)
+            </h2>
+
+            <picobel-player-default>
+                <audio
+                    src="https://eatenbymonsters.com/audio/christmas/web/MasterSlashSlave_AllIWantForChristmas.mp3"
+                    title="All I Want for Christmas"
+                    data-artist="Master Slash Slave"
+                    controls
+                >
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </picobel-player-default>
+
+            <h2>
+                <code>&lt;picobel-player&gt;</code> loaded with
+                <code>data-theme="skeleton"</code> and external stylesheet
+            </h2>
+
+            <picobel-player data-theme="skeleton">
+                <audio
+                    src="https://eatenbymonsters.com/audio/christmas/web/MasterSlashSlave_AllIWantForChristmas.mp3"
+                    title="All I Want for Christmas"
+                    data-artist="Master Slash Slave"
+                    controls
+                >
+                    Your browser does not support the
+                    <code>audio</code> element.
+                </audio>
+            </picobel-player>
+        </div>
+
+        <script
+            type="text/javascript"
+            src="../build/picobel-component.js"
+        ></script>
+        <script
+            type="text/javascript"
+            src="../build/picobel-component-default.js"
+        ></script>
+    </body>
+</html>
