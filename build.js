@@ -13,12 +13,32 @@ const globalConfig = {
     sourcemap: args.mode === "development"
 };
 
+const stylesheets = [
+    "all",
+    "main",
+    "default",
+    "skeleton",
+    "bbc",
+    "eatenbymonsters",
+    "itunes",
+    "pitchfork",
+    "soundcloud"
+];
+const components = ["default", "skeleton"];
+
 const config = {
     js: {
         ...globalConfig,
         format: "esm",
-        entryPoints: ["src/js/index.js"],
-        entryNames: "picobel"
+        entryPoints: [
+            { out: "picobel", in: "src/js/index.js" },
+            { out: "picobel-component", in: "src/js/web-component.js" },
+            ...components.map(theme => ({
+                out: `picobel-component-${theme}`,
+                in: `src/js/web-component.${theme}.js`
+            }))
+        ],
+        loader: { ".css": "text" }
     },
     legacy: {
         ...globalConfig,
@@ -28,24 +48,14 @@ const config = {
     },
     css: {
         ...globalConfig,
-        entryPoints: [
-            "src/css/picobel.all.css",
-            "src/css/picobel.main.css",
-            "src/css/picobel.default.css",
-            "src/css/picobel.skeleton.css",
-            "src/css/picobel.bbc.css",
-            "src/css/picobel.eatenbymonsters.css",
-            "src/css/picobel.itunes.css",
-            "src/css/picobel.pitchfork.css",
-            "src/css/picobel.soundcloud.css"
-        ]
+        entryPoints: stylesheets.map(theme => `src/css/picobel.${theme}.css`)
     }
 };
 
 const build = async config => {
     try {
-        await esbuild.build(config.js);
         await esbuild.build(config.css);
+        await esbuild.build(config.js);
         await esbuild.build(config.legacy);
     } catch (e) {
         if (e.errors && e.errors[0].location) {
