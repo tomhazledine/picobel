@@ -1,4 +1,4 @@
-import PicobelData from "../js/PicobelData";
+import { findAudio, getMeta, getRawData, prepareClasses } from "./data";
 
 const TEST_DOM = `
     <!DOCTYPE html>
@@ -45,20 +45,16 @@ describe("data handling", () => {
     it("finds the audio nodes", () => {
         // With test DOM:
         document.body.innerHTML = TEST_DOM;
-        let nodes = PicobelData.findAudio(document);
+        let nodes = findAudio(document);
         expect(nodes.length).toEqual(2);
         // With empty DOM:
         document.body.innerHTML = "";
-        nodes = PicobelData.findAudio(document);
+        nodes = findAudio(document);
         expect(nodes.length).toEqual(0);
     });
 
     it("creates an array of class names", () => {
-        let classList = PicobelData.prepareClasses(
-            0,
-            "some classes",
-            "themeName"
-        );
+        let classList = prepareClasses(0, "some classes", "themeName");
 
         expect(Array.isArray(classList)).toEqual(true);
         expect(classList.length).toEqual(6);
@@ -69,7 +65,7 @@ describe("data handling", () => {
         expect(classList).toContain("classes");
         expect(classList).toContain("themeName");
 
-        classList = PicobelData.prepareClasses(2, "", "something");
+        classList = prepareClasses(2, "", "something");
         expect(Array.isArray(classList)).toEqual(true);
         expect(classList.length).toEqual(4);
         expect(classList).toContain("picobel");
@@ -79,7 +75,7 @@ describe("data handling", () => {
     });
 
     it("sets the correct key for each node", () => {
-        let nodes = PicobelData.getRawData(TEST_NODES);
+        let nodes = getRawData(TEST_NODES);
         expect(nodes.length).toEqual(TEST_NODES.length);
         nodes.map((node, key) => {
             expect(node.key).toEqual(key);
@@ -87,7 +83,7 @@ describe("data handling", () => {
     });
 
     it("sets the starting values", () => {
-        let nodes = PicobelData.getRawData(TEST_NODES);
+        let nodes = getRawData(TEST_NODES);
         expect(nodes.length).toEqual(3);
         nodes.map((node, key) => {
             expect(node.mute).toEqual(false);
@@ -98,7 +94,7 @@ describe("data handling", () => {
     it("sets the correct meta values", () => {
         // Adds meta to every node (even if the node is missing the prerequisits)
         let newNodes = TEST_NODES.map(node => {
-            let meta = PicobelData.getMeta(node);
+            let meta = getMeta(node);
             expect(meta).toHaveProperty("artist");
             expect(meta).toHaveProperty("title");
             return meta;

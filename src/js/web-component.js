@@ -9,7 +9,6 @@ class PicobelWC extends HTMLElement {
     connectedCallback() {
         const className = this.classList[0] || "default";
         const theme = this.getAttribute("data-theme") || className;
-        console.log({ theme });
         const options = { theme, context: this };
         const components = this.getAttribute("data-components");
         if (components) {
