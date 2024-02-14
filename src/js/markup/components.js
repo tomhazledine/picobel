@@ -45,10 +45,10 @@ export const progress = (namespace, key) => {
 };
 
 export const mute = namespace => {
-    const mute = createElement("button", `${namespace}__mute`);
-    mute.setAttribute("type", "button");
-    mute.innerHTML = "Mute";
-    return mute;
+    const muteEl = createElement("button", `${namespace}__mute`);
+    muteEl.setAttribute("type", "button");
+    muteEl.innerHTML = "Mute";
+    return muteEl;
 };
 
 export const volume = (namespace, key) => {

@@ -1,5 +1,5 @@
-import Picobel from "../js/index.js";
-import { parseOptions } from "../js/PicobelSetup";
+import Picobel from "../outputs/index.js";
+import { parseOptions } from "./setup";
 
 const EXPECTED_COMPONENTS = [
     "playPause",

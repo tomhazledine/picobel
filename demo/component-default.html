@@ -20,27 +20,17 @@
                 </li>
                 <li><a href="types.html">Types</a></li>
                 <li><a href="types.html">Manual</a></li>
-                <li>Web Component</li>
-                <li>
-                    <a href="component-default.html">Web Component "default"</a>
-                </li>
+                <li><a href="component.html">Web Component</a></li>
             </ul>
         </nav>
 
         <div class="generic-wrapper">
-            <h1>Testing Picobel: web component</h1>
-
-            <p>
-                View experimental
-                <a href="component-default.html">Web Component "default"</a>.
-            </p>
-
+            <h1>Testing Picobel: web component default</h1>
             <h2>
-                <code>&lt;picobel-player&gt;</code> loaded with no inbuilt
-                styles
+                <code>&lt;picobel-player-default&gt;</code>
             </h2>
 
-            <picobel-player class="foo">
+            <picobel-player-default class="foo">
                 <audio
                     src="https://eatenbymonsters.com/audio/christmas/web/MasterSlashSlave_AllIWantForChristmas.mp3"
                     title="All I Want for Christmas"
@@ -50,14 +40,14 @@
                     Your browser does not support the
                     <code>audio</code> element.
                 </audio>
-            </picobel-player>
+            </picobel-player-default>
 
             <h2>
-                <code>&lt;picobel-player&gt;</code> loaded with
-                <code>data-theme="skeleton"</code> and external stylesheet
+                <code>&lt;picobel-player-default&gt;</code> with multiple audio
+                nodes
             </h2>
 
-            <picobel-player data-theme="skeleton">
+            <picobel-player-default>
                 <audio
                     src="https://eatenbymonsters.com/audio/christmas/web/MasterSlashSlave_AllIWantForChristmas.mp3"
                     title="All I Want for Christmas"
@@ -76,12 +66,12 @@
                     Your browser does not support the
                     <code>audio</code> element.
                 </audio>
-            </picobel-player>
+            </picobel-player-default>
         </div>
 
         <script
             type="text/javascript"
-            src="../build/picobel-component.js"
+            src="../build/picobel-component-default.js"
         ></script>
     </body>
 </html>
