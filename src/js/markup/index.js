@@ -1,5 +1,5 @@
 import { parseTime } from "../utils/helpers";
-import { prepareClasses } from "../data";
+import { prepareClasses } from "../core/data";
 import { createElement, buildComponents } from "./utils";
 
 // Set the value of the song-length display
@@ -54,6 +54,7 @@ export const elementHooks = (nodes, context, namespace) =>
         let wrapper = context.querySelector(
             `[data-picobel-index='${node.key}']`
         );
+
         node.elements = {
             wrapper: wrapper,
             playPauseButton: wrapper.querySelector(`.${namespace}__play-pause`),

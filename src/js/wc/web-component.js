@@ -1,4 +1,4 @@
-import { picobel } from "./Picobel.js";
+import { picobel } from "../Picobel.js";
 
 // Create a class for the element
 class PicobelWC extends HTMLElement {

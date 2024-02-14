@@ -1,6 +1,6 @@
-import { picobel } from "./Picobel.js";
+import { picobel } from "../Picobel.js";
 
-import styles from "../../build/picobel.default.css";
+import styles from "../../../build/picobel.skeleton.css";
 
 // Create a class for the element
 class PicobelWC extends HTMLElement {
@@ -8,7 +8,7 @@ class PicobelWC extends HTMLElement {
         super();
     }
 
-    mountStyles(theme = "default") {
+    mountStyles(theme = "skeleton") {
         const styleId = `picobel-styles-${theme}`;
         if (!document.getElementById(styleId)) {
             const styleEl = document.createElement("style");
@@ -20,7 +20,7 @@ class PicobelWC extends HTMLElement {
     }
 
     connectedCallback() {
-        const theme = this.getAttribute("data-theme") || "default";
+        const theme = this.getAttribute("data-theme") || "skeleton";
         const options = { theme, context: this };
         const components = this.getAttribute("data-components");
         if (components) {
@@ -32,5 +32,5 @@ class PicobelWC extends HTMLElement {
 }
 
 if (typeof window !== "undefined" && "customElements" in window) {
-    window.customElements.define("picobel-player-default", PicobelWC);
+    window.customElements.define("picobel-player-skeleton", PicobelWC);
 }

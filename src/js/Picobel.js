@@ -1,8 +1,8 @@
-import { parseOptions } from "./PicobelSetup";
-import { findAudio, getRawData } from "./data";
+import { parseOptions } from "./core/setup";
+import { findAudio, getRawData } from "./core/data";
 import { generateMarkup, elementHooks } from "./markup";
-import { _setupLocalListeners } from "./events";
-import { canplaythrough } from "./audio-functions";
+import { _setupLocalListeners } from "./core/events";
+import { canplaythrough } from "./core/audio-functions";
 
 /**
  * ---------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-import picobel from "../js/index.js";
+import picobel from "./";
 
 describe("Main app", () => {
     it("runs without breaking", () => {

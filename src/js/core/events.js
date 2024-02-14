@@ -1,7 +1,7 @@
 import * as PicobelAudio from "./audio-functions";
 
-export const _setupLocalListeners = nodes =>
-    nodes.map(node => {
+export const _setupLocalListeners = nodes => {
+    return nodes.map(node => {
         // Audio event listeners
         node.addEventListener(
             "timeupdate",
@@ -68,9 +68,10 @@ export const _setupLocalListeners = nodes =>
         if (node.elements.muteButton) {
             node.elements.muteButton.addEventListener(
                 "click",
-                () => PicobelAudio.muteUnmuteAudio(node),
+                e => PicobelAudio.muteUnmuteAudio(node, e),
                 false
             );
         }
         return node;
     });
+};

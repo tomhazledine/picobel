@@ -1,4 +1,4 @@
-import { getFileType, getFileName } from "./utils/helpers";
+import { getFileType, getFileName } from "../utils/helpers";
 
 // Return an array of all the <audio> elements found on the page.
 export const findAudio = context => {

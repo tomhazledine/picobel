@@ -1,6 +1,6 @@
-import { setLengthDisplay, setMeta } from "./markup";
+import { setLengthDisplay, setMeta } from "../markup";
 import { getMeta } from "./data";
-import { parseTime } from "./utils/helpers";
+import { parseTime } from "../utils/helpers";
 
 export const pauseAll = nodes =>
     nodes.forEach(node => {
@@ -55,6 +55,7 @@ export const updateProgress = node => {
         stop(node);
     }
     let progressPercent = ((progress / duration) * 100).toFixed(2);
+    ``;
     if (node.elements.progressBar) {
         node.elements.progressBar.value = progressPercent;
         node.elements.indicator.style.width = progressPercent + "%";
@@ -99,7 +100,7 @@ export const volumeFocus = (node, focus) =>
 
 export const setVolume = (node, value) => {
     let valueMapped = value * 10;
-    let volumePercent = value * 100;
+    let volumePercent = (value * 100).toFixed(2);
     node.volume = value;
     if (node.elements.volumeDisplay) {
         node.elements.volumeDisplay.innerHTML = valueMapped;
