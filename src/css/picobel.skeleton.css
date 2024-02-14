@@ -149,7 +149,6 @@
     position: absolute;
     bottom: 0;
     z-index: 4;
-    width: 60px;
     text-align: left;
     background: transparent;
     color: var(--black);

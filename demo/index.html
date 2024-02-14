@@ -50,6 +50,11 @@
                 <source src="./audio-examples/taken-at-the-flood.mp3" />
                 Your browser does not support the <code>audio</code> element.
             </audio>
+
+            <audio controls>
+                <source src="./audio-examples/long-audio-example.mp3" />
+                Your browser does not support the <code>audio</code> element.
+            </audio>
         </div>
 
         <p>
@@ -59,9 +64,11 @@
             natus earum nisi ducimus.
         </p>
 
+        <h2>With an "unfound" source URL</h2>
+
         <audio
             class="testClass--one testClass--two"
-            src="http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3"
+            src="./audio-examples/missing.mp3"
             controls
         >
             Your browser does not support the <code>audio</code> element.
