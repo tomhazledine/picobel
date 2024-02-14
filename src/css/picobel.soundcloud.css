@@ -56,7 +56,7 @@
     background-size: 2em 2em;
     background-repeat: repeat;
     background-position: 0 0;
-    animation: background_slide linear infinite 0.4s;
+    animation: soundcloud_background_slide linear infinite 0.4s;
 }
 .soundcloud.picobel.loading .loader {
     opacity: 0.2;
@@ -408,7 +408,7 @@
 }
 
 /* Simulates an infinite slide-to-the-right effect. */
-@keyframes background_slide {
+@keyframes soundcloud_background_slide {
     0% {
         background-position: 0 0;
     }

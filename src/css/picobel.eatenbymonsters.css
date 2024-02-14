@@ -8,7 +8,7 @@
 }
 
 /* Simulates an infinite slide-to-the-right effect. */
-@keyframes background_slide {
+@keyframes ebm_background_slide {
     0% {
         background-position: 0 0;
     }
@@ -51,7 +51,7 @@
     background-size: 2em 2em;
     background-repeat: repeat;
     background-position: 0 0;
-    animation: background_slide linear infinite 0.4s;
+    animation: ebm_background_slide linear infinite 0.4s;
 }
 
 /* Only show the loader when we're loading */

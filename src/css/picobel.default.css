@@ -16,7 +16,7 @@
 }
 
 /* Simulates an infinite slide-to-the-right effect. */
-@keyframes background_slide {
+@keyframes default_background_slide {
     0% {
         background-position: 0 0;
     }
@@ -74,7 +74,7 @@
     background-size: var(--progress-bar-height) var(--progress-bar-height);
     background-repeat: repeat;
     background-position: 0 0;
-    animation: background_slide linear infinite 0.4s;
+    animation: default_background_slide linear infinite 0.4s;
 }
 
 /* Only show the loader when we're loading */
