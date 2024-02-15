@@ -10,6 +10,7 @@
         "build:dev": "node build.js --mode=development",
         "build:demo": "node build.js && node demo/build.js",
         "build:demo:dev": "node build.js --mode=development && node demo/build.js --mode=development",
+        "demo:serve": "node ./demo/server",
         "prepublish": "npm run build",
         "prepublishOnly": "npm run build"
     },

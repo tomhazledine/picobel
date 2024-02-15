@@ -51,7 +51,7 @@
     background-size: 2em 2em;
     background-repeat: repeat;
     background-position: 0 0;
-    animation: background_slide linear infinite 0.3s;
+    animation: pitchfork_background_slide linear infinite 0.3s;
 }
 .pitchfork.picobel.loading .loader {
     display: block;
@@ -237,7 +237,7 @@
 }
 
 /* Simulates an infinite slide-to-the-right effect. */
-@keyframes background_slide {
+@keyframes pitchfork_background_slide {
     0% {
         background-position: 0 0;
     }

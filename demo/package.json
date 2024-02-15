@@ -2,5 +2,8 @@
     "name": "picobel-demo",
     "version": "1.0.0",
     "description": "Demo page for Picobel",
-    "type": "module"
+    "type": "module",
+    "devDependencies": {
+        "node-static": "^0.7.11"
+    }
 }

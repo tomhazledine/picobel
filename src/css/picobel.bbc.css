@@ -48,7 +48,7 @@
     background-size: 2em 2em;
     background-repeat: repeat;
     background-position: 0 0;
-    animation: background_slide linear infinite 0.4s;
+    animation: bbc_background_slide linear infinite 0.4s;
 }
 .bbc.picobel .bbc__loader:after {
     content: "Loading";
@@ -622,7 +622,7 @@
 }
 
 /* Simulates an infinite slide-to-the-right effect. */
-@keyframes background_slide {
+@keyframes bbc_background_slide {
     0% {
         background-position: 0 0;
     }
