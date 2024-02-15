@@ -2,10 +2,17 @@
     --black: #555;
     --white: #ffffff;
     --grey: #ddd;
-    --focus: #015ecc;
+    --grey--light: #eee;
+    --chrome-focus-blue: #015ecc;
 
     --progress-height: 32px;
-    --progress-inner-height: 30px;
+    --progress-inner-height: calc(var(--progress-height) - 2px);
+
+    --skeleton-focus: var(--chrome-focus-blue);
+    --skeleton-background: var(--white);
+    --skeleton-text: var(--black);
+    --skeleton-progress: var(--grey);
+    --skeleton-buffered: var(--grey--light);
 }
 
 /* Global */
@@ -15,7 +22,7 @@
     box-sizing: inherit;
 }
 .skeleton.picobel *:focus {
-    outline: 2px solid var(--focus);
+    outline: 2px solid var(--skeleton-focus);
     outline-offset: 1px;
     border-radius: 2px;
 }
@@ -28,7 +35,7 @@
     /* Wrapper */
     margin: 10px 0;
     height: 64px;
-    border: 1px solid var(--black);
+    border: 1px solid var(--skeleton-text);
 }
 
 /* Simulates an infinite slide-to-the-right effect. */
@@ -50,9 +57,13 @@
     left: 183px;
     right: 0;
     height: var(--progress-height);
-    border-top: 1px solid var(--black);
-    border-bottom: 1px solid var(--black);
-    background: linear-gradient(to right, var(--white) 50%, var(--black) 50%);
+    border-top: 1px solid var(--skeleton-text);
+    border-bottom: 1px solid var(--skeleton-text);
+    background: linear-gradient(
+        to right,
+        var(--skeleton-background) 50%,
+        var(--skeleton-text) 50%
+    );
     background-size: 20px 20px;
     background-repeat: repeat;
     background-position: 0 0;
@@ -67,11 +78,11 @@
 /* The play-pause button */
 .skeleton__play-pause {
     font-size: 10px;
-    border: 1px solid var(--black);
+    border: 1px solid var(--skeleton-text);
     appearance: none;
     width: 64px;
     height: 64px;
-    background: var(--white);
+    background: var(--skeleton-background);
     position: absolute;
     top: -1px;
     left: -1px;
@@ -95,7 +106,7 @@
     left: 50%;
     transform: translate(-40%, -50%);
     border-top: 10px solid transparent;
-    border-left: 12px solid var(--black);
+    border-left: 12px solid var(--skeleton-text);
     border-bottom: 10px solid transparent;
 }
 
@@ -105,8 +116,8 @@
     width: 16px;
     transform: translate(-50%, -50%);
     border-top: 0;
-    border-left: 6px solid var(--black);
-    border-right: 6px solid var(--black);
+    border-left: 6px solid var(--skeleton-text);
+    border-right: 6px solid var(--skeleton-text);
     border-bottom: 0;
 }
 
@@ -114,8 +125,8 @@
 .skeleton__wrapper--title-artist {
     padding: 0 10px 0 74px;
     height: 64px;
-    background: var(--white);
-    color: var(--black);
+    background: var(--skeleton-background);
+    color: var(--skeleton-text);
     line-height: 1.6;
 }
 .skeleton__title {
@@ -142,7 +153,7 @@
     left: 182px;
     right: 0;
     height: 32px;
-    border-left: 1px solid var(--black);
+    border-left: 1px solid var(--skeleton-text);
 }
 .skeleton__timer,
 .skeleton__duration {
@@ -151,7 +162,7 @@
     z-index: 4;
     text-align: left;
     background: transparent;
-    color: var(--black);
+    color: var(--skeleton-text);
     line-height: 1;
     pointer-events: none;
     font-size: 14px;
@@ -185,24 +196,34 @@
 }
 .skeleton__progress-slider__replacement {
     position: relative;
-    background: var(--white);
-    border-top: 1px solid var(--black);
-    border-bottom: 1px solid var(--black);
+    background: var(--skeleton-background);
+    border-top: 1px solid var(--skeleton-text);
+    border-bottom: 1px solid var(--skeleton-text);
     height: var(--progress-height);
     overflow: hidden;
 }
 .skeleton__progress-slider__replacement.focus {
-    outline: 2px solid var(--focus);
+    outline: 2px solid var(--skeleton-focus);
     outline-offset: 1px;
     border-radius: 2px;
     z-index: 3;
 }
+.skeleton__progress-slider__background {
+    transition: width 0.2s;
+    height: var(--progress-inner-height);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--skeleton-buffered);
+    width: 0%;
+}
+
 .skeleton__progress-slider__indicator {
     height: var(--progress-inner-height);
     position: absolute;
     top: 0;
     left: 0;
-    background: var(--grey);
+    background: var(--skeleton-progress);
     width: 0%;
 }
 .skeleton__progress-slider__playhead {
@@ -212,7 +233,7 @@
     top: 0;
     left: 0%;
     margin-left: -4px;
-    background: var(--black);
+    background: var(--skeleton-text);
 }
 
 /* Hide dynamic elements until loading has finished */
@@ -259,9 +280,9 @@
     width: 120px;
     height: 32px;
     z-index: 2;
-    border-top: 1px solid var(--black);
-    border-bottom: 1px solid var(--black);
-    background: var(--white);
+    border-top: 1px solid var(--skeleton-text);
+    border-bottom: 1px solid var(--skeleton-text);
+    background: var(--skeleton-background);
     display: flex;
     align-items: center;
 }
@@ -275,8 +296,8 @@
     color: transparent;
     border: 0;
     appearance: none;
-    background: var(--white);
-    border: 1px solid var(--black);
+    background: var(--skeleton-background);
+    border: 1px solid var(--skeleton-text);
     position: relative;
     cursor: pointer;
     overflow: hidden;
@@ -294,7 +315,7 @@
     right: 50%;
     margin-right: -1px;
     transform: translateY(-50%);
-    background: var(--black);
+    background: var(--skeleton-text);
 }
 
 /* Triangle part of "speaker cone" icon */
@@ -309,16 +330,16 @@
     right: 50%;
     margin-right: -4px;
     border-top: 8px solid transparent;
-    border-right: 8px solid var(--black);
+    border-right: 8px solid var(--skeleton-text);
     border-bottom: 8px solid transparent;
 }
 
 /* Change icon when muted */
 .skeleton__mute.muted:before {
-    background: var(--grey);
+    background: var(--skeleton-progress);
 }
 .skeleton__mute.muted:after {
-    border-right-color: var(--grey);
+    border-right-color: var(--skeleton-progress);
 }
 
 .skeleton__volume {
@@ -347,7 +368,7 @@
     position: relative;
     left: 0;
     z-index: 3;
-    background: var(--grey);
+    background: var(--skeleton-progress);
     flex-grow: 1;
     float: left;
     transform: rotate(180deg);
@@ -355,7 +376,7 @@
 .skeleton__volume-slider__replacement:after {
     content: "";
     display: block;
-    border-right: var(--volume-width) solid var(--white);
+    border-right: var(--volume-width) solid var(--skeleton-background);
     border-top: var(--volume-height) solid transparent;
     position: absolute;
     top: 0;
@@ -363,7 +384,7 @@
     pointer-events: none;
 }
 .skeleton__volume-slider__replacement.focus {
-    outline: 2px solid var(--focus);
+    outline: 2px solid var(--skeleton-focus);
     outline-offset: 1px;
     border-radius: 2px;
 }
@@ -373,7 +394,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    background: var(--black);
+    background: var(--skeleton-text);
     width: var(--volume-width);
 }
 .skeleton__volume-slider__playhead {
