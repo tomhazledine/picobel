@@ -77,9 +77,8 @@ export const picobel = (rawOptions = {}) => {
     const intervalState = {};
 
     // Check status
-    state.audioNodes.forEach((node, i) => {
-        const { readyState } = node;
-        if (readyState >= 1) {
+    state.audioNodes.forEach(node => {
+        if (node.readyState >= 1) {
             loadedmetadata(node);
         }
 

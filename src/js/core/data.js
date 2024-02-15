@@ -81,8 +81,10 @@ export const pollForLoadingStatus = async (node, intervalState) => {
                 clearInterval(intervalState[node.currentSrc]);
             }
         }
-        if (checks >= maxChecks && node.buffered.length <= 0) {
-            errors(node);
+        if (checks >= maxChecks) {
+            if (node.buffered.length <= 0 && node.readyState <= 0) {
+                errors(node);
+            }
             clearInterval(intervalState[node.currentSrc]);
         }
     };

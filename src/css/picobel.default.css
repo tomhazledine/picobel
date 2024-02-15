@@ -339,6 +339,7 @@
 .default__mute:after {
     display: block;
     width: 0.4em;
+    max-width: 100%;
     height: 0.4em;
     position: absolute;
     content: "";
