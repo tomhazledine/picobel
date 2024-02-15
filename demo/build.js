@@ -1,6 +1,9 @@
 import * as esbuild from "esbuild";
 import { parseArgs, watchFiles } from "../build.utils.js";
 
+import _package from "../package.json" assert { type: "json" };
+const version = _package.version;
+
 const args = parseArgs(process.argv);
 
 const config = {
@@ -14,7 +17,8 @@ const config = {
         "demo/composable.js",
         "demo/types.js",
         "build/picobel-component.js",
-        "build/picobel.all.css"
+        "build/picobel.all.css",
+        { out: `manual`, in: `build/picobel.${version}.js` }
     ],
     entryNames: "picobel-demo-[name]"
 };
