@@ -1,4 +1,5 @@
 assets/*
-.sass-cache
+demo/*
+images/*
 node_modules/*
 .DS_Store
