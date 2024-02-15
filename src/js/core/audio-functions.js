@@ -55,16 +55,20 @@ export const updateProgress = node => {
         stop(node);
     }
     let progressPercent = ((progress / duration) * 100).toFixed(2);
-    ``;
-    if (node.elements.progressBar) {
-        node.elements.progressBar.value = progressPercent;
-        node.elements.indicator.style.width = progressPercent + "%";
-        node.elements.playhead.style.left = progressPercent + "%";
+    if (node.elements.progressRange) {
+        node.elements.progressRange.value = progressPercent;
+        node.elements.progressIndicator.style.width = progressPercent + "%";
+        node.elements.progressPlayhead.style.left = progressPercent + "%";
     }
 };
 
 export const canplaythrough = node => {
     setLengthDisplay(node);
+    // setBuffered(node, node.duration);
+    loadedmetadata(node);
+};
+
+export const loadedmetadata = node => {
     node.elements.wrapper.classList.remove("loading");
     let meta = getMeta(node);
     setMeta(meta, node.elements);
@@ -139,5 +143,13 @@ export const mute = node => {
         button.classList.remove("muted");
         button.classList.add("unmuted");
         button.innerHTML = "Mute";
+    }
+};
+
+export const setBuffered = (node, buffered) => {
+    const duration = node.duration;
+    let bufferedPercent = ((buffered / duration) * 100).toFixed(2);
+    if (node.elements.progressBackground) {
+        node.elements.progressBackground.style.width = bufferedPercent + "%";
     }
 };

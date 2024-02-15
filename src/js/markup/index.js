@@ -69,13 +69,16 @@ export const elementHooks = (nodes, context, namespace) =>
             progressWrapper: wrapper.querySelector(
                 `.${namespace}__progress-slider__replacement`
             ),
-            progressBar: wrapper.querySelector(
+            progressRange: wrapper.querySelector(
                 `.${namespace}__progress-slider__range`
             ),
-            playhead: wrapper.querySelector(
+            progressPlayhead: wrapper.querySelector(
                 `.${namespace}__progress-slider__playhead`
             ),
-            indicator: wrapper.querySelector(
+            progressBackground: wrapper.querySelector(
+                `.${namespace}__progress-slider__background`
+            ),
+            progressIndicator: wrapper.querySelector(
                 `.${namespace}__progress-slider__indicator`
             ),
             volumeWrapper: wrapper.querySelector(

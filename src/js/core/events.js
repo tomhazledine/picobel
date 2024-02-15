@@ -13,6 +13,11 @@ export const _setupLocalListeners = nodes => {
             () => PicobelAudio.canplaythrough(node),
             false
         );
+        node.addEventListener(
+            "loadedmetadata",
+            () => PicobelAudio.loadedmetadata(node),
+            false
+        );
         node.addEventListener("error", () => PicobelAudio.errors(node), false);
 
         // DOM interaction event listeners
@@ -23,22 +28,22 @@ export const _setupLocalListeners = nodes => {
                 false
             );
         }
-        if (node.elements.progressBar) {
-            node.elements.progressBar.addEventListener(
+        if (node.elements.progressRange) {
+            node.elements.progressRange.addEventListener(
                 "input",
                 e => PicobelAudio.sliderScrub(e, node),
                 false
             );
         }
-        if (node.elements.progressBar) {
-            node.elements.progressBar.addEventListener(
+        if (node.elements.progressRange) {
+            node.elements.progressRange.addEventListener(
                 "focus",
                 () => PicobelAudio.sliderFocus(node, true),
                 false
             );
         }
-        if (node.elements.progressBar) {
-            node.elements.progressBar.addEventListener(
+        if (node.elements.progressRange) {
+            node.elements.progressRange.addEventListener(
                 "blur",
                 () => PicobelAudio.sliderFocus(node, false),
                 false
