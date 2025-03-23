@@ -1,4 +1,4 @@
-import { parseTime, getFileType, getFileName } from "./helpers.js";
+import { parseTime, getFileType, getFileName } from "./helpers";
 
 describe("Utilities", () => {
     it("converts seconds into HH:MM:SS format", () => {

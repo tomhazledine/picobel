@@ -1,4 +1,4 @@
-import { buildSlider } from "./slider.js";
+import { buildSlider } from "./slider";
 
 describe("markup: slider", () => {
     it("can create a slider", () => {

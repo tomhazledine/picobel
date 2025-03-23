@@ -1,4 +1,4 @@
-import Picobel from "../outputs/index.js";
+import Picobel from "../outputs/index";
 import { parseOptions } from "./setup";
 
 const EXPECTED_COMPONENTS = [

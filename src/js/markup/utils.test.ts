@@ -1,4 +1,4 @@
-import { createElement } from "./utils.js";
+import { createElement } from "./utils";
 
 describe("markup: creation", () => {
     it("can create new elements", () => {

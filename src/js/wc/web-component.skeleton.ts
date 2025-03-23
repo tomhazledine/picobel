@@ -1,4 +1,4 @@
-import { picobel } from "../Picobel.js";
+import { picobel } from "../Picobel";
 
 import styles from "../../../build/picobel.skeleton.css";
 
