@@ -7,7 +7,7 @@ describe("markup: slider", () => {
         const MAX = 100;
         const VALUE = 50;
 
-        let slider = buildSlider({
+        const slider = buildSlider({
             namespace: NAMESPACE,
             min: MIN,
             max: MAX,

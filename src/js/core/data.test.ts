@@ -45,37 +45,37 @@ describe("data handling", () => {
     it("finds the audio nodes", () => {
         // With test DOM:
         document.body.innerHTML = TEST_DOM;
-        let nodes = findAudio(document);
-        expect(nodes.length).toEqual(2);
+        const nodes01 = findAudio(document);
+        expect(nodes01.length).toEqual(2);
         // With empty DOM:
         document.body.innerHTML = "";
-        nodes = findAudio(document);
-        expect(nodes.length).toEqual(0);
+        const nodes02 = findAudio(document);
+        expect(nodes02.length).toEqual(0);
     });
 
     it("creates an array of class names", () => {
-        let classList = prepareClasses(0, "some classes", "themeName");
+        const classList01 = prepareClasses(0, "some classes", "themeName");
 
-        expect(Array.isArray(classList)).toEqual(true);
-        expect(classList.length).toEqual(6);
-        expect(classList).toContain("picobel");
-        expect(classList).toContain("loading");
-        expect(classList).toContain("picobel--index-0");
-        expect(classList).toContain("some");
-        expect(classList).toContain("classes");
-        expect(classList).toContain("themeName");
+        expect(Array.isArray(classList01)).toEqual(true);
+        expect(classList01.length).toEqual(6);
+        expect(classList01).toContain("picobel");
+        expect(classList01).toContain("loading");
+        expect(classList01).toContain("picobel--index-0");
+        expect(classList01).toContain("some");
+        expect(classList01).toContain("classes");
+        expect(classList01).toContain("themeName");
 
-        classList = prepareClasses(2, "", "something");
-        expect(Array.isArray(classList)).toEqual(true);
-        expect(classList.length).toEqual(4);
-        expect(classList).toContain("picobel");
-        expect(classList).toContain("loading");
-        expect(classList).toContain("picobel--index-2");
-        expect(classList).toContain("something");
+        const classList02 = prepareClasses(2, "", "something");
+        expect(Array.isArray(classList02)).toEqual(true);
+        expect(classList02.length).toEqual(4);
+        expect(classList02).toContain("picobel");
+        expect(classList02).toContain("loading");
+        expect(classList02).toContain("picobel--index-2");
+        expect(classList02).toContain("something");
     });
 
     it("sets the correct key for each node", () => {
-        let nodes = getRawData(TEST_NODES);
+        const nodes = getRawData(TEST_NODES);
         expect(nodes.length).toEqual(TEST_NODES.length);
         nodes.map((node, key) => {
             expect(node.key).toEqual(key);
@@ -83,7 +83,7 @@ describe("data handling", () => {
     });
 
     it("sets the starting values", () => {
-        let nodes = getRawData(TEST_NODES);
+        const nodes = getRawData(TEST_NODES);
         expect(nodes.length).toEqual(3);
         nodes.map((node, key) => {
             expect(node.mute).toEqual(false);
@@ -93,8 +93,8 @@ describe("data handling", () => {
 
     it("sets the correct meta values", () => {
         // Adds meta to every node (even if the node is missing the prerequisits)
-        let newNodes = TEST_NODES.map(node => {
-            let meta = getMeta(node);
+        const newNodes = TEST_NODES.map(node => {
+            const meta = getMeta(node);
             expect(meta).toHaveProperty("artist");
             expect(meta).toHaveProperty("title");
             return meta;

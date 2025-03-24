@@ -1,4 +1,4 @@
-import { getFileType, getFileName } from "../utils/helpers";
+import { getFileName, getFileType } from "../utils/helpers";
 import { errors, setBuffered } from "./audio-functions";
 
 // Return an array of all the <audio> elements found on the page.
@@ -28,7 +28,7 @@ export const getRawData = nodes =>
 
 // Get info about the audio track
 export const getMeta = item => {
-    let meta = {};
+    const meta = {};
     // Get the filename and type
     meta.url = item.currentSrc;
     meta.fileType = getFileType(meta.url);
@@ -61,7 +61,6 @@ export const checkURL = async url => {
 
 export const pollForLoadingStatus = async (node, intervalState) => {
     const interval = 1000; // Poll every 1000 milliseconds (1 second)
-    let isFullyBuffered = false; // Flag to track buffering status
     let checks = 0;
     const maxChecks = 15;
 
@@ -76,7 +75,6 @@ export const pollForLoadingStatus = async (node, intervalState) => {
 
             // Check if the audio is fully buffered
             if (bufferedEnd >= duration) {
-                isFullyBuffered = true;
                 // If fully buffered, clear the interval
                 clearInterval(intervalState[node.currentSrc]);
             }

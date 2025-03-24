@@ -1,5 +1,5 @@
 export const parseTime = seconds => {
-    let hours = Math.floor(seconds / 3600);
+    const hours = Math.floor(seconds / 3600);
 
     let mins = Math.floor((seconds % 3600) / 60)
         .toFixed(0)
@@ -29,7 +29,7 @@ export const getFileType = string =>
 
 // Get File Name
 export const getFileName = string => {
-    let fullFileName = string.replace(/^.*[\\\/]/, "");
-    let withNoExtension = fullFileName.split(".")[0];
+    const fullFileName = string.replace(/^.*[\\/]/, "");
+    const withNoExtension = fullFileName.split(".")[0];
     return withNoExtension;
 };

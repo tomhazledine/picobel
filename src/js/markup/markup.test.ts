@@ -41,22 +41,22 @@ const TEST_NODES = [
 describe("markup: generation", () => {
     it("generates a div for each audio element", () => {
         // With three arbitrary array entries.
-        let markup = generateMarkup(
+        const markup01 = generateMarkup(
             [...TEST_NODES, ...TEST_NODES],
             EXPECTED_COMPONENTS
         );
-        expect(markup.length).toEqual(4);
-        expect(markup[0].localName).toEqual("div");
+        expect(markup01.length).toEqual(4);
+        expect(markup01[0].localName).toEqual("div");
 
         // With two arbitrary array entries.
-        markup = generateMarkup(["test", "test"], EXPECTED_COMPONENTS);
-        expect(markup.length).toEqual(2);
-        expect(markup[1].localName).toEqual("div");
+        const markup02 = generateMarkup(["test", "test"], EXPECTED_COMPONENTS);
+        expect(markup02.length).toEqual(2);
+        expect(markup02[1].localName).toEqual("div");
 
         // With our test nodes.
-        markup = generateMarkup(TEST_NODES, EXPECTED_COMPONENTS);
-        expect(markup.length).toEqual(2);
-        expect(markup[1].localName).toEqual("div");
+        const markup03 = generateMarkup(TEST_NODES, EXPECTED_COMPONENTS);
+        expect(markup03.length).toEqual(2);
+        expect(markup03[1].localName).toEqual("div");
     });
 
     it("adds the correct data attribute to each audio element", () => {
@@ -73,12 +73,12 @@ describe("markup: generation", () => {
             namespace
         );
 
-        let firstIndicator = markup[0].getElementsByClassName(
+        const firstIndicator = markup[0].getElementsByClassName(
             `${namespace}__loader`
         );
         expect(firstIndicator.length).toEqual(1);
 
-        let secondIndicator = markup[1].getElementsByTagName("div");
+        const secondIndicator = markup[1].getElementsByTagName("div");
         expect(secondIndicator.length).toBeTruthy();
         expect(secondIndicator[0].classList).toContain(`${namespace}__loader`);
     });
@@ -86,9 +86,9 @@ describe("markup: generation", () => {
 
 describe("markup: display", () => {
     it("displays the duration value", () => {
-        let nodeOne = setLengthDisplay(TEST_NODES[0]);
+        const nodeOne = setLengthDisplay(TEST_NODES[0]);
         expect(nodeOne.elements.durationDisplay.innerHTML).toEqual("3:31");
-        let nodeTwo = setLengthDisplay(TEST_NODES[1]);
+        const nodeTwo = setLengthDisplay(TEST_NODES[1]);
         expect(nodeTwo.elements.durationDisplay.innerHTML).toEqual("22:25");
     });
 
@@ -97,7 +97,7 @@ describe("markup: display", () => {
             artist: "an artist name",
             title: "a title for a node"
         };
-        let elements = setMeta(TEST_META, TEST_NODES[0].elements);
+        const elements = setMeta(TEST_META, TEST_NODES[0].elements);
         expect(elements.artistDisplay.innerHTML).toEqual("an artist name");
         expect(elements.titleDisplay.innerHTML).toEqual("a title for a node");
     });
