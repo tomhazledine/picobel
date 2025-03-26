@@ -1,3 +1,4 @@
+import { type ComponentGroup } from "../core/setup";
 import * as componentConstructors from "./components";
 
 export const createElement = (type = "div", className = "") => {
@@ -6,7 +7,14 @@ export const createElement = (type = "div", className = "") => {
     return newElement;
 };
 
-export const buildComponents = ({ key, container, components, namespace }) => {
+type BuildComponentsOptions = {
+    key: number;
+    container: HTMLElement;
+    components: ComponentGroup[];
+    namespace: string;
+};
+
+export const buildComponents = ({ key, container, components, namespace }: BuildComponentsOptions) => {
     // Add the components to the player in the order they are listed
     components.forEach(component => {
         // If the component is a string and we have a function to build it

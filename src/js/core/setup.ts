@@ -6,8 +6,11 @@
  * -----------------------------------------------------------------------------
  */
 
+type Component = string;
+export type ComponentGroup = Component | ComponentGroup[];
+
 // Return a `components` object that matches the provided themename.
-const setComponentsByTheme = (themename = "default") => {
+const setComponentsByTheme = (themename: string = "default"): ComponentGroup[] => {
     switch (themename) {
         case "itunes":
             return [
@@ -28,7 +31,14 @@ const setComponentsByTheme = (themename = "default") => {
     }
 };
 
-export const parseOptions = (rawOptions = {}) => {
+export type Options = {
+    context?: Document | HTMLElement;
+    theme?: string;
+    preload?: boolean;
+    components?: ComponentGroup[];
+};
+
+export const parseOptions = (rawOptions: Options = {}) => {
     // Define our default options.
     const defaultOptions = {
         context: document,

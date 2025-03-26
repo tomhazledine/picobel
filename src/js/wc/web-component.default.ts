@@ -1,4 +1,5 @@
 import styles from "../../../build/picobel.default.css";
+import { type Options } from "../core/setup";
 import { picobel } from "../Picobel";
 
 // Create a class for the element
@@ -20,7 +21,7 @@ class PicobelWCDefault extends HTMLElement {
 
     connectedCallback() {
         const theme = this.getAttribute("data-theme") || "default";
-        const options = { theme, context: this };
+        const options: Options = { theme, context: this };
         const components = this.getAttribute("data-components");
         if (components) {
             options.components = JSON.parse(components);

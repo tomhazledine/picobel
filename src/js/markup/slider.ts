@@ -1,5 +1,15 @@
 import { createElement } from "./utils";
 
+type SliderOptions = {
+    namespace: string;
+    min: number;
+    max: number;
+    value: number;
+    step?: number | boolean;
+    index?: number;
+    label?: string | HTMLElement;
+};
+
 export const buildSlider = ({
     namespace = "picobel",
     min = 0,
@@ -8,7 +18,7 @@ export const buildSlider = ({
     step = false,
     index = 0,
     label = "slider"
-}) => {
+}: SliderOptions) => {
     const container = createElement("div", namespace);
     // Create a container element to hold all the parts
     const wrapper = createElement("div", `${namespace}-slider__wrapper`);
@@ -39,14 +49,14 @@ export const buildSlider = ({
     const inputId = `${namespace}-slider__range--${index}`;
 
     // Create an (invisible) input (html range)
-    const progress = createElement("input", `${namespace}-slider__range`);
+    const progress = createElement("input", `${namespace}-slider__range`) as HTMLInputElement;
     progress.setAttribute("id", inputId);
     progress.setAttribute("type", "range");
-    progress.setAttribute("min", min);
-    progress.setAttribute("max", max);
-    progress.setAttribute("value", value);
+    progress.setAttribute("min", min.toString());
+    progress.setAttribute("max", max.toString());
+    progress.setAttribute("value", value.toString());
     if (step) {
-        progress.setAttribute("step", step);
+        progress.setAttribute("step", step.toString());
     }
     wrapper.appendChild(progress);
 

@@ -1,4 +1,5 @@
-import { prepareClasses } from "../core/data";
+import { type AudioElement, prepareClasses } from "../core/data";
+import { type ComponentGroup } from "../core/setup";
 import { parseTime } from "../utils/helpers";
 import { buildComponents, createElement } from "./utils";
 
@@ -21,7 +22,11 @@ export const setMeta = (meta, elements) => {
     return elements;
 };
 
-export const generateMarkup = (nodes = [], components, namespace) => {
+export const generateMarkup = (
+    nodes: AudioElement[],
+    components: ComponentGroup[],
+    namespace: string
+) => {
     const markupArray = nodes.map(node => {
         // Create a container for our new player
         const newPlayer = createElement("div");
@@ -31,7 +36,7 @@ export const generateMarkup = (nodes = [], components, namespace) => {
         newPlayer.classList.add(...classes);
 
         // Set song index attribute
-        newPlayer.setAttribute("data-picobel-index", node.key);
+        newPlayer.setAttribute("data-picobel-index", node.key.toString());
 
         // Create a loading indicator
         const loading = createElement("div", `${namespace}__loader`);

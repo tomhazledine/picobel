@@ -1,5 +1,5 @@
-import { parseOptions } from "./core/setup";
-import { findAudio, getRawData, pollForLoadingStatus } from "./core/data";
+import { type ComponentGroup, type Options, parseOptions } from "./core/setup";
+import { type AudioElement, findAudio, getRawData, pollForLoadingStatus } from "./core/data";
 import { generateMarkup, elementHooks } from "./markup";
 import { _setupLocalListeners } from "./core/events";
 import { loadedmetadata } from "./core/audio-functions";
@@ -22,8 +22,7 @@ import { loadedmetadata } from "./core/audio-functions";
  * Functionality powered by Web Audio API.
  * ---------------------------------------------------------------------------
  */
-
-export const picobel = (rawOptions = {}) => {
+export const picobel = (rawOptions: Options = {}) => {
     /**
      * -----------------------------------------------------------------------
      * RUN THE CODE
@@ -38,9 +37,9 @@ export const picobel = (rawOptions = {}) => {
 
     // Declare a `state` variable that will hold the active state
     let state = {
-        audioNodes: [],
+        audioNodes: [] as AudioElement[],
         theme: options.theme,
-        components: options.components
+        components: options.components as ComponentGroup[]
     };
 
     const _replaceNodes = (audioElements, newMarkup) => {
@@ -52,11 +51,11 @@ export const picobel = (rawOptions = {}) => {
     // Get audio elements from page, and save their details to state.
     state.audioNodes = findAudio(options.context);
 
-    state.audioNodes = getRawData(state.audioNodes);
+    state.audioNodes = getRawData(state.audioNodes as AudioElement[]);
 
     // Build markup for each element, based on `components`
     const markup = generateMarkup(
-        state.audioNodes,
+        state.audioNodes as AudioElement[],
         state.components,
         state.theme
     );

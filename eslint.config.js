@@ -74,7 +74,8 @@ export default [
 
   // jsx-a11y configuration
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    // files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ['**/*.{js,jsx,ts}'],
     plugins: {
       'jsx-a11y': jsxA11y,
     },
@@ -93,6 +94,7 @@ export default [
 
   ...compat.extends('plugin:testing-library/react').map((config) => ({
     ...config,
-    files: ['**/?(*.)+(test).[jt]s?(x)'],
+    // files: ['**/?(*.)+(test).[jt]s?(x)'],
+    files: ['**/?(*.)+(test).[jt]s'],
   })),
 ];

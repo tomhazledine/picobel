@@ -1,4 +1,4 @@
-import { findAudio, getMeta, getRawData, prepareClasses } from "./data";
+import { type AudioElement, findAudio, getMeta, getRawData, prepareClasses } from "./data";
 
 const TEST_DOM = `
     <!DOCTYPE html>
@@ -20,6 +20,7 @@ const TEST_DOM = `
 
 const TEST_NODES = [
     {
+        ...new Audio(),
         currentSrc:
             "http://audio.eatenbymonsters.com/reviews/daughter/human.mp3",
         title: "Human",
@@ -28,6 +29,7 @@ const TEST_NODES = [
         }
     },
     {
+        ...new Audio(),
         currentSrc:
             "http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3",
         title: "Lost That Easy",
@@ -36,6 +38,7 @@ const TEST_NODES = [
         }
     },
     {
+        ...new Audio(),
         currentSrc:
             "http://audio.eatenbymonsters.com/reviews/coldWarKids/lostThatEasy.mp3"
     }
@@ -45,11 +48,11 @@ describe("data handling", () => {
     it("finds the audio nodes", () => {
         // With test DOM:
         document.body.innerHTML = TEST_DOM;
-        const nodes01 = findAudio(document);
+        const nodes01 = findAudio(document.body);
         expect(nodes01.length).toEqual(2);
         // With empty DOM:
         document.body.innerHTML = "";
-        const nodes02 = findAudio(document);
+        const nodes02 = findAudio(document.body);
         expect(nodes02.length).toEqual(0);
     });
 
@@ -75,7 +78,7 @@ describe("data handling", () => {
     });
 
     it("sets the correct key for each node", () => {
-        const nodes = getRawData(TEST_NODES);
+        const nodes = getRawData(TEST_NODES as AudioElement[]);
         expect(nodes.length).toEqual(TEST_NODES.length);
         nodes.map((node, key) => {
             expect(node.key).toEqual(key);
@@ -83,9 +86,9 @@ describe("data handling", () => {
     });
 
     it("sets the starting values", () => {
-        const nodes = getRawData(TEST_NODES);
+        const nodes = getRawData(TEST_NODES as AudioElement[]);
         expect(nodes.length).toEqual(3);
-        nodes.map((node, key) => {
+        nodes.map((node) => {
             expect(node.mute).toEqual(false);
             expect(node.tmpVolume).toEqual(1);
         });
@@ -94,7 +97,7 @@ describe("data handling", () => {
     it("sets the correct meta values", () => {
         // Adds meta to every node (even if the node is missing the prerequisits)
         const newNodes = TEST_NODES.map(node => {
-            const meta = getMeta(node);
+            const meta = getMeta(node as AudioElement);
             expect(meta).toHaveProperty("artist");
             expect(meta).toHaveProperty("title");
             return meta;
