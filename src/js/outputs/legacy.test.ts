@@ -1,15 +1,28 @@
 import picobel from "./";
+import { getPackageVersion } from "../../../build.utils.js";
+const version = getPackageVersion();
 
-describe("Primary Picobel", () => {
+declare global {
+    interface Window {
+        picobel: typeof picobel;
+    }
+}
+
+describe("Legacy Picobel", () => {
     beforeEach(() => {
+        // Clear any global variables between tests
+        if (global.picobel) delete global.picobel;
 
         // Reset the document body
         document.body.innerHTML = "";
     });
 
-    it("picobel.js loads and initializes without errors", () => {
+    it("loads and initializes without errors", () => {
         // Load the distribution
-        require("../../../build/picobel.js");
+        require(`../../../build/picobel.${version}.js`);
+
+        // Verify it exists
+        expect(global.picobel).toBeDefined();
 
         // Create a simple audio element to test with
         document.body.innerHTML = '<audio src="test.mp3"></audio>';

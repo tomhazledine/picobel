@@ -1,10 +1,10 @@
-import { picobel as Picobel } from "../Picobel";
+import { picobel } from "../Picobel";
 
 // Declare the global window interface extension
 declare global {
     interface Window {
-      picobel: typeof Picobel;
+        picobel: typeof picobel;
     }
-  }
+}
 
-window.picobel = Picobel;
+window.picobel = picobel;
