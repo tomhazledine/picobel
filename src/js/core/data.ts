@@ -22,9 +22,13 @@ type Meta = {
 export const findAudio = (context: HTMLElement | Document): AudioElement[] => {
     // Get all the <audio> occurrences in the page.
     const audioElements = context.getElementsByTagName("audio");
-    // Save our audioElements as an array (so we can manipulate the DOM but
-    // still access our items).
-    return [...audioElements].map((node, i) => ({ ...node, key: i }));
+
+    const audioElementsArrayWithKeys = [...audioElements].map(
+        // don't spread the node, just assign the key
+        (node, i) => Object.assign(node, { key: i }) as AudioElement
+    );
+    
+    return audioElementsArrayWithKeys;
 };
 
 // Build an array of classes to add to each new "player" element
