@@ -20,8 +20,11 @@ export const parseTime = (seconds: number): string => {
 };
 
 // Get File Type
-export const getFileType = (string: string): string =>
-    string.substr((~-string.lastIndexOf(".") >>> 0) + 2);
+export const getFileType = (string: string): string => {
+    const fullFileName = string.replace(/^.*[\\/]/, "");
+    const extension = fullFileName.split(".")[1];
+    return extension;
+};
 
 // Get File Name
 export const getFileName = (string: string): string => {
