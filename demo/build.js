@@ -17,6 +17,7 @@ const config = {
         "demo/composable.js",
         "demo/types.js",
         "build/picobel-component.js",
+        "build/picobel-component-default.js",
         "build/picobel.all.css",
         { out: `manual`, in: `build/picobel.${version}.js` }
     ],

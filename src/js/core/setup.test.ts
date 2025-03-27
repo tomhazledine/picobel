@@ -1,4 +1,4 @@
-import Picobel from "../outputs/index.js";
+import Picobel from "../outputs/index";
 import { parseOptions } from "./setup";
 
 const EXPECTED_COMPONENTS = [
@@ -15,12 +15,12 @@ describe("setup", () => {
     });
 
     it("correctly sets default components", () => {
-        let picobel = Picobel();
+        const picobel = Picobel();
         expect(picobel.state.components).toEqual(EXPECTED_COMPONENTS);
     });
     it("correctly sets manual components", () => {
         const startingOptions = { components: ["playPause"] };
-        let picobel = Picobel(startingOptions);
+        const picobel = Picobel(startingOptions);
         expect(picobel.state.components).toEqual(["playPause"]);
     });
 });

@@ -1,26 +1,43 @@
-import http from "http";
+import express from "express";
 import path from "path";
 import readline from "readline";
-
-import { Server } from "node-static";
+import fs from "fs";
 
 export const server = (buildPath, port) => {
-    const file = new Server(buildPath);
+    // Check if the directory exists
+    if (!fs.existsSync(buildPath)) {
+        console.error(`Error: Directory ${buildPath} does not exist!`);
+        process.exit(1);
+    }
 
-    http.createServer(function (request, response) {
-        request
-            .addListener("end", function () {
-                // Serve files!
-                file.serve(request, response);
-            })
-            .resume();
-    }).listen(port);
+    // Log the contents of the directory
+    // console.log("Directory contents:", fs.readdirSync(buildPath));
+
+    const app = express();
+    
+    // Log all requests
+    // app.use((req, res, next) => {
+    //     console.log(`Received request for: ${req.url}`);
+    //     next();
+    // });
+    
+    // Serve static files
+    app.use(express.static(buildPath));
+    
+    // Handle 404s
+    app.use((req, res) => {
+        console.error(`Error serving ${req.url}: 404 Not Found`);
+        res.status(404).send('Not Found');
+    });
+    
+    // Start the server
+    app.listen(port, () => {
+        console.log(`Server running at http://localhost:${port}/`);
+    });
 };
 
 const PORT = 8080;
 const OUT = path.resolve(".", `./demo/`);
-console.log(OUT);
-console.log(`Serving result at http://localhost:${PORT}/`);
 server(OUT, PORT);
 
 console.log(`Press "q" to exit`);

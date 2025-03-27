@@ -31,20 +31,21 @@ const config = {
         ...globalConfig,
         format: "esm",
         entryPoints: [
-            { out: "picobel", in: "src/js/outputs/index.js" },
-            { out: "picobel-component", in: "src/js/wc/web-component.js" },
+            { out: "picobel", in: "src/js/outputs/index.ts" },
+            { out: "picobel-component", in: "src/js/wc/web-component.ts" },
             ...components.map(theme => ({
                 out: `picobel-component-${theme}`,
-                in: `src/js/wc/web-component.${theme}.js`
+                in: `src/js/wc/web-component.${theme}.ts`
             }))
         ],
-        loader: { ".css": "text" }
+        loader: { ".ts": "ts", ".tsx": "tsx", ".css": "text" }
     },
     legacy: {
         ...globalConfig,
-        entryPoints: ["src/js/outputs/legacy.js"],
+        entryPoints: ["src/js/outputs/legacy.ts"],
         entryNames: `picobel.${version}`,
-        format: "iife"
+        format: "iife",
+        loader: { ".ts": "ts", ".tsx": "tsx" }
     },
     css: {
         ...globalConfig,

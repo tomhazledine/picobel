@@ -1,0 +1,1 @@
+declare module "../../build/picobel-component.js";

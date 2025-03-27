@@ -1,10 +1,11 @@
+import { type AudioElement, prepareClasses } from "../core/data";
+import { type ComponentGroup } from "../core/setup";
 import { parseTime } from "../utils/helpers";
-import { prepareClasses } from "../core/data";
-import { createElement, buildComponents } from "./utils";
+import { buildComponents, createElement } from "./utils";
 
 // Set the value of the song-length display
 export const setLengthDisplay = node => {
-    let duration = parseTime(node.duration);
+    const duration = parseTime(node.duration);
     if (node.elements.durationDisplay) {
         node.elements.durationDisplay.innerHTML = duration;
     }
@@ -21,7 +22,11 @@ export const setMeta = (meta, elements) => {
     return elements;
 };
 
-export const generateMarkup = (nodes = [], components, namespace) => {
+export const generateMarkup = (
+    nodes: AudioElement[],
+    components: ComponentGroup[],
+    namespace: string
+) => {
     const markupArray = nodes.map(node => {
         // Create a container for our new player
         const newPlayer = createElement("div");
@@ -31,10 +36,10 @@ export const generateMarkup = (nodes = [], components, namespace) => {
         newPlayer.classList.add(...classes);
 
         // Set song index attribute
-        newPlayer.setAttribute("data-picobel-index", node.key);
+        newPlayer.setAttribute("data-picobel-index", node.key.toString());
 
         // Create a loading indicator
-        let loading = createElement("div", `${namespace}__loader`);
+        const loading = createElement("div", `${namespace}__loader`);
         newPlayer.appendChild(loading);
 
         // Add the components to the player in the order they are listed
@@ -51,7 +56,7 @@ export const generateMarkup = (nodes = [], components, namespace) => {
 
 export const elementHooks = (nodes, context, namespace) =>
     nodes.map(node => {
-        let wrapper = context.querySelector(
+        const wrapper = context.querySelector(
             `[data-picobel-index='${node.key}']`
         );
 

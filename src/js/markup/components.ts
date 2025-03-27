@@ -1,7 +1,7 @@
 import { buildSlider } from "./slider";
 import { createElement } from "./utils";
 
-export const playPause = namespace => {
+export const playPause = (namespace: string) => {
     const button = createElement("button", `${namespace}__play-pause`);
     button.setAttribute("type", "button");
     const buttonText = createElement("span", `${namespace}__play-pause__text`);
@@ -10,28 +10,28 @@ export const playPause = namespace => {
     return button;
 };
 
-export const title = (namespace, key) => {
+export const title = (namespace: string, key: number) => {
     const title = createElement("span", `${namespace}__title`);
     title.innerHTML = "File " + (key + 1);
     return title;
 };
 
-export const artist = namespace =>
+export const artist = (namespace: string) =>
     createElement("span", `${namespace}__artist`);
 
-export const timer = namespace => {
+export const timer = (namespace: string) => {
     const timer = createElement("span", `${namespace}__timer`);
     timer.innerHTML = "0:00";
     return timer;
 };
 
-export const duration = namespace => {
+export const duration = (namespace: string) => {
     const duration = createElement("span", `${namespace}__duration`);
     duration.innerHTML = "-:--";
     return duration;
 };
 
-export const progress = (namespace, key) => {
+export const progress = (namespace: string, key: number) => {
     const label = createElement("span", `${namespace}__progress-label-inner`);
     label.innerHTML = "Progress";
     return buildSlider({
@@ -44,7 +44,7 @@ export const progress = (namespace, key) => {
     });
 };
 
-export const mute = namespace => {
+export const mute = (namespace: string) => {
     const muteEl = createElement("button", `${namespace}__mute`);
     muteEl.setAttribute("type", "button");
     muteEl.innerHTML = "Mute";

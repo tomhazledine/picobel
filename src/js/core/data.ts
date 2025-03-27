@@ -1,24 +1,49 @@
-import { getFileType, getFileName } from "../utils/helpers";
+import { getFileName, getFileType } from "../utils/helpers";
 import { errors, setBuffered } from "./audio-functions";
 
+export type AudioElement = HTMLAudioElement & {
+    key: number;
+    mute?: boolean;
+    tmpVolume?: number;
+    elements?: {
+        [key: string]: HTMLElement;
+    };
+};
+
+type Meta = {
+    url: string;
+    fileType: string;
+    fileName: string;
+    title: string;
+    artist: string | false;
+};
+
 // Return an array of all the <audio> elements found on the page.
-export const findAudio = context => {
+export const findAudio = (context: HTMLElement | Document): AudioElement[] => {
     // Get all the <audio> occurrences in the page.
     const audioElements = context.getElementsByTagName("audio");
-    // Save our audioElements as an array (so we can manipulate the DOM but
-    // still access our items).
-    return [...audioElements];
+
+    const audioElementsArrayWithKeys = [...audioElements].map(
+        // don't spread the node, just assign the key
+        (node, i) => Object.assign(node, { key: i }) as AudioElement
+    );
+    
+    return audioElementsArrayWithKeys;
 };
 
 // Build an array of classes to add to each new "player" element
-export const prepareClasses = (index, classes, theme) => {
+export const prepareClasses = (
+    index: number,
+    classes: string,
+    theme: string
+) => {
     const classesString = `picobel loading picobel--index-${index} ${classes}`;
     const classesArray = classesString.trim().split(" ");
     return [...classesArray, theme];
 };
 
 // Get the url for each audio file we want to load [using elements found by findAudio()]
-export const getRawData = nodes =>
+export const getRawData = (nodes: AudioElement[]) =>
     nodes.map((node, key) => {
         node.key = key;
         node.mute = false;
@@ -27,41 +52,39 @@ export const getRawData = nodes =>
     });
 
 // Get info about the audio track
-export const getMeta = item => {
-    let meta = {};
-    // Get the filename and type
-    meta.url = item.currentSrc;
-    meta.fileType = getFileType(meta.url);
-    meta.fileName = getFileName(meta.url);
-    // If there is a valid title, get that title, otherwise get the file name.
-    meta.title =
+export const getMeta = (item: AudioElement): Meta => {
+    const url = item.currentSrc;
+    const fileType = getFileType(url);
+    const fileName = getFileName(url);
+    const title =
         item.title && item.title !== ""
             ? item.title
-            : `${meta.fileName}.${meta.fileType}`;
-    // If there is a valid 'artist', get the artist name.
-    if (item.dataset) {
-        meta.artist = item.dataset.artist ? item.dataset.artist : false;
-    } else {
-        meta.artist = false;
-    }
-    return meta;
+            : `${fileName}.${fileType}`;
+    const artist = item.dataset?.artist ? item.dataset.artist : false;
+    return { url, fileType, fileName, title, artist };
 };
 
-export const checkURL = async url => {
+export const checkURL = async (url: string): Promise<boolean | null> => {
     try {
         const response = await fetch(url);
         console.log({ url, response });
         return response.ok; // URL is valid and reachable
     } catch (error) {
-        console.error(error.message);
+        if (error instanceof Error) {
+            console.error(error.message);
+        } else {
+            console.error("Unknown error");
+        }
         // Handle the error accordingly (e.g., set an error state or use a fallback URL)
         return null; // Indicate failure
     }
 };
 
-export const pollForLoadingStatus = async (node, intervalState) => {
+export const pollForLoadingStatus = async (
+    node: AudioElement,
+    intervalState: Record<string, NodeJS.Timeout>
+) => {
     const interval = 1000; // Poll every 1000 milliseconds (1 second)
-    let isFullyBuffered = false; // Flag to track buffering status
     let checks = 0;
     const maxChecks = 15;
 
@@ -76,7 +99,6 @@ export const pollForLoadingStatus = async (node, intervalState) => {
 
             // Check if the audio is fully buffered
             if (bufferedEnd >= duration) {
-                isFullyBuffered = true;
                 // If fully buffered, clear the interval
                 clearInterval(intervalState[node.currentSrc]);
             }

@@ -1,6 +1,6 @@
 import { setLengthDisplay, setMeta } from "../markup";
-import { getMeta } from "./data";
 import { parseTime } from "../utils/helpers";
+import { getMeta } from "./data";
 
 export const pauseAll = nodes =>
     nodes.forEach(node => {
@@ -45,16 +45,16 @@ export const stop = node => {
 export const triggerUpdateProgress = event => updateProgress(event.srcElement);
 
 export const updateProgress = node => {
-    let progress = node.currentTime;
-    let duration = node.duration;
+    const progress = node.currentTime;
+    const duration = node.duration;
     if (node.elements.playTimer) {
-        let progressParsed = parseTime(progress);
+        const progressParsed = parseTime(progress);
         node.elements.playTimer.innerHTML = progressParsed;
     }
     if (progress >= duration) {
         stop(node);
     }
-    let progressPercent = ((progress / duration) * 100).toFixed(2);
+    const progressPercent = ((progress / duration) * 100).toFixed(2);
     if (node.elements.progressRange) {
         node.elements.progressRange.value = progressPercent;
         node.elements.progressIndicator.style.width = progressPercent + "%";
@@ -70,7 +70,7 @@ export const canplaythrough = node => {
 
 export const loadedmetadata = node => {
     node.elements.wrapper.classList.remove("loading");
-    let meta = getMeta(node);
+    const meta = getMeta(node);
     setMeta(meta, node.elements);
 };
 
@@ -81,10 +81,10 @@ export const errors = node => {
 };
 
 export const sliderScrub = (event, node) => {
-    let duration = node.duration;
-    let targetTime = duration * (event.srcElement.value / 100);
-    targetTime = targetTime.toFixed(2);
-    node.currentTime = targetTime;
+    const duration = node.duration;
+    const targetTime = duration * (event.srcElement.value / 100);
+    const targetTimeFixed = targetTime.toFixed(2);
+    node.currentTime = targetTimeFixed;
     updateProgress(node);
 };
 
@@ -92,7 +92,7 @@ export const sliderFocus = (node, focus) =>
     node.elements.progressWrapper.classList.toggle("focus", focus);
 
 export const volume = (event, node) => {
-    let volume = event.srcElement.value;
+    const volume = event.srcElement.value;
     node.tmpVolume = node.volume;
     node.mute = false;
     mute(node);
@@ -103,8 +103,8 @@ export const volumeFocus = (node, focus) =>
     node.elements.volumeWrapper.classList.toggle("focus", focus);
 
 export const setVolume = (node, value) => {
-    let valueMapped = value * 10;
-    let volumePercent = (value * 100).toFixed(2);
+    const valueMapped = value * 10;
+    const volumePercent = (value * 100).toFixed(2);
     node.volume = value;
     if (node.elements.volumeDisplay) {
         node.elements.volumeDisplay.innerHTML = valueMapped;
@@ -148,7 +148,7 @@ export const mute = node => {
 
 export const setBuffered = (node, buffered) => {
     const duration = node.duration;
-    let bufferedPercent = ((buffered / duration) * 100).toFixed(2);
+    const bufferedPercent = ((buffered / duration) * 100).toFixed(2);
     if (node.elements.progressBackground) {
         node.elements.progressBackground.style.width = bufferedPercent + "%";
     }

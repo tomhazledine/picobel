@@ -1,14 +1,14 @@
-import { picobel } from "../Picobel.js";
-
-import styles from "../../../build/picobel.default.css";
+import styles from "../../../build/picobel.skeleton.css";
+import { type Options } from "../core/setup";
+import { picobel } from "../Picobel";
 
 // Create a class for the element
-class PicobelWCDefault extends HTMLElement {
+class PicobelWC extends HTMLElement {
     constructor() {
         super();
     }
 
-    mountStyles(theme = "default") {
+    mountStyles(theme = "skeleton") {
         const styleId = `picobel-styles-${theme}`;
         if (!document.getElementById(styleId)) {
             const styleEl = document.createElement("style");
@@ -20,8 +20,8 @@ class PicobelWCDefault extends HTMLElement {
     }
 
     connectedCallback() {
-        const theme = this.getAttribute("data-theme") || "default";
-        const options = { theme, context: this };
+        const theme = this.getAttribute("data-theme") || "skeleton";
+        const options: Options = { theme, context: this };
         const components = this.getAttribute("data-components");
         if (components) {
             options.components = JSON.parse(components);
@@ -32,5 +32,5 @@ class PicobelWCDefault extends HTMLElement {
 }
 
 if (typeof window !== "undefined" && "customElements" in window) {
-    window.customElements.define("picobel-player-default", PicobelWCDefault);
+    window.customElements.define("picobel-player-skeleton", PicobelWC);
 }

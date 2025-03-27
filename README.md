@@ -18,7 +18,7 @@ Picobel is a JavaScript utility, so you'll need to include the script somehow. T
 
 #### Install JS from [npm](https://www.npmjs.com/package/picobel)
 
-`yarn add picobel` (or `npm install picobel`) will install Picobel in your project and add Picobel into the `dependencies` section of your `package.json` file. 
+`npm install picobel` will install Picobel in your project and add Picobel into the `dependencies` section of your `package.json` file. 
 
 ```js
 // Include Picobel in your project:
