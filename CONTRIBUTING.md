@@ -21,17 +21,7 @@ To make changes to Picobel, you'll need to follow these steps:
 
 Picobel is first-and-foremost a JavaScript project, and all the JS code lives in [`/src/js`](https://github.com/tomhazledine/picobel/blob/master/src/js) with the main file being [`/src/js/Picobel.js`](https://github.com/tomhazledine/picobel/blob/master/src/js/Picobel.js). The function `picobel()` is the default export from this file, and is the function that gets called when you use Picobel in your own code.
 
-JS is written using ESM module syntax (e.g. `import { foo } from './bar.js';`), and helper-functions and utilities are imported from partials that also live in `/src/js`.
-
-There are several modules in this project:
-
-* `helpers.js`: contains simple helper function: string manipulation, etc.
-* `Picobel.js`: the master function - this is what is called when `Picobel();` is used in your code. This module pulls all the other modules together. It also contains the functions that require the `state` variable (created by Picobel to manage multiple audio elements on the same page).
-* `PicobelData.js`: these functions handle the data we need to run Picobel (e.g. getting info on audio elements within a page, etc.).
-* `PicobelMarkup.js`: these functions handle creating the markup that Picobel replaces native `<audio>` elements with.
-* `PicobelSetup.js`: these functions initialize Picobel (parsing options, generating initial `state`, etc.).
-
-The JS is compiled into a production-ready build using [esbuild](https://esbuild.github.io/), which is setup and configured in [`/build.js`](https://github.com/tomhazledine/picobel/blob/master/build.js) and run with `npm run build`.
+Picobel is written in TypeScript and is compiled into a production-ready build using [esbuild](https://esbuild.github.io/), which is setup and configured in [`/build.js`](https://github.com/tomhazledine/picobel/blob/master/build.js) and run with `npm run build`.
 
 ### CSS
 
