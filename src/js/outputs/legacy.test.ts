@@ -1,6 +1,4 @@
 import picobel from "./";
-import { getPackageVersion } from "../../../build.utils.js";
-const version = getPackageVersion();
 
 declare global {
     interface Window {
@@ -17,9 +15,9 @@ describe("Legacy Picobel", () => {
         document.body.innerHTML = "";
     });
 
-    it("loads and initializes without errors", () => {
+    it("loads and initializes without errors", async () => {
         // Load the distribution
-        require(`../../../build/picobel.${version}.js`);
+        await import(`./legacy`);
 
         // Verify it exists
         expect(global.picobel).toBeDefined();

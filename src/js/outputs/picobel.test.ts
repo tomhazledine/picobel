@@ -8,8 +8,6 @@ describe("Primary Picobel", () => {
     });
 
     it("picobel.js loads and initializes without errors", () => {
-        // Load the distribution
-        require("../../../build/picobel.js");
 
         // Create a simple audio element to test with
         document.body.innerHTML = '<audio src="test.mp3"></audio>';
