@@ -2,7 +2,7 @@
 
 <h1 align="center">Picobel.js</h1>
 
-<p align="center">v3.1.4</p>
+<p align="center">v3.1.5</p>
 
 <p align="center"><a href="https://github.com/tomhazledine/picobel/actions/workflows/tests.yml"><img src="https://github.com/tomhazledine/picobel/actions/workflows/tests.yml/badge.svg" alt="Picobel test status" style="max-width: 100%;"></a></p>
 
