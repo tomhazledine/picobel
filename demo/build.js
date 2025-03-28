@@ -16,12 +16,13 @@ const config = {
         "demo/index.js",
         "demo/composable.js",
         "demo/types.js",
-        "demo/react.js",
+        "demo/react.jsx",
         "build/picobel-component.js",
         "build/picobel-component-default.js",
         "build/picobel.all.css",
         { out: `manual`, in: `build/picobel.${version}.js` }
     ],
+    loader: { ".ts": "ts", ".tsx": "tsx", ".css": "text" },
     entryNames: "picobel-demo-[name]"
 };
 
