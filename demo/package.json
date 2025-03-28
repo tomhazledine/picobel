@@ -4,6 +4,8 @@
     "description": "Demo page for Picobel",
     "type": "module",
     "dependencies": {
-        "express": "^4.21.2"
+        "express": "^4.21.2",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
     }
 }
