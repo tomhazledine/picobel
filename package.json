@@ -3,7 +3,15 @@
     "version": "3.1.5",
     "description": "Convert html audio tags into styleable markup.",
     "main": "./build/picobel.js",
+    "module": "./build/picobel.js",
     "type": "module",
+    "exports": {
+        ".": "./build/picobel.js",
+        "./component": "./build/picobel-component.js",
+        "./component/*": "./build/picobel-component-*.js",
+        "./styles/*": "./build/picobel.*.css",
+        "./react": "./build/picobel-react.js"
+    },
     "scripts": {
         "test": "jest --verbose",
         "build": "node build.js",
@@ -27,6 +35,9 @@
     "bugs": {
         "url": "https://github.com/tomhazledine/picobel/issues"
     },
+    "peerDependencies": {
+        "react": "^18.0.0 || ^19.0.0"
+    },
     "devDependencies": {
         "@babel/core": "^7.23.7",
         "@babel/preset-env": "^7.23.7",
@@ -46,6 +57,7 @@
         "eslint-plugin-testing-library": "^7.1.1",
         "jest": "^29.7.0",
         "jest-environment-jsdom": "^29.7.0",
+        "react": "^19.0.0",
         "typescript": "^5.8.2"
     }
 }
