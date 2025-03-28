@@ -5,6 +5,11 @@ export const _setupLocalListeners = (nodes: AudioElement[]) => {
     return nodes.map(node => {
         // Audio event listeners
         node.addEventListener(
+            "progress",
+            () => PicobelAudio.handleBuffering(node),
+            false
+        );
+        node.addEventListener(
             "timeupdate",
             PicobelAudio.triggerUpdateProgress,
             false

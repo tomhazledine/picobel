@@ -10,6 +10,7 @@
         "build:dev": "node build.js --mode=development",
         "build:demo": "node build.js && node demo/build.js",
         "build:demo:dev": "node build.js --mode=development && node demo/build.js --mode=development",
+        "check": "npm run lint && npm run typecheck && npm run test",
         "demo:serve": "node ./demo/server",
         "lint": "eslint src/js/**/*.ts",
         "prepublish": "npm run build",

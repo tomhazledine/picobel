@@ -1,5 +1,4 @@
 import { getFileName, getFileType } from "../utils/helpers";
-import { errors, setBuffered } from "./audio-functions";
 
 export type AudioElement = HTMLAudioElement & {
     key: number;
@@ -78,44 +77,4 @@ export const checkURL = async (url: string): Promise<boolean | null> => {
         // Handle the error accordingly (e.g., set an error state or use a fallback URL)
         return null; // Indicate failure
     }
-};
-
-export const pollForLoadingStatus = async (
-    node: AudioElement,
-    intervalState: Record<string, NodeJS.Timeout>
-) => {
-    const interval = 1000; // Poll every 1000 milliseconds (1 second)
-    let checks = 0;
-    const maxChecks = 15;
-
-    const checkBufferedStatus = () => {
-        checks++;
-        // Assuming there's at least one range buffered
-        if (node.buffered.length > 0) {
-            const bufferedEnd = node.buffered.end(node.buffered.length - 1);
-            const duration = node.duration;
-
-            setBuffered(node, bufferedEnd);
-
-            // Check if the audio is fully buffered
-            if (bufferedEnd >= duration) {
-                // If fully buffered, clear the interval
-                clearInterval(intervalState[node.currentSrc]);
-            }
-        }
-        if (checks >= maxChecks) {
-            if (node.buffered.length <= 0 && node.readyState <= 0) {
-                errors(node);
-            }
-            clearInterval(intervalState[node.currentSrc]);
-        }
-    };
-
-    // Set up the interval to check buffering status
-    intervalState[node.currentSrc] = setInterval(checkBufferedStatus, interval);
-
-    // Optional: Clear interval on page unload or when no longer needed to avoid memory leaks
-    window.addEventListener("unload", () =>
-        clearInterval(intervalState[node.currentSrc])
-    );
 };

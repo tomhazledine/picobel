@@ -153,3 +153,20 @@ export const setBuffered = (node, buffered) => {
         node.elements.progressBackground.style.width = bufferedPercent + "%";
     }
 };
+
+export const handleBuffering = node => {
+    if (node.buffered.length > 0) {
+        // Get the furthest buffered point
+        const bufferedEnd = node.buffered.end(node.buffered.length - 1);
+        const duration = node.duration;
+
+        // Update the buffer visualization
+        setBuffered(node, bufferedEnd);
+
+        // If fully buffered, we can optionally do some cleanup
+        if (bufferedEnd >= duration) {
+            // Remove the event listener if no longer needed
+            node.removeEventListener("progress", () => handleBuffering(node));
+        }
+    }
+};

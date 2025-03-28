@@ -1,5 +1,5 @@
 import { type ComponentGroup, type Options, parseOptions } from "./core/setup";
-import { type AudioElement, findAudio, getRawData, pollForLoadingStatus } from "./core/data";
+import { type AudioElement, findAudio, getRawData } from "./core/data";
 import { generateMarkup, elementHooks } from "./markup";
 import { _setupLocalListeners } from "./core/events";
 import { loadedmetadata } from "./core/audio-functions";
@@ -73,15 +73,11 @@ export const picobel = (rawOptions: Options = {}) => {
     // Setup event listeners
     state.audioNodes = _setupLocalListeners(state.audioNodes);
 
-    const intervalState = {};
-
     // Check status
     state.audioNodes.forEach(node => {
         if (node.readyState >= 1) {
             loadedmetadata(node);
         }
-
-        pollForLoadingStatus(node, intervalState);
     });
 
     return { state };
