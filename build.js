@@ -40,6 +40,13 @@ const config = {
         ],
         loader: { ".ts": "ts", ".tsx": "tsx", ".css": "text" }
     },
+    react: {
+        ...globalConfig,
+        entryPoints: ["src/js/react/index.tsx"],
+        entryNames: `picobel-react`,
+        format: "esm",
+        loader: { ".ts": "ts", ".tsx": "tsx" }
+    },
     legacy: {
         ...globalConfig,
         entryPoints: ["src/js/outputs/legacy.ts"],
@@ -58,6 +65,7 @@ const build = async config => {
         await esbuild.build(config.css);
         await esbuild.build(config.js);
         await esbuild.build(config.legacy);
+        await esbuild.build(config.react);
     } catch (e) {
         if (e.errors && e.errors[0].location) {
             console.log({ location: e.errors[0].location });
