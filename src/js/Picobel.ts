@@ -12,14 +12,12 @@ import { loadedmetadata } from "./core/audio-functions";
  * |  __/| | (_| (_) | |_) |  __/ |_ | \__ \
  * |_|   |_|\___\___/|_.__/ \___|_(_)| |___/
  * Picobel.js                       _/ |
- * tomhazledine.com/audio          |__/
+ * picobel.tomhazledine.com        |__/
  *
  * ===========================================================================
  *
  * Replace any native <audio> instances with standard elements (spans,
- * buttons & divs) that we can style however we like.
- *
- * Functionality powered by Web Audio API.
+ * buttons & divs) that you can style however you like.
  * ---------------------------------------------------------------------------
  */
 export const picobel = (rawOptions: Options = {}) => {
