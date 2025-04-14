@@ -37,7 +37,7 @@ export const server = (buildPath, port) => {
 };
 
 const PORT = 8080;
-const OUT = path.resolve(".", `./demo/`);
+const OUT = path.resolve(".", `./pages`);
 server(OUT, PORT);
 
 console.log(`Press "q" to exit`);
