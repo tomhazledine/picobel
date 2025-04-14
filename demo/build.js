@@ -12,6 +12,7 @@ const config = {
     minify: args.mode !== "development",
     treeShaking: args.mode !== "development",
     sourcemap: args.mode === "development",
+    format: "esm",
     entryPoints: [
         "demo/index.js",
         "demo/composable.js",
@@ -22,7 +23,7 @@ const config = {
         "build/picobel.all.css",
         { out: `manual`, in: `build/picobel.${version}.js` }
     ],
-    loader: { ".ts": "ts", ".tsx": "tsx", ".css": "text" },
+    loader: { ".ts": "ts", ".tsx": "tsx", ".css": "text", ".jsx": "jsx" },
     entryNames: "picobel-demo-[name]"
 };
 

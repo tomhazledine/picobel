@@ -44,8 +44,10 @@ const config = {
         ...globalConfig,
         entryPoints: ["src/js/react/index.tsx"],
         entryNames: `picobel-react`,
+        external: ["react", "react/jsx-runtime", "react-dom"],
         format: "esm",
-        loader: { ".ts": "ts", ".tsx": "tsx" }
+        loader: { ".ts": "ts", ".tsx": "tsx" },
+        jsx: "automatic"
     },
     legacy: {
         ...globalConfig,
