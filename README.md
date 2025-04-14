@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/tomhazledine/picobel" target="_blank"><img width="200"src="https://github.com/tomhazledine/picobel/blob/main/images/heroLogo.png"></a></p>
+# Picobel<p align="center"><a href="https://github.com/tomhazledine/picobel" target="_blank"><img width="200"src="https://github.com/tomhazledine/picobel/blob/main/images/heroLogo.png"></a></p>
 
 <h1 align="center">Picobel.js</h1>
 
@@ -10,15 +10,13 @@ Picobel.js (pronounced _peek-o-bell_, as in _decibel_) is a lightweight dependen
 
 Documentation can be found at [picobel.tomhazledine.com](https://picobel.tomhazledine.com/).
 
-## Quick Start
+---
 
-### JavaScript
+## Quick start
 
-Picobel is a JavaScript utility, so you'll need to include the script somehow. The recommended method is to [install from npm](#install-js-from-npm) but you can also download the script bundle and [include it directly](#install-js-manually).
-
-#### Install JS from [npm](https://www.npmjs.com/package/picobel)
-
-`npm install picobel` will install Picobel in your project and add Picobel into the `dependencies` section of your `package.json` file. 
+```bash
+npm install picobel
+```
 
 ```js
 // Include Picobel in your project:
@@ -31,31 +29,9 @@ picobel();
 picobel({ theme: 'default' });
 ```
 
-#### Install JS manually
+---
 
-If you prefer not to use npm, you can include the Picobel build file directly.
+## Packages
 
-```html
-<!-- Load Picobel -->
-<script type='text/javascript' src='picobel.min.js'></script>
-<script type='text/javascript'>
-    picobel();
-</script>
-```
-
-### CSS (optional)
-
-Picobel's primary aim is to provide structured markup for styling audio players. If you're commited to writing all your own CSS then you do not need to include any of the Picobel stylesheets (although feel free to [use the pre-made themes as inspiration](/themes) or as a jumping-off point for [writing your own styles](/styling)). 
-
-But you don't **have** to write your own CSS. Picobel comes with several "pre made" themes that you can include.
-
-Adding a theme is a two-step process:
-
-1. Declare the `theme` option when initialising Picobel.
-2. Be sure to inclde the relevant stylesheet in your project.
-
-```js
-picobel({ theme: 'default' });
-```
-
-You can find the CSS files for each theme in the [`/src/css` directory of the GitHub repo](https://github.com/tomhazledine/picobel/tree/main/src/css), along with minified production-ready versions [here](https://github.com/tomhazledine/picobel/tree/main/build). The filename convention is `picobel.THEME_NAME.css`.
+* [picobel](packages/picobel/)
+* [demo](packages/demo)

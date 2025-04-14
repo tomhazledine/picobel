@@ -1,4 +1,4 @@
-import { type ComponentGroup } from "../core/setup";
+import { type ComponentGroup } from "../types";
 import * as componentConstructors from "./components";
 
 export const createElement = (type = "div", className = "") => {
