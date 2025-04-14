@@ -1,3 +1,3 @@
-import picobel from "../../picobel/build/picobel.js";
+import picobel from "picobel";
 
 picobel();

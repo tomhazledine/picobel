@@ -1,4 +1,4 @@
-import picobel from "../../picobel/build/picobel.js";
+import picobel from "picobel";
 
 const section01 = document.querySelector("#section-01");
 const section02 = document.querySelector("#section-02");

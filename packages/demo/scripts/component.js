@@ -1,0 +1,1 @@
+import "picobel/component";
