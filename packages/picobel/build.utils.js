@@ -22,7 +22,13 @@ export const watchFiles = (files, onChange) => {
             process.exit();
         }
     });
-    files.forEach(file => {
+
+    // All filepaths in `files` dirs:
+    const allFiles = files.flatMap(dir => {
+        return fs.readdirSync(dir).map(file => `${dir}/${file}`);
+    });
+
+    allFiles.forEach(file => {
         fs.watch(file, (eventType, filename) => {
             if (filename) {
                 onChange(filename);
