@@ -1,4 +1,4 @@
 node_modules
 .DS_Store
-demo/build
+packages/demo/pages/build
 coverage

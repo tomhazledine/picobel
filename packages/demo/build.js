@@ -14,14 +14,10 @@ const config = {
     sourcemap: args.mode === "development",
     format: "esm",
     entryPoints: [
-        "./scripts/index.js",
-        "./scripts/composable.js",
-        "./scripts/types.js",
-        "./scripts/react.jsx",
-        "../picobel/build/picobel.all.css",
-        "../picobel/build/picobel-component.js",
+        "./scripts/*.js",
+        "./scripts/*.jsx",
         "../picobel/build/picobel-component-default.js",
-        "../picobel/build/picobel.all.css",
+        "picobel/styles/all",
         { out: `manual`, in: `../picobel/build/picobel.${version}.js` }
     ],
     loader: { ".ts": "ts", ".tsx": "tsx", ".css": "css", ".jsx": "jsx" },
@@ -42,7 +38,7 @@ const build = async config => {
 
 if (args.mode === "development") {
     // Development mode
-    watchFiles(["scripts","pages"], async file => {
+    watchFiles(["scripts","../picobel/build"], async file => {
         console.log(`Changes detected in ${file}.\nRebuilding...`);
         await build(config);
     });
