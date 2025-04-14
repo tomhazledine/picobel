@@ -1,8 +1,12 @@
 {
-    "name": "picobel-demo",
+    "name": "demo",
     "version": "1.0.0",
     "description": "Demo page for Picobel",
     "type": "module",
+    "scripts": {
+        "serve": "node ./server.js",
+        "build": "node ./build.js"
+    },
     "dependencies": {
         "express": "^4.21.2",
         "picobel": "workspace:*",
