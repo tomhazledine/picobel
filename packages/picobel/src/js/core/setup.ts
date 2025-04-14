@@ -1,3 +1,5 @@
+import { Options, ComponentGroup } from "../types";
+
 /**
  * -----------------------------------------------------------------------------
  * SETUP
@@ -5,9 +7,6 @@
  * Parse our options, and set starting state.
  * -----------------------------------------------------------------------------
  */
-
-type Component = string;
-export type ComponentGroup = Component | ComponentGroup[];
 
 // Return a `components` object that matches the provided themename.
 const setComponentsByTheme = (themename: string = "default"): ComponentGroup[] => {
@@ -30,14 +29,6 @@ const setComponentsByTheme = (themename: string = "default"): ComponentGroup[] =
             ];
     }
 };
-
-export type Options = {
-    context?: Document | HTMLElement;
-    theme?: string;
-    preload?: boolean;
-    components?: ComponentGroup[];
-};
-
 export const parseOptions = (rawOptions: Options = {}) => {
     // Define our default options.
     const defaultOptions = {

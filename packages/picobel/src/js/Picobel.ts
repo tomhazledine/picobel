@@ -1,4 +1,5 @@
-import { type ComponentGroup, type Options, parseOptions } from "./core/setup";
+import { type ComponentGroup, type Options } from "./types";
+import { parseOptions } from "./core/setup";
 import { type AudioElement, findAudio, getRawData } from "./core/data";
 import { generateMarkup, elementHooks } from "./markup";
 import { _setupLocalListeners } from "./core/events";

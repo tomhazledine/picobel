@@ -1,5 +1,5 @@
 import { type AudioElement, prepareClasses } from "../core/data";
-import { type ComponentGroup } from "../core/setup";
+import { type ComponentGroup } from "../types";
 import { parseTime } from "../utils/helpers";
 import { buildComponents, createElement } from "./utils";
 
