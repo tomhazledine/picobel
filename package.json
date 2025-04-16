@@ -8,6 +8,7 @@
         "test": "pnpm --filter=picobel test",
         "build": "pnpm --filter=picobel build",
         "build:dev": "pnpm --filter=picobel build --mode=development",
+        "check": "pnpm --filter=picobel check",
         "demo:build:dev": "pnpm --filter=demo build --mode=development",
         "demo:build": "pnpm --filter=demo build",
         "demo:serve": "pnpm --filter=demo serve"

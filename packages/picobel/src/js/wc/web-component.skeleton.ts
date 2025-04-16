@@ -1,6 +1,6 @@
 import styles from "../../../build/picobel.skeleton.css";
-import { type Options } from "../core/setup";
 import { picobel } from "../Picobel";
+import { type Options } from "../types";
 
 // Create a class for the element
 class PicobelWC extends HTMLElement {

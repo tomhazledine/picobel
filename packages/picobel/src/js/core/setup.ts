@@ -1,4 +1,4 @@
-import { Options, ComponentGroup } from "../types";
+import type { ComponentGroup, Options } from "../types";
 
 /**
  * -----------------------------------------------------------------------------
@@ -9,7 +9,9 @@ import { Options, ComponentGroup } from "../types";
  */
 
 // Return a `components` object that matches the provided themename.
-const setComponentsByTheme = (themename: string = "default"): ComponentGroup[] => {
+const setComponentsByTheme = (
+    themename: string = "default"
+): ComponentGroup[] => {
     switch (themename) {
         case "itunes":
             return [
