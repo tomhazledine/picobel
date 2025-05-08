@@ -1,5 +1,8 @@
-import * as esbuild from "esbuild";
-import { parseArgs, getPackageVersion, watchFiles } from "./build.utils.js";
+import chalk from "chalk";
+import { build, context } from "esbuild";
+import readline from "readline";
+
+import { parseArgs, getPackageVersion } from "./build.utils.js";
 
 const version = getPackageVersion();
 
@@ -62,29 +65,54 @@ const config = {
     }
 };
 
-const build = async config => {
-    try {
-        await esbuild.build(config.css);
-        await esbuild.build(config.js);
-        await esbuild.build(config.legacy);
-        await esbuild.build(config.react);
-    } catch (e) {
-        if (e.errors && e.errors[0].location) {
-            console.log({ location: e.errors[0].location });
-        }
-        console.warn("esbuild error", e);
-    }
-};
+// const build = async config => {
+//     try {
+//         await build(config.css);
+//         await build(config.js);
+//         await build(config.legacy);
+//         await build(config.react);
+//     } catch (e) {
+//         if (e.errors && e.errors[0].location) {
+//             console.log({ location: e.errors[0].location });
+//         }
+//         console.warn("esbuild error", e);
+//     }
+// };
 
 if (args.mode === "development") {
     // Development mode
-    watchFiles(["./src/js", "./src/css"], async file => {
-        console.log(`Changes detected in ${file}.\nRebuilding...`);
-        await build(config);
-        console.log("Build complete.");
+
+    // Build
+    const cssContext = await context(config.css);
+    const jsContext = await context(config.js);
+    const legacyContext = await context(config.legacy);
+    const reactContext = await context(config.react);
+
+    await cssContext.watch();
+    await jsContext.watch();
+    await legacyContext.watch();
+    await reactContext.watch();
+
+    console.log("Watching files...");
+
+    console.log(chalk.cyan.bold(`Press "q" to exit`));
+    readline.emitKeypressEvents(process.stdin);
+
+    process.stdin.on("keypress", async (str, key) => {
+        if (key.name === "q") {
+            await cssContext.dispose();
+            await jsContext.dispose();
+            await legacyContext.dispose();
+            await reactContext.dispose();
+            console.log("stopped watching");
+            process.exit();
+        }
     });
 } else {
     // Production mode
-    await build(config);
+    await build(config.css);
+    await build(config.js);
+    await build(config.legacy);
+    await build(config.react);
     console.log("Build complete.");
 }
