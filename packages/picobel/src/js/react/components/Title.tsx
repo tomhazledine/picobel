@@ -11,7 +11,7 @@ export const Title = ({
 }) => {
     const { valid, trackState } = useTrackState({
         trackKey,
-        name: "Artist"
+        name: "Title"
     });
     if (!valid) return null;
 
