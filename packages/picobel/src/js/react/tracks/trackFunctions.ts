@@ -1,5 +1,5 @@
 import { type Dispatch, type RefObject, type SetStateAction } from "react";
-import { TracksState } from "../core/types";
+import type { TracksState, TrackMetadata } from "../core/types";
 
 // Functions for track management
 export const createTrackFunctions = (
@@ -12,7 +12,8 @@ export const createTrackFunctions = (
     const registerTrack = (
         id: string,
         audioRef: RefObject<HTMLAudioElement>,
-        src: string
+        src: string,
+        metadata: TrackMetadata
     ) => {
         setTracks(prev => ({
             ...prev,
@@ -24,7 +25,8 @@ export const createTrackFunctions = (
                 duration: 0,
                 isLoaded: false,
                 volume: 1,
-                muted: false
+                muted: false,
+                metadata
             }
         }));
     };

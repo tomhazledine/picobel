@@ -1,20 +1,36 @@
-import React, { useRef, useEffect, useId } from "react";
+import React, { useRef, useEffect } from "react";
+import classnames from "classnames";
+
 import { usePicobel } from "../core/provider";
+import { TrackProvider } from "../core/trackContext";
+import { getFileName } from "../../utils/helpers";
+import { Artist } from "./Artist";
+import { PlayPause } from "./PlayPause";
+import { Title } from "./Title";
 
 export interface PicobelProps {
     src: string;
     id?: string;
     className?: string;
+    theme?: string;
+    children?: React.ReactNode;
 }
 
 export const Picobel: React.FC<PicobelProps> = ({
     src,
     id: providedId,
-    className = ""
+    title: providedTitle,
+    artist,
+    className = "",
+    children
 }) => {
-    // Generate a unique ID if one wasn't provided
-    const generatedId = useId();
-    const id = providedId || `picobel-${generatedId}`;
+    const id = providedId || src;
+    const title = providedTitle || getFileName(src);
+
+    const metadata = {
+        title,
+        artist
+    };
 
     // Audio element reference
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -28,7 +44,7 @@ export const Picobel: React.FC<PicobelProps> = ({
 
     // Register with context when component mounts
     useEffect(() => {
-        context.registerTrack(id, audioRef, src);
+        context.registerTrack(id, audioRef, src, metadata);
 
         return () => {
             context.unregisterTrack(id);
@@ -38,20 +54,27 @@ export const Picobel: React.FC<PicobelProps> = ({
     // Get current player state
     const isPlaying = context.isTrackPlaying(id);
 
-    // Handle play/pause
-    const togglePlay = () => {
-        context.togglePlayPause(id);
-    };
-
     return (
-        <div className={`picobel-player ${className}`}>
+        <div
+            className={classnames(
+                "picobel",
+                context.namespace,
+                { ["loading"]: context.fileStatus === "pending" },
+                { ["playing"]: isPlaying },
+                className
+            )}
+        >
             <audio ref={audioRef} src={src} />
-            <button
-                onClick={togglePlay}
-                aria-label={isPlaying ? "Pause" : "Play"}
-            >
-                {isPlaying ? "Pause" : "Play"}
-            </button>
+            <TrackProvider value={{ trackKey: id }}>
+                {!children && (
+                    <>
+                        <Title />
+                        <Artist />
+                        <PlayPause />
+                    </>
+                )}
+                {children}
+            </TrackProvider>
         </div>
     );
 };

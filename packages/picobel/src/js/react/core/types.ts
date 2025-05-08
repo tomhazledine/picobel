@@ -29,6 +29,9 @@ export interface TracksState {
 
 // Define context type
 export interface PicobelContextType {
+    // Globals
+    namespace: string;
+
     // Registration
     registerTrack: (
         id: string,

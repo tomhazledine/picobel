@@ -7,7 +7,7 @@ const PicobelWrapper = (props: PicobelProps) => {
 
     if (!picobelContext) {
         return (
-            <PicobelProvider>
+            <PicobelProvider theme={props.theme}>
                 <Picobel {...props} />
             </PicobelProvider>
         );
