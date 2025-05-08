@@ -10,7 +10,7 @@ export const PlayPause = ({
     trackKey?: string;
     className?: string;
 }) => {
-    const { valid, trackKey, context } = useTrackState({
+    const { valid, trackState, trackKey, context } = useTrackState({
         trackKey: providedTrackKey,
         name: "PlayPause"
     });
@@ -35,13 +35,14 @@ export const PlayPause = ({
         <button
             type="button"
             className={classnames(
-                `${context.namespace}__play-pause`,
-                className
+                `${trackState.namespace}__play-pause`,
+                className,
+                { ["playing"]: isPlaying }
             )}
             onClick={handleTogglePlay}
             aria-label={isPlaying ? "Pause" : "Play"}
         >
-            <span className={`${context.namespace}__play-pause__text`}>
+            <span className={`${trackState.namespace}__play-pause__text`}>
                 {isPlaying ? "Pause" : "Play"}
             </span>
         </button>

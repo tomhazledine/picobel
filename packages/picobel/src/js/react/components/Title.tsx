@@ -9,7 +9,7 @@ export const Title = ({
     trackKey?: string;
     className?: string;
 }) => {
-    const { valid, trackState, context } = useTrackState({
+    const { valid, trackState } = useTrackState({
         trackKey,
         name: "Artist"
     });
@@ -18,7 +18,9 @@ export const Title = ({
     const { title } = trackState.metadata;
 
     return (
-        <span className={classnames(`${context.namespace}__title`, className)}>
+        <span
+            className={classnames(`${trackState.namespace}__title`, className)}
+        >
             {title}
         </span>
     );
