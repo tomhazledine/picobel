@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from "react";
 import classnames from "classnames";
 
-import { usePicobel } from "../core/provider";
-import { TrackProvider } from "../core/trackContext";
+import { usePicobel } from "./provider";
+import { TrackProvider } from "./trackContext";
 import { getFileName } from "../../utils/helpers";
-import { Artist } from "./Artist";
-import { PlayPause } from "./PlayPause";
-import { Title } from "./Title";
+import { Artist } from "../components/Artist";
+import { PlayPause } from "../components/PlayPause";
+import { Title } from "../components/Title";
 
 export interface PicobelProps {
     src: string;
@@ -14,6 +14,8 @@ export interface PicobelProps {
     className?: string;
     theme?: string;
     children?: React.ReactNode;
+    title?: string;
+    artist?: string;
 }
 
 export const Picobel: React.FC<PicobelProps> = ({
@@ -44,7 +46,7 @@ export const Picobel: React.FC<PicobelProps> = ({
 
     // Register with context when component mounts
     useEffect(() => {
-        context.registerTrack(id, audioRef, src, metadata);
+        context.registerTrack({ id, audioRef, src, metadata });
 
         return () => {
             context.unregisterTrack(id);

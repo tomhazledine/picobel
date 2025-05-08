@@ -27,17 +27,20 @@ export interface TracksState {
     [id: string]: TrackInfo;
 }
 
+export interface RegisterTrackProps {
+    id: string;
+    audioRef: React.RefObject<HTMLAudioElement>;
+    src: string;
+    metadata: TrackMetadata;
+}
+
 // Define context type
 export interface PicobelContextType {
     // Globals
     namespace: string;
 
     // Registration
-    registerTrack: (
-        id: string,
-        audioRef: React.RefObject<HTMLAudioElement>,
-        src: string
-    ) => void;
+    registerTrack: (props: RegisterTrackProps) => void;
     unregisterTrack: (id: string) => void;
 
     // Playback control
