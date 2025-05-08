@@ -4,11 +4,7 @@ import classnames from "classnames";
 import { usePicobel } from "./provider";
 import { TrackProvider } from "./trackContext";
 import { getFileName } from "../../utils/helpers";
-import { Artist } from "../components/Artist";
-import { PlayPause } from "../components/PlayPause";
-import { Title } from "../components/Title";
-import { CurrentTime } from "../components/CurrentTime";
-import { Duration } from "../components/Duration";
+import * as Components from "../components/";
 
 export interface PicobelProps {
     src: string;
@@ -75,16 +71,19 @@ export const Picobel: React.FC<PicobelProps> = ({
             <TrackProvider value={{ trackKey: id }}>
                 {!children && (
                     <>
-                        <PlayPause />
+                        <Components.PlayPause />
+                        <div className={`${namespace}__wrapper--mute-volume`}>
+                            <Components.Mute />
+                        </div>
                         <div className={`${namespace}__wrapper--title-artist`}>
-                            <Title />
-                            <Artist />
+                            <Components.Title />
+                            <Components.Artist />
                         </div>
                         <div
                             className={`${namespace}__wrapper--timer-progress-duration`}
                         >
-                            <CurrentTime />
-                            <Duration />
+                            <Components.CurrentTime />
+                            <Components.Duration />
                         </div>
                     </>
                 )}
