@@ -13,6 +13,7 @@ import { useTrackEventListeners } from "../tracks/trackListeners";
 const PicobelContext = createContext<PicobelContextType | null>(null);
 
 export const PicobelProvider: React.FC<PicobelProviderProps> = ({
+    theme = "picobel",
     children
 }) => {
     // Tracks registry
@@ -43,7 +44,8 @@ export const PicobelProvider: React.FC<PicobelProviderProps> = ({
     const contextValue: PicobelContextType = {
         ...trackFunctions,
         ...trackControls,
-        ...trackGetters
+        ...trackGetters,
+        namespace: theme
     };
 
     return (
