@@ -1,5 +1,7 @@
-import * as esbuild from "esbuild";
-import { parseArgs, watchFiles } from "../picobel/build.utils.js";
+import { build, context } from "esbuild";
+import readline from "readline";
+
+import { parseArgs } from "../picobel/build.utils.js";
 
 import _package from "../picobel/package.json" assert { type: "json" };
 const version = _package.version;
@@ -27,20 +29,21 @@ const config = {
 
 console.log(`Running in folder ${process.cwd()}`);
 
-const build = async config => {
-    try {
-        await esbuild.build(config);
-    } catch (e) {
-        console.log({ location: e.errors[0].location });
-        console.warn("esbuild error", e);
-    }
-};
-
 if (args.mode === "development") {
-    // Development mode
-    watchFiles(["scripts","../picobel/build"], async file => {
-        console.log(`Changes detected in ${file}.\nRebuilding...`);
-        await build(config);
+    const demoContext = await context(config);
+    await demoContext.watch();
+
+    console.log("Watching files...");
+
+    console.log('Press "q" to exit');
+    readline.emitKeypressEvents(process.stdin);
+
+    process.stdin.on("keypress", async (str, key) => {
+        if (key.name === "q") {
+            await demoContext.dispose();
+            console.log("stopped watching");
+            process.exit();
+        }
     });
 } else {
     // Production mode
