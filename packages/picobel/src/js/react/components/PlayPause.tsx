@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import classnames from "classnames";
 
-import { usePicobel } from "../core/provider";
-import { useTrackContext } from "../core/trackContext";
+import { useTrackState } from "../core/useTrackState";
 
 export const PlayPause = ({
     trackKey: providedTrackKey,
@@ -11,36 +10,26 @@ export const PlayPause = ({
     trackKey?: string;
     className?: string;
 }) => {
-    const context = usePicobel();
-
-    const trackContext = useTrackContext();
-    const trackKey = !trackContext ? providedTrackKey : trackContext.trackKey;
-
-    if (!context) {
-        console.error(
-            "Picobel.PlayPause must be used within a PicobelProvider"
-        );
-        return null;
-    }
-
-    if (!trackKey) {
-        console.error(
-            "Picobel.PlayPause must be used within an instance of Picobel or with an explicit trackKey prop"
-        );
-        return null;
-    }
+    const { valid, trackKey, context } = useTrackState({
+        trackKey: providedTrackKey,
+        name: "PlayPause"
+    });
 
     const [isPlaying, setIsPlaying] = useState(
-        context.getCurrentlyPlayingId() === trackKey
+        valid && context.getCurrentlyPlayingId() === trackKey
     );
+
+    useEffect(() => {
+        if (valid) {
+            setIsPlaying(context.getCurrentlyPlayingId() === trackKey);
+        }
+    }, [context, valid, trackKey]);
+
+    if (!valid) return null;
 
     const handleTogglePlay = () => {
         context.togglePlayPause(trackKey);
     };
-
-    useEffect(() => {
-        setIsPlaying(context.getCurrentlyPlayingId() === trackKey);
-    }, [context]);
 
     return (
         <button

@@ -1,29 +1,21 @@
 import classnames from "classnames";
 
-import { usePicobel } from "../core/provider";
-import { useTrackContext } from "../core/trackContext";
+import { useTrackState } from "../core/useTrackState";
 
 export const Title = ({
-    trackKey: providedTrackKey,
+    trackKey,
     className = ""
 }: {
     trackKey?: string;
     className?: string;
 }) => {
-    const context = usePicobel();
+    const { valid, trackState, context } = useTrackState({
+        trackKey,
+        name: "Artist"
+    });
+    if (!valid) return null;
 
-    const trackContext = useTrackContext();
-    const trackKey = providedTrackKey || trackContext.trackKey;
-
-    if (!context) {
-        console.error("Picobel.Title must be used within a PicobelProvider");
-        return null;
-    }
-
-    const trackState = context.getTrackState(trackKey);
-    if (!trackState) return null;
-    const { metadata } = trackState;
-    const { title } = metadata;
+    const { title } = trackState.metadata;
 
     return (
         <span className={classnames(`${context.namespace}__title`, className)}>

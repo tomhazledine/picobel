@@ -1,4 +1,4 @@
-import { PicobelProvider, usePicobel } from "../core/provider";
+import { PicobelProvider, usePicobel } from "./provider";
 
 import Picobel, { type PicobelProps } from "./Picobel";
 

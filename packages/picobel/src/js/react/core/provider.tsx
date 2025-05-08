@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
-import {
-    type PicobelContextType,
-    type PicobelProviderProps,
-    type TracksState
+import type {
+    PicobelContextType,
+    PicobelProviderProps,
+    TracksState
 } from "./types";
 import { createTrackFunctions } from "../tracks/trackFunctions";
 import { createTrackControls } from "../tracks/trackControls";
