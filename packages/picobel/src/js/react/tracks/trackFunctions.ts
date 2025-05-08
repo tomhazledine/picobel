@@ -17,7 +17,8 @@ export const createTrackFunctions = (
         id,
         audioRef,
         src,
-        metadata
+        metadata,
+        namespace
     }: RegisterTrackProps) => {
         setTracks(prev => ({
             ...prev,
@@ -30,7 +31,8 @@ export const createTrackFunctions = (
                 isLoaded: false,
                 volume: 1,
                 muted: false,
-                metadata
+                metadata,
+                namespace
             }
         }));
     };

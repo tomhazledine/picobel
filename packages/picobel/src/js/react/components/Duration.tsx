@@ -1,8 +1,9 @@
 import classnames from "classnames";
 
 import { useTrackState } from "../core/useTrackState";
+import { parseTime } from "../../utils/helpers";
 
-export const Artist = ({
+export const Duration = ({
     trackKey,
     className = ""
 }: {
@@ -11,19 +12,18 @@ export const Artist = ({
 }) => {
     const { valid, trackState } = useTrackState({
         trackKey,
-        name: "Artist"
+        name: "Duration"
     });
     if (!valid) return null;
 
-    const { artist } = trackState.metadata;
-
-    if (!artist) return null;
-
     return (
         <span
-            className={classnames(`${trackState.namespace}__artist`, className)}
+            className={classnames(
+                `${trackState.namespace}__duration`,
+                className
+            )}
         >
-            {artist}
+            {trackState.duration ? parseTime(trackState.duration) : "-:--"}
         </span>
     );
 };

@@ -3,3 +3,5 @@ export { default } from "./core/PicobelWrapper";
 export { PlayPause } from "./components/PlayPause";
 export { Artist } from "./components/Artist";
 export { Title } from "./components/Title";
+export { CurrentTime } from "./components/CurrentTime";
+export { Duration } from "./components/Duration";

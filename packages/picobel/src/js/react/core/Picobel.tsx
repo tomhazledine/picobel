@@ -7,6 +7,8 @@ import { getFileName } from "../../utils/helpers";
 import { Artist } from "../components/Artist";
 import { PlayPause } from "../components/PlayPause";
 import { Title } from "../components/Title";
+import { CurrentTime } from "../components/CurrentTime";
+import { Duration } from "../components/Duration";
 
 export interface PicobelProps {
     src: string;
@@ -22,6 +24,7 @@ export const Picobel: React.FC<PicobelProps> = ({
     src,
     id: providedId,
     title: providedTitle,
+    theme,
     artist,
     className = "",
     children
@@ -44,9 +47,11 @@ export const Picobel: React.FC<PicobelProps> = ({
         throw new Error("Picobel must be used within a PicobelProvider");
     }
 
+    const namespace = theme || context.namespace;
+
     // Register with context when component mounts
     useEffect(() => {
-        context.registerTrack({ id, audioRef, src, metadata });
+        context.registerTrack({ id, audioRef, src, metadata, namespace });
 
         return () => {
             context.unregisterTrack(id);
@@ -60,7 +65,7 @@ export const Picobel: React.FC<PicobelProps> = ({
         <div
             className={classnames(
                 "picobel",
-                context.namespace,
+                namespace,
                 { ["loading"]: context.fileStatus === "pending" },
                 { ["playing"]: isPlaying },
                 className
@@ -70,9 +75,17 @@ export const Picobel: React.FC<PicobelProps> = ({
             <TrackProvider value={{ trackKey: id }}>
                 {!children && (
                     <>
-                        <Title />
-                        <Artist />
                         <PlayPause />
+                        <div className={`${namespace}__wrapper--title-artist`}>
+                            <Title />
+                            <Artist />
+                        </div>
+                        <div
+                            className={`${namespace}__wrapper--timer-progress-duration`}
+                        >
+                            <CurrentTime />
+                            <Duration />
+                        </div>
                     </>
                 )}
                 {children}

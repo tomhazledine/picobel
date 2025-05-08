@@ -32,6 +32,7 @@ export interface RegisterTrackProps {
     audioRef: React.RefObject<HTMLAudioElement>;
     src: string;
     metadata: TrackMetadata;
+    namespace: string;
 }
 
 // Define context type
