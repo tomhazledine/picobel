@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "outDir": "./build",
+        "jsx": "react-jsx",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "allowJs": true,
+        "esModuleInterop": true
+    },
+    "files": ["src/js/react/index.tsx"],
+    "exclude": ["node_modules", "build", "**/*.test.ts", "**/*.test.tsx"]
+}

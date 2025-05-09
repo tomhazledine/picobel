@@ -10,11 +10,14 @@
         "./component": "./build/picobel-component.js",
         "./component/*": "./build/picobel-component-*.js",
         "./styles/*": "./build/picobel.*.css",
-        "./react": "./build/picobel-react.js"
+        "./react": {
+            "types": "./build/react/index.d.ts",
+            "default": "./build/picobel-react.js"
+        }
     },
     "scripts": {
         "test": "jest --verbose",
-        "build": "node build.js",
+        "build": "node build.js && tsc -p tsconfig.declarations.json",
         "build:dev": "node build.js --mode=development",
         "check": "npm run lint && npm run typecheck && npm run test",
         "lint": "eslint src/js/**/*.ts",
