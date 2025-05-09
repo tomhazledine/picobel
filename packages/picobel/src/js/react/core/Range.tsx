@@ -56,10 +56,14 @@ export const Range = ({
             </label>
             <div
                 className={classnames(`${namespace}-slider__wrapper`, {
-                    ["focused"]: focus
+                    ["focus"]: focus
                 })}
             >
-                <div className={`${namespace}-slider__replacement`}>
+                <div
+                    className={classnames(`${namespace}-slider__replacement`, {
+                        ["focus"]: focus
+                    })}
+                >
                     <div className={`${namespace}-slider__background`}></div>
                     {children}
                     <div
