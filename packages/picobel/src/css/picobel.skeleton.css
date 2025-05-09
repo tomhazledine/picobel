@@ -12,6 +12,7 @@
     --skeleton-background: var(--white);
     --skeleton-text: var(--black);
     --skeleton-progress: var(--grey);
+    --skeleton-progress-bg: var(--white);
     --skeleton-buffered: var(--grey--light);
 }
 
@@ -214,10 +215,16 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: var(--skeleton-buffered);
-    width: 0%;
+    width: 100%;
+    background: var(--skeleton-progress-bg);
 }
-
+.skeleton__progress-slider__buffered {
+    height: var(--progress-inner-height);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--skeleton-buffered);
+}
 .skeleton__progress-slider__indicator {
     height: var(--progress-inner-height);
     position: absolute;

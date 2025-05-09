@@ -232,7 +232,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--black);
+    background: var(--black--light);
     border-bottom-right-radius: 2px;
     overflow: hidden;
 }
@@ -248,6 +248,13 @@
     left: 0;
     background: var(--primary--opacity);
     width: 0%;
+}
+.default__progress-slider__buffered {
+    height: var(--progress-bar-height);
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--black);
 }
 .default__progress-slider__playhead {
     width: 5px;

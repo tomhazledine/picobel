@@ -32,3 +32,11 @@ export const getFileName = (string: string): string => {
     const withNoExtension = fullFileName.split(".")[0];
     return withNoExtension;
 };
+
+export const convertToPercentage = (
+    value: number,
+    total: number,
+    precision = 2
+) => {
+    return Number(((value / total) * 100).toFixed(precision));
+};

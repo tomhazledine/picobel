@@ -5,3 +5,4 @@ export * from "./Mute";
 export * from "./PlayPause";
 export * from "./Progress";
 export * from "./Title";
+export * from "./Volume";

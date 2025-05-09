@@ -32,7 +32,8 @@ export const createTrackFunctions = (
                 volume: 1,
                 muted: false,
                 metadata,
-                namespace
+                namespace,
+                buffered: []
             }
         }));
     };

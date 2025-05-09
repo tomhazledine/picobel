@@ -11,6 +11,7 @@ type RangeOptions = {
     trackKey?: string;
     label?: string | HTMLElement;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    children?: React.ReactNode;
 };
 
 const calculatePercentageComplete = (
@@ -30,7 +31,8 @@ export const Range = ({
     max = 100,
     value = 50,
     step,
-    label
+    label,
+    children
 }: RangeOptions) => {
     const rangeId = `${namespace}-slider__range--${trackKey}`;
 
@@ -59,6 +61,7 @@ export const Range = ({
             >
                 <div className={`${namespace}-slider__replacement`}>
                     <div className={`${namespace}-slider__background`}></div>
+                    {children}
                     <div
                         className={`${namespace}-slider__indicator`}
                         style={{ width: `${percentageComplete}%` }}
