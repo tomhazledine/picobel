@@ -44,6 +44,7 @@ root.render(
             />
 
             <Picobel
+                theme="default"
                 src="./audio-examples/long-audio-example.mp3"
                 title="Long example"
                 artist="A Question of Code"

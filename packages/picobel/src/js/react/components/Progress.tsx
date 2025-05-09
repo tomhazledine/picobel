@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import classnames from "classnames";
-
 import { useTrackState } from "../core/useTrackState";
 import { Range } from "../core/Range";
 
@@ -27,11 +24,23 @@ export const Progress = ({
     return (
         <Range
             label="Progress"
+            className={className}
             onChange={handleDurationChange}
             namespace={`${trackState.namespace}__progress`}
             min={0}
             max={trackState.duration}
             value={trackState.currentTime}
-        />
+        >
+            {trackState.buffered.map((buffered, index) => (
+                <div
+                    key={index}
+                    className={`${trackState.namespace}__progress-slider__buffered`}
+                    style={{
+                        left: `${buffered.start}%`,
+                        right: `${100 - buffered.end}%`
+                    }}
+                />
+            ))}
+        </Range>
     );
 };

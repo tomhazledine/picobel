@@ -74,6 +74,7 @@ export const Picobel: React.FC<PicobelProps> = ({
                         <Components.PlayPause />
                         <div className={`${namespace}__wrapper--mute-volume`}>
                             <Components.Mute />
+                            <Components.Volume />
                         </div>
                         <div className={`${namespace}__wrapper--title-artist`}>
                             <Components.Title />
