@@ -4,7 +4,8 @@ import Picobel, {
     PicobelProvider,
     PlayPause,
     Artist,
-    Title
+    Title,
+    CurrentTime
 } from "picobel/react";
 
 const container = document.getElementById("picobel-react-container");
@@ -15,8 +16,9 @@ root.render(
         <Picobel src="./audio-examples/taken-at-the-flood.mp3" />
         <hr />
         <h2>In a playlist</h2>
-        <PicobelProvider>
+        <PicobelProvider theme="bbc">
             <Picobel
+                theme="skeleton"
                 id="taken-at-the-flood"
                 src="./audio-examples/taken-at-the-flood.mp3"
                 title="Taken at the Flood"
@@ -24,6 +26,7 @@ root.render(
             />
 
             <Picobel
+                theme="none"
                 id="taken-at-the-flood-2"
                 src="./audio-examples/taken-at-the-flood.mp3"
                 title="Taken at the Flood"
@@ -32,9 +35,13 @@ root.render(
                 <Title />
                 <PlayPause />
                 <Artist />
+                <CurrentTime />
             </Picobel>
 
-            <Picobel src="./audio-examples/taken-at-the-flood.mp3" />
+            <Picobel
+                theme="none"
+                src="./audio-examples/taken-at-the-flood.mp3"
+            />
 
             <Picobel
                 src="./audio-examples/long-audio-example.mp3"
@@ -42,9 +49,11 @@ root.render(
                 artist="A Question of Code"
             />
 
-            <PlayPause trackKey="taken-at-the-flood" />
-            <PlayPause />
+            <PlayPause trackKey="taken-at-the-flood-2" />
+            {/* Example of using the PlayPause component without a trackKey */}
+            {/* <PlayPause /> */}
         </PicobelProvider>
-        <PlayPause trackKey="./audio-examples/taken-at-the-flood.mp3" />
+        {/* Example of using the PlayPause component outside of a Picobel instance */}
+        {/* <PlayPause trackKey="./audio-examples/taken-at-the-flood.mp3" /> */}
     </>
 );

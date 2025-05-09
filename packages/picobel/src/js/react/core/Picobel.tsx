@@ -83,6 +83,7 @@ export const Picobel: React.FC<PicobelProps> = ({
                             className={`${namespace}__wrapper--timer-progress-duration`}
                         >
                             <Components.CurrentTime />
+                            <Components.Progress />
                             <Components.Duration />
                         </div>
                     </>

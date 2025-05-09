@@ -36,9 +36,9 @@ export const Mute = ({
                 ["muted"]: isMuted
             })}
             onClick={handleToggleMute}
-            aria-label={isMuted ? "Mute" : "Unmute"}
+            aria-label={isMuted ? "Unute" : "Mute"}
         >
-            {isMuted ? "Mute" : "Unmute"}
+            {isMuted ? "Unmute" : "Mute"}
         </button>
     );
 };
