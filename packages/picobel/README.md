@@ -2,7 +2,7 @@
 
 <h1 align="center">Picobel.js</h1>
 
-<p align="center">v3.1.5</p>
+<p align="center">v3.2.1</p>
 
 <p align="center"><a href="https://github.com/tomhazledine/picobel/actions/workflows/tests.yml"><img src="https://github.com/tomhazledine/picobel/actions/workflows/tests.yml/badge.svg" alt="Picobel test status" style="max-width: 100%;"></a></p>
 
@@ -18,17 +18,17 @@ Picobel is a JavaScript utility, so you'll need to include the script somehow. T
 
 #### Install JS from [npm](https://www.npmjs.com/package/picobel)
 
-`npm install picobel` will install Picobel in your project and add Picobel into the `dependencies` section of your `package.json` file. 
+`npm install picobel` will install Picobel in your project and add Picobel into the `dependencies` section of your `package.json` file.
 
 ```js
 // Include Picobel in your project:
-import picobel from 'picobel';
+import picobel from "picobel";
 
 // Initialise picobel:
 picobel();
 
 // ...or initialise picobel with your chosen options:
-picobel({ theme: 'default' });
+picobel({ theme: "default" });
 ```
 
 #### Install JS manually
@@ -37,15 +37,15 @@ If you prefer not to use npm, you can include the Picobel build file directly.
 
 ```html
 <!-- Load Picobel -->
-<script type='text/javascript' src='picobel.min.js'></script>
-<script type='text/javascript'>
+<script type="text/javascript" src="picobel.min.js"></script>
+<script type="text/javascript">
     picobel();
 </script>
 ```
 
 ### CSS (optional)
 
-Picobel's primary aim is to provide structured markup for styling audio players. If you're commited to writing all your own CSS then you do not need to include any of the Picobel stylesheets (although feel free to [use the pre-made themes as inspiration](/themes) or as a jumping-off point for [writing your own styles](/styling)). 
+Picobel's primary aim is to provide structured markup for styling audio players. If you're commited to writing all your own CSS then you do not need to include any of the Picobel stylesheets (although feel free to [use the pre-made themes as inspiration](/themes) or as a jumping-off point for [writing your own styles](/styling)).
 
 But you don't **have** to write your own CSS. Picobel comes with several "pre made" themes that you can include.
 
@@ -55,7 +55,7 @@ Adding a theme is a two-step process:
 2. Be sure to inclde the relevant stylesheet in your project.
 
 ```js
-picobel({ theme: 'default' });
+picobel({ theme: "default" });
 ```
 
 You can find the CSS files for each theme in the [`/src/css` directory of the GitHub repo](https://github.com/tomhazledine/picobel/tree/main/src/css), along with minified production-ready versions [here](https://github.com/tomhazledine/picobel/tree/main/build). The filename convention is `picobel.THEME_NAME.css`.

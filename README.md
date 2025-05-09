@@ -1,10 +1,8 @@
-# Picobel
-
 <p align="center"><a href="https://github.com/tomhazledine/picobel" target="_blank"><img width="200"src="https://github.com/tomhazledine/picobel/blob/main/images/heroLogo.png"></a></p>
 
 <h1 align="center">Picobel.js</h1>
 
-<p align="center">v3.1.5</p>
+<p align="center">v3.2.1</p>
 
 <p align="center"><a href="https://github.com/tomhazledine/picobel/actions/workflows/tests.yml"><img src="https://github.com/tomhazledine/picobel/actions/workflows/tests.yml/badge.svg" alt="Picobel test status" style="max-width: 100%;"></a></p>
 
