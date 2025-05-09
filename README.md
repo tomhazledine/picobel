@@ -1,4 +1,6 @@
-# Picobel<p align="center"><a href="https://github.com/tomhazledine/picobel" target="_blank"><img width="200"src="https://github.com/tomhazledine/picobel/blob/main/images/heroLogo.png"></a></p>
+# Picobel
+
+<p align="center"><a href="https://github.com/tomhazledine/picobel" target="_blank"><img width="200"src="https://github.com/tomhazledine/picobel/blob/main/images/heroLogo.png"></a></p>
 
 <h1 align="center">Picobel.js</h1>
 
@@ -20,18 +22,18 @@ npm install picobel
 
 ```js
 // Include Picobel in your project:
-import picobel from 'picobel';
+import picobel from "picobel";
 
 // Initialise picobel:
 picobel();
 
 // ...or initialise picobel with your chosen options:
-picobel({ theme: 'default' });
+picobel({ theme: "default" });
 ```
 
 ---
 
 ## Packages
 
-* [picobel](packages/picobel/)
-* [demo](packages/demo)
+-   [picobel](packages/picobel/)
+-   [demo](packages/demo)
