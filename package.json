@@ -18,7 +18,7 @@
         "url": "git+https://github.com/tomhazledine/picobel.git"
     },
     "author": "Tom Hazledine <tom@tomhazledine.com> (https://tomhazledine.com)",
-    "license": "GPL-3.0",
+    "license": "MIT",
     "homepage": "https://github.com/tomhazledine/picobel#readme",
     "bugs": {
         "url": "https://github.com/tomhazledine/picobel/issues"
