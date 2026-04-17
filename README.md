@@ -29,9 +29,3 @@ picobel();
 picobel({ theme: "default" });
 ```
 
----
-
-## Packages
-
--   [picobel](packages/picobel/)
--   [demo](packages/demo)
