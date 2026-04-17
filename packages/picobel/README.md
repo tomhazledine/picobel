@@ -2,7 +2,7 @@
 
 <h1 align="center">Picobel.js</h1>
 
-<p align="center">v3.2.1</p>
+<p align="center"><a href="https://www.npmjs.com/package/picobel"><img src="https://img.shields.io/npm/v/picobel" alt="npm version"></a></p>
 
 <p align="center"><a href="https://github.com/tomhazledine/picobel/actions/workflows/tests.yml"><img src="https://github.com/tomhazledine/picobel/actions/workflows/tests.yml/badge.svg" alt="Picobel test status" style="max-width: 100%;"></a></p>
 
