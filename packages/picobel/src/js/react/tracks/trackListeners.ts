@@ -15,7 +15,7 @@ export const useTrackEventListeners = (
 
         // Set up event listeners for each track
         Object.entries(tracks).forEach(([id, track]) => {
-            const audioEl = track.audioRef.current;
+            const audioEl = track.audioRef?.current;
             if (!audioEl) return;
 
             // Time update handler
