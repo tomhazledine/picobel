@@ -13,7 +13,15 @@ class PicobelWC extends HTMLElement {
         const options: Options = { theme, context: this };
         const components = this.getAttribute("data-components");
         if (components) {
-            options.components = JSON.parse(components);
+            // Attributes are author input: a JSON typo must not break the
+            // player, so fall back to the theme's default components.
+            try {
+                options.components = JSON.parse(components);
+            } catch {
+                console.warn(
+                    `Picobel: ignoring invalid data-components attribute (not valid JSON): ${components}`
+                );
+            }
         }
         picobel(options);
     }
