@@ -41,6 +41,51 @@ describe("Picobel Web Component", () => {
         warn.mockRestore();
     });
 
+    it("tears down the player when removed from the DOM", () => {
+        const pause = jest
+            .spyOn(window.HTMLMediaElement.prototype, "pause")
+            .mockImplementation(() => {});
+
+        document.body.innerHTML =
+            '<picobel-player><audio src="test.mp3"></audio></picobel-player>';
+        const webComponent = document.querySelector(
+            "picobel-player"
+        ) as HTMLElement;
+        expect(webComponent.querySelector(".picobel")).not.toBeNull();
+
+        document.body.removeChild(webComponent);
+
+        // Player markup gone, original audio restored, playback stopped
+        expect(webComponent.querySelector(".picobel")).toBeNull();
+        expect(webComponent.querySelector("audio")).not.toBeNull();
+        expect(pause).toHaveBeenCalled();
+
+        pause.mockRestore();
+    });
+
+    it("re-initializes cleanly when re-appended to the DOM", () => {
+        const pause = jest
+            .spyOn(window.HTMLMediaElement.prototype, "pause")
+            .mockImplementation(() => {});
+
+        document.body.innerHTML =
+            '<picobel-player><audio src="test.mp3"></audio></picobel-player>';
+        const webComponent = document.querySelector(
+            "picobel-player"
+        ) as HTMLElement;
+
+        document.body.removeChild(webComponent);
+        document.body.appendChild(webComponent);
+
+        // Exactly one player: no doubling, no dead markup. The <audio>
+        // element is held detached while a player is active, so it should
+        // NOT be in the DOM after re-initialization.
+        expect(webComponent.querySelectorAll(".picobel").length).toBe(1);
+        expect(webComponent.querySelectorAll("audio").length).toBe(0);
+
+        pause.mockRestore();
+    });
+
     it("accepts theme configuration via attributes", () => {
         // Create a web component with a custom theme
         document.body.innerHTML =
