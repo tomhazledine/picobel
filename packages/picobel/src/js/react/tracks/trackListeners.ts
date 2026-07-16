@@ -1,6 +1,7 @@
 import { type Dispatch, type SetStateAction, useEffect } from "react";
-import { type TracksState } from "../core/types";
+
 import { convertToPercentage } from "../../utils/helpers";
+import { type TracksState } from "../core/types";
 
 export const useTrackEventListeners = (
     tracks: TracksState,

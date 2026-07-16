@@ -1,5 +1,6 @@
 import { type Dispatch, type SetStateAction } from "react";
-import { type TracksState, type TrackMetadata } from "../core/types";
+
+import { type TrackMetadata,type TracksState } from "../core/types";
 
 // Functions for audio controls
 export const createTrackControls = (
