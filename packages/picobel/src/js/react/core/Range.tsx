@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React, { useEffect,useState } from "react";
+import React, { useState } from "react";
 
 type RangeOptions = {
     namespace: string;
@@ -19,6 +19,9 @@ const calculatePercentageComplete = (
     min: number,
     max: number
 ) => {
+    // Guard the empty range (e.g. duration still 0/NaN before the audio's
+    // metadata loads): 0/0 is NaN, which would end up as `width: NaN%`.
+    if (max - min === 0 || !Number.isFinite(max - min)) return 0;
     return ((value - min) / (max - min)) * 100;
 };
 
@@ -36,14 +39,11 @@ export const Range = ({
 }: RangeOptions) => {
     const rangeId = `${namespace}-slider__range--${trackKey}`;
 
-    const [percentageComplete, setPercentageComplete] = useState(
-        calculatePercentageComplete(value, min, max)
-    );
+    // Derived from props — computed during render. Mirroring this into
+    // state with a syncing effect (the old approach) costs an extra
+    // render per update and can flash a stale value.
+    const percentageComplete = calculatePercentageComplete(value, min, max);
     const [focus, setFocus] = useState(false);
-
-    useEffect(() => {
-        setPercentageComplete(calculatePercentageComplete(value, min, max));
-    }, [value, min, max]);
 
     const handleFocus = () => setFocus(true);
 
