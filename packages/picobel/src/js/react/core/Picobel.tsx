@@ -1,5 +1,5 @@
 import classnames from "classnames";
-import React, { useEffect,useRef } from "react";
+import React, { useEffect, useMemo, useRef, useSyncExternalStore } from "react";
 
 import { getFileName } from "../../utils/helpers";
 import * as Components from "../components/";
@@ -28,10 +28,9 @@ export const Picobel: React.FC<PicobelProps> = ({
     const id = providedId || src;
     const title = providedTitle || getFileName(src);
 
-    const metadata = {
-        title,
-        artist
-    };
+    // Memoized so the register effect below can list it as a dependency
+    // without re-registering on every render.
+    const metadata = useMemo(() => ({ title, artist }), [title, artist]);
 
     // Audio element reference
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -57,17 +56,16 @@ export const Picobel: React.FC<PicobelProps> = ({
             audioEl?.pause();
             context.unregisterTrack(id);
         };
-        // `context` and `metadata` are rebuilt on every render, so listing
-        // them would re-register the track (and reset its state) constantly.
-        // Metadata updates have their own path (updateTrackMetadata).
-        // TODO(Task 12): a stable context makes this disable unnecessary.
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id, src, namespace]);
+    }, [context, id, src, metadata, namespace]);
 
-    // Get current player state. Before the mount effect has registered
-    // the track there is no state yet — treat that as still loading.
-    const isPlaying = context.isTrackPlaying(id);
-    const fileStatus = context.getTrackState(id)?.fileStatus ?? "pending";
+    // Subscribe to this track's slice of the store — re-renders only
+    // when OUR track's state object changes. Before the mount effect has
+    // registered the track there is no state yet: treat as still loading.
+    const track = useSyncExternalStore(context.store.subscribe, () =>
+        context.store.getState().tracks[id]
+    );
+    const isPlaying = track?.isPlaying ?? false;
+    const fileStatus = track?.fileStatus ?? "pending";
 
     return (
         <div

@@ -1,48 +1,47 @@
-import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 import { convertToPercentage } from "../../utils/helpers";
-import { type TrackInfo, type TracksState } from "../core/types";
+import { type PicobelStore, type TrackInfo } from "../core/types";
 
 /**
  * Attach media-event listeners for every registered track.
  *
- * Listeners attach ONCE per (track id, audio element) pair. The effect
- * runs whenever `tracks` changes, but instead of tearing everything down
- * and re-attaching (which, with handlers that themselves update `tracks`,
- * meant every listener churned on every timeupdate), it reconciles:
- * detach only tracks that disappeared or whose element was replaced,
- * attach only new ones — the same "diff against desired state" idea React
- * applies to the DOM.
+ * Listeners attach ONCE per (track id, audio element) pair. Registration
+ * changes are observed by subscribing to the store directly — no React
+ * re-renders involved — and reconciled: detach only tracks that
+ * disappeared or whose element was replaced, attach only new ones. The
+ * same "diff against desired state" idea React applies to the DOM.
  *
- * Handlers read the element (not React state) and write exclusively via
- * functional updaters, so they never go stale no matter how long the
- * listeners live.
+ * Handlers read the audio element (not captured state) and write through
+ * store.setState, so they never go stale however long they live.
  */
-export const useTrackEventListeners = (
-    tracks: TracksState,
-    setTracks: Dispatch<SetStateAction<TracksState>>,
-    currentlyPlayingId: string | null,
-    setCurrentlyPlayingId: Dispatch<SetStateAction<string | null>>
-) => {
-    // Which element each track id currently has listeners on, plus the
-    // AbortController that detaches them all in one call.
-    const attached = useRef(
-        new Map<
+export const useTrackEventListeners = (store: PicobelStore) => {
+    useEffect(() => {
+        const attached = new Map<
             string,
             { audioEl: HTMLAudioElement; controller: AbortController }
-        >()
-    );
-
-    useEffect(() => {
-        const current = attached.current;
+        >();
 
         const attachListeners = (id: string, audioEl: HTMLAudioElement) => {
             // Patch one track's state; a guard drops events that arrive
             // after the track has unregistered.
             const patchTrack = (patch: Partial<TrackInfo>) =>
-                setTracks(prev =>
-                    prev[id]
-                        ? { ...prev, [id]: { ...prev[id], ...patch } }
+                store.setState(prev =>
+                    prev.tracks[id]
+                        ? {
+                              ...prev,
+                              tracks: {
+                                  ...prev.tracks,
+                                  [id]: { ...prev.tracks[id], ...patch }
+                              }
+                          }
+                        : prev
+                );
+
+            const clearCurrentIfOurs = () =>
+                store.setState(prev =>
+                    prev.currentlyPlayingId === id
+                        ? { ...prev, currentlyPlayingId: null }
                         : prev
                 );
 
@@ -70,7 +69,7 @@ export const useTrackEventListeners = (
                 "ended",
                 () => {
                     patchTrack({ isPlaying: false, currentTime: 0 });
-                    setCurrentlyPlayingId(cur => (cur === id ? null : cur));
+                    clearCurrentIfOurs();
                 },
                 { signal }
             );
@@ -78,8 +77,20 @@ export const useTrackEventListeners = (
             audioEl.addEventListener(
                 "play",
                 () => {
-                    patchTrack({ isPlaying: true });
-                    setCurrentlyPlayingId(id);
+                    store.setState(prev =>
+                        prev.tracks[id]
+                            ? {
+                                  currentlyPlayingId: id,
+                                  tracks: {
+                                      ...prev.tracks,
+                                      [id]: {
+                                          ...prev.tracks[id],
+                                          isPlaying: true
+                                      }
+                                  }
+                              }
+                            : prev
+                    );
                 },
                 { signal }
             );
@@ -88,7 +99,7 @@ export const useTrackEventListeners = (
                 "pause",
                 () => {
                     patchTrack({ isPlaying: false });
-                    setCurrentlyPlayingId(cur => (cur === id ? null : cur));
+                    clearCurrentIfOurs();
                 },
                 { signal }
             );
@@ -130,33 +141,37 @@ export const useTrackEventListeners = (
                 { signal }
             );
 
-            current.set(id, { audioEl, controller });
+            attached.set(id, { audioEl, controller });
         };
 
-        // Detach tracks that unregistered or whose element was replaced
-        for (const [id, entry] of current) {
-            const liveElement = tracks[id]?.audioRef?.current;
-            if (liveElement !== entry.audioEl) {
-                entry.controller.abort();
-                current.delete(id);
-            }
-        }
+        const reconcile = () => {
+            const { tracks } = store.getState();
 
-        // Attach new tracks (or replaced elements)
-        Object.entries(tracks).forEach(([id, track]) => {
-            const audioEl = track.audioRef?.current;
-            if (audioEl && !current.has(id)) {
-                attachListeners(id, audioEl);
+            // Detach tracks that unregistered or whose element was replaced
+            for (const [id, entry] of attached) {
+                const liveElement = tracks[id]?.audioRef?.current;
+                if (liveElement !== entry.audioEl) {
+                    entry.controller.abort();
+                    attached.delete(id);
+                }
             }
-        });
-    }, [tracks, setTracks, setCurrentlyPlayingId]);
 
-    // Detach everything when the provider itself unmounts.
-    useEffect(() => {
-        const current = attached.current;
+            // Attach new tracks (or replaced elements)
+            Object.entries(tracks).forEach(([id, track]) => {
+                const audioEl = track.audioRef?.current;
+                if (audioEl && !attached.has(id)) {
+                    attachListeners(id, audioEl);
+                }
+            });
+        };
+
+        reconcile();
+        const unsubscribe = store.subscribe(reconcile);
+
         return () => {
-            current.forEach(({ controller }) => controller.abort());
-            current.clear();
+            unsubscribe();
+            attached.forEach(({ controller }) => controller.abort());
+            attached.clear();
         };
-    }, []);
+    }, [store]);
 };

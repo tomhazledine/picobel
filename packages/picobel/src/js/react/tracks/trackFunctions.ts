@@ -1,14 +1,9 @@
-import { type Dispatch, type SetStateAction } from "react";
+import type { PicobelStore, RegisterTrackProps } from "../core/types";
 
-import type { RegisterTrackProps, TracksState } from "../core/types";
-
-// Functions for track management
-export const createTrackFunctions = (
-    tracks: TracksState,
-    setTracks: Dispatch<SetStateAction<TracksState>>,
-    currentlyPlayingId: string | null,
-    setCurrentlyPlayingId: Dispatch<SetStateAction<string | null>>
-) => {
+// Functions for track management. Built once per store: every function
+// reads the store's CURRENT state when called, so none of them can go
+// stale — unlike closures over render-scoped state.
+export const createTrackFunctions = (store: PicobelStore) => {
     // Helper function to register a new track
     const registerTrack = ({
         id,
@@ -17,43 +12,47 @@ export const createTrackFunctions = (
         metadata,
         namespace
     }: RegisterTrackProps) => {
-        setTracks(prev => ({
+        store.setState(prev => ({
             ...prev,
-            [id]: {
-                audioRef,
-                src,
-                isPlaying: false,
-                currentTime: 0,
-                duration: 0,
-                isLoaded: false,
-                volume: 1,
-                muted: false,
-                fileStatus: "pending",
-                metadata,
-                namespace,
-                buffered: []
+            tracks: {
+                ...prev.tracks,
+                [id]: {
+                    audioRef,
+                    src,
+                    isPlaying: false,
+                    currentTime: 0,
+                    duration: 0,
+                    isLoaded: false,
+                    volume: 1,
+                    muted: false,
+                    fileStatus: "pending" as const,
+                    metadata,
+                    namespace,
+                    buffered: []
+                }
             }
         }));
     };
 
-    // Helper function to unregister a track. Uses functional updaters
-    // only: this runs from effect cleanups, whose closures see the state
-    // from the render that created them — reading `tracks` or
-    // `currentlyPlayingId` here would act on stale values. (Pausing the
-    // audio is the owning component's job: it holds the ref.)
+    // Helper function to unregister a track. (Pausing the audio is the
+    // owning component's job: it holds the ref.)
     const unregisterTrack = (id: string) => {
-        setTracks(prev => {
-            const newTracks = { ...prev };
-            delete newTracks[id];
-            return newTracks;
+        store.setState(prev => {
+            const tracks = { ...prev.tracks };
+            delete tracks[id];
+            return {
+                tracks,
+                currentlyPlayingId:
+                    prev.currentlyPlayingId === id
+                        ? null
+                        : prev.currentlyPlayingId
+            };
         });
-
-        setCurrentlyPlayingId(current => (current === id ? null : current));
     };
 
     // Play a specific audio element
     const playTrack = (id: string) => {
-        const track = tracks[id];
+        const track = store.getState().tracks[id];
         if (track?.audioRef.current) {
             // Pause other tracks first
             pauseAllExcept(id);
@@ -63,13 +62,11 @@ export const createTrackFunctions = (
                 console.error("Error playing audio:", error);
             });
 
-            // Update state
-            setCurrentlyPlayingId(id);
-            setTracks(prev => ({
-                ...prev,
-                [id]: {
-                    ...prev[id],
-                    isPlaying: true
+            store.setState(prev => ({
+                currentlyPlayingId: id,
+                tracks: {
+                    ...prev.tracks,
+                    [id]: { ...prev.tracks[id], isPlaying: true }
                 }
             }));
         }
@@ -77,28 +74,26 @@ export const createTrackFunctions = (
 
     // Pause a specific audio element
     const pauseTrack = (id: string) => {
-        const track = tracks[id];
+        const track = store.getState().tracks[id];
         if (track?.audioRef.current) {
             track.audioRef.current.pause();
 
-            setTracks(prev => ({
-                ...prev,
-                [id]: {
-                    ...prev[id],
-                    isPlaying: false
+            store.setState(prev => ({
+                currentlyPlayingId:
+                    prev.currentlyPlayingId === id
+                        ? null
+                        : prev.currentlyPlayingId,
+                tracks: {
+                    ...prev.tracks,
+                    [id]: { ...prev.tracks[id], isPlaying: false }
                 }
             }));
-
-            // Only reset current track if this was the current track
-            if (currentlyPlayingId === id) {
-                setCurrentlyPlayingId(null);
-            }
         }
     };
 
     // Toggle play/pause for a specific audio element
     const togglePlayPause = (id: string) => {
-        const track = tracks[id];
+        const track = store.getState().tracks[id];
         if (track?.audioRef.current) {
             if (track.isPlaying) {
                 pauseTrack(id);
@@ -110,37 +105,40 @@ export const createTrackFunctions = (
 
     // Stop a specific audio element (pause and reset to beginning)
     const stopTrack = (id: string) => {
-        const track = tracks[id];
+        const track = store.getState().tracks[id];
         if (track?.audioRef.current) {
             track.audioRef.current.pause();
             track.audioRef.current.currentTime = 0;
 
-            setTracks(prev => ({
-                ...prev,
-                [id]: {
-                    ...prev[id],
-                    isPlaying: false,
-                    currentTime: 0
+            store.setState(prev => ({
+                currentlyPlayingId:
+                    prev.currentlyPlayingId === id
+                        ? null
+                        : prev.currentlyPlayingId,
+                tracks: {
+                    ...prev.tracks,
+                    [id]: {
+                        ...prev.tracks[id],
+                        isPlaying: false,
+                        currentTime: 0
+                    }
                 }
             }));
-
-            if (currentlyPlayingId === id) {
-                setCurrentlyPlayingId(null);
-            }
         }
     };
 
     // Helper function to pause all tracks except one
     const pauseAllExcept = (exceptId: string) => {
+        const { tracks } = store.getState();
         Object.entries(tracks).forEach(([id, track]) => {
             if (id !== exceptId && track.audioRef.current && track.isPlaying) {
                 track.audioRef.current.pause();
 
-                setTracks(prev => ({
+                store.setState(prev => ({
                     ...prev,
-                    [id]: {
-                        ...prev[id],
-                        isPlaying: false
+                    tracks: {
+                        ...prev.tracks,
+                        [id]: { ...prev.tracks[id], isPlaying: false }
                     }
                 }));
             }

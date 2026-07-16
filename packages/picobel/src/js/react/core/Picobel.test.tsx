@@ -5,17 +5,23 @@ import { Picobel } from "./Picobel";
 import { PicobelProvider, usePicobel } from "./provider";
 
 // Small probe rendered alongside the players so tests can observe the
-// provider's state from outside an unmounted subtree.
+// provider's state from outside an unmounted subtree. Subscribes via
+// the store: the context object itself is stable, so imperative reads
+// during render would never update.
 const Probe = () => {
-    const context = usePicobel();
+    const context = usePicobel()!;
+    const currentId = React.useSyncExternalStore(
+        context.store.subscribe,
+        () => context.store.getState().currentlyPlayingId
+    );
+    const trackIds = React.useSyncExternalStore(
+        context.store.subscribe,
+        () => Object.keys(context.store.getState().tracks).join(",")
+    );
     return (
         <>
-            <div data-testid="current-id">
-                {String(context!.getCurrentlyPlayingId())}
-            </div>
-            <div data-testid="track-ids">
-                {Object.keys(context!.getAllTracks()).join(",")}
-            </div>
+            <div data-testid="current-id">{String(currentId)}</div>
+            <div data-testid="track-ids">{trackIds}</div>
         </>
     );
 };

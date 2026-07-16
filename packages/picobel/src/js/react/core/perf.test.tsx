@@ -111,8 +111,7 @@ describe("render and listener behavior while one track plays", () => {
         expect(listenerAdds).toBe(0);
     });
 
-    // Same deal: flips to a normal `it` in Task 12.
-    it.failing("does not re-render idle sibling players", () => {
+    it("does not re-render idle sibling players", () => {
         const { playingRenders, siblingRenders } = runPlaybackScenario();
 
         // The playing player must keep updating (its timer/progress move)…
