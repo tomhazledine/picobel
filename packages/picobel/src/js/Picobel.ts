@@ -1,6 +1,6 @@
 import { loadedmetadata } from "./core/audio-functions";
 import { type AudioElement, findAudio, getRawData } from "./core/data";
-import { _setupLocalListeners } from "./core/events";
+import { _setupLocalListeners, removeLocalListeners } from "./core/events";
 import { parseOptions } from "./core/setup";
 import { elementHooks,generateMarkup } from "./markup";
 import { type ComponentGroup, type Options } from "./types";
@@ -79,5 +79,22 @@ export const picobel = (rawOptions: Options = {}) => {
         }
     });
 
-    return { state };
+    // Undo everything: stop playback, detach all listeners, and swap the
+    // player markup back out for the original <audio> elements. Without
+    // this, removing a player's DOM leaves a detached-but-playing audio
+    // element with no remaining handle to stop it.
+    const destroy = () => {
+        state.audioNodes.forEach(node => {
+            node.pause();
+            removeLocalListeners(node);
+            const wrapper = node.elements?.wrapper;
+            if (wrapper?.parentNode) {
+                wrapper.parentNode.replaceChild(node, wrapper);
+            }
+            delete node.elements;
+        });
+        state.audioNodes = [];
+    };
+
+    return { state, destroy };
 };
