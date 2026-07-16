@@ -20,11 +20,39 @@ describe("Utilities", () => {
         ).toEqual("mp3");
     });
 
+    it("gets the filetype from a filename containing dots", () => {
+        expect(getFileType("music/my.favourite.song.mp3")).toEqual("mp3");
+    });
+
+    it("gets the filetype from a url with a query string or hash", () => {
+        expect(getFileType("song.mp3?v=2")).toEqual("mp3");
+        expect(getFileType("song.mp3#t=30")).toEqual("mp3");
+    });
+
+    it("returns an empty filetype when there is no extension", () => {
+        expect(getFileType("music/song")).toEqual("");
+    });
+
     it("gets the file name from a url", () => {
         expect(
             getFileName(
                 "http://audio.eatenbymonsters.com/reviews/daughter/human.mp3"
             )
         ).toEqual("human");
+    });
+
+    it("gets the file name from a filename containing dots", () => {
+        expect(getFileName("music/my.favourite.song.mp3")).toEqual(
+            "my.favourite.song"
+        );
+    });
+
+    it("gets the file name from a url with a query string or hash", () => {
+        expect(getFileName("song.mp3?v=2")).toEqual("song");
+        expect(getFileName("song.mp3#t=30")).toEqual("song");
+    });
+
+    it("returns the whole name when there is no extension", () => {
+        expect(getFileName("music/song")).toEqual("song");
     });
 });

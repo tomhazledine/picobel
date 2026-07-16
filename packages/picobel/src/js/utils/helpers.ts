@@ -19,18 +19,24 @@ export const parseTime = (seconds: number): string => {
     return parsedTime;
 };
 
+// Extract the final path segment, ignoring any query string or hash.
+const getFullFileName = (string: string): string => {
+    const path = string.split(/[?#]/)[0];
+    return path.replace(/^.*[\\/]/, "");
+};
+
 // Get File Type
 export const getFileType = (string: string): string => {
-    const fullFileName = string.replace(/^.*[\\/]/, "");
-    const extension = fullFileName.split(".")[1];
-    return extension;
+    const fullFileName = getFullFileName(string);
+    const dotIndex = fullFileName.lastIndexOf(".");
+    return dotIndex > 0 ? fullFileName.slice(dotIndex + 1) : "";
 };
 
 // Get File Name
 export const getFileName = (string: string): string => {
-    const fullFileName = string.replace(/^.*[\\/]/, "");
-    const withNoExtension = fullFileName.split(".")[0];
-    return withNoExtension;
+    const fullFileName = getFullFileName(string);
+    const dotIndex = fullFileName.lastIndexOf(".");
+    return dotIndex > 0 ? fullFileName.slice(0, dotIndex) : fullFileName;
 };
 
 export const convertToPercentage = (
