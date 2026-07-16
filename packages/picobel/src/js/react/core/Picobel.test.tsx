@@ -81,6 +81,41 @@ describe("Picobel React lifecycle", () => {
         expect(screen.getByTestId("track-ids").textContent).toBe("");
     });
 
+    it("shows the loading state until the audio can play", () => {
+        const { container } = render(
+            <PicobelProvider>
+                <Picobel src="test.mp3" />
+            </PicobelProvider>
+        );
+        const player = container.querySelector(".picobel")!;
+        const audio = container.querySelector("audio")!;
+
+        expect(player.classList.contains("loading")).toBe(true);
+
+        act(() => {
+            audio.dispatchEvent(new Event("canplay"));
+        });
+
+        expect(player.classList.contains("loading")).toBe(false);
+    });
+
+    it("shows the error state when the audio fails to load", () => {
+        const { container } = render(
+            <PicobelProvider>
+                <Picobel src="test.mp3" />
+            </PicobelProvider>
+        );
+        const player = container.querySelector(".picobel")!;
+        const audio = container.querySelector("audio")!;
+
+        act(() => {
+            audio.dispatchEvent(new Event("error"));
+        });
+
+        expect(player.classList.contains("error")).toBe(true);
+        expect(player.classList.contains("loading")).toBe(false);
+    });
+
     it("re-registers the track when src changes", () => {
         const { rerender } = render(
             <PicobelProvider>

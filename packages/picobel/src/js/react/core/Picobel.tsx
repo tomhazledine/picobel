@@ -64,15 +64,18 @@ export const Picobel: React.FC<PicobelProps> = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, src, namespace]);
 
-    // Get current player state
+    // Get current player state. Before the mount effect has registered
+    // the track there is no state yet — treat that as still loading.
     const isPlaying = context.isTrackPlaying(id);
+    const fileStatus = context.getTrackState(id)?.fileStatus ?? "pending";
 
     return (
         <div
             className={classnames(
                 "picobel",
                 namespace,
-                { ["loading"]: context.fileStatus === "pending" },
+                { ["loading"]: fileStatus === "pending" },
+                { ["error"]: fileStatus === "error" },
                 { ["playing"]: isPlaying },
                 className
             )}

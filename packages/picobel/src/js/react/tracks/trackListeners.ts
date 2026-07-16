@@ -37,7 +37,42 @@ export const useTrackEventListeners = (
                     [id]: {
                         ...prev[id],
                         duration: audioEl.duration,
-                        isLoaded: true
+                        isLoaded: true,
+                        fileStatus: "loaded" as const
+                    }
+                }));
+            };
+
+            // File-loading lifecycle handlers. The media element moves
+            // through loadstart → (metadata/data events) → canplay, with
+            // error as the failure branch; fileStatus mirrors that state
+            // machine for the UI (loading spinner / error styling).
+            const handleLoadStart = () => {
+                setTracks(prev => ({
+                    ...prev,
+                    [id]: {
+                        ...prev[id],
+                        fileStatus: "pending" as const
+                    }
+                }));
+            };
+
+            const handleCanPlay = () => {
+                setTracks(prev => ({
+                    ...prev,
+                    [id]: {
+                        ...prev[id],
+                        fileStatus: "loaded" as const
+                    }
+                }));
+            };
+
+            const handleLoadError = () => {
+                setTracks(prev => ({
+                    ...prev,
+                    [id]: {
+                        ...prev[id],
+                        fileStatus: "error" as const
                     }
                 }));
             };
@@ -121,6 +156,9 @@ export const useTrackEventListeners = (
             audioEl.addEventListener("play", handlePlay);
             audioEl.addEventListener("pause", handlePause);
             audioEl.addEventListener("progress", handleProgress);
+            audioEl.addEventListener("loadstart", handleLoadStart);
+            audioEl.addEventListener("canplay", handleCanPlay);
+            audioEl.addEventListener("error", handleLoadError);
 
             // Add cleanup function for this track
             cleanupListeners.push(() => {
@@ -134,6 +172,9 @@ export const useTrackEventListeners = (
                     audioEl.removeEventListener("play", handlePlay);
                     audioEl.removeEventListener("pause", handlePause);
                     audioEl.removeEventListener("progress", handleProgress);
+                    audioEl.removeEventListener("loadstart", handleLoadStart);
+                    audioEl.removeEventListener("canplay", handleCanPlay);
+                    audioEl.removeEventListener("error", handleLoadError);
                 }
             });
         });
