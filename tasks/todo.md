@@ -10,11 +10,14 @@ Rule: one task per commit, failing test first, suite green before ticking.
 - [x] ✅ Checkpoint 1: lint + typecheck + 33 tests green (also fixed 8 pre-existing lint errors, a3adb48)
 
 ## Phase 2 — Vanilla lifecycle & memory leaks
-- [ ] 4. AbortController-based listeners; remove no-op `removeEventListener`
-- [ ] 5. `destroy()` API on `picobel()` (pause, abort, restore original audio)
-- [ ] 6. `disconnectedCallback` in web component (uses destroy)
-- [ ] 7. Fix index collisions — capture element refs at build time
+- [x] 4. AbortController-based listeners; remove no-op `removeEventListener` (2fabdd9)
+- [x] 5. `destroy()` API on `picobel()` (pause, abort, restore original audio) (76bd6db)
+- [x] 6. `disconnectedCallback` in web component (uses destroy) (2343981)
+- [x] 7. Fix index collisions — capture element refs at build time (d9b133c)
 - [ ] ✅ Checkpoint 2: DevTools leak verification (getEventListeners, heap snapshot, detached nodes)
+      — automated checks green (44 tests); manual browser steps pending human run
+      — bonus: demo build fixed for Node 22+ import attributes (e783e38)
+      — note: README instructs hot-linking build/ from GitHub ⇒ answers Q1: artifacts ARE load-bearing
 
 ## Phase 3 — React correctness
 - [ ] 8. Fix stale-closure unmount cleanup; enable `exhaustive-deps` lint
