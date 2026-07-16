@@ -1,9 +1,9 @@
-import { type ComponentGroup, type Options } from "./types";
-import { parseOptions } from "./core/setup";
-import { type AudioElement, findAudio, getRawData } from "./core/data";
-import { generateMarkup, elementHooks } from "./markup";
-import { _setupLocalListeners } from "./core/events";
 import { loadedmetadata } from "./core/audio-functions";
+import { type AudioElement, findAudio, getRawData } from "./core/data";
+import { _setupLocalListeners } from "./core/events";
+import { parseOptions } from "./core/setup";
+import { elementHooks,generateMarkup } from "./markup";
+import { type ComponentGroup, type Options } from "./types";
 
 /**
  * ---------------------------------------------------------------------------
@@ -35,7 +35,7 @@ export const picobel = (rawOptions: Options = {}) => {
     const options = parseOptions(rawOptions);
 
     // Declare a `state` variable that will hold the active state
-    let state = {
+    const state = {
         audioNodes: [] as AudioElement[],
         theme: options.theme,
         components: options.components as ComponentGroup[]

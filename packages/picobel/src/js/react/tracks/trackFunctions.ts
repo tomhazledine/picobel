@@ -1,9 +1,6 @@
-import { type Dispatch, type RefObject, type SetStateAction } from "react";
-import type {
-    TracksState,
-    TrackMetadata,
-    RegisterTrackProps
-} from "../core/types";
+import { type Dispatch, type SetStateAction } from "react";
+
+import type { RegisterTrackProps, TracksState } from "../core/types";
 
 // Functions for track management
 export const createTrackFunctions = (
