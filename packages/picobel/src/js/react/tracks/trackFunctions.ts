@@ -35,24 +35,19 @@ export const createTrackFunctions = (
         }));
     };
 
-    // Helper function to unregister a track
+    // Helper function to unregister a track. Uses functional updaters
+    // only: this runs from effect cleanups, whose closures see the state
+    // from the render that created them — reading `tracks` or
+    // `currentlyPlayingId` here would act on stale values. (Pausing the
+    // audio is the owning component's job: it holds the ref.)
     const unregisterTrack = (id: string) => {
-        const track = tracks[id];
-
-        // Ensure we pause the audio if it's playing
-        if (track?.isPlaying && track.audioRef.current) {
-            track.audioRef.current.pause();
-        }
-
         setTracks(prev => {
             const newTracks = { ...prev };
             delete newTracks[id];
             return newTracks;
         });
 
-        if (currentlyPlayingId === id) {
-            setCurrentlyPlayingId(null);
-        }
+        setCurrentlyPlayingId(current => (current === id ? null : current));
     };
 
     // Play a specific audio element

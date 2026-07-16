@@ -1,6 +1,5 @@
-import { PicobelProvider, usePicobel } from "./provider";
-
 import Picobel, { type PicobelProps } from "./Picobel";
+import { PicobelProvider, usePicobel } from "./provider";
 
 const PicobelWrapper = (props: PicobelProps) => {
     const picobelContext = usePicobel();

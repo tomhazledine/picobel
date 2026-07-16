@@ -4,6 +4,7 @@ import tsParser from '@typescript-eslint/parser';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -28,6 +29,7 @@ export default [
   {
     plugins: {
       react,
+      'react-hooks': reactHooks,
       '@typescript-eslint': typescriptEslint,
       'simple-import-sort': simpleImportSort,
     },
@@ -68,7 +70,8 @@ export default [
       'no-unsafe-optional-chaining': 'off',
       'simple-import-sort/imports': 'error',
       '@typescript-eslint/consistent-type-imports': 'error',
-      'react-hooks/rules-of-hooks': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'error',
     },
   },
 

@@ -1,7 +1,7 @@
 import classnames from "classnames";
 
-import { useTrackState } from "../core/useTrackState";
 import { parseTime } from "../../utils/helpers";
+import { useTrackState } from "../core/useTrackState";
 
 export const CurrentTime = ({
     trackKey,
