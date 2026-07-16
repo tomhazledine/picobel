@@ -42,7 +42,7 @@ export const stop = node => {
     buttonText.innerHTML = "Play";
 };
 
-export const triggerUpdateProgress = event => updateProgress(event.srcElement);
+export const triggerUpdateProgress = event => updateProgress(event.target);
 
 export const updateProgress = node => {
     const progress = node.currentTime;
@@ -82,7 +82,7 @@ export const errors = node => {
 
 export const sliderScrub = (event, node) => {
     const duration = node.duration;
-    const targetTime = duration * (event.srcElement.value / 100);
+    const targetTime = duration * (event.target.value / 100);
     const targetTimeFixed = targetTime.toFixed(2);
     node.currentTime = targetTimeFixed;
     updateProgress(node);
@@ -92,7 +92,7 @@ export const sliderFocus = (node, focus) =>
     node.elements.progressWrapper.classList.toggle("focus", focus);
 
 export const volume = (event, node) => {
-    const volume = event.srcElement.value;
+    const volume = event.target.value;
     node.tmpVolume = node.volume;
     node.mute = false;
     mute(node);

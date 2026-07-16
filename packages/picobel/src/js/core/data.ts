@@ -62,19 +62,3 @@ export const getMeta = (item: AudioElement): Meta => {
     const artist = item.dataset?.artist ? item.dataset.artist : false;
     return { url, fileType, fileName, title, artist };
 };
-
-export const checkURL = async (url: string): Promise<boolean | null> => {
-    try {
-        const response = await fetch(url);
-        console.log({ url, response });
-        return response.ok; // URL is valid and reachable
-    } catch (error) {
-        if (error instanceof Error) {
-            console.error(error.message);
-        } else {
-            console.error("Unknown error");
-        }
-        // Handle the error accordingly (e.g., set an error state or use a fallback URL)
-        return null; // Indicate failure
-    }
-};

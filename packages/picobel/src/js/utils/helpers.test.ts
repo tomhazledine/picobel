@@ -12,6 +12,13 @@ describe("Utilities", () => {
         expect(parseTime(3846)).toEqual("1:04:06");
     });
 
+    it("returns a placeholder for non-finite durations", () => {
+        // duration is NaN until the audio's metadata has loaded
+        expect(parseTime(NaN)).toEqual("0:00");
+        expect(parseTime(Infinity)).toEqual("0:00");
+        expect(parseTime(undefined as unknown as number)).toEqual("0:00");
+    });
+
     it("gets the filetype from a url", () => {
         expect(
             getFileType(
