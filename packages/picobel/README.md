@@ -29,6 +29,20 @@ picobel();
 picobel({ theme: "default" });
 ```
 
+#### Cleaning up
+
+`picobel()` returns an instance with a `destroy()` method. Call it if you
+ever need to remove the players (for example before a client-side
+navigation): it stops playback, removes all event listeners, and puts the
+original `<audio>` elements back in the document.
+
+```js
+const players = picobel();
+
+// ...later:
+players.destroy();
+```
+
 ### React
 
 ```js
