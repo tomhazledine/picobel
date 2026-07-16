@@ -106,10 +106,7 @@ describe("render and listener behavior while one track plays", () => {
         return measurements;
     };
 
-    // `it.failing` = the current architecture is known to fail this spec;
-    // jest goes red if it unexpectedly starts PASSING. When the fix lands
-    // (Task 11), remove `.failing` so it becomes a regression guard.
-    it.failing("attaches media listeners once, not per state change", () => {
+    it("attaches media listeners once, not per state change", () => {
         const { listenerAdds } = runPlaybackScenario();
         expect(listenerAdds).toBe(0);
     });

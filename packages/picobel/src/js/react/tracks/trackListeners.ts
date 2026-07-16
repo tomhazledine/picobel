@@ -1,187 +1,162 @@
-import { type Dispatch, type SetStateAction, useEffect } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
 
 import { convertToPercentage } from "../../utils/helpers";
-import { type TracksState } from "../core/types";
+import { type TrackInfo, type TracksState } from "../core/types";
 
+/**
+ * Attach media-event listeners for every registered track.
+ *
+ * Listeners attach ONCE per (track id, audio element) pair. The effect
+ * runs whenever `tracks` changes, but instead of tearing everything down
+ * and re-attaching (which, with handlers that themselves update `tracks`,
+ * meant every listener churned on every timeupdate), it reconciles:
+ * detach only tracks that disappeared or whose element was replaced,
+ * attach only new ones — the same "diff against desired state" idea React
+ * applies to the DOM.
+ *
+ * Handlers read the element (not React state) and write exclusively via
+ * functional updaters, so they never go stale no matter how long the
+ * listeners live.
+ */
 export const useTrackEventListeners = (
     tracks: TracksState,
     setTracks: Dispatch<SetStateAction<TracksState>>,
     currentlyPlayingId: string | null,
     setCurrentlyPlayingId: Dispatch<SetStateAction<string | null>>
 ) => {
-    // Set up event listeners for all tracks
+    // Which element each track id currently has listeners on, plus the
+    // AbortController that detaches them all in one call.
+    const attached = useRef(
+        new Map<
+            string,
+            { audioEl: HTMLAudioElement; controller: AbortController }
+        >()
+    );
+
     useEffect(() => {
-        // Clean up function to remove all event listeners
-        const cleanupListeners: (() => void)[] = [];
+        const current = attached.current;
 
-        // Set up event listeners for each track
-        Object.entries(tracks).forEach(([id, track]) => {
-            const audioEl = track.audioRef?.current;
-            if (!audioEl) return;
+        const attachListeners = (id: string, audioEl: HTMLAudioElement) => {
+            // Patch one track's state; a guard drops events that arrive
+            // after the track has unregistered.
+            const patchTrack = (patch: Partial<TrackInfo>) =>
+                setTracks(prev =>
+                    prev[id]
+                        ? { ...prev, [id]: { ...prev[id], ...patch } }
+                        : prev
+                );
 
-            // Time update handler
-            const handleTimeUpdate = () => {
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
-                        currentTime: audioEl.currentTime
-                    }
-                }));
-            };
+            const controller = new AbortController();
+            const { signal } = controller;
 
-            // Duration change handler
-            const handleDurationChange = () => {
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
+            audioEl.addEventListener(
+                "timeupdate",
+                () => patchTrack({ currentTime: audioEl.currentTime }),
+                { signal }
+            );
+
+            audioEl.addEventListener(
+                "durationchange",
+                () =>
+                    patchTrack({
                         duration: audioEl.duration,
                         isLoaded: true,
-                        fileStatus: "loaded" as const
-                    }
-                }));
-            };
+                        fileStatus: "loaded"
+                    }),
+                { signal }
+            );
 
-            // File-loading lifecycle handlers. The media element moves
-            // through loadstart → (metadata/data events) → canplay, with
-            // error as the failure branch; fileStatus mirrors that state
-            // machine for the UI (loading spinner / error styling).
-            const handleLoadStart = () => {
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
-                        fileStatus: "pending" as const
-                    }
-                }));
-            };
+            audioEl.addEventListener(
+                "ended",
+                () => {
+                    patchTrack({ isPlaying: false, currentTime: 0 });
+                    setCurrentlyPlayingId(cur => (cur === id ? null : cur));
+                },
+                { signal }
+            );
 
-            const handleCanPlay = () => {
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
-                        fileStatus: "loaded" as const
-                    }
-                }));
-            };
+            audioEl.addEventListener(
+                "play",
+                () => {
+                    patchTrack({ isPlaying: true });
+                    setCurrentlyPlayingId(id);
+                },
+                { signal }
+            );
 
-            const handleLoadError = () => {
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
-                        fileStatus: "error" as const
-                    }
-                }));
-            };
+            audioEl.addEventListener(
+                "pause",
+                () => {
+                    patchTrack({ isPlaying: false });
+                    setCurrentlyPlayingId(cur => (cur === id ? null : cur));
+                },
+                { signal }
+            );
 
-            // Ended handler
-            const handleEnded = () => {
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
-                        isPlaying: false,
-                        currentTime: 0
-                    }
-                }));
-
-                if (currentlyPlayingId === id) {
-                    setCurrentlyPlayingId(null);
-                }
-            };
-
-            // Play handler
-            const handlePlay = () => {
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
-                        isPlaying: true
-                    }
-                }));
-
-                setCurrentlyPlayingId(id);
-            };
-
-            // Pause handler
-            const handlePause = () => {
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
-                        isPlaying: false
-                    }
-                }));
-
-                if (currentlyPlayingId === id) {
-                    setCurrentlyPlayingId(null);
-                }
-            };
-
-            // Progress handler
-            const handleProgress = e => {
-                const buffered = e.target.buffered;
-
-                // Array of buffered ranges, in percentage
-                const bufferedRanges = Array.from(
-                    { length: buffered.length },
-                    (_, i) => {
-                        const start = convertToPercentage(
-                            buffered.start(i),
-                            audioEl.duration
-                        );
-                        const end = convertToPercentage(
-                            buffered.end(i),
-                            audioEl.duration
-                        );
-                        return { start, end };
-                    }
-                );
-                setTracks(prev => ({
-                    ...prev,
-                    [id]: {
-                        ...prev[id],
-                        buffered: bufferedRanges
-                    }
-                }));
-            };
-
-            // Add event listeners
-            audioEl.addEventListener("timeupdate", handleTimeUpdate);
-            audioEl.addEventListener("durationchange", handleDurationChange);
-            audioEl.addEventListener("ended", handleEnded);
-            audioEl.addEventListener("play", handlePlay);
-            audioEl.addEventListener("pause", handlePause);
-            audioEl.addEventListener("progress", handleProgress);
-            audioEl.addEventListener("loadstart", handleLoadStart);
-            audioEl.addEventListener("canplay", handleCanPlay);
-            audioEl.addEventListener("error", handleLoadError);
-
-            // Add cleanup function for this track
-            cleanupListeners.push(() => {
-                if (audioEl) {
-                    audioEl.removeEventListener("timeupdate", handleTimeUpdate);
-                    audioEl.removeEventListener(
-                        "durationchange",
-                        handleDurationChange
+            audioEl.addEventListener(
+                "progress",
+                () => {
+                    const { buffered, duration } = audioEl;
+                    const bufferedRanges = Array.from(
+                        { length: buffered.length },
+                        (_, i) => ({
+                            start: convertToPercentage(
+                                buffered.start(i),
+                                duration
+                            ),
+                            end: convertToPercentage(buffered.end(i), duration)
+                        })
                     );
-                    audioEl.removeEventListener("ended", handleEnded);
-                    audioEl.removeEventListener("play", handlePlay);
-                    audioEl.removeEventListener("pause", handlePause);
-                    audioEl.removeEventListener("progress", handleProgress);
-                    audioEl.removeEventListener("loadstart", handleLoadStart);
-                    audioEl.removeEventListener("canplay", handleCanPlay);
-                    audioEl.removeEventListener("error", handleLoadError);
-                }
-            });
-        });
+                    patchTrack({ buffered: bufferedRanges });
+                },
+                { signal }
+            );
 
-        // Return combined cleanup function
-        return () => {
-            cleanupListeners.forEach(cleanup => cleanup());
+            // File-loading lifecycle: loadstart → … → canplay, with error
+            // as the failure branch; fileStatus mirrors it for the UI.
+            audioEl.addEventListener(
+                "loadstart",
+                () => patchTrack({ fileStatus: "pending" }),
+                { signal }
+            );
+            audioEl.addEventListener(
+                "canplay",
+                () => patchTrack({ fileStatus: "loaded" }),
+                { signal }
+            );
+            audioEl.addEventListener(
+                "error",
+                () => patchTrack({ fileStatus: "error" }),
+                { signal }
+            );
+
+            current.set(id, { audioEl, controller });
         };
-    }, [tracks, currentlyPlayingId, setTracks, setCurrentlyPlayingId]);
+
+        // Detach tracks that unregistered or whose element was replaced
+        for (const [id, entry] of current) {
+            const liveElement = tracks[id]?.audioRef?.current;
+            if (liveElement !== entry.audioEl) {
+                entry.controller.abort();
+                current.delete(id);
+            }
+        }
+
+        // Attach new tracks (or replaced elements)
+        Object.entries(tracks).forEach(([id, track]) => {
+            const audioEl = track.audioRef?.current;
+            if (audioEl && !current.has(id)) {
+                attachListeners(id, audioEl);
+            }
+        });
+    }, [tracks, setTracks, setCurrentlyPlayingId]);
+
+    // Detach everything when the provider itself unmounts.
+    useEffect(() => {
+        const current = attached.current;
+        return () => {
+            current.forEach(({ controller }) => controller.abort());
+            current.clear();
+        };
+    }, []);
 };
