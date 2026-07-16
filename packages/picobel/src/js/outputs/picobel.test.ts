@@ -24,6 +24,25 @@ describe("Primary Picobel", () => {
         expect(instance.state.components.length).toBe(4);
     });
 
+    it("wires each player to its own markup across multiple picobel() calls", () => {
+        document.body.innerHTML = '<audio src="first.mp3"></audio>';
+        const first = picobel();
+
+        // A second batch of audio arrives (e.g. dynamically added content)
+        const audio2 = document.createElement("audio");
+        audio2.src = "second.mp3";
+        document.body.appendChild(audio2);
+        const second = picobel();
+
+        expect(document.querySelectorAll(".picobel").length).toBe(2);
+
+        // Each instance must hook onto its OWN wrapper — with index-based
+        // DOM queries both batches resolve to the first player's markup.
+        const firstWrapper = first.state.audioNodes[0].elements!.wrapper;
+        const secondWrapper = second.state.audioNodes[0].elements!.wrapper;
+        expect(secondWrapper).not.toBe(firstWrapper);
+    });
+
     describe("destroy()", () => {
         const init = () => {
             document.body.innerHTML = '<audio src="test.mp3"></audio>';

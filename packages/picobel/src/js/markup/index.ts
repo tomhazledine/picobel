@@ -54,11 +54,14 @@ export const generateMarkup = (
     return markupArray;
 };
 
-export const elementHooks = (nodes, context, namespace) =>
-    nodes.map(node => {
-        const wrapper = context.querySelector(
-            `[data-picobel-index='${node.key}']`
-        );
+// Hook each node up to the player markup built for it. The wrappers come
+// straight from generateMarkup's output (matched by position) rather than
+// a document-wide query: we created these elements, so we keep the
+// references — re-finding them by an index attribute invites collisions
+// when picobel() runs more than once per page.
+export const elementHooks = (nodes, markup, namespace) =>
+    nodes.map((node, i) => {
+        const wrapper = markup[i];
 
         node.elements = {
             wrapper: wrapper,

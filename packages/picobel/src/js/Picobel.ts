@@ -63,11 +63,7 @@ export const picobel = (rawOptions: Options = {}) => {
     _replaceNodes(state.audioNodes, markup);
 
     // Save new DOM elements to our node list
-    state.audioNodes = elementHooks(
-        state.audioNodes,
-        options.context,
-        state.theme
-    );
+    state.audioNodes = elementHooks(state.audioNodes, markup, state.theme);
 
     // Setup event listeners
     state.audioNodes = _setupLocalListeners(state.audioNodes);
