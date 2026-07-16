@@ -3,7 +3,7 @@ import readline from "readline";
 
 import { parseArgs } from "../picobel/build.utils.js";
 
-import _package from "../picobel/package.json" assert { type: "json" };
+import _package from "../picobel/package.json" with { type: "json" };
 const version = _package.version;
 
 const args = parseArgs(process.argv);
