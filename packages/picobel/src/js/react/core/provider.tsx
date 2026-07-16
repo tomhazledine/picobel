@@ -1,13 +1,14 @@
 import React, { createContext, useContext, useState } from "react";
+
+import { createTrackControls } from "../tracks/trackControls";
+import { createTrackFunctions } from "../tracks/trackFunctions";
+import { createTrackGetters } from "../tracks/trackGetters";
+import { useTrackEventListeners } from "../tracks/trackListeners";
 import type {
     PicobelContextType,
     PicobelProviderProps,
     TracksState
 } from "./types";
-import { createTrackFunctions } from "../tracks/trackFunctions";
-import { createTrackControls } from "../tracks/trackControls";
-import { createTrackGetters } from "../tracks/trackGetters";
-import { useTrackEventListeners } from "../tracks/trackListeners";
 
 // Create the context with default value
 const PicobelContext = createContext<PicobelContextType | null>(null);

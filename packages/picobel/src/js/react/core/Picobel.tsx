@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from "react";
 import classnames from "classnames";
+import React, { useEffect,useRef } from "react";
 
-import { usePicobel } from "./provider";
-import { TrackProvider } from "./trackContext";
 import { getFileName } from "../../utils/helpers";
 import * as Components from "../components/";
+import { usePicobel } from "./provider";
+import { TrackProvider } from "./trackContext";
 
 export interface PicobelProps {
     src: string;
@@ -45,14 +45,24 @@ export const Picobel: React.FC<PicobelProps> = ({
 
     const namespace = theme || context.namespace;
 
-    // Register with context when component mounts
+    // Register with context on mount and whenever the track's identity
+    // changes. The cleanup pauses via our own ref: this component owns the
+    // <audio> element, so it doesn't need to reach into provider state
+    // (which a cleanup closure would only ever see a stale copy of).
     useEffect(() => {
+        const audioEl = audioRef.current;
         context.registerTrack({ id, audioRef, src, metadata, namespace });
 
         return () => {
+            audioEl?.pause();
             context.unregisterTrack(id);
         };
-    }, []);
+        // `context` and `metadata` are rebuilt on every render, so listing
+        // them would re-register the track (and reset its state) constantly.
+        // Metadata updates have their own path (updateTrackMetadata).
+        // TODO(Task 12): a stable context makes this disable unnecessary.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id, src, namespace]);
 
     // Get current player state
     const isPlaying = context.isTrackPlaying(id);

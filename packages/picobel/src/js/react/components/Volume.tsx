@@ -1,5 +1,5 @@
-import { useTrackState } from "../core/useTrackState";
 import { Range } from "../core/Range";
+import { useTrackState } from "../core/useTrackState";
 
 export const Volume = ({
     trackKey: providedTrackKey,

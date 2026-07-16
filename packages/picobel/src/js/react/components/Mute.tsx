@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import classnames from "classnames";
+import { useEffect, useState } from "react";
 
 import { useTrackState } from "../core/useTrackState";
 
