@@ -7,6 +7,11 @@ export interface TrackMetadata {
     fileName?: string;
 }
 
+export interface BufferedRange {
+    start: number;
+    end: number;
+}
+
 // Define track info type
 export interface TrackInfo {
     audioRef: React.RefObject<HTMLAudioElement>;
@@ -17,6 +22,8 @@ export interface TrackInfo {
     isLoaded: boolean;
     volume: number;
     muted: boolean;
+    namespace: string;
+    buffered: BufferedRange[];
     fileStatus?: "pending" | "buffering" | "loaded" | "error";
     bufferedPercentage?: number;
     metadata?: TrackMetadata;
