@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Picobel.js Profiling Page</title>
+
+        <!-- Load the Picobel CSS -->
+        <link
+            rel="stylesheet"
+            href="./build/picobel-demo-all.css"
+            type="text/css"
+        />
+        <style>
+            #stats-table {
+                border-collapse: collapse;
+                margin: 1em 0;
+                font-variant-numeric: tabular-nums;
+            }
+            #stats-table th,
+            #stats-table td {
+                border: 1px solid #ccc;
+                padding: 0.25em 0.75em;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body style="font-family: sans-serif">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="composable.html">Composable</a></li>
+                <li><a href="types.html">Types</a></li>
+                <li><a href="manual.html">Manual</a></li>
+                <li><a href="react.html">React</a></li>
+                <li><a href="component.html">Web Component</a></li>
+                <li>Profiling</li>
+            </ul>
+        </nav>
+
+        <div class="generic-wrapper">
+            <h1>React render profiling</h1>
+            <p>
+                Play <strong>one</strong> track and watch the table: rows in
+                <strong>bold</strong> are re-rendering. Ideally only the
+                playing player's row should move — if every row climbs while
+                one track plays, the context is re-rendering the world.
+            </p>
+
+            <table id="stats-table">
+                <thead>
+                    <tr>
+                        <th>Probe</th>
+                        <th>Renders</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody id="stats-body"></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Media listener adds</th>
+                        <td id="listener-adds" colspan="2">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div id="picobel-react-container">Loading...</div>
+        </div>
+
+        <script
+            type="text/javascript"
+            src="./build/picobel-demo-profiling.js"
+        ></script>
+    </body>
+</html>
