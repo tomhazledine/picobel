@@ -1,4 +1,7 @@
 export const parseTime = (seconds: number): string => {
+    // Media elements report NaN duration until metadata has loaded.
+    if (!Number.isFinite(seconds)) return "0:00";
+
     const hours = Math.floor(seconds / 3600);
 
     const mins = Math.floor((seconds % 3600) / 60)
