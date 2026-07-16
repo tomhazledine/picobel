@@ -4,10 +4,10 @@ Full detail, lessons, and acceptance criteria: see [plan.md](./plan.md).
 Rule: one task per commit, failing test first, suite green before ticking.
 
 ## Phase 1 — Warm-up: pure-function bugs
-- [ ] 1. Fix `getFileType`/`getFileName` (dots, query strings) — TDD on `helpers.ts`
-- [ ] 2. `srcElement` → `event.target`; guard `parseTime(NaN)`; delete dead `checkURL`
-- [ ] 3. try/catch `JSON.parse` in web component `connectedCallback`
-- [ ] ✅ Checkpoint 1: `pnpm --filter=picobel check` green
+- [x] 1. Fix `getFileType`/`getFileName` (dots, query strings) — TDD on `helpers.ts` (72558c6)
+- [x] 2. `srcElement` → `event.target`; guard `parseTime(NaN)`; delete dead `checkURL` (35a77a9)
+- [x] 3. try/catch `JSON.parse` in web component `connectedCallback` (de5b908)
+- [x] ✅ Checkpoint 1: lint + typecheck + 33 tests green (also fixed 8 pre-existing lint errors, a3adb48)
 
 ## Phase 2 — Vanilla lifecycle & memory leaks
 - [ ] 4. AbortController-based listeners; remove no-op `removeEventListener`
