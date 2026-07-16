@@ -28,6 +28,7 @@ export const createTrackFunctions = (
                 isLoaded: false,
                 volume: 1,
                 muted: false,
+                fileStatus: "pending",
                 metadata,
                 namespace,
                 buffered: []
