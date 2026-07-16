@@ -29,11 +29,13 @@ Rule: one task per commit, failing test first, suite green before ticking.
       (react.html: players start with loading class, clears when playable)
 
 ## Phase 4 — React performance (measure → fix → re-measure)
-- [ ] 10. Profiling harness in demo + baseline numbers → `tasks/perf-baseline.md`
-- [ ] 11. Stop listener churn (attach once per track)
-- [ ] 12. Provider refactor: memoized/split contexts (12a), external store + `useSyncExternalStore` if needed (12b)
-- [ ] 13. Re-measure, write up before/after; fix `Range.tsx` derived-state + NaN%
-- [ ] ✅ Checkpoint 4: numbers documented, human review of provider diff
+- [x] 10. Profiling harness in demo + baseline numbers → `tasks/perf-baseline.md` (f8244cf)
+- [x] 11. Stop listener churn (attach once per track) — adds 1800 → 0 (d295601)
+- [x] 12. Provider refactor: went straight to external store + `useSyncExternalStore`
+      (split contexts alone can't stop state-context fan-out) — idle renders 20 → 0 (f6245a3)
+- [x] 13. Re-measure, write up before/after; fix `Range.tsx` derived-state + NaN% (4a1772a)
+- [ ] ✅ Checkpoint 4: numbers documented ✓; human steps pending:
+      browser pass on /profiling.html (only playing row moves) + review provider diff
 
 ## Phase 5 — Polish & hygiene
 - [ ] 14. Vanilla fixes: pause-at-0:00, error markup styling, volume/mute simplification
