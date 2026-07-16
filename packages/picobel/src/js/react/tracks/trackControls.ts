@@ -1,24 +1,19 @@
-import { type Dispatch, type SetStateAction } from "react";
-
-import { type TrackMetadata,type TracksState } from "../core/types";
+import type { PicobelStore, TrackMetadata } from "../core/types";
 
 // Functions for audio controls
-export const createTrackControls = (
-    tracks: TracksState,
-    setTracks: Dispatch<SetStateAction<TracksState>>
-) => {
+export const createTrackControls = (store: PicobelStore) => {
     // Set volume for a specific audio element
     const setVolume = (id: string, volume: number) => {
-        const track = tracks[id];
+        const track = store.getState().tracks[id];
         if (track?.audioRef.current) {
             const clampedVolume = Math.max(0, Math.min(1, volume));
             track.audioRef.current.volume = clampedVolume;
 
-            setTracks(prev => ({
+            store.setState(prev => ({
                 ...prev,
-                [id]: {
-                    ...prev[id],
-                    volume: clampedVolume
+                tracks: {
+                    ...prev.tracks,
+                    [id]: { ...prev.tracks[id], volume: clampedVolume }
                 }
             }));
         }
@@ -26,15 +21,15 @@ export const createTrackControls = (
 
     // Set muted state for a specific audio element
     const setMuted = (id: string, muted: boolean) => {
-        const track = tracks[id];
+        const track = store.getState().tracks[id];
         if (track?.audioRef.current) {
             track.audioRef.current.muted = muted;
 
-            setTracks(prev => ({
+            store.setState(prev => ({
                 ...prev,
-                [id]: {
-                    ...prev[id],
-                    muted
+                tracks: {
+                    ...prev.tracks,
+                    [id]: { ...prev.tracks[id], muted }
                 }
             }));
         }
@@ -42,15 +37,15 @@ export const createTrackControls = (
 
     // Seek to a specific time in a specific audio element
     const seekTo = (id: string, time: number) => {
-        const track = tracks[id];
+        const track = store.getState().tracks[id];
         if (track?.audioRef.current) {
             track.audioRef.current.currentTime = time;
 
-            setTracks(prev => ({
+            store.setState(prev => ({
                 ...prev,
-                [id]: {
-                    ...prev[id],
-                    currentTime: time
+                tracks: {
+                    ...prev.tracks,
+                    [id]: { ...prev.tracks[id], currentTime: time }
                 }
             }));
         }
@@ -61,16 +56,19 @@ export const createTrackControls = (
         id: string,
         metadata: Partial<TrackMetadata>
     ) => {
-        setTracks(prev => {
-            if (!prev[id]) return prev;
+        store.setState(prev => {
+            if (!prev.tracks[id]) return prev;
 
             return {
                 ...prev,
-                [id]: {
-                    ...prev[id],
-                    metadata: {
-                        ...prev[id].metadata,
-                        ...metadata
+                tracks: {
+                    ...prev.tracks,
+                    [id]: {
+                        ...prev.tracks[id],
+                        metadata: {
+                            ...prev.tracks[id].metadata,
+                            ...metadata
+                        }
                     }
                 }
             };

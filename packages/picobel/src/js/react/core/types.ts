@@ -42,10 +42,29 @@ export interface RegisterTrackProps {
     namespace: string;
 }
 
+// The provider's state lives in an external store so components can
+// subscribe to just their own slice (via useSyncExternalStore) instead
+// of re-rendering whenever anything anywhere changes.
+export interface PicobelStoreState {
+    tracks: TracksState;
+    currentlyPlayingId: string | null;
+}
+
+export interface PicobelStore {
+    getState: () => PicobelStoreState;
+    setState: (
+        updater: (previous: PicobelStoreState) => PicobelStoreState
+    ) => void;
+    subscribe: (listener: () => void) => () => void;
+}
+
 // Define context type
 export interface PicobelContextType {
     // Globals
     namespace: string;
+
+    // State store (subscribe via useSyncExternalStore for reactive reads)
+    store: PicobelStore;
 
     // Registration
     registerTrack: (props: RegisterTrackProps) => void;

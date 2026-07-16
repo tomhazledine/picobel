@@ -1,5 +1,4 @@
 import classnames from "classnames";
-import { useEffect, useState } from "react";
 
 import { useTrackState } from "../core/useTrackState";
 
@@ -15,17 +14,12 @@ export const PlayPause = ({
         name: "PlayPause"
     });
 
-    const [isPlaying, setIsPlaying] = useState(
-        valid && context.getCurrentlyPlayingId() === trackKey
-    );
-
-    useEffect(() => {
-        if (valid) {
-            setIsPlaying(context.getCurrentlyPlayingId() === trackKey);
-        }
-    }, [context, valid, trackKey]);
-
     if (!valid) return null;
+
+    // Derived directly from the subscribed track snapshot — mirroring it
+    // into local state via an effect (the old approach) only appeared to
+    // work because the provider used to re-render everything constantly.
+    const isPlaying = trackState.isPlaying;
 
     const handleTogglePlay = () => {
         context.togglePlayPause(trackKey);
