@@ -24,6 +24,23 @@ describe("Picobel Web Component", () => {
         expect(webComponent?.querySelector("audio")).toBeDefined();
     });
 
+    it("renders the default player when data-components is malformed JSON", () => {
+        const warn = jest.spyOn(console, "warn").mockImplementation(() => {});
+
+        // Trailing comma makes this invalid JSON
+        document.body.innerHTML =
+            '<picobel-player data-components=\'["playPause",]\'><audio src="test.mp3"></audio></picobel-player>';
+
+        // The player should still be built…
+        const playerElements = document.querySelectorAll(".picobel");
+        expect(playerElements.length).toBeGreaterThan(0);
+
+        // …and the author should be told why their components were ignored
+        expect(warn).toHaveBeenCalled();
+
+        warn.mockRestore();
+    });
+
     it("accepts theme configuration via attributes", () => {
         // Create a web component with a custom theme
         document.body.innerHTML =
