@@ -33,13 +33,37 @@ Prediction to verify:
 - Task 12 (stable actions context + per-track subscriptions):
   idle-sibling renders → **0**, playing-player renders stays > 0
 
-## After — (to be filled in by Task 13)
+## After — 2026-07-16 (Tasks 11 + 12 landed)
 
 | Metric (per 20 timeupdates) | Baseline | After | Change |
 |---|---|---|---|
-| Playing-player renders | 20 | | |
-| Idle-sibling renders | 20 | | |
-| Media listener adds | 1800 | | |
+| Playing-player renders | 20 | 20 | unchanged (correct: its UI moves) |
+| Idle-sibling renders | 20 | **0** | **eliminated** |
+| Media listener adds | 1800 | **0** | **eliminated** |
+
+At real playback rates on a 10-player page this removes ~36 component
+re-renders/second and ~360 listener add/removes/second of pure waste;
+the only work left is the one player whose UI is actually changing.
+
+What changed:
+
+- **Task 11 (d295601):** the listener effect reconciles (attach/detach
+  deltas) instead of tearing everything down whenever the state object
+  it also writes to is replaced. Handlers read the audio element and
+  write via functional updaters, so they never go stale.
+- **Task 12 (f6245a3):** track state moved out of `useState` into a
+  ~40-line external store; the context value is memoized (actions read
+  fresh store state on call), and components subscribe to their own
+  track's slice via `useSyncExternalStore` — React bails out when the
+  snapshot is identical, so other tracks' updates cost nothing.
+- **Task 13:** `Range.tsx` computes its percentage during render
+  instead of mirroring props into state via an effect (one render per
+  update saved on the two sliders of the playing player), and guards
+  the `0/0 → NaN%` case before audio metadata loads.
+
+The lesson in one line: match subscription granularity to update
+frequency — `currentTime` at 4Hz was living in the most widely
+broadcast state container the app had.
 
 Notes / surprises:
 
