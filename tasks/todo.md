@@ -14,15 +14,19 @@ Rule: one task per commit, failing test first, suite green before ticking.
 - [x] 5. `destroy()` API on `picobel()` (pause, abort, restore original audio) (76bd6db)
 - [x] 6. `disconnectedCallback` in web component (uses destroy) (2343981)
 - [x] 7. Fix index collisions — capture element refs at build time (d9b133c)
-- [ ] ✅ Checkpoint 2: DevTools leak verification (getEventListeners, heap snapshot, detached nodes)
-      — automated checks green (44 tests); manual browser steps pending human run
+- [x] ✅ Checkpoint 2: DevTools leak verification (getEventListeners, heap snapshot, detached nodes)
+      — automated checks green (44 tests); manual browser verification done 2026-07-16:
+        listeners drop to {}, no detached picobel wrappers post-destroy, playback stops
       — bonus: demo build fixed for Node 22+ import attributes (e783e38)
       — note: README instructs hot-linking build/ from GitHub ⇒ answers Q1: artifacts ARE load-bearing
 
 ## Phase 3 — React correctness
-- [ ] 8. Fix stale-closure unmount cleanup; enable `exhaustive-deps` lint
-- [ ] 9. Implement per-track `fileStatus` from media events
-- [ ] ✅ Checkpoint 3: check green + manual react demo (unmount stops audio)
+- [x] 8. Fix stale-closure unmount cleanup; enable `exhaustive-deps` lint (775f887)
+      — includes React test/lint infra: @testing-library/react, preset-react ^7,
+        jest tsx transform, lint script now covers .tsx (React layer was unlinted!)
+- [x] 9. Implement per-track `fileStatus` from media events (6a81e35)
+- [ ] ✅ Checkpoint 3: check green (49 tests) ✓ + manual react demo pending
+      (react.html: players start with loading class, clears when playable)
 
 ## Phase 4 — React performance (measure → fix → re-measure)
 - [ ] 10. Profiling harness in demo + baseline numbers → `tasks/perf-baseline.md`
