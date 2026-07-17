@@ -38,11 +38,17 @@ Rule: one task per commit, failing test first, suite green before ticking.
       browser pass on /profiling.html (only playing row moves) + review provider diff
 
 ## Phase 5 — Polish & hygiene
-- [ ] 14. Vanilla fixes: pause-at-0:00, error markup styling, volume/mute simplification
-- [ ] 15. Repo hygiene: untrack `build/`, drop `prepublish`, `npm pack --dry-run` audit
-- [ ] ✅ Final checkpoint: CHANGELOG, README (`destroy()`), version bump decision
+- [x] 14. Vanilla fixes: pause-at-0:00, single-write volume, CSS-styled error state (7908a68)
+- [x] 15. Repo hygiene (f68b843): CI switched npm→pnpm (root cause of unnoticed lint
+      errors), npm tarball 238 files/2.4MB → 53 files/673kB, README manual-install
+      moved to jsDelivr, prepublish dropped. `build/` KEPT in git (Q1: hot-linked).
+- [ ] ✅ Final checkpoint (pending): version bump decision (destroy() = new API ⇒ minor),
+      user browser pass on demo pages, resolve origin/audit-fixes divergence
+      (local rebase happened; push --force-with-lease when ready)
 
-## Open questions (answer before the marked task)
-- [ ] Q1 (before 15): are committed `build/` bundles hot-linked anywhere?
-- [ ] Q2 (before 12): go all the way to `useSyncExternalStore`, or stop at split contexts?
-- [ ] Q3 (before 5): should `destroy()` restore the original `<audio>` tags?
+## Open questions — all resolved
+- [x] Q1: YES — README instructed hot-linking build/ from GitHub ⇒ artifacts kept in
+      git; README now points new users at jsDelivr npm CDN instead
+- [x] Q2: went straight to external store + useSyncExternalStore (split contexts
+      alone could not stop state-context fan-out)
+- [x] Q3: destroy() restores the original <audio> elements (plan's assumption, kept)
