@@ -3,6 +3,7 @@
     "description": "Convert html audio tags into styleable markup.",
     "private": true,
     "type": "module",
+    "packageManager": "pnpm@11.5.2",
     "scripts": {
         "test": "pnpm --filter=picobel test",
         "build": "pnpm --filter=picobel build",
