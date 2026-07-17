@@ -53,19 +53,21 @@ import { Picobel } from "picobel/react";
 
 ### Install manually
 
-If you prefer not to use npm, you can include the Picobel build file directly from the GitHub repository:
+If you prefer not to use npm, you can load Picobel from the jsDelivr CDN (which serves the published npm package):
 
 ```html
 <script
     type="text/javascript"
-    src="https://raw.githubusercontent.com/tomhazledine/picobel/main/packages/picobel/build/picobel.js"
+    src="https://cdn.jsdelivr.net/npm/picobel@3/build/picobel.js"
 ></script>
 <script type="text/javascript">
     picobel();
 </script>
 ```
 
-Versioned builds (e.g. `picobel.3.3.0.js`) are also available in the [same directory](https://github.com/tomhazledine/picobel/tree/main/packages/picobel/build) if you need a pinned version.
+Pin an exact version with `picobel@3.3.4` (recommended for production — the file can never change underneath you).
+
+> Older instructions linked files from `raw.githubusercontent.com`. Those URLs still work, but the CDN is faster, sends correct content types, and versions are pinned to real releases rather than whatever is on the `main` branch.
 
 ---
 

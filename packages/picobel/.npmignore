@@ -1,5 +1,21 @@
-assets/*
-demo/*
-images/*
-node_modules/*
+# Publish only build output + README/license. (A package.json "files"
+# allowlist would be preferable, but it can't exclude paths INSIDE an
+# included directory — and we need to prune build/.)
+src/
+tsconfig.json
+tsconfig.declarations.json
+babel.config.json
+jest.config.js
+eslint.config.js
+build.js
+build.utils.js
+.gitignore
+
+# Historical versioned bundles stay in git for old hot-links, but npm
+# already versions the package — no need to ship every release twice.
+build/picobel.[0-9]*.js
+build/picobel.[0-9]*.js.map
+
+coverage/
+
 .DS_Store
