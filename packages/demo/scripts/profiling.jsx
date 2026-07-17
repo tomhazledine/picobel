@@ -34,9 +34,18 @@ window.HTMLMediaElement.prototype.addEventListener = function (...args) {
     return originalAdd.apply(this, args);
 };
 
+// Subscribes to its own track's state slice, exactly like the real
+// player sub-components do. (Consuming only the context object is no
+// longer a valid instrument: since the store refactor the context is
+// stable, so a context-only consumer re-renders NEVER — every row
+// would freeze at 1, including the playing player's.)
 const Probe = ({ index }) => {
     const context = usePicobel();
-    void context;
+    const track = React.useSyncExternalStore(
+        context.store.subscribe,
+        () => context.store.getState().tracks[`profiling-track-${index}`]
+    );
+    void track;
     probeRenderCounts[index]++;
     return null;
 };
