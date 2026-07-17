@@ -291,3 +291,11 @@
         transform: rotate(360deg);
     }
 }
+
+/* Error state (structural styles previously injected inline from JS) */
+.picobel .error {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}

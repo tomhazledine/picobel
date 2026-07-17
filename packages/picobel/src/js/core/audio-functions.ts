@@ -1,4 +1,5 @@
 import { setLengthDisplay, setMeta } from "../markup";
+import { createElement } from "../markup/utils";
 import { parseTime } from "../utils/helpers";
 import { getMeta } from "./data";
 
@@ -8,7 +9,9 @@ export const pauseAll = nodes =>
     });
 
 export const playPauseAudio = (node, nodes) => {
-    if (node.paused || node.currentTime === 0) {
+    // The media element is the source of truth for playing state —
+    // second-guessing it with currentTime made pause impossible at 0:00.
+    if (node.paused) {
         pauseAll(nodes);
         play(node);
     } else {
@@ -75,9 +78,16 @@ export const loadedmetadata = node => {
 };
 
 export const errors = node => {
-    node.elements.wrapper.classList.add("error");
-    node.elements.wrapper.classList.remove("loading");
-    node.elements.wrapper.innerHTML = `<div class="error" style="display:flex;height: 100%;align-items:  center;justify-content: center;"><span class="error__icon"></span><span class="error__message">Error loading audio file</span></div>`;
+    const wrapper = node.elements.wrapper;
+    wrapper.classList.add("error");
+    wrapper.classList.remove("loading");
+    wrapper.innerHTML = "";
+    const errorMessage = createElement("div", "error");
+    errorMessage.appendChild(createElement("span", "error__icon"));
+    const messageText = createElement("span", "error__message");
+    messageText.innerHTML = "Error loading audio file";
+    errorMessage.appendChild(messageText);
+    wrapper.appendChild(errorMessage);
 };
 
 export const sliderScrub = (event, node) => {
@@ -92,11 +102,11 @@ export const sliderFocus = (node, focus) =>
     node.elements.progressWrapper.classList.toggle("focus", focus);
 
 export const volume = (event, node) => {
-    const volume = event.target.value;
-    node.tmpVolume = node.volume;
+    // Moving the slider is an explicit volume choice: leave mute, set
+    // the new value once, and refresh the button to match.
     node.mute = false;
-    mute(node);
-    setVolume(node, volume);
+    setVolume(node, Number(event.target.value));
+    renderMuteState(node);
 };
 
 export const volumeFocus = (node, focus) =>
@@ -126,24 +136,23 @@ export const muteUnmuteAudio = node => {
 };
 
 export const mute = node => {
-    const button = node.elements.muteButton;
-
     if (node.mute) {
+        // Remember the level to come back to on unmute
         node.tmpVolume = node.volume;
         setVolume(node, 0);
-        button.classList.add("muted");
-        button.classList.remove("unmuted");
-        button.innerHTML = "Unmute";
     } else {
-        if (typeof node.tmpVolume != "undefined" && node.tmpVolume > 0) {
-            setVolume(node, node.tmpVolume);
-        } else {
-            setVolume(node, 1);
-        }
-        button.classList.remove("muted");
-        button.classList.add("unmuted");
-        button.innerHTML = "Mute";
+        setVolume(node, node.tmpVolume > 0 ? node.tmpVolume : 1);
     }
+    renderMuteState(node);
+};
+
+// Sync the mute button's label and classes with the node's mute state
+const renderMuteState = node => {
+    const button = node.elements.muteButton;
+    if (!button) return;
+    button.classList.toggle("muted", node.mute);
+    button.classList.toggle("unmuted", !node.mute);
+    button.innerHTML = node.mute ? "Unmute" : "Mute";
 };
 
 export const setBuffered = (node, buffered) => {

@@ -371,3 +371,11 @@
     height: 1.5em;
     cursor: pointer;
 }
+
+/* Error state (structural styles previously injected inline from JS) */
+.picobel .error {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
