@@ -21,7 +21,6 @@
         "build:dev": "node build.js --mode=development",
         "check": "npm run lint && npm run typecheck && npm run test",
         "lint": "eslint \"src/js/**/*.{ts,tsx}\"",
-        "prepublish": "npm run build",
         "prepublishOnly": "npm run build",
         "typecheck": "tsc"
     },
