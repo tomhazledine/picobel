@@ -15,6 +15,14 @@ To make changes to Picobel, you'll need to follow these steps:
 5. run `npm run test` to run the test suite.
 6. commit your changes and make a pull request.
 
+## Releasing
+
+Releases are cut with a single command run from the repo root — see [RELEASING.md](./RELEASING.md) for details:
+
+```bash
+pnpm release patch|minor|major [--dry-run]
+```
+
 ## Project structure
 
 ### JavaScript

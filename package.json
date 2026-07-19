@@ -11,7 +11,8 @@
         "check": "pnpm --filter=picobel check",
         "demo:build:dev": "pnpm --filter=demo build --mode=development",
         "demo:build": "pnpm --filter=demo build",
-        "demo:serve": "pnpm --filter=demo serve"
+        "demo:serve": "pnpm --filter=demo serve",
+        "release": "bash scripts/release.sh"
     },
     "repository": {
         "type": "git",
