@@ -1,5 +1,5 @@
-import { type TrackInfo, type TracksState } from "../core/types";
-export declare const createTrackGetters: (tracks: TracksState, currentlyPlayingId: string | null) => {
+import type { PicobelStore, TrackInfo, TracksState } from "../core/types";
+export declare const createTrackGetters: (store: PicobelStore) => {
     getTrackState: (id: string) => TrackInfo | undefined;
     isTrackPlaying: (id: string) => boolean;
     getCurrentlyPlayingId: () => string | null;

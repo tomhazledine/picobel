@@ -2,12 +2,12 @@ export declare const useTrackState: ({ trackKey: providedTrackKey, name }: {
     trackKey?: string;
     name: string;
 }) => {
-    valid: boolean;
+    valid: false;
     trackKey?: undefined;
     context?: undefined;
     trackState?: undefined;
 } | {
-    valid: boolean;
+    valid: true;
     trackKey: any;
     context: any;
     trackState: any;

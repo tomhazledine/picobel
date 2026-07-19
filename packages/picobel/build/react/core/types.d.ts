@@ -1,9 +1,13 @@
-import React from "react";
+import type React from "react";
 export interface TrackMetadata {
     title?: string;
     artist?: string;
     fileType?: string;
     fileName?: string;
+}
+export interface BufferedRange {
+    start: number;
+    end: number;
 }
 export interface TrackInfo {
     audioRef: React.RefObject<HTMLAudioElement>;
@@ -14,6 +18,8 @@ export interface TrackInfo {
     isLoaded: boolean;
     volume: number;
     muted: boolean;
+    namespace: string;
+    buffered: BufferedRange[];
     fileStatus?: "pending" | "buffering" | "loaded" | "error";
     bufferedPercentage?: number;
     metadata?: TrackMetadata;
@@ -28,8 +34,18 @@ export interface RegisterTrackProps {
     metadata: TrackMetadata;
     namespace: string;
 }
+export interface PicobelStoreState {
+    tracks: TracksState;
+    currentlyPlayingId: string | null;
+}
+export interface PicobelStore {
+    getState: () => PicobelStoreState;
+    setState: (updater: (previous: PicobelStoreState) => PicobelStoreState) => void;
+    subscribe: (listener: () => void) => () => void;
+}
 export interface PicobelContextType {
     namespace: string;
+    store: PicobelStore;
     registerTrack: (props: RegisterTrackProps) => void;
     unregisterTrack: (id: string) => void;
     playTrack: (id: string) => void;
